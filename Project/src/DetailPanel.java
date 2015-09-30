@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.GregorianCalendar;
+import java.util.Scanner;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -132,6 +133,11 @@ public class DetailPanel extends JPanel {
 		stblCalendar.setBounds(10, 50, 350, 250);  //calendar size
 		commandField.setBounds(10, 550, 27, 5);
 		enterBtn.setBounds(40, 550, 10, 5);
+		
+		/*Scanner sc = new Scanner(System.in);
+		if((sc.next()).equals("Add")) {
+			System.out.println("add event");
+		}*/
 		
 		//Get real month/year
 		GregorianCalendar cal = new GregorianCalendar(); //Create calendar
