@@ -26,10 +26,10 @@ public class DetailPanel extends JPanel {
 	static JLabel labelMonth, labelYear;
 	static JButton prevBtn, nextBtn, enterBtn;
 	static JTextField commandField;
-	static JTable tblCalendar;
-	static JComboBox cmbYear;
-	static DefaultTableModel mtblCalendar; //Table model
-	static JScrollPane stblCalendar; //The scrollpane
+	static JTable tableCalendar;
+	static JComboBox chooseYear;  //Choices of year
+	static DefaultTableModel modelCalendar; //Table model
+	static JScrollPane scrollCalendar; //The scrollpane
 	static int realYear, realMonth, realDay, currentYear, currentMonth;
 
 	public DetailPanel() {
@@ -50,12 +50,12 @@ public class DetailPanel extends JPanel {
 		
 		labelMonth = new JLabel ("January");
 		labelYear = new JLabel ("Change year:");
-		cmbYear = new JComboBox();
+		chooseYear = new JComboBox();
 		prevBtn = new JButton ("<<");
 		nextBtn = new JButton (">>");
 		commandField = new JTextField(25);
 		enterBtn = new JButton("Enter");
-		mtblCalendar = new DefaultTableModel() {
+		modelCalendar = new DefaultTableModel() {
 			private static final long serialVersionUID = 1L;
 
 			public boolean isCellEditable(int rowIndex, int mColIndex) {
@@ -63,16 +63,16 @@ public class DetailPanel extends JPanel {
 			}
 		};
 		
-		tblCalendar = new JTable(mtblCalendar);
-		stblCalendar = new JScrollPane(tblCalendar);
+		tableCalendar = new JTable(modelCalendar);
+		scrollCalendar = new JScrollPane(tableCalendar);
 		
 		prevBtn.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent e) {
-				if (currentMonth == 0) { //Back one year
+				if (currentMonth == 0) { //Goes back one year
 					currentMonth = 11;
 					currentYear -= 1;
 				}
-				else { //Back one month
+				else { //Goes back one month
 					currentMonth -= 1;
 				}
 				refreshCalendar(currentMonth, currentYear);
@@ -81,33 +81,52 @@ public class DetailPanel extends JPanel {
 		
 		nextBtn.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent e) {
-				if (currentMonth == 11) { //Foward one year
+				if (currentMonth == 11) { //Forward one year
 					currentMonth = 0;
 					currentYear += 1;
 				}
-				else { //Foward one month
+				else { //Forward one month
 					currentMonth += 1;
 				}
 				refreshCalendar(currentMonth, currentYear);
 			}
 		});
 		
-		cmbYear.addActionListener(new ActionListener () {
+		chooseYear.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				if (cmbYear.getSelectedItem() != null) {
-					String b = cmbYear.getSelectedItem().toString();
+				if (chooseYear.getSelectedItem() != null) {
+					String b = chooseYear.getSelectedItem().toString();
 					currentYear = Integer.parseInt(b);
 					refreshCalendar(currentMonth, currentYear);
 				}
 			}
 		});
 		
+		commandField.addActionListener(new ActionListener () {
+			public void actionPerformed(ActionEvent e) {
+				//String command = commandField.getText();
+				
+				//String text = command + "\n";
+				
+				String commandLine = commandField.getText();
+				String arr[] = commandLine.split(" ", 1);
+				String op = arr[0];
+				String text = commandLine + "\n";
+				if(op.equals("add")) {
+					fireDetailEvent(new DetailEvent(this, text));
+				}
+
+				fireDetailEvent(new DetailEvent(this, text));
+			}
+		});
+		
+		//delete afterwards
 		enterBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String command = commandField.getText();
 				
 				String text = command + "\n";
-				
+
 				fireDetailEvent(new DetailEvent(this, text));
 			}
 		});
@@ -115,10 +134,10 @@ public class DetailPanel extends JPanel {
 		//Add controls to pane
 		add(labelMonth);
 		add(labelYear);
-		add(cmbYear);
+		add(chooseYear);
 		add(prevBtn);
 		add(nextBtn);
-		add(stblCalendar);
+		add(scrollCalendar);
 		add(commandField);
 		add(enterBtn);
 		
@@ -126,18 +145,13 @@ public class DetailPanel extends JPanel {
 		labelMonth.setBounds(185-labelMonth.getPreferredSize().width/2, 25, 100, 25);  //position of month
 		//lblYear.setBounds(10, 400, 80, 20);
 		labelYear.setBounds(10, 400, 80, 20);
-		cmbYear.setBounds(280, 400, 80, 20);  //scroll year
+		chooseYear.setBounds(280, 400, 80, 20);  //scroll year
 		//btnPrev.setBounds(10, 25, 60, 25);
 		prevBtn.setBounds(50, 25, 60, 25);
 		nextBtn.setBounds(400, 25, 60, 25);
-		stblCalendar.setBounds(10, 50, 350, 250);  //calendar size
+		scrollCalendar.setBounds(10, 50, 350, 250);  //calendar size
 		commandField.setBounds(10, 550, 27, 5);
 		enterBtn.setBounds(40, 550, 10, 5);
-		
-		/*Scanner sc = new Scanner(System.in);
-		if((sc.next()).equals("Add")) {
-			System.out.println("add event");
-		}*/
 		
 		//Get real month/year
 		GregorianCalendar cal = new GregorianCalendar(); //Create calendar
@@ -147,31 +161,31 @@ public class DetailPanel extends JPanel {
 		currentMonth = realMonth; //Match month and year
 		currentYear = realYear;
 		
-		//Add headers
-		String[] headers = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"}; //All headers
-		for (int i=0; i<7; i++) {
-			mtblCalendar.addColumn(headers[i]);
+		//Add headers of days
+		String[] headers = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+		for (int i = 0; i < 7; i++) {
+			modelCalendar.addColumn(headers[i]);
 		}
 		
-		tblCalendar.getParent().setBackground(tblCalendar.getBackground()); //Set background
+		tableCalendar.getParent().setBackground(tableCalendar.getBackground()); //Set background
 
 		//No resize/reorder
-		tblCalendar.getTableHeader().setResizingAllowed(false);
-		tblCalendar.getTableHeader().setReorderingAllowed(false);
+		tableCalendar.getTableHeader().setResizingAllowed(false);
+		tableCalendar.getTableHeader().setReorderingAllowed(false);
 
 		//Single cell selection
-		tblCalendar.setColumnSelectionAllowed(true);
-		tblCalendar.setRowSelectionAllowed(true);
-		tblCalendar.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableCalendar.setColumnSelectionAllowed(true);
+		tableCalendar.setRowSelectionAllowed(true);
+		tableCalendar.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		//Set row/column count
-		tblCalendar.setRowHeight(38);
-		mtblCalendar.setColumnCount(7);
-		mtblCalendar.setRowCount(6);
+		tableCalendar.setRowHeight(38);
+		modelCalendar.setColumnCount(7);
+		modelCalendar.setRowCount(6);
 		
 		//Populate table
 		for (int i = realYear-100; i <= realYear+100; i++) {
-			cmbYear.addItem(String.valueOf(i));
+			chooseYear.addItem(String.valueOf(i));
 		}
 		
 		//Refresh calendar
@@ -214,12 +228,12 @@ public class DetailPanel extends JPanel {
 		labelMonth.setText(months[month]); //Refresh the month label (at the top)
 		//lblMonth.setBounds(160-lblMonth.getPreferredSize().width/2, 25, 180, 25); //Re-align label with calendar
 		labelMonth.setBounds(185-labelMonth.getPreferredSize().width/2, 25, 180, 25);
-		cmbYear.setSelectedItem(String.valueOf(year)); //Select the correct year in the combo box
+		chooseYear.setSelectedItem(String.valueOf(year)); //Select the correct year in the combo box
 		
 		//Clear table
 		for (int i = 0; i < 6; i++){
 			for (int j = 0; j < 7; j++){
-				mtblCalendar.setValueAt(null, i, j);
+				modelCalendar.setValueAt(null, i, j);
 			}
 		}
 		
@@ -232,11 +246,11 @@ public class DetailPanel extends JPanel {
 		for (int i = 1; i <= nod; i++){
 			int row = new Integer((i + som - 2) / 7);
 			int column  =  (i + som - 2) % 7;
-			mtblCalendar.setValueAt(i, row, column);
+			modelCalendar.setValueAt(i, row, column);
 		}
 
 		//Apply renderers
-		tblCalendar.setDefaultRenderer(tblCalendar.getColumnClass(0), new tblCalendarRenderer());
+		tableCalendar.setDefaultRenderer(tableCalendar.getColumnClass(0), new tblCalendarRenderer());
 	}
 
 	static class tblCalendarRenderer extends DefaultTableCellRenderer {
