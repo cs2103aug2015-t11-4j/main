@@ -22,8 +22,8 @@ import javax.swing.table.DefaultTableModel;
 public class DetailPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
-	static JLabel lblMonth, lblYear;
-	static JButton btnPrev, btnNext, enterBtn;
+	static JLabel labelMonth, labelYear;
+	static JButton prevBtn, nextBtn, enterBtn;
 	static JTextField commandField;
 	static JTable tblCalendar;
 	static JComboBox cmbYear;
@@ -47,11 +47,11 @@ public class DetailPanel extends JPanel {
 		
 		setBorder(BorderFactory.createTitledBorder("Calendar"));
 		
-		lblMonth = new JLabel ("January");
-		lblYear = new JLabel ("Change year:");
+		labelMonth = new JLabel ("January");
+		labelYear = new JLabel ("Change year:");
 		cmbYear = new JComboBox();
-		btnPrev = new JButton ("<<");
-		btnNext = new JButton (">>");
+		prevBtn = new JButton ("<<");
+		nextBtn = new JButton (">>");
 		commandField = new JTextField(25);
 		enterBtn = new JButton("Enter");
 		mtblCalendar = new DefaultTableModel() {
@@ -65,7 +65,7 @@ public class DetailPanel extends JPanel {
 		tblCalendar = new JTable(mtblCalendar);
 		stblCalendar = new JScrollPane(tblCalendar);
 		
-		btnPrev.addActionListener(new ActionListener() {
+		prevBtn.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent e) {
 				if (currentMonth == 0) { //Back one year
 					currentMonth = 11;
@@ -78,7 +78,7 @@ public class DetailPanel extends JPanel {
 			}
 		});
 		
-		btnNext.addActionListener(new ActionListener() {
+		nextBtn.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent e) {
 				if (currentMonth == 11) { //Foward one year
 					currentMonth = 0;
@@ -112,23 +112,23 @@ public class DetailPanel extends JPanel {
 		});
 		
 		//Add controls to pane
-		add(lblMonth);
-		add(lblYear);
+		add(labelMonth);
+		add(labelYear);
 		add(cmbYear);
-		add(btnPrev);
-		add(btnNext);
+		add(prevBtn);
+		add(nextBtn);
 		add(stblCalendar);
 		add(commandField);
 		add(enterBtn);
 		
 		//Set bounds
-		lblMonth.setBounds(185-lblMonth.getPreferredSize().width/2, 25, 100, 25);  //position of month
+		labelMonth.setBounds(185-labelMonth.getPreferredSize().width/2, 25, 100, 25);  //position of month
 		//lblYear.setBounds(10, 400, 80, 20);
-		lblYear.setBounds(10, 400, 80, 20);
+		labelYear.setBounds(10, 400, 80, 20);
 		cmbYear.setBounds(280, 400, 80, 20);  //scroll year
 		//btnPrev.setBounds(10, 25, 60, 25);
-		btnPrev.setBounds(50, 25, 60, 25);
-		btnNext.setBounds(400, 25, 60, 25);
+		prevBtn.setBounds(50, 25, 60, 25);
+		nextBtn.setBounds(400, 25, 60, 25);
 		stblCalendar.setBounds(10, 50, 350, 250);  //calendar size
 		commandField.setBounds(10, 550, 27, 5);
 		enterBtn.setBounds(40, 550, 10, 5);
@@ -197,17 +197,17 @@ public class DetailPanel extends JPanel {
 		int nod, som; //Number Of Days, Start Of Month
 			
 		//Allow/disallow buttons
-		btnPrev.setEnabled(true);
-		btnNext.setEnabled(true);
+		prevBtn.setEnabled(true);
+		nextBtn.setEnabled(true);
 		if (month == 0 && year <= realYear-10) {
-			btnPrev.setEnabled(false);
+			prevBtn.setEnabled(false);
 		} //Too early
 		if (month == 11 && year >= realYear+100) {
-			btnNext.setEnabled(false);
+			nextBtn.setEnabled(false);
 		} //Too late
-		lblMonth.setText(months[month]); //Refresh the month label (at the top)
+		labelMonth.setText(months[month]); //Refresh the month label (at the top)
 		//lblMonth.setBounds(160-lblMonth.getPreferredSize().width/2, 25, 180, 25); //Re-align label with calendar
-		lblMonth.setBounds(185-lblMonth.getPreferredSize().width/2, 25, 180, 25);
+		labelMonth.setBounds(185-labelMonth.getPreferredSize().width/2, 25, 180, 25);
 		cmbYear.setSelectedItem(String.valueOf(year)); //Select the correct year in the combo box
 		
 		//Clear table
