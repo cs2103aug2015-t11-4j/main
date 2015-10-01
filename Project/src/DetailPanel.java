@@ -102,7 +102,10 @@ public class DetailPanel extends JPanel {
 			}
 		});
 		
-		commandField.addActionListener(new ActionListener () {
+		
+		//pass command to logic, create a logic object
+		//Logic logic = new Logic();
+		commandField.addActionListener(new ActionListener () {   //detect "enter" key being pressed
 			public void actionPerformed(ActionEvent e) {
 				//String command = commandField.getText();
 				
@@ -143,10 +146,10 @@ public class DetailPanel extends JPanel {
 		
 		//Set bounds
 		labelMonth.setBounds(185-labelMonth.getPreferredSize().width/2, 25, 100, 25);  //position of month
-		//lblYear.setBounds(10, 400, 80, 20);
+		//labelYear.setBounds(10, 400, 80, 20);
 		labelYear.setBounds(10, 400, 80, 20);
 		chooseYear.setBounds(280, 400, 80, 20);  //scroll year
-		//btnPrev.setBounds(10, 25, 60, 25);
+		//prevBtn.setBounds(10, 25, 60, 25);
 		prevBtn.setBounds(50, 25, 60, 25);
 		nextBtn.setBounds(400, 25, 60, 25);
 		scrollCalendar.setBounds(10, 50, 350, 250);  //calendar size
@@ -196,9 +199,9 @@ public class DetailPanel extends JPanel {
 	public void fireDetailEvent(DetailEvent event) {
 		Object[] listeners = listenerList.getListenerList();
 		
-		for(int i = 0; i < listeners.length; i += 2) {
+		for(int i = 0; i < listeners.length; i += 2) {  //first is checking the class DetailListener.class
 			if(listeners[i] == DetailListener.class) {
-				((DetailListener)listeners[i+1]).detailEventOccurred(event);
+				((DetailListener)listeners[i+1]).detailEventOccurred(event);  //when it is from the class, cast it to detailListener
 			}
 		}
 	}
