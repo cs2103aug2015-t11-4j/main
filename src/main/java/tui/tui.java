@@ -10,7 +10,7 @@ import java.util.Scanner;
 //import main.java.data.SourceFile;
 
 /**
- * This class handles the text ui of Collate and is ran from the command line.
+ * This class handles the text ui of Alt4 and is ran from the command line.
  * 
  * @author Yu Ju
  *
@@ -31,9 +31,6 @@ public class tui {
     // Summary view table headers
     // ================================================================
 
-    //private static final String SUMMARY_HEADER_AUTHOR = "Author";
-    //private static final String SUMMARY_HEADER_LOC = "LOC";
-    //private static final String SUMMARY_HEADER_PROPORTION = "Proportion (%)";
     private static final String SUMMARY_HEADER_DIVIDER =
         "---------------------------------------------\n";
     private static final String FORMAT_SUMMARY_HEADER = "%-15s%10s%20s\n";
@@ -61,11 +58,6 @@ public class tui {
     // Other constants
     // ================================================================
 
-    //private static final String STRING_TRUNCATED_FRONT_FORMAT = "...%s";
-    //private static final String STRING_TRUNCATED_BACK_FORMAT = "%s...";
-
-    private static final int MAX_AUTHOR_NAME_LENGTH = 10;
-    private static final int MAX_FILENAME_LENGTH = 40;
 
     private static boolean isTimeToExit = false;
 
@@ -91,30 +83,25 @@ public class tui {
         input.close();
     }
 
-    /*public static String handleUserInput(Logic logic, String userInput) {
+    public static String handleUserInput(Logic logic, String userInput) {
         switch (logic.executeCommand(userInput)) {
         	case ADD :
         	case UNDO :
         	case DELETE :
         	case UPDATE :
         	case SEARCH :
-        	case SUMMARY :  //whole to do list
+        	case SUMMARY :  //whole to do list?
         		//return handleSummaryCommand(logic);
         	case VIEW :
         		//return handleViewCommand(logic);
-            /*case COLLATE :
-            case SUMMARY :
-                return handleSummaryCommand(logic);
-            case VIEW :
-                return handleViewCommand(logic);*/
-            /*case EXIT :
+            case EXIT :
                 isTimeToExit = true;
                 return MESSAGE_EXIT;
             case INVALID :
             default :
                 return handleInvalidCommand();
         }
-    }*/
+    }
 
 
     // ================================================================
@@ -186,27 +173,6 @@ public class tui {
                                                             file.getNumLines())));
         }
         return builder.toString();
-    }
-
-    /*private static String generateTruncatedPhrase(String phrase,
-                                                  int maxLength,
-                                                  boolean truncateFromFront) {
-        if (phrase.length() >= maxLength) {
-            if (truncateFromFront) {
-                return String.format(STRING_TRUNCATED_FRONT_FORMAT,
-                                     phrase.substring(phrase.length() -
-                                                      maxLength));
-            } else {
-                return String.format(STRING_TRUNCATED_BACK_FORMAT,
-                                     phrase.substring(0, maxLength));
-            }
-        }
-        return phrase;
-    }*/
-
-    /*private static double generatePercentage(int authorLinesOfCode,
-                                             int fileLinesOfCode) {
-        return (double) authorLinesOfCode / fileLinesOfCode * 100;
     }*/
 
 
