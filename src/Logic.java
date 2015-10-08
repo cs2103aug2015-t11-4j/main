@@ -15,10 +15,10 @@ public class Logic {
 			break;
 		case "update":
 			content = createContentForUpdate(commandAfterParser, contentList);
-			code = Storage.updateOneItem(commandAfterParser.get(1), content); //pass in item number
+			Storage.updateOneItem(Integer.parseInt(commandAfterParser.get(1)), content); //pass in item number
 			break;
 		case "delete":
-			Storage.deleteOneItem(commandAfterParser.get(1));//pass in item number
+			Storage.deleteOneItem(Integer.parseInt(commandAfterParser.get(1)));//pass in item number
 		case "display":
 			Storage.display();
 			
