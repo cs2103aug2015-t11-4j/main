@@ -16,7 +16,8 @@ import main.java.resources.Task;
 
 public class Storage {
 	/* 
-	 * Temporary placeholder for creation of file - To be replaced with initializeFile
+	 * Temporary placeholder for creation of file - To be replaced with user's
+	 * directory of choice
 	 */
 	private static String filename = "MyCalender.txt";
 	
@@ -25,7 +26,8 @@ public class Storage {
 			FileWriter fw = new FileWriter(filename, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			
-			bw.write(task.getTaskDescription());
+			bw.write(task.getTaskType() + ";" + task.getTaskDescription() + ";" + task.getDate()
+					+ ";" + task.getStartTime() + ";" + task.getEndTime());
 			bw.newLine();
 			bw.close();
 		} catch (Exception e) {
@@ -47,7 +49,8 @@ public class Storage {
 			while ((br.readLine()) != null) {
 				lineNumber += 1;
 				if (lineNumber == itemNumber) {
-					bw.write(task.getTaskDescription());
+					bw.write(task.getTaskType() + ";" + task.getTaskDescription() + ";" + task.getDate()
+					+ ";" + task.getStartTime() + ";" + task.getEndTime());
 					bw.newLine();
 				}
 			}
