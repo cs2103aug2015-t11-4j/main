@@ -9,6 +9,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import main.java.logic.Logic;
+
 /**
  * MainApp is the entry point for JavaFX applications.
  * 
@@ -20,15 +22,15 @@ public class MainApp extends Application {
     private static final String ROOT_LAYOUT_FXML = "/main/resources/layouts/RootLayouts.fxml";
     private static final String WINDOW_TITLE = "Alt4";
     
+    /*
     private static final String FEEDBACK_INVALID_COMMAND = "Invalid command.";
     private static final String FEEDBACK_TASK_ADDED = "Task added!";
     private static final String FEEDBACK_TASK_DELETED = "Task deleted!";
     private static final String FEEDBACK_TASK_UPDATED = "Task updated!";
-
+	*/
+    
     private Stage primaryStage;
     private BorderPane rootLayout;
-
-    private Logic logic;
 
     public static void main(String[] args) {
         launch(args);
@@ -70,7 +72,7 @@ public class MainApp extends Application {
     }
 
     private void initLogic() {
-        logic = new Logic();
+        new Logic();
     }
 
     private void addCommandBar(MainApp mainApp) {
@@ -92,7 +94,7 @@ public class MainApp extends Application {
 
     private void handleEnterPress(CommandBarController commandBarController,
                                   String userInput) {
-    	
+    	/*
     	switch(logic.executeCommand(userInput)) {
     		case ADD :
     			commandBarController.setFeedback(FEEDBACK_TASK_ADDED);
@@ -108,6 +110,7 @@ public class MainApp extends Application {
     			commandBarController.setFeedback(FEEDBACK_INVALID_COMMAND);
     			break;
     	}
+    	*/
     	commandBarController.setFeedback("data added");  //stub
         commandBarController.clear();
     }

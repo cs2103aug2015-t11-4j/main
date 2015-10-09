@@ -29,5 +29,9 @@ public class UI {
  			} 
  		} 
  		 
- 	} 
+ 	}
+
+	public static void feedbackWrongCommand() {
+		// TODO Auto-generated method stub
+	} 
  } 

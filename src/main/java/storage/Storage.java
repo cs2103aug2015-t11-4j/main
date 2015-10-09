@@ -96,4 +96,9 @@ public class Storage {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public static void display() {
+		// TODO Auto-generated method stub
+		// May not be required as told by Jiahuan
+	}
 }

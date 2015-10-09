@@ -24,13 +24,14 @@ public class tui {
     private static final String MESSAGE_INVALID_COMMAND = "Invalid command.";
     private static final String MESSAGE_WELCOME = "Welcome to Alt4!";
     private static final String MESSAGE_COMMAND_PROMPT = "Command: ";
-    private static final String MESSAGE_EXIT = "Goodbye!";
+    //private static final String MESSAGE_EXIT = "Goodbye!";
 
 
     // ================================================================
     // Summary view table headers
     // ================================================================
 
+    /*
     private static final String SUMMARY_HEADER_DIVIDER =
         "---------------------------------------------\n";
     private static final String FORMAT_SUMMARY_HEADER = "%-15s%10s%20s\n";
@@ -38,12 +39,13 @@ public class tui {
     
     private static final String SUMMARY_HEADER_DONE = "Completed";
     private static final String SUMMARY_HEADER_UNDONE = "Yet to complete";
-
+	*/
 
     // ================================================================
     // Author statistics view table headers
     // ================================================================
 
+    /*
     private static final String AUTHOR_STATS_HEADER_FILE_PATH = "File path";
     private static final String AUTHOR_STATS_HEADER_LOC = "LOC";
     private static final String AUTHOR_STATS_HEADER_PROPORTION =
@@ -52,7 +54,7 @@ public class tui {
         "---------------------------------------------------------------------------\n";
     private static final String FORMAT_AUTHOR_STATS_HEADER = "%-45s%10s%20s\n";
     private static final String FORMAT_AUTHOR_STATS_ITEM = "%-45s%10d%20.2f\n";
-
+	*/
 
     // ================================================================
     // Other constants
@@ -75,7 +77,7 @@ public class tui {
 
         while (!isTimeToExit) {
             output.print(MESSAGE_COMMAND_PROMPT);
-            String userInput = input.nextLine();
+            //String userInput = input.nextLine();
             output.println();
             //output.println(handleUserInput(logic, userInput));
         }
@@ -83,6 +85,7 @@ public class tui {
         input.close();
     }
 
+    /*
     public static String handleUserInput(Logic logic, String userInput) {
         switch (logic.executeCommand(userInput)) {
         	case ADD :
@@ -102,7 +105,7 @@ public class tui {
                 return handleInvalidCommand();
         }
     }
-
+    */
 
     // ================================================================
     // Methods for summary command
@@ -180,7 +183,9 @@ public class tui {
     // Methods for invalid command
     // ================================================================
 
+    /*
     private static String handleInvalidCommand() {
         return MESSAGE_INVALID_COMMAND;
     }
+    */
 }
