@@ -24,7 +24,7 @@ public class Parser {
 			contentListForLogic.add(content[1]);
 	}
 	
-	public static Task createTask(ArrayList<String> listFromLogic) {
+	public static Task createTaskForAdd (ArrayList<String> listFromLogic) {
 		
 		Task task = new Task();
 		String taskType = listFromLogic.get(1);
@@ -46,6 +46,28 @@ public class Parser {
 		return task;
 	}
 	
+	public static Task createTaskForUpdate (ArrayList<String> listFromLogic) {
+		
+		Task task = new Task();
+		String taskType = listFromLogic.get(3);
+		String taskContent = listFromLogic.get(2);
+		
+		switch(taskType.toLowerCase()) {
+		case "deadline":
+			task = createDeadline(taskType, taskContent);
+			break;
+		case "event":
+			task = createEvent(taskType, taskContent);
+			break;
+		case "floating":
+			task = createFloating(taskType, taskContent);
+			break;
+		default:
+			break;
+		}
+		return task;
+	}
+
 	private static Task createDeadline(String taskType, String taskContent) {
 		
 		int indexToSplit = taskContent.lastIndexOf("by");
