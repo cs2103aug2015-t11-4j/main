@@ -1,5 +1,3 @@
-package src;
-
 //@author : wenbin
 
 public class Task {
