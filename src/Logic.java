@@ -1,33 +1,48 @@
 import java.util.ArrayList;
 
 public class Logic {
+	
+	//Pass the User Input to parser and parser return a arraylist of parsing result
 	public static ArrayList<String> passToParser(String command){
 		ArrayList<String> commandAfterParser = Parser.retrieveCommand(command);
 		return commandAfterParser;
 	}
-
-	public static void takeAction(ArrayList<String> commandAfterParser, ArrayList<String> contentList) {
+	//Switch case to decide which action to carry forward after first parsing
+	public static void takeAction(ArrayList<String> inputForSecondParsing, ArrayList<String> contentList) {
 		int code = -1;
-		switch (commandAfterParser.get(0).toLowerCase()){
+		Task task;
+		int itemNum;
+		String taskType, stringForParsingUpdate;
+		switch (inputForSecondParsing.get(0).toLowerCase()){
+		//if add, need to create task object for storage
 		case "add":
-			String content = createContentForAdd(commandAfterParser, contentList);
-			code = Storage.addOneItem(content);
+			task = Parser.createTaskForAdd(inputForSecondParsing);
+			code = Storage.addOneItem(task);
 			break;
 		case "update":
-			content = createContentForUpdate(commandAfterParser, contentList);
-			Storage.updateOneItem(Integer.parseInt(commandAfterParser.get(1)), content); //pass in item number
+			itemNum = Integer.parseInt(inputForSecondParsing.get(1)); 
+			taskType = Storage.getTaskTypeByItemNum(itemNum); //get tasktype from logic
+			inputForSecondParsing.add(taskType); //append tasktype to arraylist
+			task = Parser.createTaskForUpdate(inputForSecondParsing); //create task obj 
+			code = Storage.updateOneItem(itemNum, task); //pass in item number and task obj
 			break;
 		case "delete":
-			Storage.deleteOneItem(Integer.parseInt(commandAfterParser.get(1)));//pass in item number
+			itemNum = Integer.parseInt(inputForSecondParsing.get(1));
+			Storage.deleteOneItem(itemNum);//pass in item number
+			break;
 		case "display":
 			Storage.display();
-			
+			break;
+		default:
+			UI.feedbackWrongCommand();
 		}
 		UI.feedback(commandAfterParser.get(0),code);
 	}
 
 
-
+//**************Below part can be used by Yong Zhi for storage analysis************************//	
+	
+/*
 
 	private static String createContentForUpdate(ArrayList<String> commandAfterParser, ArrayList<String> contentList) {
 		
@@ -68,7 +83,7 @@ public class Logic {
 		return "By "+task.getDate()+": "+ task.getTaskDescription();
 	}
 	
-
+*/
 	
 	
 }
