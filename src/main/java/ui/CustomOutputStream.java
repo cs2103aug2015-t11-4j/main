@@ -5,6 +5,12 @@ import java.io.OutputStream;
 
 import javax.swing.JTextArea;
 
+/**
+ * 
+ * @author Yu Ju
+ *
+ */
+
 public class CustomOutputStream extends OutputStream {
 
 	private JTextArea textArea;
