@@ -28,7 +28,7 @@ public class Logic {
 			break;
 		case "delete":
 			itemNum = Integer.parseInt(inputForSecondParsing.get(1));
-			Storage.deleteOneItem(itemNum);//pass in item number
+			code = Storage.deleteOneItem(itemNum);//pass in item number
 			break;
 		case "display":
 			Storage.display();
@@ -36,7 +36,7 @@ public class Logic {
 		default:
 			UI.feedbackWrongCommand();
 		}
-		UI.feedback(commandAfterParser.get(0),code);
+		UI.feedback(inputForSecondParsing.get(0),code);
 	}
 
 
