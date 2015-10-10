@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 
 import main.java.logic.Alt4;
 import main.java.logic.Logic;
@@ -113,7 +114,14 @@ public class todoapp extends JFrame{
 				}
 				
 				else if(commandField.equals("exit")) {
-					mainFrame.dispose();
+					System.out.println("Exiting Alt4");
+					Timer t = new Timer(1000, new ActionListener() {
+	                    @Override
+	                    public void actionPerformed(ActionEvent e) {
+	                    	mainFrame.dispose();
+	                    }
+	                });
+					t.start();
 				}
 				
 				else {
