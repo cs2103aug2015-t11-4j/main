@@ -113,6 +113,20 @@ public class todoapp extends JFrame{
 					}*/
 				}
 				
+				//case "display":
+				//Logic.passToParser(command);
+				//line = String.format(format, "1.", "meeting with bob", "09/10/15");
+				//outputJTextArea.append(line + "\n");
+				/*String [] columns= {"Tasks Completed", "Task To Be Done"};
+				String [] columns= {"Tasks", "Due Date", "Time"};
+	        	String array ="A&B&1&May 8 2011 12:17AM;;E&D&5&May 8 2011 12:43AM;;F&G&5&May 8 2011 7:06AM;;H&I&1&May 14 2011 11:57PM";
+	        	records = to2dim (array ,";;","&");
+	        	Object rows[][] = records;
+				JTable table = new JTable(rows, columns);
+	        	sp = new JScrollPane(table);
+	        	contentPane.add(sp, BorderLayout.CENTER);*/
+				//break;
+				
 				else if(commandField.equals("exit")) {
 					System.out.println("Exiting Alt4");
 					Timer t = new Timer(1000, new ActionListener() {
@@ -138,19 +152,6 @@ public class todoapp extends JFrame{
 					case "update":
 						System.out.println("updated: " + description);
 						break;
-					//case "display":
-						//Logic.passToParser(command);
-						//line = String.format(format, "1.", "meeting with bob", "09/10/15");
-						//outputJTextArea.append(line + "\n");
-						/*String [] columns= {"Tasks Completed", "Task To Be Done"};
-						String [] columns= {"Tasks", "Due Date", "Time"};
-			        	String array ="A&B&1&May 8 2011 12:17AM;;E&D&5&May 8 2011 12:43AM;;F&G&5&May 8 2011 7:06AM;;H&I&1&May 14 2011 11:57PM";
-			        	records = to2dim (array ,";;","&");
-			        	Object rows[][] = records;
-						JTable table = new JTable(rows, columns);
-			        	sp = new JScrollPane(table);
-			        	contentPane.add(sp, BorderLayout.CENTER);*/
-						//break;
 					default:
 						System.out.println("wrong command");
 					}
