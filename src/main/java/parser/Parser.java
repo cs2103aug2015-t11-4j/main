@@ -18,15 +18,25 @@ public class Parser {
 	private static final String KEYWORD_TO = "to";
 	private static final int LENGTH_OF_TO = KEYWORD_TO.length();
 
-	public static void main(String[] args) {
+	//for testing purposes
+	/*public static void main(String[] args) {
 		System.out.println("Enter: ");
 		Scanner sc = new Scanner(System.in);
 		String input = sc.nextLine();
 		ArrayList<String> contentListForLogic = retrieveCommand(input);
+		contentListForLogic.add("deadline");
 		for(int i=0; i<contentListForLogic.size(); i++) {
 			System.out.println(contentListForLogic.get(i));
 		}
+		Task task = createTaskForUpdate(contentListForLogic);
+		System.out.println("date: " + task.getDate());
+		System.out.println("task: " + task.getTaskDescription());
+		System.out.println("TT: " + task.getTaskType());
+		System.out.println("ST: " + task.getStartTime());
+		System.out.println("ET: " + task.getEndTime());
+		
 	}
+	*/
 	public static ArrayList<String> retrieveCommand(String inputFromLogic){
 		
 		ArrayList<String> contentListForLogic = new ArrayList<String>();
