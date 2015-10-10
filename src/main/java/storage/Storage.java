@@ -1,4 +1,5 @@
 package main.java.storage;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -21,13 +22,17 @@ public class Storage {
 	 */
 	private static String filename = "MyCalender.txt";
 	
+	/* 
+     * Adds one task to the agenda
+     */
 	public static int addOneItem(Task task) {
 		try {
 			FileWriter fw = new FileWriter(filename, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			
 			bw.write(task.getTaskType() + ";" + task.getTaskDescription() + ";" + task.getDate()
-					+ ";" + task.getStartTime() + ";" + task.getEndTime());
+					+ ";" + task.getStartTime() + ";" + task.getEndTime() + ";");
+			
 			bw.newLine();
 			bw.close();
 		} catch (Exception e) {
@@ -36,27 +41,37 @@ public class Storage {
 		return 0;
 	}
 	
+	/* 
+     * Updates one task to the agenda
+     */
 	public static int updateOneItem(int itemNumber, Task task) {
 		try {
-			FileWriter fw = new FileWriter(filename, true);
-			FileReader fr = new FileReader(filename);
-			
-			BufferedWriter bw = new BufferedWriter(fw);
-			BufferedReader br = new BufferedReader(fr);
-			
-			int lineNumber = 0;
-						
-			while ((br.readLine()) != null) {
-				lineNumber += 1;
-				if (lineNumber == itemNumber) {
-					bw.write(task.getTaskType() + ";" + task.getTaskDescription() + ";" + task.getDate()
-					+ ";" + task.getStartTime() + ";" + task.getEndTime());
-					bw.newLine();
-				}
-			}
-			
-			br.close();
-			bw.close();
+		    FileReader fr = new FileReader(filename);
+            BufferedReader br = new BufferedReader(fr);
+		    
+            int lineNumber = 0;
+            String input = "";
+            String line;
+            String replaceLine = "";
+            
+            while ((line = br.readLine()) != null) {        
+                lineNumber += 1;
+                input += line + '\n';
+                
+                if (lineNumber == itemNumber) {
+                    replaceLine = line + '\n';
+                }
+            }
+            
+            br.close();
+            
+            FileWriter fw = new FileWriter(filename);
+            BufferedWriter bw = new BufferedWriter(fw);
+            
+            bw.write(input.replaceAll(replaceLine, task.getTaskType() + ";" + task.getTaskDescription() + ";" + task.getDate()
+            + ";" + task.getStartTime() + ";" + task.getEndTime() + ";" + "\n"));
+            
+            bw.close();
 		} catch (Exception e) {
 			return -1;
 		}
@@ -73,10 +88,8 @@ public class Storage {
             FileWriter fw = new FileWriter("Alt4.tmp", true);
             BufferedWriter bw = new BufferedWriter(fw);
             
-            String line = "";
             int lineNumber = 0;
-            
-            @SuppressWarnings("unused")
+            String line = "";
             String deletedLine = "";
             
             while ((line = br.readLine()) != null) {
@@ -89,9 +102,7 @@ public class Storage {
                     deletedLine = line;
                 } 
             }
-                
-            //System.out.println(String.format(MESSAGE_DELETE, filename, deletedLine));
-                
+                               
             br.close();
             bw.close();
             original.delete();
@@ -102,11 +113,9 @@ public class Storage {
 		return 0;
 	}
 
-	public static String getTaskTypeByItemNum(int itemNum) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	/* 
+     * Displays all tasks to the agenda
+     */
 	public static void display() {
         try {
             File file = new File(filename);
@@ -116,12 +125,13 @@ public class Storage {
             } else {
                 FileReader fr = new FileReader(filename);
                 BufferedReader br = new BufferedReader(fr);
+                
+                int lineNumber = 0;
                 String line = "";
-                int lineNum = 0;
             
                 while ((line = br.readLine()) != null) {
-                        lineNum += 1;
-                        System.out.println(lineNum + ". " + line);
+                        lineNumber += 1;
+                        System.out.println(lineNumber + ". " + line);
                 }
             
                 br.close();
@@ -129,5 +139,33 @@ public class Storage {
        } catch (Exception e) {
             //System.out.println(MESSAGE_READ_ERROR);
        }
-    }
+	}
+	
+	/* 
+     * Obtains task type from task saved in Storage
+     */
+	public static String getTaskTypeByItemNum(int itemNumber) {
+	    try {
+	        FileReader fr = new FileReader(filename);
+	        BufferedReader br = new BufferedReader(fr);        
+               
+            int lineNumber = 0;
+	        String line = null;
+	        String[] target = new String[4];
+        
+            while ((line = br.readLine()) != null) {
+                lineNumber += 1;
+            
+                if (lineNumber == itemNumber) {
+                    target = line.split(";");
+                }
+            }
+        
+            br.close();
+            return target[0];
+	    } catch (Exception e) {
+            return null;
+        }
+	}
+
 }
