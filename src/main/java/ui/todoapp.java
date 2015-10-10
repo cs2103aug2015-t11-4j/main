@@ -42,7 +42,7 @@ public class todoapp extends JFrame{
 	//JTable to display events in table form, currently not used
 	//JScrollPane to be used when table is not enough to show all information
 	static private JTable table;
-	static private JScrollPane sp;
+	static private JScrollPane tableScrollPane;
 	
 	static private String command;
 	static private String commandField;
@@ -102,16 +102,17 @@ public class todoapp extends JFrame{
 				
 				if(commandField.equals("display")){
 					Logic.takeAction(Logic.passToParser(commandField));
-					String[] columns = {"Floating", "Event", "Due Date"};
-					Object rows[][] = records;
+					//String[] columns = {"Floating", "Event", "Due Date"};
+					//Object rows[][] = records;
 					//Object rows[][] = Storage.display();
-					table = new JTable(rows, columns);
-					sp = new JScrollPane(table);
-					contentPane.add(sp, BorderLayout.CENTER);
+					//table = new JTable(rows, columns);
+					//tableScrollPane = new JScrollPane(table);
+					//contentPane.add(tableScrollPane, BorderLayout.CENTER);
 
 					/*catch(NullPointerException e1) {
 						System.out.println("File is currently empty.");
 					}*/
+					textField.setText("");
 				}
 				
 				//case "display":
