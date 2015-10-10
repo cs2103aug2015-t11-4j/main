@@ -16,6 +16,8 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.Timer;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import main.java.logic.Alt4;
 import main.java.logic.Logic;
@@ -71,6 +73,14 @@ public class ToDoApp extends JFrame{
 	}
 		
 	public ToDoApp() {
+		
+		/*try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e) {
+		} catch (InstantiationException e) {
+		} catch (IllegalAccessException e) {
+		} catch (UnsupportedLookAndFeelException e) {
+		}*/
 		
 		JFrame mainFrame = new JFrame("Alt4");
 		mainFrame.setSize(600, 600);
