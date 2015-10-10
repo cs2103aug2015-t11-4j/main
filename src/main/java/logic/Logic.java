@@ -14,7 +14,8 @@ public class Logic {
 		return commandAfterParser;
 	}
 	//Switch case to decide which action to carry forward after first parsing
-	public static void takeAction(ArrayList<String> inputForSecondParsing, ArrayList<String> contentList) {
+	//public static void takeAction(ArrayList<String> inputForSecondParsing, ArrayList<String> contentList) {
+	public static void takeAction(ArrayList<String> inputForSecondParsing) {
 		int code = -1;
 		Task task;
 		int itemNum;
@@ -24,6 +25,7 @@ public class Logic {
 		case "add":
 			task = Parser.createTaskForAdd(inputForSecondParsing);
 			code = Storage.addOneItem(task);
+			System.out.println("added: " + code);  //prints out 0 (Yu Ju)
 			break;
 		case "update":
 			itemNum = Integer.parseInt(inputForSecondParsing.get(1)); 
@@ -35,6 +37,7 @@ public class Logic {
 		case "delete":
 			itemNum = Integer.parseInt(inputForSecondParsing.get(1));
 			code = Storage.deleteOneItem(itemNum);//pass in item number
+			System.out.println("deleted: " + code);  //prints out 0 (Yu Ju)
 			break;
 		case "display":
 			Storage.display();
@@ -42,7 +45,7 @@ public class Logic {
 		default:
 			UI.feedbackWrongCommand();
 		}
-		UI.feedback(inputForSecondParsing.get(0),code);
+		UI.feedback(inputForSecondParsing.get(0),code);  //not used for now (Yu Ju)
 	}
 
 

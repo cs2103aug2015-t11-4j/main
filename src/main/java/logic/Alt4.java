@@ -20,11 +20,13 @@ public class Alt4 {
 		Logic.takeAction(commandAfterParser, contentList);*/
 		
 		//Yu Ju's version
-		ArrayList<String> contentList = new ArrayList<String>();
-		todoapp.welcome();
+		/*ArrayList<String> contentList = new ArrayList<String>();
 		String command = args[0];
-		ArrayList<String> commandAfterParser = Logic.passToParser(command);
-		Logic.takeAction(commandAfterParser, contentList);
+		String[] text = args;*/
+		//ArrayList<String> commandAfterParser = Logic.passToParser(command);
+		//contentList = Logic.passToParser(command);
+		//Logic.takeAction(commandAfterParser, contentList);
+		//Logic.takeAction(contentList);  //I comment off the second para cuz its not used in the method itself
 	}
 
 }

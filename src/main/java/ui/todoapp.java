@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.JFrame;
@@ -38,7 +39,8 @@ public class todoapp extends JFrame{
 	static private String command;
 	static private String[] arr;
 	static private String description;
-	static private String[] commandOp;
+	//static private String[] commandOp;
+	static private String[] commandFieldArr;
 	
 	//static private JPanel contentPane;
 	//static private BorderLayout bl;
@@ -58,6 +60,7 @@ public class todoapp extends JFrame{
 		javax.swing.SwingUtilities.invokeLater(new Runnable() { 
 			public void run() { 
 				new todoapp(); 
+				System.out.println("Welcome to ALT4, your personlized agenda manager");
 			} 
 		}); 
 
@@ -89,6 +92,13 @@ public class todoapp extends JFrame{
 				
 				//String text = commandField + "\n";
 				
+				//welcome message
+				//System.out.println("Welcome to ALT4, your personlized agenda manager");
+				
+				if(commandField.equals("display")) {
+					Logic.takeAction(Logic.passToParser(commandField));
+				}
+				
 				arr = commandField.split(" ", 2);
 				command = arr[0];
 				description = (arr[1]).trim();
@@ -102,8 +112,8 @@ public class todoapp extends JFrame{
 				case "update":
 					System.out.println("updated: " + description);
 					break;
-				case "display":
-					Logic.passToParser(command);
+				//case "display":
+					//Logic.passToParser(command);
 					//line = String.format(format, "1.", "meeting with bob", "09/10/15");
 					//outputJTextArea.append(line + "\n");
 					/*String [] columns= {"Tasks Completed", "Task To Be Done"};
@@ -114,14 +124,19 @@ public class todoapp extends JFrame{
 					JTable table = new JTable(rows, columns);
 			        sp = new JScrollPane(table);
 			        contentPane.add(sp, BorderLayout.CENTER);*/
-					break;
+					//break;
 				default:
 					System.out.println("wrong command");
 				}
 				//System.out.println(text);
 				taskJTextField.setText("");
-				commandOp = new String[] {command};
-				Alt4.main(commandOp);
+				//commandOp = new String[] {command};
+				//Alt4.main(commandOp);
+				commandFieldArr = new String[] {commandField};
+				//Alt4.main(commandFieldArr);
+				ArrayList<String> contentList = new ArrayList<String>();
+				contentList = Logic.passToParser(commandField);
+				Logic.takeAction(contentList);
 			}
 		});
                
