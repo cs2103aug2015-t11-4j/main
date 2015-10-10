@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 
 import main.java.logic.Alt4;
 import main.java.logic.Logic;
@@ -30,34 +31,36 @@ public class todoapp extends JFrame{
 	
 	private static final long serialVersionUID = 7154613852426382429L;
 	
-	// JLabel and JTextField to input a task   
-	//static private JLabel taskJLabel;   
-	static private JTextField taskJTextField;     
+	//JTextField to input a task
+	static private JTextField textField;     
    
-	// JTextArea to display the to-do list   
-	static private JTextArea outputJTextArea; 
+	/*JTextArea to display the to-do list. JScrollPane to ensure text area can be
+	scrolled down when too much information has to be showed*/
+	static private JTextArea outputTextArea;
+	static private JScrollPane textAreaScrollPane;
+	
+	//JTable to display events in table form, currently not used
+	//JScrollPane to be used when table is not enough to show all information
+	static private JTable table;
+	static private JScrollPane sp;
 	
 	static private String command;
 	static private String commandField;
 	static private String[] arr;
 	static private String description;
-	//static private String[] commandOp;
 	static private String[] commandFieldArr;
-	
-	//static private BorderLayout bl;
-	
-	static private JTable table;
-	static private JScrollPane sp;
 	static private String [][] records;
 	
 	//static private String format = "%1$5s %2$-40s %3$-20s";
 	//static private String line;
+	//static private String[] commandOp;
+	//static private BorderLayout bl;
       
-	// main method   
+	//main method   
 	public static void main( String[] args )   
 	{   
-		// Schedule a job for the event-dispatching thread: 
-		// creating and showing this application's GUI. 
+		//Schedule a job for the event-dispatching thread: 
+		//creating and showing this application's GUI. 
 		javax.swing.SwingUtilities.invokeLater(new Runnable() { 
 			public void run() { 
 				new todoapp(); 
@@ -72,25 +75,24 @@ public class todoapp extends JFrame{
 		JFrame mainFrame = new JFrame("Alt4");
 		mainFrame.setSize(600, 600);
 		mainFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE ); 
-		// set properties of application’s window   
-		mainFrame.setVisible(true);  // display window
+		mainFrame.setVisible(true);  //display window
 		
 		Container contentPane = mainFrame.getContentPane();   
         
-		// enable explicit positioning of GUI components   
+		//enable explicit positioning of GUI components   
 		contentPane.setLayout(null);     
         
-		// set up taskJTextField   
-		taskJTextField = new JTextField();   
-		taskJTextField.setBounds(10, 480, 560, 40);   
-		taskJTextField.setHorizontalAlignment(JTextField.LEFT);   
-		contentPane.add(taskJTextField);      
+		//set up taskJTextField   
+		textField = new JTextField();   
+		textField.setBounds(10, 480, 560, 40);   
+		textField.setHorizontalAlignment(JTextField.LEFT);   
+		contentPane.add(textField);      
 		
 		//to detect if the "enter" key is pressed
-		taskJTextField.addActionListener(new ActionListener() {
+		textField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					commandField = taskJTextField.getText();
+					commandField = textField.getText();
 				}
 				catch(NumberFormatException excep) {
 					System.out.println("Please Enter the Right Information");
@@ -112,6 +114,31 @@ public class todoapp extends JFrame{
 					}*/
 				}
 				
+				//case "display":
+				//Logic.passToParser(command);
+				//line = String.format(format, "1.", "meeting with bob", "09/10/15");
+				//outputJTextArea.append(line + "\n");
+				/*String [] columns= {"Tasks Completed", "Task To Be Done"};
+				String [] columns= {"Tasks", "Due Date", "Time"};
+	        	String array ="A&B&1&May 8 2011 12:17AM;;E&D&5&May 8 2011 12:43AM;;F&G&5&May 8 2011 7:06AM;;H&I&1&May 14 2011 11:57PM";
+	        	records = to2dim (array ,";;","&");
+	        	Object rows[][] = records;
+				JTable table = new JTable(rows, columns);
+	        	sp = new JScrollPane(table);
+	        	contentPane.add(sp, BorderLayout.CENTER);*/
+				//break;
+				
+				else if(commandField.equals("exit")) {
+					System.out.println("Exiting Alt4");
+					Timer t = new Timer(1000, new ActionListener() {
+	                    @Override
+	                    public void actionPerformed(ActionEvent e) {
+	                    	mainFrame.dispose();
+	                    }
+	                });
+					t.start();
+				}
+				
 				else {
 					arr = commandField.split(" ", 2);
 					command = arr[0];
@@ -126,28 +153,11 @@ public class todoapp extends JFrame{
 					case "update":
 						System.out.println("updated: " + description);
 						break;
-					//case "display":
-						//Logic.passToParser(command);
-						//line = String.format(format, "1.", "meeting with bob", "09/10/15");
-						//outputJTextArea.append(line + "\n");
-						/*String [] columns= {"Tasks Completed", "Task To Be Done"};
-						String [] columns= {"Tasks", "Due Date", "Time"};
-			        	String array ="A&B&1&May 8 2011 12:17AM;;E&D&5&May 8 2011 12:43AM;;F&G&5&May 8 2011 7:06AM;;H&I&1&May 14 2011 11:57PM";
-			        	records = to2dim (array ,";;","&");
-			        	Object rows[][] = records;
-						JTable table = new JTable(rows, columns);
-			        	sp = new JScrollPane(table);
-			        	contentPane.add(sp, BorderLayout.CENTER);*/
-						//break;
 					default:
 						System.out.println("wrong command");
 					}
-					//System.out.println(text);
-					taskJTextField.setText("");
-					//commandOp = new String[] {command};
-					//Alt4.main(commandOp);
+					textField.setText("");
 					commandFieldArr = new String[] {commandField};
-					//Alt4.main(commandFieldArr);
 					ArrayList<String> contentList = new ArrayList<String>();
 					contentList = Logic.passToParser(commandField);
 					Logic.takeAction(contentList);
@@ -156,18 +166,17 @@ public class todoapp extends JFrame{
 		});
                
 		// set up outputJTextArea   
-		outputJTextArea = new JTextArea();   
-		outputJTextArea.setEditable(false);   
+		outputTextArea = new JTextArea();   
+		outputTextArea.setEditable(false);   
 		
-		contentPane.add(outputJTextArea, BorderLayout.CENTER);
+		contentPane.add(outputTextArea, BorderLayout.CENTER);
   
 		// set up JScrollPane to allow JTextArea scrolling   
-		JScrollPane scrollJScrollPane =    
-		new JScrollPane(outputJTextArea);   
-		scrollJScrollPane.setBounds(10, 10, 560, 450);   
-		contentPane.add(scrollJScrollPane);
+		textAreaScrollPane = new JScrollPane(outputTextArea);   
+		textAreaScrollPane.setBounds(10, 10, 560, 450);   
+		contentPane.add(textAreaScrollPane);
 		
-		PrintStream printStream = new PrintStream(new CustomOutputStream(outputJTextArea));
+		PrintStream printStream = new PrintStream(new CustomOutputStream(outputTextArea));
          
         // re-assigns standard output stream and error output stream
         System.setOut(printStream);
@@ -205,16 +214,10 @@ public class todoapp extends JFrame{
 	    this.setTitle("JTextArea as JTable");
 	    contentPane.add(outputJTextArea, BorderLayout.CENTER);
 	}*/
-	
-	//currently not in use
-	public static void welcome() {
-		//System.out.println("Welcome to Alt4!");   //if this is used, text will be printed out in the eclipse console and not ui
-		PrintStream standardOut = new PrintStream(new CustomOutputStream(outputJTextArea));
-	}
    
 	//currently not in use
 	public static void feedbackWrongCommand() {
 		//System.out.println("Wrong command");
-		PrintStream standardOut = new PrintStream(new CustomOutputStream(outputJTextArea));
+		PrintStream standardOut = new PrintStream(new CustomOutputStream(outputTextArea));
 	}
 }
