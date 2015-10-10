@@ -18,7 +18,10 @@ public class CustomOutputStream extends OutputStream {
     public CustomOutputStream(JTextArea textArea) {
         this.textArea = textArea;
     }
-     
+    
+    /**
+     * @param b the byte to be written as character to the JTextArea
+     */
     @Override
     public void write(int b) throws IOException {
         // redirects data to the text area
