@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import main.java.logic.Logic;
 import main.java.resources.Task;
 import main.java.ui.UI;
-import main.java.ui.todoapp;
+import main.java.ui.ToDoApp;
 
 //@@Author: Jiahuan
 

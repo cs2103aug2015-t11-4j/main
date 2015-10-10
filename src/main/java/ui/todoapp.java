@@ -27,7 +27,7 @@ import main.java.storage.Storage;
  *
  */
 
-public class todoapp extends JFrame{
+public class ToDoApp extends JFrame{
 	
 	private static final long serialVersionUID = 7154613852426382429L;
 	
@@ -63,14 +63,14 @@ public class todoapp extends JFrame{
 		//creating and showing this application's GUI. 
 		javax.swing.SwingUtilities.invokeLater(new Runnable() { 
 			public void run() { 
-				new todoapp(); 
+				new ToDoApp(); 
 				System.out.println("Welcome to ALT4, your personlized agenda manager");
 			} 
 		}); 
 
 	}
 		
-	public todoapp() {
+	public ToDoApp() {
 		
 		JFrame mainFrame = new JFrame("Alt4");
 		mainFrame.setSize(600, 600);
