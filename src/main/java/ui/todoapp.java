@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 
 import main.java.logic.Alt4;
 import main.java.logic.Logic;
+import main.java.storage.Storage;
 
 /**
  * 
@@ -37,17 +38,17 @@ public class todoapp extends JFrame{
 	static private JTextArea outputJTextArea; 
 	
 	static private String command;
+	static private String commandField;
 	static private String[] arr;
 	static private String description;
 	//static private String[] commandOp;
 	static private String[] commandFieldArr;
 	
-	//static private JPanel contentPane;
 	//static private BorderLayout bl;
 	
-	//static private JTable table;
+	static private JTable table;
 	static private JScrollPane sp;
-	static String [][] records;
+	static private String [][] records;
 	
 	//static private String format = "%1$5s %2$-40s %3$-20s";
 	//static private String line;
@@ -88,55 +89,69 @@ public class todoapp extends JFrame{
 		//to detect if the "enter" key is pressed
 		taskJTextField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String commandField = taskJTextField.getText();
+				try {
+					commandField = taskJTextField.getText();
+				}
+				catch(NumberFormatException excep) {
+					System.out.println("Please Enter the Right Information");
+				}
+		
+				commandField = commandField.toLowerCase();
 				
-				//String text = commandField + "\n";
-				
-				//welcome message
-				//System.out.println("Welcome to ALT4, your personlized agenda manager");
-				
-				if(commandField.equals("display")) {
+				if(commandField.equals("display")){
 					Logic.takeAction(Logic.passToParser(commandField));
+					String[] columns = {"Floating", "Event", "Due Date"};
+					Object rows[][] = records;
+					//Object rows[][] = Storage.display();
+					table = new JTable(rows, columns);
+					sp = new JScrollPane(table);
+					contentPane.add(sp, BorderLayout.CENTER);
+
+					/*catch(NullPointerException e1) {
+						System.out.println("File is currently empty.");
+					}*/
 				}
 				
-				arr = commandField.split(" ", 2);
-				command = arr[0];
-				description = (arr[1]).trim();
-				switch(command) {
-				case "add":
-					System.out.println("added: " + description);
-					break;
-				case "delete":
-					System.out.println("deleted: " + description);
-					break;
-				case "update":
-					System.out.println("updated: " + description);
-					break;
-				//case "display":
-					//Logic.passToParser(command);
-					//line = String.format(format, "1.", "meeting with bob", "09/10/15");
-					//outputJTextArea.append(line + "\n");
-					/*String [] columns= {"Tasks Completed", "Task To Be Done"};
-					String [] columns= {"Tasks", "Due Date", "Time"};
-			        String array ="A&B&1&May 8 2011 12:17AM;;E&D&5&May 8 2011 12:43AM;;F&G&5&May 8 2011 7:06AM;;H&I&1&May 14 2011 11:57PM";
-			        records = to2dim (array ,";;","&");
-			        Object rows[][] = records;
-					JTable table = new JTable(rows, columns);
-			        sp = new JScrollPane(table);
-			        contentPane.add(sp, BorderLayout.CENTER);*/
-					//break;
-				default:
-					System.out.println("wrong command");
+				else {
+					arr = commandField.split(" ", 2);
+					command = arr[0];
+					description = (arr[1]).trim();
+					switch(command) {
+					case "add":
+						System.out.println("added: " + description);
+						break;
+					case "delete":
+						System.out.println("deleted: " + description);
+						break;
+					case "update":
+						System.out.println("updated: " + description);
+						break;
+					//case "display":
+						//Logic.passToParser(command);
+						//line = String.format(format, "1.", "meeting with bob", "09/10/15");
+						//outputJTextArea.append(line + "\n");
+						/*String [] columns= {"Tasks Completed", "Task To Be Done"};
+						String [] columns= {"Tasks", "Due Date", "Time"};
+			        	String array ="A&B&1&May 8 2011 12:17AM;;E&D&5&May 8 2011 12:43AM;;F&G&5&May 8 2011 7:06AM;;H&I&1&May 14 2011 11:57PM";
+			        	records = to2dim (array ,";;","&");
+			        	Object rows[][] = records;
+						JTable table = new JTable(rows, columns);
+			        	sp = new JScrollPane(table);
+			        	contentPane.add(sp, BorderLayout.CENTER);*/
+						//break;
+					default:
+						System.out.println("wrong command");
+					}
+					//System.out.println(text);
+					taskJTextField.setText("");
+					//commandOp = new String[] {command};
+					//Alt4.main(commandOp);
+					commandFieldArr = new String[] {commandField};
+					//Alt4.main(commandFieldArr);
+					ArrayList<String> contentList = new ArrayList<String>();
+					contentList = Logic.passToParser(commandField);
+					Logic.takeAction(contentList);
 				}
-				//System.out.println(text);
-				taskJTextField.setText("");
-				//commandOp = new String[] {command};
-				//Alt4.main(commandOp);
-				commandFieldArr = new String[] {commandField};
-				//Alt4.main(commandFieldArr);
-				ArrayList<String> contentList = new ArrayList<String>();
-				contentList = Logic.passToParser(commandField);
-				Logic.takeAction(contentList);
 			}
 		});
                

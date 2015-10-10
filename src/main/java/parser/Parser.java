@@ -16,15 +16,21 @@ public class Parser {
 	
 	private static void updateList(String inputFromLogic, ArrayList<String> contentListForLogic) {
 		
-		String content[] = inputFromLogic.split(" ", 2);
-		contentListForLogic.add(content[0]);
-		if(content[1].contains(" ")) {
-			content = content[1].split(" ", 2);
-			contentListForLogic.add(content[0]);
-			contentListForLogic.add(content[1]);
+		if(inputFromLogic.equals("display")) {
+			contentListForLogic.add(inputFromLogic);
 		}
-		else 
-			contentListForLogic.add(content[1]);
+		
+		else {  //original only contains this part (yj)
+			String content[] = inputFromLogic.split(" ", 2);
+			contentListForLogic.add(content[0]);
+			if(content[1].contains(" ")) {
+				content = content[1].split(" ", 2);
+				contentListForLogic.add(content[0]);
+				contentListForLogic.add(content[1]);
+			}
+			else 
+				contentListForLogic.add(content[1]);
+		}
 	}
 	
 	public static Task createTaskForAdd (ArrayList<String> listFromLogic) {

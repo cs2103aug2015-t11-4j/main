@@ -20,30 +20,35 @@ public class Logic {
 		Task task;
 		int itemNum;
 		String taskType, stringForParsingUpdate;
-		switch (inputForSecondParsing.get(0).toLowerCase()){
-		//if add, need to create task object for storage
-		case "add":
-			task = Parser.createTaskForAdd(inputForSecondParsing);
-			code = Storage.addOneItem(task);
-			System.out.println("added: " + code);  //prints out 0 (Yu Ju)
-			break;
-		case "update":
-			itemNum = Integer.parseInt(inputForSecondParsing.get(1)); 
-			taskType = Storage.getTaskTypeByItemNum(itemNum); //get tasktype from logic
-			inputForSecondParsing.add(taskType); //append tasktype to arraylist
-			task = Parser.createTaskForUpdate(inputForSecondParsing); //create task obj 
-			code = Storage.updateOneItem(itemNum, task); //pass in item number and task obj
-			break;
-		case "delete":
-			itemNum = Integer.parseInt(inputForSecondParsing.get(1));
-			code = Storage.deleteOneItem(itemNum);//pass in item number
-			System.out.println("deleted: " + code);  //prints out 0 (Yu Ju)
-			break;
-		case "display":
+		if(inputForSecondParsing.get(0).equals("display")) {
 			Storage.display();
-			break;
-		default:
-			UI.feedbackWrongCommand();
+		}
+		else {  //original only contains this part (yj)
+			switch (inputForSecondParsing.get(0).toLowerCase()){
+			//if add, need to create task object for storage
+			case "add":
+				task = Parser.createTaskForAdd(inputForSecondParsing);
+				code = Storage.addOneItem(task);
+				System.out.println("added: " + code);  //prints out 0 (yj)
+				break;
+			case "update":
+				itemNum = Integer.parseInt(inputForSecondParsing.get(1)); 
+				taskType = Storage.getTaskTypeByItemNum(itemNum); //get tasktype from logic
+				inputForSecondParsing.add(taskType); //append tasktype to arraylist
+				task = Parser.createTaskForUpdate(inputForSecondParsing); //create task obj 
+				code = Storage.updateOneItem(itemNum, task); //pass in item number and task obj
+				break;
+			case "delete":
+				itemNum = Integer.parseInt(inputForSecondParsing.get(1));
+				code = Storage.deleteOneItem(itemNum);//pass in item number
+				System.out.println("deleted: " + code);  //prints out 0 (yj)
+				break;
+			/*case "display":
+				Storage.display();
+				break;*/
+			default:
+				UI.feedbackWrongCommand();
+			}
 		}
 		UI.feedback(inputForSecondParsing.get(0),code);  //not used for now (Yu Ju)
 	}
