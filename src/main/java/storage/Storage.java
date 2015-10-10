@@ -65,30 +65,37 @@ public class Storage {
 	
 	public static int deleteOneItem(int itemNumber) {
 		try {
-			File original = new File(filename);
-			FileReader fr = new FileReader(filename);
-			BufferedReader br = new BufferedReader(fr);
-			
-			File temp = new File("Alt4.tmp");
-			FileWriter fw = new FileWriter("Alt4.tmp", true);
-			BufferedWriter bw = new BufferedWriter(fw);
-			
-			int lineNumber = 0;
-			String line = "";
-			
-			while ((line = br.readLine()) != null) {
-				lineNumber += 1;
-				if (lineNumber == itemNumber) {
-					bw.write(line);
-					bw.newLine();
-				}
-			}
-			
-			br.close();
-			bw.close();
-			original.delete();
-			temp.renameTo(original);
-			
+		    File original = new File(filename);
+            FileReader fr = new FileReader(filename);
+            BufferedReader br = new BufferedReader(fr);
+            
+            File temp = new File("Alt4.tmp");
+            FileWriter fw = new FileWriter("Alt4.tmp", true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            
+            String line = "";
+            int lineNumber = 0;
+            
+            @SuppressWarnings("unused")
+            String deletedLine = "";
+            
+            while ((line = br.readLine()) != null) {
+                lineNumber += 1;
+                
+                if (lineNumber != itemNumber) {
+                    bw.write(line);
+                    bw.newLine();
+                } else {
+                    deletedLine = line;
+                } 
+            }
+                
+            //System.out.println(String.format(MESSAGE_DELETE, filename, deletedLine));
+                
+            br.close();
+            bw.close();
+            original.delete();
+            temp.renameTo(original);
 		} catch (Exception e) {
 			return -1;
 		}
