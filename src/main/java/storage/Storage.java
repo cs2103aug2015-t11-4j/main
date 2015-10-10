@@ -101,7 +101,26 @@ public class Storage {
 	}
 
 	public static void display() {
-		// TODO Auto-generated method stub
-		// May not be required as told by Jiahuan
-	}
+        try {
+            File file = new File(filename);
+            
+            if (file.length() == 0) {
+                //System.out.println(String.format(MESSAGE_DISPLAY_EMPTY, filename));
+            } else {
+                FileReader fr = new FileReader(filename);
+                BufferedReader br = new BufferedReader(fr);
+                String line = "";
+                int lineNum = 0;
+            
+                while ((line = br.readLine()) != null) {
+                        lineNum += 1;
+                        System.out.println(lineNum + ". " + line);
+                }
+            
+                br.close();
+            }
+       } catch (Exception e) {
+            //System.out.println(MESSAGE_READ_ERROR);
+       }
+    }
 }

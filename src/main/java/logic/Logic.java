@@ -43,9 +43,9 @@ public class Logic {
 				code = Storage.deleteOneItem(itemNum);//pass in item number
 				System.out.println("deleted: " + code);  //prints out 0 (yj)
 				break;
-			/*case "display":
+			case "display":
 				Storage.display();
-				break;*/
+				break;
 			default:
 				UI.feedbackWrongCommand();
 			}
