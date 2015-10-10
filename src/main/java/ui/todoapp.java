@@ -155,12 +155,8 @@ public class todoapp extends JFrame{
 					default:
 						System.out.println("wrong command");
 					}
-					//System.out.println(text);
 					taskJTextField.setText("");
-					//commandOp = new String[] {command};
-					//Alt4.main(commandOp);
 					commandFieldArr = new String[] {commandField};
-					//Alt4.main(commandFieldArr);
 					ArrayList<String> contentList = new ArrayList<String>();
 					contentList = Logic.passToParser(commandField);
 					Logic.takeAction(contentList);
@@ -218,12 +214,6 @@ public class todoapp extends JFrame{
 	    this.setTitle("JTextArea as JTable");
 	    contentPane.add(outputJTextArea, BorderLayout.CENTER);
 	}*/
-	
-	//currently not in use
-	public static void welcome() {
-		//System.out.println("Welcome to Alt4!");   //if this is used, text will be printed out in the eclipse console and not ui
-		PrintStream standardOut = new PrintStream(new CustomOutputStream(outputJTextArea));
-	}
    
 	//currently not in use
 	public static void feedbackWrongCommand() {
