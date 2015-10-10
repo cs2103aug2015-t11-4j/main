@@ -112,6 +112,10 @@ public class todoapp extends JFrame{
 					}*/
 				}
 				
+				else if(commandField.equals("exit")) {
+					mainFrame.dispose();
+				}
+				
 				else {
 					arr = commandField.split(" ", 2);
 					command = arr[0];
