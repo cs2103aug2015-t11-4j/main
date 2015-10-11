@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import main.java.parser.Parser;
 import main.java.resources.Task;
+import main.java.resources.dataDisplay;
 import main.java.storage.Storage;
 import main.java.ui.UI;
 
@@ -20,10 +21,7 @@ public class Logic {
 		Task task;
 		int itemNum;
 		String taskType;
-		if(inputForSecondParsing.get(0).equals("display")) {
-			Storage.display();
-		}
-		else {  //original only contains this part (yj)
+
 			switch (inputForSecondParsing.get(0).toLowerCase()){
 			//if add, need to create task object for storage
 			case "add":
@@ -35,13 +33,12 @@ public class Logic {
 			case "delete":
 				code = deleteInLogic(inputForSecondParsing);
 				break;
-			/*case "display":
-				Storage.display();
-				break;*/
+			case "display":
+				dataDisplay.displayAll();
+				break;
 			default:
 				UI.feedbackWrongCommand();
 			}
-		}
 		UI.feedback(inputForSecondParsing.get(0),code);  //not used for now (Yu Ju)
 	}
 	private static int deleteInLogic(ArrayList<String> inputForSecondParsing) {
@@ -49,7 +46,7 @@ public class Logic {
 		int itemNum;
 		itemNum = Integer.parseInt(inputForSecondParsing.get(1));
 		code = Storage.deleteOneItem(itemNum);//pass in item number
-		System.out.println("deleted: " + code);  //prints out 0 (yj)
+		//System.out.println("deleted: " + code);  //prints out 0 (yj)
 		return code;
 	}
 	private static int updateInLogic(ArrayList<String> inputForSecondParsing) {
@@ -69,7 +66,7 @@ public class Logic {
 		Task task;
 		task = Parser.createTaskForAdd(inputForSecondParsing);
 		code = Storage.addOneItem(task);
-		System.out.println("added: " + code);  //prints out 0 (yj)
+		//System.out.println("added: " + code);  //prints out 0 (yj)
 		return code;
 	}
 

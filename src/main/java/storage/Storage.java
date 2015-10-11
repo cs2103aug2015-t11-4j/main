@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
 
 import main.java.resources.Task;
 
@@ -15,17 +16,20 @@ import main.java.resources.Task;
  * @@author Lim Yong Zhi
  */
 
+
 public class Storage {
 	/* 
 	 * Temporary placeholder for creation of file - To be replaced with user's
 	 * directory of choice
 	 */
+	public static ArrayList<Task> taskList =new ArrayList<Task>();// a global variable for task list (jh)
 	private static String filename = "MyCalender.txt";
 	
 	/* 
      * Adds one task to the agenda
      */
 	public static int addOneItem(Task task) {
+		taskList.add(task); //(jh) update internal list
 		try {
 			FileWriter fw = new FileWriter(filename, true);
 			BufferedWriter bw = new BufferedWriter(fw);
@@ -45,6 +49,7 @@ public class Storage {
      * Updates one task to the agenda
      */
 	public static int updateOneItem(int itemNumber, Task task) {
+		taskList.set(itemNumber, task); //(jh) update internal list
 		try {
 		    FileReader fr = new FileReader(filename);
             BufferedReader br = new BufferedReader(fr);
@@ -79,6 +84,7 @@ public class Storage {
 	}
 	
 	public static int deleteOneItem(int itemNumber) {
+		taskList.remove(itemNumber); //(jh) update internal list
 		try {
 		    File original = new File(filename);
             FileReader fr = new FileReader(filename);
@@ -113,9 +119,9 @@ public class Storage {
 		return 0;
 	}
 
-	/* 
+/*	/* 
      * Displays all tasks to the agenda
-     */
+     
 	public static void display() {
         try {
             File file = new File(filename);
