@@ -101,13 +101,13 @@ public class ToDoApp extends JFrame{
 		//to detect if the "enter" key is pressed
 		textField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
+				/*try {
 					commandField = textField.getText();
 				}
 				catch(NumberFormatException excep) {
 					System.out.println("Please Enter the Right Information");
-				}
-		
+				}*/
+				commandField = textField.getText();
 				commandField = commandField.toLowerCase();
 				
 				if(commandField.equals("display")){
@@ -118,26 +118,8 @@ public class ToDoApp extends JFrame{
 					//table = new JTable(rows, columns);
 					//tableScrollPane = new JScrollPane(table);
 					//contentPane.add(tableScrollPane, BorderLayout.CENTER);
-
-					/*catch(NullPointerException e1) {
-						System.out.println("File is currently empty.");
-					}*/
 					textField.setText("");
 				}
-				
-				//case "display":
-				//Logic.passToParser(command);
-				//line = String.format(format, "1.", "meeting with bob", "09/10/15");
-				//outputJTextArea.append(line + "\n");
-				/*String [] columns= {"Tasks Completed", "Task To Be Done"};
-				String [] columns= {"Tasks", "Due Date", "Time"};
-	        	String array ="A&B&1&May 8 2011 12:17AM;;E&D&5&May 8 2011 12:43AM;;F&G&5&May 8 2011 7:06AM;;H&I&1&May 14 2011 11:57PM";
-	        	records = to2dim (array ,";;","&");
-	        	Object rows[][] = records;
-				JTable table = new JTable(rows, columns);
-	        	sp = new JScrollPane(table);
-	        	contentPane.add(sp, BorderLayout.CENTER);*/
-				//break;
 				
 				else if(commandField.equals("exit")) {
 					System.out.println("Exiting Alt4");
@@ -195,21 +177,6 @@ public class ToDoApp extends JFrame{
 
         //textarea();
 	} // end method main
-	
-	/*public static String [][] to2dim (String source , String outerdelim, String innerdelim) {
-
-        String [][] result = new String [(source.split (outerdelim)).length][];
-        int count = 0;
-
-        System.out.println("result len "+result.length);
-        for (String line : source.split (outerdelim ))
-            {
-                result [count++] = line.split (innerdelim);
-            }
-
-        System.out.println(Arrays.deepToString(result));
-        return result;
-    }*/
 
 	/*private void textarea() throws Exception {
 		Container contentPane;
@@ -225,10 +192,4 @@ public class ToDoApp extends JFrame{
 	    this.setTitle("JTextArea as JTable");
 	    contentPane.add(outputJTextArea, BorderLayout.CENTER);
 	}*/
-   
-	//currently not in use
-	public static void feedbackWrongCommand() {
-		//System.out.println("Wrong command");
-		PrintStream standardOut = new PrintStream(new CustomOutputStream(outputTextArea));
-	}
 }
