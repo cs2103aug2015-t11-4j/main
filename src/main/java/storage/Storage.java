@@ -49,7 +49,7 @@ public class Storage {
      * Updates one task to the agenda
      */
 	public static int updateOneItem(int itemNumber, Task task) {
-		taskList.set(itemNumber, task); //(jh) update internal list
+		taskList.set(itemNumber-1, task); //(jh) update internal list
 		try {
 		    FileReader fr = new FileReader(filename);
             BufferedReader br = new BufferedReader(fr);
