@@ -30,12 +30,14 @@ public class DataDisplay {
 
 	private static String createContentForEvent(Task task) {
 		
-		return task.getStartTime()+" - "+task.getEndTime()+ " on "+ task.getDate()+": "+task.getTaskDescription();
+		return "From " + task.getStartDate() + "," + task.getStartTime()+ " - " + 
+				"to " + task.getEndDate() + "," + task.getEndTime()+ ": " + task.getTaskDescription();
+	
 	}
 
 	private static String createContentForDeadline(Task task) {
 
-		return "By "+task.getDate()+": "+ task.getTaskDescription();
+		return "By "+task.getEndDate()+": "+ task.getTaskDescription();
 	}
 
 }

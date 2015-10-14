@@ -5,9 +5,11 @@ public class Task {
 	
 	private String taskType;
 	private String taskDescription;
-	private String date;
+	private String startDate;
+	private String endDate;
 	private String startTime;
 	private String endTime;
+	private boolean isCompleted;
 	
 	/********************** Constructor ************************/
 	//creates an empty task
@@ -15,19 +17,23 @@ public class Task {
 		
 		setTaskType(null);
 		setTaskDescription(null);
-		setDate(null);
+		setStartDate(null);
+		setEndDate(null);
 		setStartTime(null);
 		setEndTime(null);
+		setCompleted(false);
 	}
 	
-	public Task (String newTaskType, String newTaskDescription, String newDate,
-									String newStartTime, String newEndTime) {
+	public Task (String newTaskType, String newTaskDescription, String newStartDate, String newEndDate,
+									String newStartTime, String newEndTime, boolean taskStatus) {
 			
 		setTaskType(newTaskType);
 		setTaskDescription(newTaskDescription);
-		setDate(newDate);
+		setStartDate(newStartDate);
+		setEndDate(newEndDate);
 		setStartTime(newStartTime);
 		setEndTime(newEndTime);
+		setCompleted(taskStatus);
 	}
 
 	/********************* Accessors *************************/
@@ -39,8 +45,12 @@ public class Task {
 		return taskDescription;
 	}
 	
-	public String getDate() {
-		return date;
+	public String getStartDate() {
+		return startDate;
+	}
+	
+	public String getEndDate() {
+		return endDate;
 	}
 	
 	public String getStartTime() {
@@ -49,6 +59,10 @@ public class Task {
 	
 	public String getEndTime() {
 		return endTime;
+	}
+	
+	public boolean getIsCompleted() {
+		return isCompleted;
 	}
 	
 	/*********************** Mutators ************************/
@@ -60,8 +74,12 @@ public class Task {
 		taskDescription = newTaskDescription;
 	}
 	
-	public void setDate(String newDate) {
-		date = newDate;
+	public void setStartDate(String newStartDate) {
+		startDate = newStartDate;
+	}
+	
+	public void setEndDate(String newEndDate) {
+		endDate = newEndDate;
 	}
 	
 	public void setStartTime(String newStartTime) {
@@ -70,5 +88,9 @@ public class Task {
 	
 	public void setEndTime(String newEndTime) {
 		endTime = newEndTime;
+	}
+	
+	public void setCompleted(boolean newTaskStatus) {
+		isCompleted = newTaskStatus;
 	}
 }

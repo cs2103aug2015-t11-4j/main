@@ -34,8 +34,9 @@ public class Storage {
 			FileWriter fw = new FileWriter(filename, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			
-			bw.write(task.getTaskType() + ";" + task.getTaskDescription() + ";" + task.getDate()
-					+ ";" + task.getStartTime() + ";" + task.getEndTime() + ";");
+			bw.write(task.getTaskType() + ";" + task.getTaskDescription() + ";" + task.getStartDate()
+					+ ";" + task.getEndDate() + ";" + task.getStartTime() + ";" + task.getEndTime() + ";"
+					+ task.getIsCompleted() + ";" );
 			
 			bw.newLine();
 			bw.close();
@@ -73,8 +74,8 @@ public class Storage {
             FileWriter fw = new FileWriter(filename);
             BufferedWriter bw = new BufferedWriter(fw);
             
-            bw.write(input.replaceAll(replaceLine, task.getTaskType() + ";" + task.getTaskDescription() + ";" + task.getDate()
-            + ";" + task.getStartTime() + ";" + task.getEndTime() + ";" + "\n"));
+            bw.write(input.replaceAll(replaceLine, task.getTaskType() + ";" + task.getTaskDescription() + ";" + task.getStartDate()
+            + ";" + task.getEndDate() + ";" + task.getStartTime() + ";" + task.getEndTime() + ";" + task.getIsCompleted() + ";"  + "\n"));
             
             bw.close();
 		} catch (Exception e) {
