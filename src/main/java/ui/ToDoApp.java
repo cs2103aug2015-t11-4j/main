@@ -49,7 +49,7 @@ public class ToDoApp extends JFrame{
 	static private String commandField;
 	static private String[] arr;
 	static private String description;
-	static private String[] commandFieldArr;
+	//static private String[] commandFieldArr;
 	static private String [][] records;
 	
 	//static private String format = "%1$5s %2$-40s %3$-20s";
@@ -100,24 +100,38 @@ public class ToDoApp extends JFrame{
 		//to detect if the "enter" key is pressed
 		textField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*try {
+				
+				try {
 					commandField = textField.getText();
 				}
 				catch(NumberFormatException excep) {
 					System.out.println("Please Enter the Right Information");
-				}*/
+				}
+				
 				commandField = textField.getText();
 				commandField = commandField.toLowerCase();
 				
 				if(commandField.equals("display")){
-					Logic.takeAction(Logic.passToParser(commandField));
+					
+					try {
+						Logic.takeAction(commandField);
+						textField.setText("");
+			        } catch (NullPointerException e1) {
+			            System.out.print("List is empty");
+			        }
+					
+					//list is not null assert(list not null)
+					//Logic.takeAction(Logic.passToParser(commandField));
+					
+					//Logic.takeAction(commandField);
+					
 					//String[] columns = {"Floating", "Event", "Due Date"};
 					//Object rows[][] = records;
 					//Object rows[][] = Storage.display();
 					//table = new JTable(rows, columns);
 					//tableScrollPane = new JScrollPane(table);
 					//contentPane.add(tableScrollPane, BorderLayout.CENTER);
-					textField.setText("");
+					//textField.setText("");
 				}
 				
 				else if(commandField.equals("exit")) {
@@ -137,22 +151,41 @@ public class ToDoApp extends JFrame{
 					description = (arr[1]).trim();
 					switch(command) {
 					case "add":
+						Logic.takeAction(commandField);
 						System.out.println("added: " + description);
+						textField.setText("");
 						break;
 					case "delete":
-						System.out.println("deleted: " + description);
+						try {
+							Logic.takeAction(commandField);
+							System.out.println("deleted: " + description);
+							textField.setText("");
+				        } catch (NullPointerException e1) {
+				            System.out.print("List is empty");
+				        }
+						//assert list not null
+						//System.out.println("deleted: " + description);
 						break;
 					case "update":
-						System.out.println("updated: " + description);
+						try {
+							Logic.takeAction(commandField);
+							System.out.println("updated: " + description);
+							textField.setText("");
+				        } catch (NullPointerException e1) {
+				            System.out.print("List is empty");
+				        }
+						//System.out.println("updated: " + description);
 						break;
 					default:
 						System.out.println("wrong command");
+						textField.setText("");
 					}
-					textField.setText("");
-					commandFieldArr = new String[] {commandField};
-					ArrayList<String> contentList = new ArrayList<String>();
-					contentList = Logic.passToParser(commandField);
-					Logic.takeAction(contentList);
+					//textField.setText("");
+					//commandFieldArr = new String[] {commandField};
+					//ArrayList<String> contentList = new ArrayList<String>();
+					//contentList = Logic.passToParser(commandField);
+					//Logic.takeAction(contentList);
+					//Logic.takeAction(commandField);
 				}
 			}
 		});
