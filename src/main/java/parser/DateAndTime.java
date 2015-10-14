@@ -1,5 +1,9 @@
 package main.java.parser;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class DateAndTime {
@@ -10,114 +14,171 @@ public class DateAndTime {
 	private static final String KEYWORD_AM = "am";
 	private static final String KEYWORD_PM = "pm";
 
-	/* testing purposes
+	//2 testing purposes
 	public static void main(String[] args) {
+
 		Scanner sc = new Scanner(System.in);
 		System.out.println("ENTER: ");
 		String input = sc.nextLine();
-		System.out.println(reformatTime(input));
+		System.out.println(reformatDate(input));
 	}
-	*/
+	//
 	
 	public static String reformatDate(String input) {
 		
-		//valid formats examples: 22 oct, 22 october, 22/10, 22.10
-		//to return date in format dd/mm
+		//valid formats examples: 22 oct, 22 october, 22/10, 22.10, 22 oct 2015, 22 october 2015, 22/10/2015, 22.10.2015
+		//to return date in format dd/mm/yyyy
 		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy");
+		//get current date time with Date()
+		Date year = new Date();
 		String date = "";
 		
 		if (isOneWord(input)) {
-			//input is in dd/mm; check if valid
+
+			//input can be dd/mm or dd/mm/yyyy; check if valid
 			if (input.contains(REGEX_SLASH)) {
+				ArrayList<String> dateList = new ArrayList<String>();
 				String content[] = input.split(REGEX_SLASH, 2);
-				if(Integer.parseInt(content[1]) <= 12) 	//within month range
-					if(isValidDD(content[0],content[1])) //check if day is valid within the month
-						date = input;
+				dateList.add(content[0]); //add date into list
+				if(content[1].contains(REGEX_SLASH)) {//input is dd/mm/yyyy
+					content = content[1].split(REGEX_SLASH, 2);
+					dateList.add(content[0]); //add month into list
+					dateList.add(content[1]); //add year into list
+				}
+				else 
+					dateList.add(content[1]); //input is dd/mm
+
+				if(Integer.parseInt(dateList.get(1)) <= 12) 	//within month range
+					if(isValidDD(dateList.get(0),dateList.get(1))) //check if day is valid within the month
+						date = dateList.get(0) + "/" + dateList.get(1);
+				
+				if(dateList.size() == 3) {//year is specified
+					if(isValidYear(dateList.get(2)))
+						date = date + "/" + dateList.get(2);
+					else 
+						date = "invalid date";
+				}
+				else { //year is not specified; append current year to it
+					date = date + "/" + dateFormat.format(year);
+				}	
 			}
-			//input is in dd/mm; check if valid
+			//format is in dd.mm.yyyy or dd.mm
 			else if (input.contains(REGEX_DOT)) {
+				ArrayList<String> dateList = new ArrayList<String>();
 				String content[] = input.split("\\.", 2);
-				if(Integer.parseInt(content[1]) <= 12) 	//within month range
-					if(isValidDD(content[0],content[1])) //check if day is valid within the month
-						date = content[0] + "/" + content[1];
+				dateList.add(content[0]); //add date into list
+				if(content[1].contains(REGEX_DOT)) {//input is dd.mm.yyyy
+					content = content[1].split("\\.", 2);
+					dateList.add(content[0]); //add month into list
+					dateList.add(content[1]); //add year into list
+				}
+				else 
+					dateList.add(content[1]); //input is dd.mm
+
+				if(Integer.parseInt(dateList.get(1)) <= 12) 	//within month range
+					if(isValidDD(dateList.get(0),dateList.get(1))) //check if day is valid within the month
+						date = dateList.get(0) + "/" + dateList.get(1);
+				
+				if(dateList.size() == 3) {//year is specified
+					if(isValidYear(dateList.get(2)))
+						date = date + "/" + dateList.get(2);
+					else 
+						date = "invalid date";
+				}
+				else { //year is not specified; append current year to it
+					date = date + "/" + dateFormat.format(year);
+				}	
 			}
 			else 
 				date = "invalid date";
 		}
 		else {
 			//input is in eg (22 october/ 22 oct)
+			ArrayList<String> dateList = new ArrayList<String>();
 			String content[] = input.split(REGEX_WHITESPACE, 2);
-			switch(content[1].toLowerCase()) {
+			dateList.add(content[0]); //add date into list
+			if(content[1].contains(REGEX_WHITESPACE)) {//input is dd month yyyy
+				content = content[1].split(REGEX_WHITESPACE, 2);
+				dateList.add(content[0].toLowerCase()); //add month into list
+				dateList.add(content[1]); //add year into list
+			}
+			else 
+				dateList.add(content[1].toLowerCase()); //input is dd month 
+
+			switch(dateList.get(1)) {
 			//january
 			case "jan":
 			case "january":
-				if(isValidDD(content[0], content[1].toLowerCase())) 
-						date = content[0] + "/" + "1";
+				if(isValidDD(dateList.get(0), dateList.get(1))) {
+					System.out.println(1);
+					date = appendYear(dateFormat, year, date, dateList, "1");
+				}
 				break;
 			//february
 			case "feb":
 			case "february":
-				if(isValidDD(content[0], content[1].toLowerCase()))
-					date = content[0] + "/" + "2";
+				if(isValidDD(dateList.get(0), dateList.get(1))) 
+					date = appendYear(dateFormat, year, date, dateList, "2");
 				break;
 			//march
 			case "mar":
 			case "march":
-				if(isValidDD(content[0], content[1].toLowerCase()))
-					date = content[0] + "/" + "3";
+				if(isValidDD(dateList.get(0), dateList.get(1))) 
+					date = appendYear(dateFormat, year, date, dateList, "3");
 				break;
 			//april
 			case "apr":
 			case "april":
-				if(isValidDD(content[0], content[1].toLowerCase()))
-					date = content[0] + "/" + "4";
+				if(isValidDD(dateList.get(0), dateList.get(1))) 
+					date = appendYear(dateFormat, year, date, dateList, "4");
 				break;
 			//may
 			case "may":
-				if(isValidDD(content[0], content[1].toLowerCase()))
-					date = content[0] + "/" + "5";
+				if(isValidDD(dateList.get(0), dateList.get(1))) 
+					date = appendYear(dateFormat, year, date, dateList, "5");
 				break;
 			//june
 			case "jun":
 			case "june":
-				if(isValidDD(content[0], content[1].toLowerCase()))
-					date = content[0] + "/" + "6";
+				if(isValidDD(dateList.get(0), dateList.get(1))) 
+					date = appendYear(dateFormat, year, date, dateList, "6");
 				break;
 			//july
 			case "jul":
 			case "july":
-				if(isValidDD(content[0], content[1].toLowerCase()))
-					date = content[0] + "/" + "7";
+				if(isValidDD(dateList.get(0), dateList.get(1))) 
+					date = appendYear(dateFormat, year, date, dateList, "7");
 				break;
 			//august
 			case "aug":
 			case "august":
-				if(isValidDD(content[0], content[1].toLowerCase()))
-					date = content[0] + "/" + "8";
+				if(isValidDD(dateList.get(0), dateList.get(1))) 
+					date = appendYear(dateFormat, year, date, dateList, "8");
 				break;
 			//september
 			case "sept":
 			case "september":
-				if(isValidDD(content[0], content[1].toLowerCase()))
-					date = content[0] + "/" + "9";
+				if(isValidDD(dateList.get(0), dateList.get(1))) 
+					date = appendYear(dateFormat, year, date, dateList, "9");
 				break;
 			//october
 			case "oct":
 			case "october":
-				if(isValidDD(content[0], content[1].toLowerCase()))
-					date = content[0] + "/" + "10";
+				if(isValidDD(dateList.get(0), dateList.get(1))) 
+					date = appendYear(dateFormat, year, date, dateList, "10");
 				break;
 			//november
 			case "nov":
 			case "november":
-				if(isValidDD(content[0], content[1].toLowerCase()))
-					date = content[0] + "/" + "11";
+				if(isValidDD(dateList.get(0), dateList.get(1))) 
+					date = appendYear(dateFormat, year, date, dateList, "11");
 				break;
 			//december
 			case "dec":
 			case "december":
-				if(isValidDD(content[0], content[1].toLowerCase()))
-					date = content[0] + "/" + "12";
+				if(isValidDD(dateList.get(0), dateList.get(1))) 
+					date = appendYear(dateFormat, year, date, dateList, "12");
 				break;	
 			default:
 				break;
@@ -127,6 +188,17 @@ public class DateAndTime {
 			return "invalid date";
 		else 
 			return date;
+	}
+	
+	private static String appendYear(DateFormat dateFormat, Date year, String date, ArrayList<String> dateList, String month) {
+		if(dateList.size() == 3) { //year is specified
+			if(isValidYear(dateList.get(2)))
+				date = dateList.get(0) + "/" + month + "/" + dateList.get(2);
+		}
+		else { //year not specified; append current year
+			date = dateList.get(0) + "/" + month + "/" + dateFormat.format(year);
+		}
+		return date;
 	}
 	
 	public static String reformatTime(String input) {
@@ -180,6 +252,20 @@ public class DateAndTime {
 			return "invalid time";
 		else 
 			return time;
+	}
+	
+	public static boolean isDate(String input) {
+		if((reformatDate(input).equals("invalid date")))
+			return false;
+		else 
+			return true;
+	}
+	
+	public static boolean isTime(String input) {
+		if((reformatTime(input).equals("invalid time"))) 
+			return false;
+		else 
+			return true;
 	}
 	
 	private static boolean isValid12Format(String time) {
@@ -347,6 +433,13 @@ public class DateAndTime {
 		return valid;
 	}
 	
+	//check if a string input is a valid year; cannot be past year
+	private static boolean isValidYear(String input) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy");
+		Date date = new Date();
+		
+		return (onlyDigits(input) && (input.length() == 4) && (Integer.parseInt(input) >= Integer.parseInt(dateFormat.format(date)))); 
+	}
 	//check if a string input is only a word
 	private final static boolean isOneWord(String input) {
 		if (input.contains(REGEX_WHITESPACE))
