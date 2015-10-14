@@ -1,8 +1,10 @@
+//@Author: Jiahuan
+
 package main.java.resources;
 
 import main.java.storage.Storage;
 
-public class dataDisplay {
+public class DataDisplay {
 	//To display all items in the current list
 	public static void displayAll(){
 		int size = Storage.taskList.size();
@@ -21,7 +23,7 @@ public class dataDisplay {
 			}
 		}
 	}
-private static String createContentForfloating(Task task) {
+	private static String createContentForfloating(Task task) {
 		
 		return task.getTaskDescription();
 	}

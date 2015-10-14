@@ -3,44 +3,37 @@ package main.java.logic;
 import java.util.ArrayList;
 
 import main.java.parser.Parser;
+import main.java.resources.DataDisplay;
 import main.java.resources.Task;
-import main.java.resources.dataDisplay;
 import main.java.storage.Storage;
 import main.java.ui.UI;
 
 public class Logic {
 	
-	//Pass the User Input to parser and parser return a arraylist of parsing result
-	public static ArrayList<String> passToParser(String command){
-		ArrayList<String> commandAfterParser = Parser.retrieveCommand(command);
-		return commandAfterParser;
-	}
+
 	//Switch case to decide which action to carry forward after first parsing
 	//public static void takeAction(ArrayList<String> inputForSecondParsing, ArrayList<String> contentList) {
-	public static void takeAction(ArrayList<String> inputForSecondParsing) {
+	public static void takeAction(String inputFromUser) {
+		ArrayList<String> inputForAction = Parser.retrieveCommand(inputFromUser);
 		int code = -1;
-		Task task;
-		int itemNum;
-		String taskType;
-
-			switch (inputForSecondParsing.get(0).toLowerCase()){
+			switch (inputForAction.get(0).toLowerCase()){
 			//if add, need to create task object for storage
 			case "add":
-				code = addInLogic(inputForSecondParsing);
+				code = addInLogic(inputForAction);
 				break;
 			case "update":
-				code = updateInLogic(inputForSecondParsing);
+				code = updateInLogic(inputForAction);
 				break;
 			case "delete":
-				code = deleteInLogic(inputForSecondParsing);
+				code = deleteInLogic(inputForAction);
 				break;
 			case "display":
-				dataDisplay.displayAll();
+				DataDisplay.displayAll();
 				break;
 			default:
 				UI.feedbackWrongCommand();
 			}
-		UI.feedback(inputForSecondParsing.get(0),code);  //not used for now (Yu Ju)
+		UI.feedback(inputForAction.get(0),code);  //not used for now (Yu Ju)
 	}
 	private static int deleteInLogic(ArrayList<String> inputForSecondParsing) {
 		int code;
@@ -71,51 +64,4 @@ public class Logic {
 		return code;
 	}
 
-
-//**************Below part can be used by Yong Zhi for storage analysis************************//	
-	
-/*
-
-	private static String createContentForUpdate(ArrayList<String> commandAfterParser, ArrayList<String> contentList) {
-		
-		return createContentForAdd(commandAfterParser, contentList);
-	}
-
-	private static String createContentForAdd(ArrayList<String> commandAfterParser, ArrayList<String> contentList) {
-		Task task = Parser.createTask(commandAfterParser);
-		String content = null;
-		switch (task.getTaskType().toLowerCase()){
-		case "deadline":
-			content = createContentForDeadline(task);
-			break;
-		case "event":
-			content = createContentForEvent(task);
-			break;
-		case "floating":
-			content = createContentForfloating(task);
-			break;
-		}
-		contentList.add(content);
-		return content;
-		
-	}
-
-	private static String createContentForfloating(Task task) {
-		
-		return task.getTaskDescription();
-	}
-
-	private static String createContentForEvent(Task task) {
-		
-		return task.getStartTime()+" - "+task.getEndTime()+ " on "+ task.getDate()+": "+task.getTaskDescription();
-	}
-
-	private static String createContentForDeadline(Task task) {
-
-		return "By "+task.getDate()+": "+ task.getTaskDescription();
-	}
-	
-*/
-	
-	
 }
