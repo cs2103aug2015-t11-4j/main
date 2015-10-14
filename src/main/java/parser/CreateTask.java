@@ -8,7 +8,6 @@ import main.java.resources.Task;
 
 public class CreateTask {
 	
-	private static final String REGEX_WHITESPACE = " ";
 	private static final String KEYWORD_BY = "/b";
 	private static final int LENGTH_OF_BY = KEYWORD_BY.length();
 	private static final String KEYWORD_FROM = "/f";

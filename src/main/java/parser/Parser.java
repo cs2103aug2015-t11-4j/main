@@ -14,16 +14,16 @@ public class Parser {
 	private static final String KEYWORD_TO = "/t";
 
 
-	//for testing purposes
+	/*for testing purposes
 	public static void main(String[] args) {
 
 		System.out.println("Enter: ");
 		Scanner sc = new Scanner(System.in);
 		String input = sc.nextLine();
 		ArrayList<String> contentListForLogic = retrieveCommand(input);
-//		for(int i=0; i<contentListForLogic.size(); i++) {
-//			System.out.println(contentListForLogic.get(i));
-//		}
+		for(int i=0; i<contentListForLogic.size(); i++) {
+			System.out.println(contentListForLogic.get(i));
+		}
 //		String tasktype = identifyTaskType(contentListForLogic);
 //		System.out.println(tasktype);
 		
@@ -36,7 +36,7 @@ public class Parser {
 		System.out.println("ET: " + task.getEndTime()); 
 		
 		
-	}
+	}*/
 	
 	public static ArrayList<String> retrieveCommand(String inputFromLogic){
 		
@@ -51,13 +51,13 @@ public class Parser {
 		
 		//for commands: exit, help, undo
 		if(isOneWord(inputFromLogic)) {
-			contentListForLogic.add(inputFromLogic);
+			contentListForLogic.add(FlexiCommands.flexiCommands(inputFromLogic));
 		}
 		
 		else {  
 			//splitting first input from logic into 2: (command) (content)
 			String content[] = inputFromLogic.split(REGEX_WHITESPACE, 2);
-			contentListForLogic.add(content[0]);
+			contentListForLogic.add(FlexiCommands.flexiCommands(content[0]));
 			contentListForLogic.add(content[1]);
 		}
 	}

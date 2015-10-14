@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class DateAndTime {
 	
@@ -14,7 +14,7 @@ public class DateAndTime {
 	private static final String KEYWORD_AM = "am";
 	private static final String KEYWORD_PM = "pm";
 
-	// testing purposes
+	/* testing purposes
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
@@ -23,7 +23,7 @@ public class DateAndTime {
 		String inputB = sc.nextLine();
 		System.out.println(compareDates(inputA, inputB));
 	}
-	//
+	*/
 	
 	public static String reformatDate(String input) {
 		
