@@ -14,13 +14,14 @@ public class DateAndTime {
 	private static final String KEYWORD_AM = "am";
 	private static final String KEYWORD_PM = "pm";
 
-	//2 testing purposes
+	// testing purposes
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
 		System.out.println("ENTER: ");
-		String input = sc.nextLine();
-		System.out.println(reformatDate(input));
+		String inputA = sc.nextLine();
+		String inputB = sc.nextLine();
+		System.out.println(compareDates(inputA, inputB));
 	}
 	//
 	
@@ -57,7 +58,7 @@ public class DateAndTime {
 					if(isValidYear(dateList.get(2)))
 						date = date + "/" + dateList.get(2);
 					else 
-						date = "invalid date";
+						date = null;
 				}
 				else { //year is not specified; append current year to it
 					date = date + "/" + dateFormat.format(year);
@@ -84,14 +85,14 @@ public class DateAndTime {
 					if(isValidYear(dateList.get(2)))
 						date = date + "/" + dateList.get(2);
 					else 
-						date = "invalid date";
+						date = null;
 				}
 				else { //year is not specified; append current year to it
 					date = date + "/" + dateFormat.format(year);
 				}	
 			}
 			else 
-				date = "invalid date";
+				date = null;
 		}
 		else {
 			//input is in eg (22 october/ 22 oct)
@@ -185,20 +186,9 @@ public class DateAndTime {
 			}
 		}
 		if (date.equals(""))
-			return "invalid date";
+			return null;
 		else 
 			return date;
-	}
-	
-	private static String appendYear(DateFormat dateFormat, Date year, String date, ArrayList<String> dateList, String month) {
-		if(dateList.size() == 3) { //year is specified
-			if(isValidYear(dateList.get(2)))
-				date = dateList.get(0) + "/" + month + "/" + dateList.get(2);
-		}
-		else { //year not specified; append current year
-			date = dateList.get(0) + "/" + month + "/" + dateFormat.format(year);
-		}
-		return date;
 	}
 	
 	public static String reformatTime(String input) {
@@ -241,31 +231,77 @@ public class DateAndTime {
 				time = String.valueOf(timeNumeric);
 			}
 			else 
-				return "invalid time";
+				return null;
 		}
 		else if(isValid24Format(input))
 			time = input;
 		else
-			return "invalid time";
+			return null;
 		
 		if (time.equals(""))
-			return "invalid time";
+			return null;
 		else 
 			return time;
 	}
 	
 	public static boolean isDate(String input) {
-		if((reformatDate(input).equals("invalid date")))
+		if((reformatDate(input).equals(null)))
 			return false;
 		else 
 			return true;
 	}
 	
 	public static boolean isTime(String input) {
-		if((reformatTime(input).equals("invalid time"))) 
+		if((reformatTime(input).equals(null))) 
 			return false;
 		else 
 			return true;
+	}
+	
+	//compare dates; return true only if dateA is earlier than or equal to dateB
+	//only for date formats: dd/mm/yyyy
+	public static boolean compareDates(String dateA, String dateB) {
+		String[] contentA = dateA.split("/", 3); 
+		String[] contentB = dateB.split("/", 3); 
+		
+		if(dateA == null)
+			return false;
+		else if(dateB == null)
+			return false;
+		//compare year first
+		else if (Integer.parseInt(contentA[2]) > Integer.parseInt(contentB[2]))
+			return false;
+		else if (Integer.parseInt(contentA[2]) < Integer.parseInt(contentB[2]))
+			return true;
+		//year is same
+		else {
+			//compare month
+			if (Integer.parseInt(contentA[1]) > Integer.parseInt(contentB[1]))
+				return false;
+			else if (Integer.parseInt(contentA[1]) < Integer.parseInt(contentB[1]))
+				return true;
+			//month is same
+			else {
+				if (Integer.parseInt(contentA[0]) > Integer.parseInt(contentB[0]))
+					return false;
+				else if (Integer.parseInt(contentA[0]) < Integer.parseInt(contentB[0]))
+					return true;
+				//day is same
+				else 
+					return true;
+			}
+		}
+	}
+	
+	//compare time; return true only if timeA is earlier than or equal to timeB
+	//only for 24-hour time format
+	public static boolean compareTimes(String timeA, String timeB) {
+		if(timeA == null)
+			return false;
+		else if(timeB == null)
+			return false;
+		else 
+			return (Integer.parseInt(timeA) <= Integer.parseInt(timeB));
 	}
 	
 	private static boolean isValid12Format(String time) {
@@ -439,6 +475,17 @@ public class DateAndTime {
 		Date date = new Date();
 		
 		return (onlyDigits(input) && (input.length() == 4) && (Integer.parseInt(input) >= Integer.parseInt(dateFormat.format(date)))); 
+	}
+	//appends current year or specified year to a date
+	private static String appendYear(DateFormat dateFormat, Date year, String date, ArrayList<String> dateList, String month) {
+		if(dateList.size() == 3) { //year is specified
+			if(isValidYear(dateList.get(2)))
+				date = dateList.get(0) + "/" + month + "/" + dateList.get(2);
+		}
+		else { //year not specified; append current year
+			date = dateList.get(0) + "/" + month + "/" + dateFormat.format(year);
+		}
+		return date;
 	}
 	//check if a string input is only a word
 	private final static boolean isOneWord(String input) {

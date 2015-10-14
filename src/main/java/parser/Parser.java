@@ -1,7 +1,10 @@
 package main.java.parser;
 //@author: wenbin 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 import main.java.resources.Task;
@@ -18,23 +21,25 @@ public class Parser {
 
 	//for testing purposes
 	public static void main(String[] args) {
+
 		System.out.println("Enter: ");
 		Scanner sc = new Scanner(System.in);
 		String input = sc.nextLine();
 		ArrayList<String> contentListForLogic = retrieveCommand(input);
-		//contentListForLogic.add("deadline");
-		for(int i=0; i<contentListForLogic.size(); i++) {
-			System.out.println(contentListForLogic.get(i));
-		}
-		String tasktype = identifyTaskType(contentListForLogic);
-		System.out.println(tasktype);
+//		for(int i=0; i<contentListForLogic.size(); i++) {
+//			System.out.println(contentListForLogic.get(i));
+//		}
+//		String tasktype = identifyTaskType(contentListForLogic);
+//		System.out.println(tasktype);
 		
 		Task task = createTaskForAdd(contentListForLogic);
-		System.out.println("date: " + task.getDate());
+		System.out.println("startdate: " + task.getStartDate());
+		System.out.println("enddate: " + task.getEndDate());
 		System.out.println("task: " + task.getTaskDescription());
 		System.out.println("TT: " + task.getTaskType());
 		System.out.println("ST: " + task.getStartTime());
-		System.out.println("ET: " + task.getEndTime());
+		System.out.println("ET: " + task.getEndTime()); 
+		
 		
 	}
 	
@@ -58,15 +63,6 @@ public class Parser {
 			String content[] = inputFromLogic.split(REGEX_WHITESPACE, 2);
 			contentListForLogic.add(content[0]);
 			contentListForLogic.add(content[1]);
-			/* original code
-			 if(content[1].contains(REGEX_WHITESPACE)) {
-				content = content[1].split(REGEX_WHITESPACE, 2);
-				contentListForLogic.add(content[0]);
-				contentListForLogic.add(content[1]);
-			}
-			else 
-				contentListForLogic.add(content[1]);
-			*/	
 		}
 	}
 	
@@ -106,7 +102,7 @@ public class Parser {
 			task = createEvent(taskType, taskContent);
 			break;
 		case "floating":
-			task = createFloating(taskType, taskContent);
+//			task = createFloating(taskType, taskContent);
 			break;
 		default:
 			break;
@@ -127,38 +123,88 @@ public class Parser {
 	
 	private static Task createDeadline(String taskType, String taskContent) {
 		String[] dateTime;
+		
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date today = new Date();
+		Task task = new Task();
+		
 		int indexToSplit = taskContent.lastIndexOf(KEYWORD_BY);
 		String taskDescription = taskContent.substring(0, indexToSplit - 1);
 		String taskDateTime = taskContent.substring(indexToSplit + (LENGTH_OF_BY + 1));
+		//taskDateTime contains both deadline date and deadline time
 		if(taskDateTime.contains(";")) {
 			dateTime = taskDateTime.split(";");
 			dateTime[0] = DateAndTime.reformatDate(dateTime[0]);
 			dateTime[1] = DateAndTime.reformatTime(dateTime[1]);
 
-  			Task task = new Task(taskType, taskDescription, dateTime[0], null, dateTime[1]);
+  			task = new Task(taskType, taskDescription, null, dateTime[0], null, dateTime[1], false);
 		}
-//		else taskDate = DateAndTime.reformatDate(taskDate);
-	//	Task task = new Task(taskType, taskDescription, taskDate, null, null);
+		//taskDateTime contains only deadline date
+		else if(DateAndTime.isDate(taskDateTime)) {
+			String date = DateAndTime.reformatDate(taskDateTime);
+			task = new Task(taskType, taskDescription, null, date, null, null, false);
+		}
+		//taskDateTime contains only deadline time and set deadline date as today
+		else if(DateAndTime.isTime(taskDateTime)) {
+			String time = DateAndTime.reformatTime(taskDateTime);
+			task = new Task(taskType, taskDescription, null, dateFormat.format(today), null, time, false);
+		}
+		else 
+			return task;
 		
-		return null;
+		return task;
 	}
 	
 	private static Task createEvent(String taskType, String taskContent) {
+		
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date today = new Date();
+		Task task = new Task();
+		
 		int firstIndexToSplit = taskContent.lastIndexOf(KEYWORD_FROM);
 		int secondIndexToSplit = taskContent.lastIndexOf(KEYWORD_TO);
 		
 		String taskDescription = taskContent.substring(0, firstIndexToSplit - 1);
-//		String taskDate = taskContent.substring(firstIndexToSplit + (LENGTH_OF_ON + 1), secondIndexToSplit - 1);
-//		String startTime = taskContent.substring(secondIndexToSplit + (LENGTH_OF_FROM + 1), thirdIndexToSplit - 1);
-//		String endTime = taskContent.substring(thirdIndexToSplit + (LENGTH_OF_TO + 1));
+		String taskStart = taskContent.substring(firstIndexToSplit + (LENGTH_OF_FROM + 1), secondIndexToSplit - 1);
+		String taskEnd = taskContent.substring(secondIndexToSplit + (LENGTH_OF_TO + 1), taskContent.length());
+		//taskStart and taskEnd contains both time and date
+		if(taskStart.contains(";") && taskEnd.contains(";")) {
+			String[] startDateTime;
+			String[] endDateTime;
+			startDateTime = taskStart.split(";");
+			endDateTime = taskEnd.split(";");
+			startDateTime[0] = DateAndTime.reformatDate(startDateTime[0]);
+			startDateTime[1] = DateAndTime.reformatTime(startDateTime[1]);
+			endDateTime[0] = DateAndTime.reformatDate(endDateTime[0]);
+			endDateTime[1] = DateAndTime.reformatTime(endDateTime[1]);
+			
+			if(DateAndTime.compareDates(startDateTime[0], endDateTime[0]) && DateAndTime.compareTimes(startDateTime[1], endDateTime[1]))
+				task = new Task(taskType, taskDescription, startDateTime[0], endDateTime[0], startDateTime[0], endDateTime[1], false);
+		}
+		//taskStart and taskEnd contains only date
+		else if(DateAndTime.isDate(taskStart) && DateAndTime.isDate(taskEnd)) {
+			String startDate = DateAndTime.reformatDate(taskStart);
+			String endDate = DateAndTime.reformatDate(taskEnd);
+			
+			if(DateAndTime.compareDates(startDate, endDate))
+					task = new Task(taskType, taskDescription, startDate, endDate, null, null, false);
+		}
+		//taskStart and taskEnd contains only time
+		else if(DateAndTime.isTime(taskStart) && DateAndTime.isTime(taskEnd)) {
+			String startTime = DateAndTime.reformatTime(taskStart);
+			String endTime = DateAndTime.reformatTime(taskEnd);
+			//auto assume is today's event; append today 
+			if(DateAndTime.compareTimes(startTime, endTime))
+				task = new Task(taskType, taskDescription, dateFormat.format(today), dateFormat.format(today), startTime, endTime, false);
+		}
+		else
+			return task;	
 		
-//		Task task = new Task(taskType, taskDescription, taskDate, startTime, endTime);
-		
-		return null;
+		return task;
 	}
 	
 	private static Task createFloating(String taskType, String taskContent) {
-		return new Task(taskType, taskContent, null, null, null);
+		return new Task(taskType, taskContent, null, null, null, null, false);
 	}
 	
 	//removes all unnecessary whitespaces to 1 whitespace
@@ -174,12 +220,4 @@ public class Parser {
 			return true;
 	}
 	
-	private final static ArrayList<String> splitDateAndTime(String input) {
-		ArrayList<String> dateAndTime  = new ArrayList<String>();
-		String[] content = input.split(":");
-		dateAndTime.add(content[0]);
-		dateAndTime.add(content[1]);
-		
-		return dateAndTime;
-	}
 }
