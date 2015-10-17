@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.*?>
+
+<fx:root type="StackPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <TableView fx:id="tmrTable" prefHeight="600.0" prefWidth="900.0">
+      <columns>
+        <TableColumn prefWidth="400.0" text="Tomorrow's Events" fx:id="eventNameCol" />
+        <TableColumn prefWidth="122.5" text="Start Time" fx:id="startDateCol" />
+        <TableColumn prefWidth="122.5" text="End Date" fx:id="endDateCol" />
+        <TableColumn prefWidth="122.5" text="Start Time" fx:id="startTimeCol" />
+        <TableColumn prefWidth="122.5" text="End Time" fx:id="endTimeCol" />
+      </columns>
+    </TableView>
+  </children>
+</fx:root>
