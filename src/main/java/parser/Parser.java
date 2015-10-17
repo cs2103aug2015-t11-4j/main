@@ -9,9 +9,9 @@ import main.java.resources.Task;
 public class Parser {
 	
 	private static final String REGEX_WHITESPACE = " ";
-	private static final String KEYWORD_BY = "/b";
-	private static final String KEYWORD_FROM = "/f";
-	private static final String KEYWORD_TO = "/t";
+	private static final String KEYWORD_BY = " by ";
+	private static final String KEYWORD_FROM = " from ";
+	private static final String KEYWORD_TO = " to ";
 
 
 	/*for testing purposes
@@ -49,7 +49,7 @@ public class Parser {
 	
 	private static void updateList(String inputFromLogic, ArrayList<String> contentListForLogic) {
 		
-		//for commands: exit, help, undo
+		//for commands: exit, help, undo etc
 		if(isOneWord(inputFromLogic)) {
 			contentListForLogic.add(FlexiCommands.flexiCommands(inputFromLogic));
 		}
@@ -83,28 +83,6 @@ public class Parser {
 		}
 		return task;
 	}
-	/*TODO: based on new format changes
-	public static Task createTaskForUpdate(ArrayList<String> listFromLogic) {
-		
-		Task task = new Task();
-		String taskType = listFromLogic.get(3);
-		String taskContent = listFromLogic.get(2);
-		
-		switch(taskType.toLowerCase()) {
-		case "deadline":
-			task = CreateTask.createDeadline(taskType, taskContent);
-			break;
-		case "event":
-			task = CreateTask.createEvent(taskType, taskContent);
-			break;
-		case "floating":
-//			task = createFloating(taskType, taskContent);
-			break;
-		default:
-			break;
-		}
-		return task;
-	}*/
 	
 	private static String identifyTaskType(ArrayList<String> listFromLogic ) {
 		String taskContent = listFromLogic.get(1);

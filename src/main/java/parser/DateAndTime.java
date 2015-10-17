@@ -14,7 +14,7 @@ public class DateAndTime {
 	private static final String KEYWORD_AM = "am";
 	private static final String KEYWORD_PM = "pm";
 
-	// testing purposes
+	/* testing purposes
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
@@ -27,7 +27,7 @@ public class DateAndTime {
 //		System.out.println(reformatDate(inputB));
 		}
 	}
-	//
+	*/
 	
 	public static String reformatDate(String input) {
 		
