@@ -3,17 +3,25 @@ package main.java.parser;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
 
 import main.java.resources.Task;
 
 public class CreateTask {
 	
-	private static final String KEYWORD_BY = "/b";
+	private static final String KEYWORD_BY = " by ";
 	private static final int LENGTH_OF_BY = KEYWORD_BY.length();
-	private static final String KEYWORD_FROM = "/f";
+	private static final String KEYWORD_FROM = " from ";
 	private static final int LENGTH_OF_FROM = KEYWORD_FROM.length();
-	private static final String KEYWORD_TO = "/t";
+	private static final String KEYWORD_TO = " to ";
 	private static final int LENGTH_OF_TO = KEYWORD_TO.length();
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter :");
+		String input = sc.nextLine();
+		Task task = createEvent("event", input);
+	}
 	
 	public static Task createDeadline(String taskType, String taskContent) {
 		String[] dateTime;
@@ -23,8 +31,8 @@ public class CreateTask {
 		Task task = new Task();
 		
 		int indexToSplit = taskContent.lastIndexOf(KEYWORD_BY);
-		String taskDescription = taskContent.substring(0, indexToSplit - 1);
-		String taskDateTime = taskContent.substring(indexToSplit + (LENGTH_OF_BY + 1));
+		String taskDescription = taskContent.substring(0, indexToSplit);
+		String taskDateTime = taskContent.substring(indexToSplit + (LENGTH_OF_BY));
 		//taskDateTime contains both deadline date and deadline time
 		if(taskDateTime.contains(";")) {
 			dateTime = taskDateTime.split(";");
@@ -58,9 +66,12 @@ public class CreateTask {
 		int firstIndexToSplit = taskContent.lastIndexOf(KEYWORD_FROM);
 		int secondIndexToSplit = taskContent.lastIndexOf(KEYWORD_TO);
 		
-		String taskDescription = taskContent.substring(0, firstIndexToSplit - 1);
-		String taskStart = taskContent.substring(firstIndexToSplit + (LENGTH_OF_FROM + 1), secondIndexToSplit - 1);
-		String taskEnd = taskContent.substring(secondIndexToSplit + (LENGTH_OF_TO + 1), taskContent.length());
+		String taskDescription = taskContent.substring(0, firstIndexToSplit);
+		String taskStart = taskContent.substring(firstIndexToSplit + (LENGTH_OF_FROM ), secondIndexToSplit);
+		String taskEnd = taskContent.substring(secondIndexToSplit + (LENGTH_OF_TO), taskContent.length());
+		System.out.println(taskDescription);
+		System.out.println(taskStart);
+		System.out.println(taskEnd);
 		//taskStart and taskEnd contains both time and date
 		if(taskStart.contains(";") && taskEnd.contains(";")) {
 			String[] startDateTime;

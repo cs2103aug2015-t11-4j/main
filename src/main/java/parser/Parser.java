@@ -83,7 +83,7 @@ public class Parser {
 		}
 		return task;
 	}
-	//TODO: based on new format changes
+	/*TODO: based on new format changes
 	public static Task createTaskForUpdate(ArrayList<String> listFromLogic) {
 		
 		Task task = new Task();
@@ -104,7 +104,7 @@ public class Parser {
 			break;
 		}
 		return task;
-	}
+	}*/
 	
 	private static String identifyTaskType(ArrayList<String> listFromLogic ) {
 		String taskContent = listFromLogic.get(1);
