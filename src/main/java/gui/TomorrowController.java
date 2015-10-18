@@ -9,20 +9,20 @@ import javafx.scene.control.ListView;
  *
  */
 
-public class TodayController {
+public class TomorrowController {
 
 	@FXML
-    private ListView<String> todayList;
+    private ListView<String> tmrList;
 	
 	private MainApp mainApp;
 	
-	public TodayController() {
+	public TomorrowController() {
 		
 	}
 	
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 		
-		todayList.setItems(mainApp.getToday());
+		tmrList.setItems(mainApp.getTmr());
 	}
 }
