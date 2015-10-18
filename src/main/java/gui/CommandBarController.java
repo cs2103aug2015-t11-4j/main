@@ -19,6 +19,9 @@ public class CommandBarController extends BorderPane {
 
     @FXML
     private Label feedback;
+    
+    @FXML
+    private Label status;
 
     @FXML
     private TextField commandBar;
@@ -51,5 +54,9 @@ public class CommandBarController extends BorderPane {
 
     public void setFeedback(String feedbackText) {
         feedback.setText(feedbackText);
+    }
+    
+    public void setStatus(String currStatus) {
+    	status.setText(currStatus);
     }
 }

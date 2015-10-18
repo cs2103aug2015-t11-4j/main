@@ -5,9 +5,11 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
@@ -32,9 +34,13 @@ public class MainApp extends Application {
     private static final String EVENT_LAYOUT_FXML = "/main/resources/layouts/Event.fxml";
     private static final String TODAY_LAYOUT_FXML = "/main/resources/layouts/Today.fxml";
     private static final String TOMORROW_LAYOUT_FXML = "/main/resources/layouts/Tomorrow.fxml";
+    private static final String COMPLETE_LAYOUT_FXML = "/main/resources/layouts/Complete.fxml";
+    private static final String INCOMPLETE_LAYOUT_FXML = "/main/resources/layouts/Incomplete.fxml";
     
     private static final String FEEDBACK_SUMMARY = "Summary";
     private static final String FEEDBACK_DISPLAY = "All Events";
+    private static final String FEEDBACK_COMPLETE = "Completed Events";
+    private static final String FEEDBACK_INCOMPLETE = "Incomplete Events";
     private static final String FEEDBACK_TODAY = "Today's Tasks";
     private static final String FEEDBACK_TOMORROW = "Tomorrow's Tasks";
     private static final String FEEDBACK_DEADLINE = "Deadline Tasks";
@@ -47,6 +53,8 @@ public class MainApp extends Application {
     private static final String FEEDBACK_UPDATED = "Updated ";
     private static final String FEEDBACK_EXIT = "Exiting Alt4";
     private static final String FEEDBACK_UNDONE = "Undone: ";
+    private static final String SUCCESS_STATUS = "Successful Execution";
+    private static final String FAIL_STATUS = "Execution Failed";
     
     private static final String TYPE_DEADLINE = "deadline";
     private static final String TYPE_EVENT = "event";
@@ -61,6 +69,8 @@ public class MainApp extends Application {
     private ObservableList<String> tomorrow = FXCollections.observableArrayList();
     
     private String[] arr;
+    private String[] array;
+    private String typeDisplay;  //types of display in command
     private String command;
     private String description;
     private String type;
@@ -69,7 +79,7 @@ public class MainApp extends Application {
 	
 	private Stage primaryStage;
     private BorderPane rootLayout;
-    //private MainApp mainApp;
+    private MainApp mainApp;
 
     public static void main(String[] args) {
         launch(args);
@@ -103,8 +113,27 @@ public class MainApp extends Application {
     private void initPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle(WINDOW_TITLE);
-        this.primaryStage.setScene(new Scene(rootLayout));
+        Scene scene = new Scene(rootLayout);
+        //this.primaryStage.setScene(new Scene(rootLayout));
+        this.primaryStage.setScene(scene);
         this.primaryStage.show();
+    	
+    	/*primaryStage = newPrimaryStage;
+        primaryStage.setTitle(WINDOW_TITLE);
+        Scene scene = new Scene(rootLayout);
+        primaryStage.setScene(scene);
+        primaryStage.show();*/
+        
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+
+            @Override
+            public void handle(KeyEvent key) {
+              if(key.getCode()==KeyCode.ESCAPE)
+              {
+            	  primaryStage.close();
+              }
+            }
+        });
     }
 
     /**
@@ -115,7 +144,7 @@ public class MainApp extends Application {
         //event.add(new LocalEvent("Hans"));
         //event.add(new LocalEvent("Ruth"));
     	
-    	/*event.add("Hans");
+    	event.add("Hans");
         event.add("Ruth");
         event.add("Heinz");
         event.add("Cornelia");
@@ -143,7 +172,7 @@ public class MainApp extends Application {
         floating.add("Lydia");
         floating.add("Anna");
         floating.add("Stefan");
-        floating.add("Martin");*/
+        floating.add("Martin");
         
         Text text = new Text("hello");
         text.setFill(Color.GREEN);
@@ -204,6 +233,7 @@ public class MainApp extends Application {
         	
         	SummaryController controller = loader.getController();
             controller.setMainApp(this);
+        	//controller.setMainApp(mainApp);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -217,6 +247,7 @@ public class MainApp extends Application {
         	
         	DisplayAllController controller = loader.getController();
             controller.setMainApp(this);
+            //controller.setMainApp(mainApp);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -230,6 +261,7 @@ public class MainApp extends Application {
         	
         	TodayController controller = loader.getController();
             controller.setMainApp(this);
+        	//controller.setMainApp(mainApp);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -243,6 +275,7 @@ public class MainApp extends Application {
         	
         	TomorrowController controller = loader.getController();
             controller.setMainApp(this);
+            //controller.setMainApp(mainApp);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -256,6 +289,7 @@ public class MainApp extends Application {
         	
         	DeadlineController controller = loader.getController();
             controller.setMainApp(this);
+        	//controller.setMainApp(mainApp);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -269,6 +303,7 @@ public class MainApp extends Application {
         	
         	EventController controller = loader.getController();
             controller.setMainApp(this);
+            //controller.setMainApp(mainApp);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -282,6 +317,35 @@ public class MainApp extends Application {
         	
         	FloatingController controller = loader.getController();
             controller.setMainApp(this);
+        	//controller.setMainApp(mainApp);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void addComplete() {
+    	try {
+        	FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(COMPLETE_LAYOUT_FXML));
+        	AnchorPane page = (AnchorPane) loader.load();
+        	rootLayout.setTop(page);
+        	
+        	CompleteController controller = loader.getController();
+            controller.setMainApp(this);
+        	//controller.setMainApp(mainApp);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void addIncomplete() {
+    	try {
+        	FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(INCOMPLETE_LAYOUT_FXML));
+        	AnchorPane page = (AnchorPane) loader.load();
+        	rootLayout.setTop(page);
+        	
+        	IncompleteController controller = loader.getController();
+            controller.setMainApp(this);
+        	//controller.setMainApp(mainApp);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -302,12 +366,6 @@ public class MainApp extends Application {
     	if(userInput.equals("summary")) {
     		addSummaryView();
     		commandBarController.setFeedback(FEEDBACK_SUMMARY);
-    		commandBarController.clear();
-    	}
-    	
-    	else if(userInput.equals("display")) {
-    		addDisplayAll();
-    		commandBarController.setFeedback(FEEDBACK_DISPLAY);
     		commandBarController.clear();
     	}
     	
@@ -351,16 +409,54 @@ public class MainApp extends Application {
     		commandBarController.clear();
     	}
     	
+    	else if(userInput.substring(0, 7).equals("display")) {
+    		array = userInput.split(" ", 2);
+    		typeDisplay = (array[1]).trim();
+    		if(typeDisplay.equals("all")) {
+    			addDisplayAll();
+    			commandBarController.setFeedback(FEEDBACK_DISPLAY);
+    		}
+    		else if(typeDisplay.equals("completed")) {
+    			addComplete();
+    			commandBarController.setFeedback(FEEDBACK_COMPLETE);
+    		}
+    		else if(typeDisplay.equals("incomplete")) {
+    			addIncomplete();
+    			commandBarController.setFeedback(FEEDBACK_INCOMPLETE);
+    		}
+    		commandBarController.clear();
+    	}
+    	
+    	//need Logic to pass me the event with task type that is to be deleted
+		//or get task type from Task
+    	else if(userInput.substring(0, 6).equals("delete") || 
+    			userInput.substring(0, 3).equals("del") ||
+    			userInput.substring(0, 1).equals("d")) {
+    		listNum = Integer.parseInt(userInput.substring(7));
+			Logic.takeAction(userInput);
+			if(type.equals(TYPE_DEADLINE)) {
+				deadline.remove(listNum);
+			}
+			else if(type.equals(TYPE_EVENT)) {
+				event.add(description);
+			}
+			else if(type.equals(TYPE_FLOATING)) {
+				floating.add(description);
+			}
+			commandBarController.setFeedback(FEEDBACK_DELETED + description);  //des being task name
+			commandBarController.setStatus(SUCCESS_STATUS);
+    	}
+    	
     	else {
     		arr = userInput.split(" ", 3);
     		command = arr[0];
     	
     		switch (command) {
             
-    			case "add" :
+    			case "add":
     				type = arr[1];
     	    		description = (arr[2]).trim();
-    				//Logic.takeAction(userInput);  //doesnt work yet
+    				//Logic.takeAction(userInput);
     				if(type.equals(TYPE_DEADLINE)) {
     					deadline.add(description);
     				}
@@ -371,6 +467,58 @@ public class MainApp extends Application {
     					floating.add(description);
     				}
     				commandBarController.setFeedback(FEEDBACK_ADDED + description);
+    				commandBarController.setStatus(SUCCESS_STATUS);
+    				break;
+    				
+    			case "create":   //add command
+    				type = arr[1];
+    	    		description = (arr[2]).trim();
+    				//Logic.takeAction(userInput);
+    				if(type.equals(TYPE_DEADLINE)) {
+    					deadline.add(description);
+    				}
+    				else if(type.equals(TYPE_EVENT)) {
+    					event.add(description);
+    				}
+    				else if(type.equals(TYPE_FLOATING)) {
+    					floating.add(description);
+    				}
+    				commandBarController.setFeedback(FEEDBACK_ADDED + description);
+    				commandBarController.setStatus(SUCCESS_STATUS);
+    				break;
+    				
+    			case "a":   //add command
+    				type = arr[1];
+    	    		description = (arr[2]).trim();
+    				//Logic.takeAction(userInput);
+    				if(type.equals(TYPE_DEADLINE)) {
+    					deadline.add(description);
+    				}
+    				else if(type.equals(TYPE_EVENT)) {
+    					event.add(description);
+    				}
+    				else if(type.equals(TYPE_FLOATING)) {
+    					floating.add(description);
+    				}
+    				commandBarController.setFeedback(FEEDBACK_ADDED + description);
+    				commandBarController.setStatus(SUCCESS_STATUS);
+    				break;
+    				
+    			case "c":  //add command
+    				type = arr[1];
+    	    		description = (arr[2]).trim();
+    				//Logic.takeAction(userInput);
+    				if(type.equals(TYPE_DEADLINE)) {
+    					deadline.add(description);
+    				}
+    				else if(type.equals(TYPE_EVENT)) {
+    					event.add(description);
+    				}
+    				else if(type.equals(TYPE_FLOATING)) {
+    					floating.add(description);
+    				}
+    				commandBarController.setFeedback(FEEDBACK_ADDED + description);
+    				commandBarController.setStatus(SUCCESS_STATUS);
     				break;
                 
     			case "update" :
@@ -380,10 +528,10 @@ public class MainApp extends Application {
     				Logic.takeAction(userInput);
     				commandBarController.setFeedback(FEEDBACK_UPDATED + "\"" + description +
     						"\" to " + newDescription);
+    				commandBarController.setStatus(SUCCESS_STATUS);
     				break;
             	
-    			case "delete" :  //need Logic to pass me the event with task type that is to be deleted
-    				//or get task type from Task
+    			/*case "delete" :  
     				description = (arr[1]).trim();
     				listNum = Integer.parseInt(arr[1]);
     				Logic.takeAction(userInput);
@@ -397,20 +545,58 @@ public class MainApp extends Application {
     					floating.add(description);
     				}
     				commandBarController.setFeedback(FEEDBACK_DELETED + description);
+    				commandBarController.setStatus(SUCCESS_STATUS);
     				break;
+    				
+    			case "del":  //delete command
+    				description = (arr[1]).trim();
+    				listNum = Integer.parseInt(arr[1]);
+    				Logic.takeAction(userInput);
+    				if(type.equals(TYPE_DEADLINE)) {
+    					deadline.remove(listNum);
+    				}
+    				else if(type.equals(TYPE_EVENT)) {
+    					event.add(description);
+    				}
+    				else if(type.equals(TYPE_FLOATING)) {
+    					floating.add(description);
+    				}
+    				commandBarController.setFeedback(FEEDBACK_DELETED + description);
+    				commandBarController.setStatus(SUCCESS_STATUS);
+    				break;
+    				
+    			case "d":  //delete command
+    				description = (arr[1]).trim();
+    				listNum = Integer.parseInt(arr[1]);
+    				Logic.takeAction(userInput);
+    				if(type.equals(TYPE_DEADLINE)) {
+    					deadline.remove(listNum);
+    				}
+    				else if(type.equals(TYPE_EVENT)) {
+    					event.add(description);
+    				}
+    				else if(type.equals(TYPE_FLOATING)) {
+    					floating.add(description);
+    				}
+    				commandBarController.setFeedback(FEEDBACK_DELETED + description);
+    				commandBarController.setStatus(SUCCESS_STATUS);
+    				break;*/
     				
     			case "undo" :
     				description = (arr[1]).trim();
     				Logic.takeAction(userInput);
     				commandBarController.setFeedback(FEEDBACK_UNDONE + description);
+    				commandBarController.setStatus(SUCCESS_STATUS);
     				break;
     			
     			case "search" :
     				Logic.takeAction(userInput);
+    				commandBarController.setStatus(SUCCESS_STATUS);
     				break;
                 
     			default :
     				commandBarController.setFeedback(FEEDBACK_INVALID_COMMAND);
+    				commandBarController.setStatus(FAIL_STATUS);
     				break;
     		}
     		commandBarController.clear();
