@@ -144,53 +144,59 @@ public class MainApp extends Application {
         //event.add(new LocalEvent("Hans"));
         //event.add(new LocalEvent("Ruth"));
     	
-    	event.add("Hans");
-        event.add("Ruth");
-        event.add("Heinz");
-        event.add("Cornelia");
-        event.add("Werner");
-        event.add("Lydia");
-        event.add("Anna");
-        event.add("Stefan");
-        event.add("Martin");
+    	event.add("school activites");
+        event.add("community service");
+        event.add("cca");
+        event.add("school activities");
+        event.add("welfare packs packing");
+        event.add("church visit with friend");
+        event.add("family outing");
+        event.add("family dinner");
+        event.add("banquet");
         
-        deadline.add("Hans");
-        deadline.add("Ruth");
-        deadline.add("Heinz");
-        deadline.add("Cornelia");
-        deadline.add("Werner");
-        deadline.add("Lydia");
-        deadline.add("Anna");
-        deadline.add("Stefan");
-        deadline.add("Martin");
+        deadline.add("V0.2 Project Manual Submission");
+        deadline.add("Review on Reflections");
+        deadline.add("Post Lecture Quiz");
+        deadline.add("Tutorial Homework");
+        deadline.add("V0.2 Features");
+        deadline.add("Link All Components Together");
+        deadline.add("Essay Submission");
+        deadline.add("Demo");
+        deadline.add("V0.5 Poject Manual Submission");
         
-        floating.add("Hans");
-        floating.add("Ruth");
-        floating.add("Heinz");
-        floating.add("Cornelia");
-        floating.add("Werner");
-        floating.add("Lydia");
-        floating.add("Anna");
-        floating.add("Stefan");
-        floating.add("Martin");
+        floating.add("badminton with friends");
+        floating.add("project meeting");
+        floating.add("meal with family");
+        floating.add("replace broken cup");
+        floating.add("study for test");
+        floating.add("movie");
+        floating.add("buy birthday present");
+        floating.add("shopping");
+        floating.add("dinner with friends");
         
-        Text text = new Text("hello");
+        Text text = new Text("V0.1 Project Manual");
         text.setFill(Color.GREEN);
+        Text t2 = new Text("V0.1 Live Demo");
+        t2.setFill(Color.GREEN);
+        Text t3 = new Text("Study for mid-terms");
+        t3.setFill(Color.GREEN);
         
         //complete.add("hello");
         //complete.add("world");
         complete.add(text);
+        complete.add(t2);
+        complete.add(t3);
         
-        Text text2 = new Text("not yet");
+        Text text2 = new Text("Adde All V0.2 Features");
         text2.setFill(Color.RED);
         
         //incomplete.add("not yet");
         //incomplete.add("undone");
         incomplete.add(text2);
         
-        today.add("sunday");
+        today.add("Change GUI");
         
-        tomorrow.add("monday");
+        tomorrow.add("Edit Developer Guide");
     }
 
     public ObservableList<String> getEvent() {
@@ -463,7 +469,7 @@ public class MainApp extends Application {
     				else if(type.equals(TYPE_EVENT)) {
     					event.add(description);
     				}
-    				else if(type.equals(TYPE_FLOATING)) {
+    				else {
     					floating.add(description);
     				}
     				commandBarController.setFeedback(FEEDBACK_ADDED + description);
