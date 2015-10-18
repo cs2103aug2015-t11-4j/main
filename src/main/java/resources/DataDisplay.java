@@ -40,8 +40,8 @@ public class DataDisplay {
 			for (int i = 0; i < taskTypeCount.get(1); i++){
 				int j = i + taskTypeCount.get(0);
 				int itemNum = j + 1;
-				System.out.println(itemNum + ": " + createContentForDeadline(summaryList.get(i)));
-				outputForTesting.add(itemNum + ": " + createContentForEvent(summaryList.get(i)));
+				System.out.println(itemNum + ": " + createContentForEvent(summaryList.get(j)));
+				outputForTesting.add(itemNum + ": " + createContentForEvent(summaryList.get(j)));
 			}
 		}
 		if (taskTypeCount.get(0)!=0){
@@ -50,8 +50,8 @@ public class DataDisplay {
 			for (int i = 0; i < taskTypeCount.get(2); i++){
 				int j = i + taskTypeCount.get(0)+taskTypeCount.get(1);
 				int itemNum = j + 1;
-				System.out.println(itemNum + ": " + createContentForDeadline(summaryList.get(i)));
-				outputForTesting.add(itemNum + ": " + createContentForFloating(summaryList.get(i)));
+				System.out.println(itemNum + ": " + createContentForFloating(summaryList.get(j)));
+				outputForTesting.add(itemNum + ": " + createContentForFloating(summaryList.get(j)));
 			}
 		}
 		return outputForTesting;
@@ -59,15 +59,15 @@ public class DataDisplay {
 	
 	
 	//To count the number of different task types
-	private static ArrayList<Integer> countTaskTypeNum(ArrayList<Task> summaryList) {
+	public static ArrayList<Integer> countTaskTypeNum(ArrayList<Task> summaryList) {
 		ArrayList<Integer> taskTypeCount = new ArrayList<Integer>(3);
 		int deadlineCount =0, eventCount = 0, floatingCount = 0;
 		for (int i = 0; i < summaryList.size(); i++){
-			if (summaryList.get(0).getTaskType().equalsIgnoreCase(TASK_TYPE_DEADLINE_LOWERCASE)){
+			if (summaryList.get(i).getTaskType().equalsIgnoreCase(TASK_TYPE_DEADLINE_LOWERCASE)){
 				deadlineCount++;
-			} else if (summaryList.get(0).getTaskType().equalsIgnoreCase(TASK_TYPE_EVENT_LOWERCASE)){
+			} else if (summaryList.get(i).getTaskType().equalsIgnoreCase(TASK_TYPE_EVENT_LOWERCASE)){
 				eventCount++;
-			} else if (summaryList.get(0).getTaskType().equalsIgnoreCase(TASK_TYPE_FLOATING_LOWERCASE)){
+			} else if (summaryList.get(i).getTaskType().equalsIgnoreCase(TASK_TYPE_FLOATING_LOWERCASE)){
 				floatingCount++;
 			}
 		}
@@ -98,9 +98,9 @@ public class DataDisplay {
 	//Display all incomplete tasks
 	public static ArrayList<String> displayIncomplete(ArrayList<Task> incompleteList) {
 		ArrayList<String> outputForTesting = new ArrayList<String>();
-		System.out.println(LABEL_ALL);
+		System.out.println(LABEL_INCOMPLETE);
 		outputForTesting = displayList(incompleteList);
-		outputForTesting.add(0, LABEL_ALL);
+		outputForTesting.add(0, LABEL_INCOMPLETE);
 		return outputForTesting;
 	}	
 	
@@ -127,7 +127,7 @@ public class DataDisplay {
 		ArrayList<String> outputForTesting = new ArrayList<String>();
 		System.out.println(LABEL_EVENT);
 		outputForTesting = displayList(eventList);
-		outputForTesting.add(0, LABEL_ALL);
+		outputForTesting.add(0, LABEL_EVENT);
 		return outputForTesting;
 	}	
 	
@@ -142,11 +142,11 @@ public class DataDisplay {
 				outputForTesting.add(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
 			break;
 			case TASK_TYPE_EVENT_LOWERCASE:
-				System.out.println(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
+				System.out.println(itemNum + ": " + createContentForEvent(listForPrint.get(i)));
 				outputForTesting.add(itemNum + ": " + createContentForEvent(listForPrint.get(i)));
 			break; 
 			case TASK_TYPE_FLOATING_LOWERCASE:
-				System.out.println(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
+				System.out.println(itemNum + ": " + createContentForFloating(listForPrint.get(i)));
 				outputForTesting.add(itemNum + ": " + createContentForFloating(listForPrint.get(i)));
 			break;
 			}
@@ -163,8 +163,8 @@ public class DataDisplay {
 
 	private static String createContentForEvent(Task task) {
 		
-		return "From " + task.getStartTime() + ", " + task.getStartDate()+ " - " + 
-				"to " + task.getEndTime() + ", " + task.getEndDate()+ ": " + task.getTaskDescription();
+		return "From " + task.getStartTime() + ", " + task.getStartDate()+ 
+				" to " + task.getEndTime() + ", " + task.getEndDate()+ ": " + task.getTaskDescription();
 	
 	}
 

@@ -28,7 +28,7 @@ public class Logic {
 				code = deleteInLogic(inputForAction);
 				break;
 			case "display":
-				DataDisplay.displayAll();
+				DataDisplay.displaySummary();
 				break;
 			default:
 				UI.feedbackWrongCommand();

@@ -53,6 +53,13 @@ public class FlexiCommands {
 			case "recur":
 			case "r":
 				return "recurring";
+			//shows summary of today events, deadlines
+			case "today":
+				return "today";
+			case "tomorrow":
+			case "tmr":
+			case "tml":
+				return "tomorrow";
 			default:
 				return "invalid command";	
 		}

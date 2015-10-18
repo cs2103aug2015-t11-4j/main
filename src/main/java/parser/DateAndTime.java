@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-//import java.util.Scanner;
+import java.util.Scanner;
 
 public class DateAndTime {
 	
@@ -18,10 +18,14 @@ public class DateAndTime {
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
+		while(true) {
 		System.out.println("ENTER: ");
 		String inputA = sc.nextLine();
+		System.out.println("ENTER: ");
 		String inputB = sc.nextLine();
-		System.out.println(compareDates(inputA, inputB));
+		System.out.println(compareTimes(inputA, inputB));
+//		System.out.println(reformatDate(inputB));
+		}
 	}
 	*/
 	
@@ -33,7 +37,12 @@ public class DateAndTime {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy");
 		//get current date time with Date()
 		Date year = new Date();
+		String currentYear = dateFormat.format(year);
 		String date = "";
+		boolean invalidDay = false;
+		boolean invalidMonth = false;
+		boolean invalidYear = false;
+		boolean invalidDateFormat = false;
 		
 		if (isOneWord(input)) {
 
@@ -50,18 +59,23 @@ public class DateAndTime {
 				else 
 					dateList.add(content[1]); //input is dd/mm
 
-				if(Integer.parseInt(dateList.get(1)) <= 12) 	//within month range
+				if(Integer.parseInt(dateList.get(1)) <= 12) {	//within month range
 					if(isValidDD(dateList.get(0),dateList.get(1))) //check if day is valid within the month
 						date = dateList.get(0) + "/" + dateList.get(1);
+					else 
+						invalidDay = true;
+				}
+				else 
+					invalidMonth = true;
 				
 				if(dateList.size() == 3) {//year is specified
 					if(isValidYear(dateList.get(2)))
 						date = date + "/" + dateList.get(2);
 					else 
-						date = null;
+						invalidYear = true;
 				}
 				else { //year is not specified; append current year to it
-					date = date + "/" + dateFormat.format(year);
+					date = date + "/" + currentYear;
 				}	
 			}
 			//format is in dd.mm.yyyy or dd.mm
@@ -77,22 +91,27 @@ public class DateAndTime {
 				else 
 					dateList.add(content[1]); //input is dd.mm
 
-				if(Integer.parseInt(dateList.get(1)) <= 12) 	//within month range
+				if(Integer.parseInt(dateList.get(1)) <= 12) { 	//within month range
 					if(isValidDD(dateList.get(0),dateList.get(1))) //check if day is valid within the month
 						date = dateList.get(0) + "/" + dateList.get(1);
+					else
+						invalidDay = true;
+				}
+				else 
+					invalidMonth = true;
 				
 				if(dateList.size() == 3) {//year is specified
 					if(isValidYear(dateList.get(2)))
 						date = date + "/" + dateList.get(2);
 					else 
-						date = null;
+						invalidYear = true;
 				}
 				else { //year is not specified; append current year to it
-					date = date + "/" + dateFormat.format(year);
+					date = date + "/" + currentYear;
 				}	
 			}
 			else 
-				date = null;
+				invalidDateFormat = true;
 		}
 		else {
 			//input is in eg (22 october/ 22 oct)
@@ -112,83 +131,232 @@ public class DateAndTime {
 			case "jan":
 			case "january":
 				if(isValidDD(dateList.get(0), dateList.get(1))) {
-					System.out.println(1);
-					date = appendYear(dateFormat, year, date, dateList, "1");
+					date = dateList.get(0) + "/1/";
+					if(dateList.size() == 3) {//year is specified
+						if(isValidYear(dateList.get(2)))
+							date = date + dateList.get(2);
+						else 
+							invalidYear = true;
+					}
+					else { //year is not specified; append current year to it
+						date = date + currentYear;
+					}	
 				}
+				else
+					date = "invalid day";
 				break;
 			//february
 			case "feb":
 			case "february":
-				if(isValidDD(dateList.get(0), dateList.get(1))) 
-					date = appendYear(dateFormat, year, date, dateList, "2");
+				if(isValidDD(dateList.get(0), dateList.get(1))) {
+					date = dateList.get(0) + "/2/";
+					if(dateList.size() == 3) {//year is specified
+						if(isValidYear(dateList.get(2)))
+							date = date + dateList.get(2);
+						else 
+							invalidYear = true;
+					}
+					else { //year is not specified; append current year to it
+						date = date + currentYear;
+					}	
+				}
+				else
+					date = "invalid day";
 				break;
 			//march
 			case "mar":
 			case "march":
-				if(isValidDD(dateList.get(0), dateList.get(1))) 
-					date = appendYear(dateFormat, year, date, dateList, "3");
+				if(isValidDD(dateList.get(0), dateList.get(1))) {
+					date = dateList.get(0) + "/3/";
+					if(dateList.size() == 3) {//year is specified
+						if(isValidYear(dateList.get(2)))
+							date = date + dateList.get(2);
+						else 
+							invalidYear = true;
+					}
+					else { //year is not specified; append current year to it
+						date = date + currentYear;
+					}	
+				}
+				else
+					date = "invalid day";
 				break;
 			//april
 			case "apr":
 			case "april":
-				if(isValidDD(dateList.get(0), dateList.get(1))) 
-					date = appendYear(dateFormat, year, date, dateList, "4");
+				if(isValidDD(dateList.get(0), dateList.get(1))) {
+					date = dateList.get(0) + "/4/";
+					if(dateList.size() == 3) {//year is specified
+						if(isValidYear(dateList.get(2)))
+							date = date + dateList.get(2);
+						else 
+							invalidYear = true;
+					}
+					else { //year is not specified; append current year to it
+						date = date + currentYear;
+					}	
+				}
+				else
+					date = "invalid day";
 				break;
 			//may
 			case "may":
-				if(isValidDD(dateList.get(0), dateList.get(1))) 
-					date = appendYear(dateFormat, year, date, dateList, "5");
+				if(isValidDD(dateList.get(0), dateList.get(1))) {
+					date = dateList.get(0) + "/5/";
+					if(dateList.size() == 3) {//year is specified
+						if(isValidYear(dateList.get(2)))
+							date = date + dateList.get(2);
+						else 
+							invalidYear = true;
+					}
+					else { //year is not specified; append current year to it
+						date = date + currentYear;
+					}	
+				}
+				else
+					date = "invalid day";
 				break;
 			//june
 			case "jun":
 			case "june":
-				if(isValidDD(dateList.get(0), dateList.get(1))) 
-					date = appendYear(dateFormat, year, date, dateList, "6");
+				if(isValidDD(dateList.get(0), dateList.get(1))) {
+					date = dateList.get(0) + "/6/";
+					if(dateList.size() == 3) {//year is specified
+						if(isValidYear(dateList.get(2)))
+							date = date + dateList.get(2);
+						else 
+							invalidYear = true;
+					}
+					else { //year is not specified; append current year to it
+						date = date + currentYear;
+					}	
+				}
+				else
+					date = "invalid day";
 				break;
 			//july
 			case "jul":
 			case "july":
-				if(isValidDD(dateList.get(0), dateList.get(1))) 
-					date = appendYear(dateFormat, year, date, dateList, "7");
+				if(isValidDD(dateList.get(0), dateList.get(1))) {
+					date = dateList.get(0) + "/7/";
+					if(dateList.size() == 3) {//year is specified
+						if(isValidYear(dateList.get(2)))
+							date = date + dateList.get(2);
+						else 
+							invalidYear = true;
+					}
+					else { //year is not specified; append current year to it
+						date = date + currentYear;
+					}	
+				}
+				else
+					date = "invalid day";
 				break;
 			//august
 			case "aug":
 			case "august":
-				if(isValidDD(dateList.get(0), dateList.get(1))) 
-					date = appendYear(dateFormat, year, date, dateList, "8");
+				if(isValidDD(dateList.get(0), dateList.get(1))) {
+					date = dateList.get(0) + "/8/";
+					if(dateList.size() == 3) {//year is specified
+						if(isValidYear(dateList.get(2)))
+							date = date + dateList.get(2);
+						else 
+							invalidYear = true;
+					}
+					else { //year is not specified; append current year to it
+						date = date + currentYear;
+					}	
+				}
+				else
+					date = "invalid day";
 				break;
 			//september
 			case "sept":
 			case "september":
-				if(isValidDD(dateList.get(0), dateList.get(1))) 
-					date = appendYear(dateFormat, year, date, dateList, "9");
+				if(isValidDD(dateList.get(0), dateList.get(1))) {
+					date = dateList.get(0) + "/9/";
+					if(dateList.size() == 3) {//year is specified
+						if(isValidYear(dateList.get(2)))
+							date = date + dateList.get(2);
+						else 
+							invalidYear = true;
+					}
+					else { //year is not specified; append current year to it
+						date = date + currentYear;
+					}	
+				}
+				else
+					date = "invalid day";
 				break;
 			//october
 			case "oct":
 			case "october":
-				if(isValidDD(dateList.get(0), dateList.get(1))) 
-					date = appendYear(dateFormat, year, date, dateList, "10");
+				if(isValidDD(dateList.get(0), dateList.get(1))) {
+					date = dateList.get(0) + "/10/";
+					if(dateList.size() == 3) {//year is specified
+						if(isValidYear(dateList.get(2)))
+							date = date + dateList.get(2);
+						else 
+							invalidYear = true;
+					}
+					else { //year is not specified; append current year to it
+						date = date + currentYear;
+					}	
+				}
+				else
+					date = "invalid day";
 				break;
 			//november
 			case "nov":
 			case "november":
-				if(isValidDD(dateList.get(0), dateList.get(1))) 
-					date = appendYear(dateFormat, year, date, dateList, "11");
+				if(isValidDD(dateList.get(0), dateList.get(1))) {
+					date = dateList.get(0) + "/11/";
+					if(dateList.size() == 3) {//year is specified
+						if(isValidYear(dateList.get(2)))
+							date = date + dateList.get(2);
+						else 
+							invalidYear = true;
+					}
+					else { //year is not specified; append current year to it
+						date = date + currentYear;
+					}	
+				}
+				else
+					date = "invalid day";
 				break;
 			//december
 			case "dec":
 			case "december":
-				if(isValidDD(dateList.get(0), dateList.get(1))) 
-					date = appendYear(dateFormat, year, date, dateList, "12");
+				if(isValidDD(dateList.get(0), dateList.get(1))) {
+					date = dateList.get(0) + "/12/";
+					if(dateList.size() == 3) {//year is specified
+						if(isValidYear(dateList.get(2)))
+							date = date + dateList.get(2);
+						else 
+							invalidYear = true;
+					}
+					else { //year is not specified; append current year to it
+						date = date + currentYear;
+					}	
+				}
+				else
+					date = "invalid day";
 				break;	
 			default:
+				date = "invalid month";
 				break;
 			}
 		}
-		if (date.equals(""))
-			return null;
-		else 
+		if (!invalidDay && !invalidMonth && !invalidYear && !invalidDateFormat)
 			return date;
+		else if(invalidDay)
+			return "invalid day";
+		else if(invalidMonth)
+			return "invalid month";
+		else if(invalidYear)
+			return "invalid year";
+		else
+			return "invalid date format";
 	}
 	
 	public static String reformatTime(String input) {
@@ -231,28 +399,28 @@ public class DateAndTime {
 				time = String.valueOf(timeNumeric);
 			}
 			else 
-				return null;
+				return "invalid time format";
 		}
 		else if(isValid24Format(input))
 			time = input;
 		else
-			return null;
+			return "invalid time format";
 		
 		if (time.equals(""))
-			return null;
+			return "invalid time format";
 		else 
 			return time;
 	}
 	
 	public static boolean isDate(String input) {
-		if((reformatDate(input).equals(null)))
+		if((reformatDate(input).contains("invalid")))
 			return false;
 		else 
 			return true;
 	}
 	
 	public static boolean isTime(String input) {
-		if((reformatTime(input).equals(null))) 
+		if((reformatTime(input).contains("invalid"))) 
 			return false;
 		else 
 			return true;
@@ -262,33 +430,36 @@ public class DateAndTime {
 	//only for date formats: dd/mm/yyyy
 	public static boolean compareDates(String dateA, String dateB) {
 		String[] contentA = dateA.split("/", 3); 
-		String[] contentB = dateB.split("/", 3); 
+		String[] contentB = dateB.split("/", 3);
 		
-		if(dateA == null)
+		//check if dateA is in dd/mm/yyyy format
+		if (!dateA.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})"))
 			return false;
-		else if(dateB == null)
+		else if(!dateB.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})"))
 			return false;
 		//compare year first
-		else if (Integer.parseInt(contentA[2]) > Integer.parseInt(contentB[2]))
-			return false;
-		else if (Integer.parseInt(contentA[2]) < Integer.parseInt(contentB[2]))
-			return true;
-		//year is same
-		else {
-			//compare month
-			if (Integer.parseInt(contentA[1]) > Integer.parseInt(contentB[1]))
+		else  {
+			if (Integer.parseInt(contentA[2]) > Integer.parseInt(contentB[2]))
 				return false;
-			else if (Integer.parseInt(contentA[1]) < Integer.parseInt(contentB[1]))
+			else if (Integer.parseInt(contentA[2]) < Integer.parseInt(contentB[2]))
 				return true;
-			//month is same
+			//year is same
 			else {
-				if (Integer.parseInt(contentA[0]) > Integer.parseInt(contentB[0]))
+				//compare month
+				if (Integer.parseInt(contentA[1]) > Integer.parseInt(contentB[1]))
 					return false;
-				else if (Integer.parseInt(contentA[0]) < Integer.parseInt(contentB[0]))
+				else if (Integer.parseInt(contentA[1]) < Integer.parseInt(contentB[1]))
 					return true;
-				//day is same
-				else 
-					return true;
+				//month is same
+				else {
+					if (Integer.parseInt(contentA[0]) > Integer.parseInt(contentB[0]))
+						return false;
+					else if (Integer.parseInt(contentA[0]) < Integer.parseInt(contentB[0]))
+						return true;
+					//day is same
+					else 
+						return true;
+				}
 			}
 		}
 	}
@@ -296,9 +467,9 @@ public class DateAndTime {
 	//compare time; return true only if timeA is earlier than or equal to timeB
 	//only for 24-hour time format
 	public static boolean compareTimes(String timeA, String timeB) {
-		if(timeA == null)
+		if(!isValid24Format(timeA))
 			return false;
-		else if(timeB == null)
+		else if(!isValid24Format(timeB))
 			return false;
 		else 
 			return (Integer.parseInt(timeA) <= Integer.parseInt(timeB));
@@ -318,9 +489,9 @@ public class DateAndTime {
 		//for cases: 930am, 1020am
 		if (onlyDigits(time)) {
 			//pure hour; eg 9am, 10am
-			if(Integer.parseInt(time) <= 12)
+			if(Integer.parseInt(time) <= 12 && Integer.parseInt(time) > 0)
 				return true;
-			//contains  single digit hours and min; eg 930am, 759am
+			//contains  single digit hours and min; max 959am, 959pm, min 000am,000pm
 			else if (time.length() == 3) {
 				int count = 0;
 				//check last char; can only be digit 0 to 9
@@ -354,10 +525,16 @@ public class DateAndTime {
 					count++;
 				}
 				//check first char; can only be digit 0 to 1
-				if(Character.isDigit(time.charAt(0)))
-					if(Character.getNumericValue(time.charAt(0)) <= 1) {
+				//if digit is 1; second char can only be 0, 1 or 2
+				if(Character.isDigit(time.charAt(0))) {
+					if(Character.getNumericValue(time.charAt(0)) == 0) {
 							count++;
 					}
+					else if(Character.getNumericValue(time.charAt(0)) == 1) {
+						if(Character.getNumericValue(time.charAt(1)) <= 2)
+							count++;
+					}
+				}	
 				return (count == 4);
 			}
 			else
@@ -385,10 +562,16 @@ public class DateAndTime {
 			count++;
 		}
 		//check first char; can only be digit 0 to 2
-		if(Character.isDigit(time.charAt(0)))
-			if(Character.getNumericValue(time.charAt(0)) <= 2) {
+		//if digit is 2, second digit can only in range of 0 <= x <= 3
+		if(Character.isDigit(time.charAt(0))) {
+			if(Character.getNumericValue(time.charAt(0)) <= 1) {
 					count++;
 			}
+			else if(Character.getNumericValue(time.charAt(0)) == 2) {
+				if(Character.getNumericValue(time.charAt(1)) <= 3)
+					count++;
+			}
+		}
 		return (count == 4);
 	}
 	
@@ -476,17 +659,7 @@ public class DateAndTime {
 		
 		return (onlyDigits(input) && (input.length() == 4) && (Integer.parseInt(input) >= Integer.parseInt(dateFormat.format(date)))); 
 	}
-	//appends current year or specified year to a date
-	private static String appendYear(DateFormat dateFormat, Date year, String date, ArrayList<String> dateList, String month) {
-		if(dateList.size() == 3) { //year is specified
-			if(isValidYear(dateList.get(2)))
-				date = dateList.get(0) + "/" + month + "/" + dateList.get(2);
-		}
-		else { //year not specified; append current year
-			date = dateList.get(0) + "/" + month + "/" + dateFormat.format(year);
-		}
-		return date;
-	}
+
 	//check if a string input is only a word
 	private final static boolean isOneWord(String input) {
 		if (input.contains(REGEX_WHITESPACE))
