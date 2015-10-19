@@ -10,20 +10,23 @@ import javafx.scene.text.Text;
  *
  */
 
-public class IncompleteController {
-	
+public class DisplayAllController {
+
+	@FXML
+    private ListView<Text> completeList;
 	@FXML
     private ListView<Text> incompleteList;
-
+	
 	private MainApp mainApp;
 	
-	public IncompleteController() {
-	
-	}
+	public DisplayAllController() {
+        
+    }
 	
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 		
+		completeList.setItems(mainApp.getComplete());
 		incompleteList.setItems(mainApp.getIncomplete());
 	}
 }

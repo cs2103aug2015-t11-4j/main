@@ -2,19 +2,13 @@
 
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<fx:root type="StackPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="main.java.gui.TodayController">
+  <!-- TODO Add Nodes -->
   <children>
-    <TableView fx:id="todayTable" prefHeight="600.0" prefWidth="900.0">
-      <columns>
-        <TableColumn prefWidth="400.0" text="Today's Events" fx:id="eventNameCol" />
-        <TableColumn prefWidth="122.5" text="Start Time" fx:id="startDateCol" />
-        <TableColumn prefWidth="122.5" text="End Date" fx:id="endDateCol" />
-        <TableColumn prefWidth="122.5" text="Start Time" fx:id="startTimeCol" />
-        <TableColumn prefWidth="122.5" text="End Time" fx:id="endTimeCol" />
-      </columns>
-    </TableView>
+    <Label prefHeight="30.0" text="Today's Tasks" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
+    <ListView fx:id="todayList" prefHeight="570.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
   </children>
-</fx:root>
+</AnchorPane>
