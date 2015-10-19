@@ -1,5 +1,5 @@
-package main.java.logic;
 //@author : Jiahuan
+package main.java.logic;
 import java.util.ArrayList;
 
 import main.java.parser.Parser;
@@ -7,8 +7,8 @@ import main.java.resources.DataDisplay;
 import main.java.resources.Task;
 import main.java.storage.Storage;
 import main.java.ui.UI;
-
-public class Logic {
+//invoker class
+public class LogicInvoker {
 	
 
 	//Switch case to decide which action to carry forward after first parsing

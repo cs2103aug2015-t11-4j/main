@@ -150,6 +150,40 @@ public class DataDisplay {
 		}
 		return outputForTesting;
 	}
+	
+	//get a strig to display on input box to ask user to update accordingly
+	//TODO: j-unit testing
+	public static String displayTaskNeedForUpdate(Task task) {
+		String outputForTesting = "";
+		switch (task.getTaskType()) {
+		case "deadline":
+			System.out.println("update " + updateContentForDeadline(task));
+			outputForTesting = "update " + updateContentForDeadline(task);
+			break;
+		case "floating":
+			System.out.println("update " + updateContentForFloating(task));
+			outputForTesting = "update " + updateContentForFloating(task);
+			break;
+		case "event":
+			System.out.println("update " + updateContentForEvent(task));
+			outputForTesting = "update " + updateContentForEvent(task);
+			break;
+		}
+		return outputForTesting;
+	}
+
+	private static String updateContentForDeadline(Task task) {
+		return task.getTaskDescription() + " by " + task.getEndDate() + ";" + task.getEndTime();
+	}
+
+	private static String updateContentForFloating(Task task) {
+		return createContentForFloating(task);
+	}
+
+	private static String updateContentForEvent(Task task) {
+		return task.getTaskDescription() + " from " + task.getStartDate() + ";" + task.getStartTime() + " to "
+				+ task.getEndDate() + ";" + task.getEndTime();
+	}
 
 	private static String createContentForFloating(Task task) {
 		return task.getTaskDescription();
@@ -163,4 +197,5 @@ public class DataDisplay {
 	private static String createContentForDeadline(Task task) {
 		return "By " + task.getEndTime() + ", " + task.getEndDate() + ": " + task.getTaskDescription();
 	}
+
 }
