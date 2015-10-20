@@ -22,6 +22,14 @@ public class DataDisplay {
 		// To get a count of how many different type of tasks are there
 		ArrayList<Integer> taskTypeCount = new ArrayList<Integer>(3);
 		taskTypeCount = countTaskTypeNum(summaryList);
+		// print empty if nothing in list
+		if (summaryList.size()==0){
+			System.out.println("No task exists, please add one task to start");
+			outputForTesting.add("No task exists, please add one task to start");
+			return outputForTesting;
+		}
+		
+		
 		// print different task with a label above them
 		if (taskTypeCount.get(0) != 0) {
 			System.out.println(LABEL_DEADLINE);
