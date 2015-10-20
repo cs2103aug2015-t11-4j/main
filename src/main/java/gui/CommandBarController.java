@@ -2,6 +2,7 @@ package main.java.gui;
 
 import java.io.IOException;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -19,9 +20,6 @@ public class CommandBarController extends BorderPane {
 
     @FXML
     private Label feedback;
-    
-    @FXML
-    private Label status;
 
     @FXML
     private TextField commandBar;
@@ -56,7 +54,12 @@ public class CommandBarController extends BorderPane {
         feedback.setText(feedbackText);
     }
     
-    public void setStatus(String currStatus) {
-    	status.setText(currStatus);
+    public void setText(String listviewName) {
+    	commandBar.setOnKeyTyped(new EventHandler<KeyEvent>() {
+    		public void handle(KeyEvent event) {
+    			commandBar.setText(listviewName);
+    		}
+    	});
+    	commandBar.setEditable(true);  //no use
     }
 }
