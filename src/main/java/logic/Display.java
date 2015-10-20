@@ -14,31 +14,30 @@ public class Display implements Command {
 
 	@Override
 	public void execute() {
-		Search search; //TODO: TO change search to static methods
 		switch (userInput.get(1).toLowerCase()){
 		case "today":
-			DataDisplay.displaySummary(search.obtainTodaySummary());
+			DataDisplay.displaySummary(Search.obtainTodaySummary());
 			break;
 		case "tommorrow":
-			DataDisplay.displaySummary(search.obtainTommorrowSummary());
+			DataDisplay.displaySummary(Search.obtainTommorrowSummary());
 			break;
 		case "floating":
-			DataDisplay.displayFloating(search.obtainFloatingTasks());
+			DataDisplay.displayFloating(Search.obtainFloatingTasks());
 			break;
 		case "event":
-			DataDisplay.displayEvent(search.obtainEventTasks());
+			DataDisplay.displayEvent(Search.obtainEventTasks());
 			break;
 		case "deadline":
-			DataDisplay.displayDeadline(search.obtainDeadlineTasks());
+			DataDisplay.displayDeadline(Search.obtainDeadlineTasks());
 			break;
 		case "complete":
-			DataDisplay.displayComplete(search.obtainAllCompleteTasks());
+			DataDisplay.displayComplete(Search.obtainAllCompleteTasks());
 			break;
 		case "incomplete":
-			DataDisplay.displayIncomplete(search.obtainAllIncompleteTasks());
+			DataDisplay.displayIncomplete(Search.obtainAllIncompleteTasks());
 			break;
 		case "all":
-			DataDisplay.displayAll(search.obtainAllTasks());
+			DataDisplay.displayAll(Search.obtainAllTasks());
 		}
 	}
 
