@@ -5,7 +5,9 @@ import main.java.resources.Task;
 import main.java.storage.Storage;
 
 public class Add implements Command{
-	private Task task; //Task.java is our request class in this case
+	private Task task; 
+
+	
 	
 	public Add(Task task){
 		this.task=task;

@@ -157,16 +157,16 @@ public class DataDisplay {
 		String outputForTesting = "";
 		switch (task.getTaskType()) {
 		case "deadline":
-			System.out.println("update " + updateContentForDeadline(task));
-			outputForTesting = "update " + updateContentForDeadline(task);
+			System.out.println("add " + updateContentForDeadline(task));
+			outputForTesting = "add " + updateContentForDeadline(task);
 			break;
 		case "floating":
-			System.out.println("update " + updateContentForFloating(task));
-			outputForTesting = "update " + updateContentForFloating(task);
+			System.out.println("add " + updateContentForFloating(task));
+			outputForTesting = "add " + updateContentForFloating(task);
 			break;
 		case "event":
-			System.out.println("update " + updateContentForEvent(task));
-			outputForTesting = "update " + updateContentForEvent(task);
+			System.out.println("add " + updateContentForEvent(task));
+			outputForTesting = "add " + updateContentForEvent(task);
 			break;
 		}
 		return outputForTesting;

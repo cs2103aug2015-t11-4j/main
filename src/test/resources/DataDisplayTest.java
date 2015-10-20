@@ -1,5 +1,5 @@
 //@Author: Jiahuan
-package main.java.test;
+package test.resources;
 
 import static org.junit.Assert.*;
 

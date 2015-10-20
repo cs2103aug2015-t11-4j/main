@@ -5,10 +5,10 @@ import main.java.resources.DataDisplay;
 import main.java.resources.Task;
 import main.java.storage.Storage;
 
-public class UpdateWithNum implements Command{
+public class Update implements Command{
 	private int itemNum;
 	
-	public UpdateWithNum(int itemNum){
+	public Update(int itemNum){
 		this.itemNum=itemNum;
 	}
 	
