@@ -95,6 +95,21 @@ public class Parser {
 			return "floating";
 	}
 	
+	public static String identifyDisplay(ArrayList<String> listFromLogic) {
+		String displayContent = listFromLogic.get(1);
+		
+		switch (displayContent.toLowerCase()) {
+			case "today":
+				 displayContent = "today";
+			case "tomorrow":
+			case "tmr":
+			case "tml":
+				displayContent = "tomorrow";
+			case "all":
+				displayContent = "all";
+		}
+		return displayContent;
+	}
 	//removes all unnecessary whitespaces to 1 whitespace
 	private final static String formatInputForValidParsing (String input) {
 		return input.replaceAll("\\s+", REGEX_WHITESPACE).trim();

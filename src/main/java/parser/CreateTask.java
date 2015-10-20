@@ -21,6 +21,7 @@ public class CreateTask {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter :");
 		String input = sc.nextLine();
+		System.out.println(removeAllSemiColon(input));
 		Task task = createDeadline("deadline", input);
 		System.out.println("startdate: " + task.getStartDate());
 		System.out.println("enddate: " + task.getEndDate());
