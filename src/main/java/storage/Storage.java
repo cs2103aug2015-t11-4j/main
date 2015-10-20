@@ -3,9 +3,13 @@ package main.java.storage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import main.java.resources.Task;
 
@@ -18,18 +22,20 @@ import main.java.resources.Task;
 
 
 public class Storage {
-	/* 
+    public static ArrayList<Task> taskList = new ArrayList<Task>(); // a global variable for task list (jh)
+    
+    /* 
 	 * Temporary placeholder for creation of file - To be replaced with user's
 	 * directory of choice
 	 */
-	public static ArrayList<Task> taskList =new ArrayList<Task>();// a global variable for task list (jh)
 	private static String filename = "MyCalender.txt";
 	
 	/* 
-     * Adds one task to the agenda
+     * Adds one task to the taskList and writes to external file
      */
 	public static int addOneItem(Task task) {
 		taskList.add(task); //(jh) update internal list
+		
 		try {
 			FileWriter fw = new FileWriter(filename, true);
 			BufferedWriter bw = new BufferedWriter(fw);
@@ -47,10 +53,11 @@ public class Storage {
 	}
 	
 	/* 
-     * Updates one task to the agenda
+     * Updates one task to the taskList and writes to external file
      */
 	public static int updateOneItem(int itemNumber, Task task) {
 		taskList.set(itemNumber-1, task); //(jh) update internal list
+		
 		try {
 		    FileReader fr = new FileReader(filename);
             BufferedReader br = new BufferedReader(fr);
@@ -84,8 +91,12 @@ public class Storage {
 		return 0;
 	}
 	
+	/* 
+     * Deletes a task from the taskList and delete entry from external file
+     */
 	public static int deleteOneItem(int itemNumber) {
-		taskList.remove(itemNumber); //(jh) update internal list
+		taskList.remove(itemNumber-1); //(jh) update internal list
+		
 		try {
 		    File original = new File(filename);
             FileReader fr = new FileReader(filename);
@@ -97,7 +108,6 @@ public class Storage {
             
             int lineNumber = 0;
             String line = "";
-            String deletedLine = "";
             
             while ((line = br.readLine()) != null) {
                 lineNumber += 1;
@@ -105,9 +115,7 @@ public class Storage {
                 if (lineNumber != itemNumber) {
                     bw.write(line);
                     bw.newLine();
-                } else {
-                    deletedLine = line;
-                } 
+                }
             }
                                
             br.close();
@@ -119,9 +127,78 @@ public class Storage {
 		}
 		return 0;
 	}
+	
+	/* 
+     * Obtains task type from task saved in external file
+     */
+    public static String getTaskTypeByItemNum(int itemNumber) {
+        try {
+            String[] target = readExternalFile(itemNumber);
+            return target[0];
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    /* 
+     * Obtains task description from task saved in external file
+     */
+    public static String getTaskDescriptionByItemNum(int itemNumber) {
+        try {
+            String[] target = readExternalFile(itemNumber);
+            return target[1];
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
-/*	/* 
-     * Displays all tasks to the agenda
+    /* 
+     * Obtains deadline from task saved in external file
+     */
+    public static String getTaskDeadlineItemNum(int itemNumber) {
+        try {
+            String[] target = readExternalFile(itemNumber);
+            return target[2];
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    /*
+     * Reads the external file based on its line number
+     */
+    private static String[] readExternalFile(int itemNumber) throws FileNotFoundException, IOException {
+        FileReader fr = new FileReader(filename);
+        BufferedReader br = new BufferedReader(fr);        
+           
+        int lineNumber = 0;
+        String line = null;
+        String[] target = new String[4];
+      
+        while ((line = br.readLine()) != null) {
+            lineNumber += 1;
+        
+            if (lineNumber == itemNumber) {
+                target = line.split(";");
+            }
+        }
+      
+        br.close();
+        return target;
+    }
+    
+
+    /* 
+     * Sorts task by task type and description in the taskList
+     */
+    public static ArrayList<Task> sortTaskList (ArrayList<Task> taskList) {
+        Collections.sort(taskList, new TaskComparatorByTaskDescription());
+        return taskList;
+    }
+    
+	/* 
+     * Displays all tasks to the taskList
+     * @@author A0126058-unused due to change of requirements
      
 	public static void display() {
         try {
@@ -147,32 +224,58 @@ public class Storage {
             //System.out.println(MESSAGE_READ_ERROR);
        }
 	}
-	
-	/* 
-     * Obtains task type from task saved in Storage
-     */
-	public static String getTaskTypeByItemNum(int itemNumber) {
-	    try {
-	        FileReader fr = new FileReader(filename);
-	        BufferedReader br = new BufferedReader(fr);        
-               
-            int lineNumber = 0;
-	        String line = null;
-	        String[] target = new String[4];
-        
-            while ((line = br.readLine()) != null) {
-                lineNumber += 1;
-            
-                if (lineNumber == itemNumber) {
-                    target = line.split(";");
-                }
-            }
-        
-            br.close();
-            return target[0];
-	    } catch (Exception e) {
-            return null;
-        }
-	}
+	*/
+}
 
+/**
+ * Comparator override methods for sorting purposes
+ * @@author Lim Yong Zhi
+ */
+
+/*
+ * Sorts taskList by Task Description
+ */
+class TaskComparatorByTaskDescription implements Comparator<Task> {
+    @Override
+    public int compare(Task t1, Task t2) {
+        return t1.getTaskDescription().compareTo(t2.getTaskDescription());
+    }
+}
+
+/*
+ * Sorts taskList by Date
+ */
+class TaskComparatorByDate implements Comparator<Task> {
+    @Override
+    public int compare(Task t1, Task t2) {
+        if (t1.getStartDate() == null || t2.getStartDate() == null) {
+            return 0;
+        }
+        return t1.getStartDate().compareTo(t2.getStartDate());
+    }
+}
+
+/*
+ * Sorts taskList by Time
+ */
+class TaskComparatorByTime implements Comparator<Task> {
+    @Override
+    public int compare(Task t1, Task t2) {
+        if (t1.getStartTime() == null || t2.getStartTime() == null) {
+            return 0;
+        }
+        return t1.getStartTime().compareTo(t2.getStartTime());
+    }
+}
+
+
+/*
+ * Sorts taskList by Task Type
+ * TODO: May not be required
+ */
+class TaskComparatorByTaskType implements Comparator<Task> {
+    @Override
+    public int compare(Task t1, Task t2) {
+        return t1.getTaskType().compareTo(t2.getTaskType());
+    }
 }
