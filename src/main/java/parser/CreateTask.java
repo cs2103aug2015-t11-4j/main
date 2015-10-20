@@ -1,4 +1,5 @@
 package main.java.parser;
+//@author: A0124524N; wenbin 
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -31,7 +32,7 @@ public class CreateTask {
 		System.out.println("ET: " + task.getEndTime()); 
 	}*/
 	
-	public static Task createDeadline(String taskType, String taskContent) {
+	public final static Task createDeadline(String taskType, String taskContent) {
 		String[] dateTime;
 		
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -68,7 +69,7 @@ public class CreateTask {
 			return task;
 	}
 	
-	public static Task createEvent(String taskType, String taskContent) {
+	public final static Task createEvent(String taskType, String taskContent) {
 		
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date today = new Date();
@@ -119,7 +120,7 @@ public class CreateTask {
 		return task;
 	}
 	
-	public static Task createFloating(String taskType, String taskContent) {
+	public final static Task createFloating(String taskType, String taskContent) {
 		return new Task(taskType, removeAllSemiColon(taskContent), null, null, null, null, false);
 	}
 	

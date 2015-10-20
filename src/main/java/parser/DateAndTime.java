@@ -1,4 +1,5 @@
 package main.java.parser;
+//@author: A0124524N; wenbin 
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -28,8 +29,8 @@ public class DateAndTime {
 		}
 	}
 	*/
-	
-	public static String reformatDate(String input) {
+	//for task creation
+	public final static String reformatDate(String input) {
 		
 		//valid formats examples: 22 oct, 22 october, 22/10, 22.10, 22 oct 2015, 22 october 2015, 22/10/2015, 22.10.2015
 		//to return date in format dd/mm/yyyy
@@ -359,7 +360,8 @@ public class DateAndTime {
 			return "invalid date format";
 	}
 	
-	public static String reformatTime(String input) {
+	//for task creation
+	public final static String reformatTime(String input) {
 		
 		//valid formats: 9am, 901am, 0901am, 9:01am, 9pm, 0901
 		//to return in 24-hour format: 0901
@@ -412,23 +414,26 @@ public class DateAndTime {
 			return time;
 	}
 	
-	public static boolean isDate(String input) {
+	//for task creation
+	public final static boolean isDate(String input) {
 		if((reformatDate(input).contains("invalid")))
 			return false;
 		else 
 			return true;
 	}
 	
-	public static boolean isTime(String input) {
+	//for task creation
+	public final static boolean isTime(String input) {
 		if((reformatTime(input).contains("invalid"))) 
 			return false;
 		else 
 			return true;
 	}
 	
+	//for task creation
 	//compare dates; return true only if dateA is earlier than or equal to dateB
 	//only for date formats: dd/mm/yyyy
-	public static boolean compareDates(String dateA, String dateB) {
+	public final static boolean compareDates(String dateA, String dateB) {
 		String[] contentA = dateA.split("/", 3); 
 		String[] contentB = dateB.split("/", 3);
 		
@@ -464,9 +469,10 @@ public class DateAndTime {
 		}
 	}
 	
+	//for task creation
 	//compare time; return true only if timeA is earlier than or equal to timeB
 	//only for 24-hour time format
-	public static boolean compareTimes(String timeA, String timeB) {
+	public final static boolean compareTimes(String timeA, String timeB) {
 		if(!isValid24Format(timeA))
 			return false;
 		else if(!isValid24Format(timeB))
@@ -574,7 +580,6 @@ public class DateAndTime {
 		}
 		return (count == 4);
 	}
-	
 	private static boolean isValidDD(String dd, String mm) {
 		
 		int day = Integer.parseInt(dd);
@@ -651,7 +656,6 @@ public class DateAndTime {
 		}
 		return valid;
 	}
-	
 	//check if a string input is a valid year; cannot be past year
 	private static boolean isValidYear(String input) {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy");
@@ -659,7 +663,6 @@ public class DateAndTime {
 		
 		return (onlyDigits(input) && (input.length() == 4) && (Integer.parseInt(input) >= Integer.parseInt(dateFormat.format(date)))); 
 	}
-
 	//check if a string input is only a word
 	private final static boolean isOneWord(String input) {
 		if (input.contains(REGEX_WHITESPACE))
@@ -667,7 +670,6 @@ public class DateAndTime {
 		else 
 			return true;
 	}
-	
 	//check if a string input are all digits only
 	private final static boolean onlyDigits(String input) {
 		int count = 0;

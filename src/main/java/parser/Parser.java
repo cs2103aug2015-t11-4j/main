@@ -1,5 +1,5 @@
 package main.java.parser;
-//@author: wenbin 
+//@author: A0124524N; wenbin 
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -37,14 +37,47 @@ public class Parser {
 		
 		
 	}*/
-	
-	public static ArrayList<String> retrieveCommand(String inputFromLogic){
+	//FOR LOGIC USE ONLY
+	public final static ArrayList<String> retrieveCommand(String inputFromLogic){
 		
 		ArrayList<String> contentListForLogic = new ArrayList<String>();
 		inputFromLogic = formatInputForValidParsing(inputFromLogic);
 		updateList(inputFromLogic, contentListForLogic);
 		
 		return contentListForLogic;
+	}
+	
+	//FOR LOGIC USE ONLY
+	public final static Task createTaskForAdd(ArrayList<String> listFromLogic) {
+			
+			Task task = new Task();
+			String taskType = identifyTaskType(listFromLogic);
+			String taskContent = listFromLogic.get(1);
+			
+			switch(taskType) {
+			case "deadline":
+				task = CreateTask.createDeadline(taskType, taskContent);
+				break;
+			case "event":
+				task = CreateTask.createEvent(taskType, taskContent);
+				break;
+			case "floating":
+				task = CreateTask.createFloating(taskType, taskContent);
+				break;
+			default:
+				break;
+			}
+			return task;
+		}
+	
+	//FOR LOGIC USE ONLY
+	//formats the display commands with flexicommands
+	public final static ArrayList<String> flexiDisplay(ArrayList<String> listFromLogic) {
+		String displayContent = listFromLogic.remove(1);
+		displayContent = FlexiCommands.flexiDisplayCommands(displayContent);
+		listFromLogic.add(displayContent);
+		
+		return listFromLogic;
 	}
 	
 	private static void updateList(String inputFromLogic, ArrayList<String> contentListForLogic) {
@@ -61,29 +94,6 @@ public class Parser {
 			contentListForLogic.add(content[1]);
 		}
 	}
-	
-	public static Task createTaskForAdd(ArrayList<String> listFromLogic) {
-		
-		Task task = new Task();
-		String taskType = identifyTaskType(listFromLogic);
-		String taskContent = listFromLogic.get(1);
-		
-		switch(taskType) {
-		case "deadline":
-			task = CreateTask.createDeadline(taskType, taskContent);
-			break;
-		case "event":
-			task = CreateTask.createEvent(taskType, taskContent);
-			break;
-		case "floating":
-			task = CreateTask.createFloating(taskType, taskContent);
-			break;
-		default:
-			break;
-		}
-		return task;
-	}
-	
 	private static String identifyTaskType(ArrayList<String> listFromLogic ) {
 		String taskContent = listFromLogic.get(1);
 		
@@ -94,27 +104,10 @@ public class Parser {
 		else
 			return "floating";
 	}
-	
-	public static String identifyDisplay(ArrayList<String> listFromLogic) {
-		String displayContent = listFromLogic.get(1);
-		
-		switch (displayContent.toLowerCase()) {
-			case "today":
-				 displayContent = "today";
-			case "tomorrow":
-			case "tmr":
-			case "tml":
-				displayContent = "tomorrow";
-			case "all":
-				displayContent = "all";
-		}
-		return displayContent;
-	}
 	//removes all unnecessary whitespaces to 1 whitespace
 	private final static String formatInputForValidParsing (String input) {
 		return input.replaceAll("\\s+", REGEX_WHITESPACE).trim();
 	}
-	
 	//check if a string input is only a word
 	private final static boolean isOneWord(String input) {
 		if (input.contains(REGEX_WHITESPACE))

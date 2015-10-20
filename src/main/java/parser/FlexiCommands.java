@@ -1,4 +1,5 @@
 package main.java.parser;
+//@author: A0124524N; wenbin 
 
 public class FlexiCommands {
 	
@@ -56,5 +57,30 @@ public class FlexiCommands {
 			default:
 				return "invalid command";	
 		}
+	}
+	
+	public static String flexiDisplayCommands(String command){
+		
+		switch (command.toLowerCase()) {
+		case "floating":
+			command = "floating";
+		case "event":
+			command = "event";
+		case "deadline":
+			command = "deadline";
+		case "incomplete":
+			command = "incomplete";
+		case "complete":
+			command = "complete";
+		case "today":
+			command = "today";
+		case "tomorrow":
+		case "tmr":
+		case "tml":
+			command = "tomorrow";
+		case "all":
+			command = "all";
+		}
+		return command;
 	}
 }
