@@ -41,6 +41,7 @@ public class CreateTask {
 		if(taskContent.contains(KEYWORD_BY)) {
 			int indexToSplit = taskContent.lastIndexOf(KEYWORD_BY);
 			String taskDescription = taskContent.substring(0, indexToSplit);
+			taskDescription = removeAllSemiColon(taskDescription);
 			String taskDateTime = taskContent.substring(indexToSplit + (LENGTH_OF_BY));
 			//taskDateTime contains both deadline date and deadline time
 			if(taskDateTime.contains(";")) {
@@ -78,6 +79,7 @@ public class CreateTask {
 			int secondIndexToSplit = taskContent.lastIndexOf(KEYWORD_TO);
 		
 			String taskDescription = taskContent.substring(0, firstIndexToSplit);
+			taskDescription = removeAllSemiColon(taskDescription);
 			String taskStart = taskContent.substring(firstIndexToSplit + (LENGTH_OF_FROM ), secondIndexToSplit);
 			String taskEnd = taskContent.substring(secondIndexToSplit + (LENGTH_OF_TO), taskContent.length());
 		
@@ -117,7 +119,10 @@ public class CreateTask {
 	}
 	
 	public static Task createFloating(String taskType, String taskContent) {
-		return new Task(taskType, taskContent, null, null, null, null, false);
+		return new Task(taskType, removeAllSemiColon(taskContent), null, null, null, null, false);
 	}
 	
+	private static String removeAllSemiColon(String input) {
+		return input.replaceAll(";", "");
+	}
 }
