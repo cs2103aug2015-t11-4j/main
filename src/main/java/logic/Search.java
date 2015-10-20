@@ -28,20 +28,24 @@ public class Search {
      */
     public static ArrayList<Task> obtainTodaySummary() {
         ArrayList<Task> todaySummary = new ArrayList<Task>();
-        ArrayList<Task> taskList = Storage.taskList;
+        ArrayList<Task> taskList = Storage.getTaskList();
         
         while(todaySummary.size() == 25 || taskList.isEmpty()) {
-            for(int i = 0; i<25; i++) {
+            for(int i = 0; i<10; i++) {
                 if((taskList.get(i).getTaskType().equals("deadline"))) { 
                     todaySummary.add(taskList.get(i));
                     taskList.remove(i);
                 }
+            }
 
+            for(int i = 0; i<10; i++) {
                 if(taskList.get(i).getTaskType().equals("event")) {
                     todaySummary.add(taskList.get(i));
                     taskList.remove(i);
                 }
+            }
 
+            for(int i = 0; i<5; i++) { 
                 if(taskList.get(i).getTaskType().equals("floating")) {
                     todaySummary.add(taskList.get(i));
                     taskList.remove(i);
@@ -79,8 +83,8 @@ public class Search {
      * Obtains all tasks in the taskList
      */
     public static ArrayList<Task> obtainAllTasks() {
-        if(!Storage.taskList.isEmpty()) {
-            return Storage.taskList;
+        if(!Storage.getTaskList().isEmpty()) {
+            return Storage.getTaskList();
         }
         return null;
     }
@@ -91,9 +95,9 @@ public class Search {
     public static ArrayList<Task> obtainAllIncompleteTasks() {
         ArrayList<Task> incomplete = new ArrayList<Task>();
         
-        for(int i = 0; i<Storage.taskList.size(); i++) {
-            if(Storage.taskList.get(i).getIsCompleted() == false) {
-                incomplete.add(Storage.taskList.get(i));
+        for(int i = 0; i<Storage.getTaskList().size(); i++) {
+            if(Storage.getTaskList().get(i).getIsCompleted() == false) {
+                incomplete.add(Storage.getTaskList().get(i));
             }
         }
         
@@ -106,9 +110,9 @@ public class Search {
     public static ArrayList<Task> obtainAllCompleteTasks() {
         ArrayList<Task> complete = new ArrayList<Task>();
         
-        for(int i = 0; i<Storage.taskList.size(); i++) {
-            if(Storage.taskList.get(i).getIsCompleted() == true) {
-                complete.add(Storage.taskList.get(i));
+        for(int i = 0; i<Storage.getTaskList().size(); i++) {
+            if(Storage.getTaskList().get(i).getIsCompleted() == true) {
+                complete.add(Storage.getTaskList().get(i));
             }
         }
         
@@ -121,9 +125,9 @@ public class Search {
     public static ArrayList<Task> obtainDeadlineTasks() {
         ArrayList<Task> deadlines = new ArrayList<Task>();
         
-        for(int i = 0; i<Storage.taskList.size(); i++) {
-            if(Storage.taskList.get(i).getTaskType().equals("deadline")) {
-                deadlines.add(Storage.taskList.get(i));
+        for(int i = 0; i<Storage.getTaskList().size(); i++) {
+            if(Storage.getTaskList().get(i).getTaskType().equals("deadline")) {
+                deadlines.add(Storage.getTaskList().get(i));
             }
         }
         
@@ -136,12 +140,12 @@ public class Search {
     public ArrayList<Task> obtainApproachingDeadlineTasks() {
         ArrayList<Task> deadlines = new ArrayList<Task>();
         
-        for(int i = 0; i<Storage.taskList.size(); i++) {
-            if(Storage.taskList.get(i).getTaskType().equals("deadline")
-                    && (Storage.taskList.get(i).getEndDate().equals(ldt.getDayOfMonth()  + "/" + toMonthValue() + "/" + ldt.getYear()))
-                    && (Storage.taskList.get(i).getEndDate().equals((ldt.getDayOfMonth() + 1) + "/" + toMonthValue() + "/" + ldt.getYear()))
-                    && (Storage.taskList.get(i).getEndDate().equals((ldt.getDayOfMonth() + 2) + "/" + toMonthValue() + "/" + ldt.getYear()))) {
-                deadlines.add(Storage.taskList.get(i));
+        for(int i = 0; i<Storage.getTaskList().size(); i++) {
+            if(Storage.getTaskList().get(i).getTaskType().equals("deadline")
+                    && (Storage.getTaskList().get(i).getEndDate().equals(ldt.getDayOfMonth()  + "/" + toMonthValue() + "/" + ldt.getYear()))
+                    && (Storage.getTaskList().get(i).getEndDate().equals((ldt.getDayOfMonth() + 1) + "/" + toMonthValue() + "/" + ldt.getYear()))
+                    && (Storage.getTaskList().get(i).getEndDate().equals((ldt.getDayOfMonth() + 2) + "/" + toMonthValue() + "/" + ldt.getYear()))) {
+                deadlines.add(Storage.getTaskList().get(i));
             }
         }
         
@@ -154,9 +158,9 @@ public class Search {
     public static ArrayList<Task> obtainEventTasks() {
         ArrayList<Task> events = new ArrayList<Task>();
         
-        for(int i = 0; i<Storage.taskList.size(); i++) {
-            if(Storage.taskList.get(i).getTaskType().equals("event")) {
-                events.add(Storage.taskList.get(i));
+        for(int i = 0; i<Storage.getTaskList().size(); i++) {
+            if(Storage.getTaskList().get(i).getTaskType().equals("event")) {
+                events.add(Storage.getTaskList().get(i));
             }
         }
         
@@ -169,9 +173,9 @@ public class Search {
     public static ArrayList<Task> obtainFloatingTasks() {
         ArrayList<Task> floating = new ArrayList<Task>();
         
-        for(int i = 0; i<Storage.taskList.size(); i++) {
-            if(Storage.taskList.get(i).getTaskType().equals("floating")) {
-                floating.add(Storage.taskList.get(i));
+        for(int i = 0; i<Storage.getTaskList().size(); i++) {
+            if(Storage.getTaskList().get(i).getTaskType().equals("floating")) {
+                floating.add(Storage.getTaskList().get(i));
             }
         }
         
@@ -185,13 +189,13 @@ public class Search {
     public ArrayList<Task> SearchKeyword(String keyword) {
         ArrayList<Task> results = new ArrayList<Task>();
         
-        for(int i = 0; i<Storage.taskList.size(); i++) {
-            if(Storage.taskList.get(i).getEndDate().contains(keyword)
-                    || Storage.taskList.get(i).getEndTime().contains(keyword)
-                    || Storage.taskList.get(i).getStartDate().contains(keyword)
-                    || Storage.taskList.get(i).getStartTime().contains(keyword)
-                    || Storage.taskList.get(i).getTaskDescription().contains(keyword)) {
-                results.add(Storage.taskList.get(i));
+        for(int i = 0; i<Storage.getTaskList().size(); i++) {
+            if(Storage.getTaskList().get(i).getEndDate().contains(keyword)
+                    || Storage.getTaskList().get(i).getEndTime().contains(keyword)
+                    || Storage.getTaskList().get(i).getStartDate().contains(keyword)
+                    || Storage.getTaskList().get(i).getStartTime().contains(keyword)
+                    || Storage.getTaskList().get(i).getTaskDescription().contains(keyword)) {
+                results.add(Storage.getTaskList().get(i));
             }
         }
         
@@ -202,7 +206,7 @@ public class Search {
         }
     }
 
-    public static Task obtainTaskByItemNum(int itemNum) {
-        return Storage.taskList.get(itemNum);
+    public static Task obtainTaskByItemNum(int itemNumber) {
+        return Storage.getTaskList().get(itemNumber-1);
     }
 }

@@ -22,7 +22,27 @@ import main.java.resources.Task;
 
 
 public class Storage {
-    public static ArrayList<Task> taskList = new ArrayList<Task>(); // a global variable for task list (jh)
+    private static ArrayList<Task> taskList; // a global variable for task list (jh)
+    
+    private static Storage storage;
+    
+    //private constructor
+    private Storage() {
+        taskList = new ArrayList<Task>();
+    }
+    
+    //access to object, create one if there is none
+    public static Storage getInstance(){
+        if (storage == null){
+            storage = new Storage();
+        }
+        return storage;
+    }
+    
+    //access to task list
+    public static ArrayList<Task> getTaskList(){
+        return taskList;
+    }
     
     /* 
 	 * Temporary placeholder for creation of file - To be replaced with user's
