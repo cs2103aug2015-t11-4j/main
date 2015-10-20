@@ -201,4 +201,8 @@ public class Search {
             return results;
         }
     }
+
+    public static Task obtainTaskByItemNum(int itemNum) {
+        return Storage.taskList.get(itemNum);
+    }
 }
