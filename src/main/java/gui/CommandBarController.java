@@ -55,11 +55,15 @@ public class CommandBarController extends BorderPane {
     }
     
     public void setText(String listviewName) {
+    	/*
+    	 * set text in command bar
+    	 * @@author A0131300-unused as this section is used to test prompt text
+    	 * 
     	commandBar.setOnKeyTyped(new EventHandler<KeyEvent>() {
     		public void handle(KeyEvent event) {
     			commandBar.setText(listviewName);
     		}
-    	});
-    	commandBar.setEditable(true);  //no use
+    	});*/
+    	commandBar.setText(listviewName);
     }
 }
