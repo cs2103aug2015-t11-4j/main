@@ -1,6 +1,7 @@
 package main.java.gui;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
@@ -18,7 +19,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-//import main.java.logic.Logic;
+import main.java.logic.Command;
+import main.java.logic.LogicInvoker;
 
 /**
  * 
@@ -40,7 +42,8 @@ public class MainApp extends Application {
     private static final String COMPLETE_LAYOUT_FXML = "/main/resources/layouts/Complete.fxml";
     private static final String INCOMPLETE_LAYOUT_FXML = "/main/resources/layouts/Incomplete.fxml";
     
-    private static final String FEEDBACK_SUMMARY = "Summary";
+    private static final String FEEDBACK_TODAY_SUMMARY = "Today's Summary";
+    private static final String FEEDBACK_TMR_SUMMARY = "Tomorrow's Summary";
     private static final String FEEDBACK_DISPLAY = "All Events";
     private static final String FEEDBACK_COMPLETE = "Completed Events";
     private static final String FEEDBACK_INCOMPLETE = "Incomplete Events";
@@ -66,8 +69,8 @@ public class MainApp extends Application {
     private ObservableList<String> floating = FXCollections.observableArrayList();
     private ObservableList<Text> complete = FXCollections.observableArrayList();
     private ObservableList<Text> incomplete = FXCollections.observableArrayList();
-    private ObservableList<String> today = FXCollections.observableArrayList();
-    private ObservableList<String> tomorrow = FXCollections.observableArrayList();
+    //private ObservableList<String> today = FXCollections.observableArrayList();
+    //private ObservableList<String> tomorrow = FXCollections.observableArrayList();
     
     private String[] arr;
     private String[] array;
@@ -137,7 +140,10 @@ public class MainApp extends Application {
      * Constructor
      */
     public MainApp() {
-        // Add some sample data
+    	/*
+    	 * testing GUI
+    	 * @@author A0131300-unused because these are used to test GUI
+    	 * 
         //event.add(new LocalEvent("Hans"));
         //event.add(new LocalEvent("Ruth"));
     	
@@ -193,7 +199,7 @@ public class MainApp extends Application {
         
         today.add("Change GUI");
         
-        tomorrow.add("Edit Developer Guide");
+        tomorrow.add("Edit Developer Guide");*/
     }
 
     public ObservableList<String> getEvent() {
@@ -216,13 +222,18 @@ public class MainApp extends Application {
     	return incomplete;
     }
     
+    
+    /*
+	 * Display today and tomorrow's tasks individually
+	 * @@author A0131300-unused due to change in plans
+	 * 
     public ObservableList<String> getToday() {
     	return today;
     }
 
     public ObservableList<String> getTmr() {
     	return tomorrow;
-    }
+    }*/
     
     private void addCommandBar(MainApp mainApp) {
         rootLayout.setBottom(new CommandBarController(mainApp));
@@ -259,6 +270,7 @@ public class MainApp extends Application {
     /*
 	 * Display today and tomorrow's tasks individually
 	 * @@author A0131300-unused due to change in plans
+	 * 
     private void addToday() {
     	try {
         	FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(TODAY_LAYOUT_FXML));
@@ -372,7 +384,12 @@ public class MainApp extends Application {
     	if(userInput.equals("summary") || userInput.equals("today") || 
     			userInput.equals("tomorrow") || userInput.equals("tmr")) {
     		addSummaryView();
-    		commandBarController.setFeedback(FEEDBACK_SUMMARY);
+    		if(userInput.equals("summary") || userInput.equals("today")) {
+    			commandBarController.setFeedback(FEEDBACK_TODAY_SUMMARY);
+    		}
+    		else {
+    			commandBarController.setFeedback(FEEDBACK_TMR_SUMMARY);
+    		}
     		commandBarController.clear();
     	}
     	
@@ -383,6 +400,7 @@ public class MainApp extends Application {
     	
     	else if(userInput.equals("exit") || userInput.equals("quit")) {
     		commandBarController.setFeedback(FEEDBACK_EXIT);
+    		commandBarController.clear();
     		delay = new PauseTransition(Duration.seconds(1));  //delay closing of GUI window by 1s
     		delay.setOnFinished(new EventHandler<ActionEvent> () {
     			@Override
@@ -396,6 +414,7 @@ public class MainApp extends Application {
     	/*
     	 * Display today and tomorrow's tasks individually
     	 * @@author A0131300-unused due to change in plans
+    	 * 
     	else if(userInput.equals("today")) {
     		addToday();
     		commandBarController.setFeedback(FEEDBACK_TODAY);
@@ -444,8 +463,12 @@ public class MainApp extends Application {
     		commandBarController.clear();
     	}
     	
-    	//need Logic to pass me the event with task type that is to be deleted
-		//or get task type from Task
+    	/* 
+	     * Determines user input
+	     * @@author A0131300-unused as this section is for testing the GUI separately
+	     *
+    	 * need Logic to pass me the event with task type that is to be deleted
+		 * or get task type from Task
     	else if(userInput.substring(0, 6).equals("delete") || 
     			userInput.substring(0, 3).equals("del") ||
     			userInput.substring(0, 1).equals("d")) {
@@ -461,7 +484,7 @@ public class MainApp extends Application {
 				floating.add(description);
 			}
 			commandBarController.setFeedback(FEEDBACK_DELETED + description);  //des being task name
-    	}
+    	}*/
     	
     	//list.get(1).getTaskType();
     	
@@ -469,6 +492,9 @@ public class MainApp extends Application {
     		
     		//Command command = createCommand(userInput);
     		//command.execute();
+    		
+    		//update (num)
+    		//commandBarController.setText(string event returned by logic);
     		
     		/* 1:
     		 * handleEnterPress(commandBarController, "(get first param)") 
@@ -492,9 +518,64 @@ public class MainApp extends Application {
     		 * String for input box (for update)
     		 */
     		
+    		/*ArrayList<String> list = new ArrayList<String>();
+    		Command command = createCommand(userInput);
+    		list = command.execute();
+    		
+    		handleEnterPress(commandBarController, list.get(0));
+    		if(list.get(1).getTaskType().equals("floating")) {
+    			description = list.get(1).getTaskDescription();
+    			floating.add(list.get(1).getTaskDescription());
+    			commandBarController.setFeedback(list.get(2));
+    		}
+    		
+    		else if(list.get(1).getTaskType().equals("event")) {
+    			description = list.get(1).getTaskDescription();
+    			event.add(description);
+    			commandBarController.setFeedback(list.get(2));
+    		}
+    		
+    		else if(list.get(1).getTaskType().equals("deadline")) {
+    			description = list.get(1).getTaskDescription();
+    			deadline.add(description);
+    			commandBarController.setFeedback(list.get(2));
+    		}
+    		
+    		else if(list.get(1).getTaskType().equals("complete")) {
+    			description = list.get(1).getTaskDescription();
+    			Text text = new Text(description);
+    			text.setFill(Color.GREEN);
+    			complete.add(text);
+    			commandBarController.setFeedback(list.get(2));
+    		}
+    		
+    		else if(list.get(1).getTaskType().equals("incomplete")) {
+    			description = list.get(1).getTaskDescription();
+    			Text text = new Text(description);
+    			text.setFill(Color.RED);
+    			incomplete.add(text);
+    			commandBarController.setFeedback(list.get(2));
+    		}
+    		
+    		else if(list.get(1).getTaskType().equals("update")) {
+    			description = list.get(1).getTaskDescription();
+    			//complete.add(description);
+    			commandBarController.setFeedback(list.get(2));
+    			commandBarController.setText(list.get(3));
+    		}
+    		handleEnterPress(commandBarController, list.get(0));*/
+    		
+    		//listView.getItems().remove(item);  // Here I remove the item form my list.
+    		//remove item from incomplete list when user is done with it and add it into complete list
+    		
+//****************************************************************************************//
+//***********************below is all used for testing before*****************************//
+//****************************************************************************************//
+    		
     		/* 
     	     * Determines user input
     	     * @@author A0131300-unused as this section is for testing the GUI separately
+    	     *
     		arr = userInput.split(" ", 3);
     		command = arr[0];
     	
@@ -659,7 +740,7 @@ public class MainApp extends Application {
     				commandBarController.setFeedback(FEEDBACK_INVALID_COMMAND);
     				break;
     		}
-    		commandBarController.clear();*/
+    		//commandBarController.clear();*/
     	}
     	
     }
