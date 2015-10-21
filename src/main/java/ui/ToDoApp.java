@@ -19,7 +19,7 @@ import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import main.java.logic.Logic;
+//import main.java.logic.Logic;
 import main.java.storage.Storage;
 
 /**
@@ -114,7 +114,7 @@ public class ToDoApp extends JFrame{
 				if(commandField.equals("display")){
 					
 					try {
-						Logic.takeAction(commandField);
+						//Logic.takeAction(commandField);
 						textField.setText("");
 			        } catch (NullPointerException e1) {
 			            System.out.print("List is empty");
@@ -125,7 +125,7 @@ public class ToDoApp extends JFrame{
 					
 					//Logic.takeAction(commandField);
 					
-					//String[] columns = {"Floating", "Event", "Due Date"};
+					//String[] columns =  {"Floating", "Event", "Due Date"};
 					//Object rows[][] = records;
 					//Object rows[][] = Storage.display();
 					//table = new JTable(rows, columns);
@@ -151,13 +151,13 @@ public class ToDoApp extends JFrame{
 					description = (arr[1]).trim();
 					switch(command) {
 					case "add":
-						Logic.takeAction(commandField);
+						//Logic.takeAction(commandField);
 						System.out.println("added: " + description);
 						textField.setText("");
 						break;
 					case "delete":
 						try {
-							Logic.takeAction(commandField);
+							//Logic.takeAction(commandField);
 							System.out.println("deleted: " + description);
 							textField.setText("");
 				        } catch (NullPointerException e1) {
@@ -168,7 +168,7 @@ public class ToDoApp extends JFrame{
 						break;
 					case "update":
 						try {
-							Logic.takeAction(commandField);
+							//Logic.takeAction(commandField);
 							System.out.println("updated: " + description);
 							textField.setText("");
 				        } catch (NullPointerException e1) {

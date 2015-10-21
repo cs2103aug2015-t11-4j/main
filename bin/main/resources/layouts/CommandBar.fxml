@@ -10,14 +10,11 @@
   <center>
     <TextField fx:id="commandBar" maxWidth="850.0" onKeyPressed="#onKeyPress">
       <BorderPane.margin>
-        <Insets bottom="30.0" />
+        <Insets bottom="15.0" />
       </BorderPane.margin>
     </TextField>
   </center>
   <top>
     <Label fx:id="feedback" focusTraversable="false" BorderPane.alignment="CENTER" />
   </top>
-  <bottom>
-    <Label fx:id="status" focusTraversable="false" BorderPane.alignment="CENTER" />
-  </bottom>
 </fx:root>
