@@ -8,6 +8,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import main.java.resources.Task;
 
@@ -21,6 +23,7 @@ import main.java.resources.Task;
 
 public class Storage {
     private static ArrayList<Task> taskList; // a global variable for task list (jh)
+    static Logger logger = Logger.getLogger("Storage");
     
     private static Storage storage;
     
@@ -48,13 +51,36 @@ public class Storage {
 	 */
 	private static String filename = "MyCalender.txt";
 	
+	
+	/* 
+     * Allows user to change the destination of the taskList
+     */
+	public static void changeDirectory(String directory) {
+	    filename = directory + filename;
+	}
+	
+	/*
+	 * Retrieves the external file to regenerate the taskList
+	 * NOTE: External file saves the path of the user's directory of choice 
+	 * to the first line of the external file
+	 * 
+	 * TODO: To allow retrieval of user's directory of choice once set
+     
+	private static void retrieveDirectory(String directory) throws FileNotFoundException, IOException {
+	    String[] getDirectory = readExternalFile(0);
+	    changeDirectory(getDirectory[0]);
+	}
+	*/
+	
 	/* 
      * Adds one task to the taskList and writes to external file
      */
 	public static int addOneItem(Task task) {
+	    logger.log(Level.INFO, "Adding {0} to taskList", task.getTaskDescription());
 		taskList.add(task); //(jh) update internal list
 		
 		try {
+		    logger.log(Level.INFO, "Writing {0} to external file", task.getTaskDescription());
 			FileWriter fw = new FileWriter(filename, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			
@@ -64,7 +90,9 @@ public class Storage {
 			
 			bw.newLine();
 			bw.close();
+			logger.log(Level.INFO, "Completed writing {0} to external file", task.getTaskDescription());
 		} catch (Exception e) {
+		    logger.log(Level.WARNING, "Unable to add {0}", task.getTaskDescription());
 			return -1;
 		}
 		return 0;
@@ -74,9 +102,11 @@ public class Storage {
      * Updates one task to the taskList and writes to external file
      */
 	public static int updateOneItem(int itemNumber, Task task) {
+	    logger.log(Level.INFO, "Updating {0} to taskList", task.getTaskDescription());
 		taskList.set(itemNumber-1, task); //(jh) update internal list
 		
 		try {
+		    logger.log(Level.INFO, "Updating {0} to external file", task.getTaskDescription());
 		    FileReader fr = new FileReader(filename);
             BufferedReader br = new BufferedReader(fr);
 		    
@@ -103,7 +133,9 @@ public class Storage {
             + ";" + task.getEndDate() + ";" + task.getStartTime() + ";" + task.getEndTime() + ";" + task.getIsCompleted() + ";"  + "\n"));
             
             bw.close();
+            logger.log(Level.INFO, "Updated {0} to external file", task.getTaskDescription());
 		} catch (Exception e) {
+		    logger.log(Level.WARNING, "Unable to update {0}", task.getTaskDescription());
 			return -1;
 		}
 		return 0;
@@ -113,6 +145,7 @@ public class Storage {
      * Deletes a task from the taskList and delete entry from external file
      */
 	public static int deleteOneItem(int itemNumber) {
+	    logger.log(Level.INFO, "Deleting task {0}", itemNumber);
 		taskList.remove(itemNumber-1); //(jh) update internal list
 		
 		try {
@@ -141,6 +174,7 @@ public class Storage {
             original.delete();
             temp.renameTo(original);
 		} catch (Exception e) {
+		    logger.log(Level.WARNING, "Unable to delete task {0}", itemNumber);
 			return -1;
 		}
 		return 0;
