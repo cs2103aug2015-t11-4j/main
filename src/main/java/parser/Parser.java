@@ -12,8 +12,12 @@ public class Parser {
 	private static final String KEYWORD_BY = " by ";
 	private static final String KEYWORD_FROM = " from ";
 	private static final String KEYWORD_TO = " to ";
-
-
+	
+/*	public static void main(String args[]){
+		ArrayList<String> action = retrieveCommand("display complete");
+		action.get(1);
+		System.out.println(action.get(1));
+	}*/
 	/*for testing purposes
 	public static void main(String[] args) {
 

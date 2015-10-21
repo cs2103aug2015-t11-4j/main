@@ -141,22 +141,26 @@ public class DataDisplay {
 	// To display a given list of task in order
 	public static ArrayList<String> displayList(ArrayList<Task> listForPrint) {
 		ArrayList<String> outputForTesting = new ArrayList<String>();
+		if (listForPrint.isEmpty()){
+			System.out.println("No task. Please enter one to start");
+		}else{
 		for (int i = 0; i < listForPrint.size(); i++) {
 			int itemNum = i + 1;
 			switch (listForPrint.get(i).getTaskType().toLowerCase()) {
 			case TASK_TYPE_DEADLINE_LOWERCASE:
-				//System.out.println(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
+				System.out.println(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
 				outputForTesting.add(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
 				break;
 			case TASK_TYPE_EVENT_LOWERCASE:
-				//System.out.println(itemNum + ": " + createContentForEvent(listForPrint.get(i)));
+				System.out.println(itemNum + ": " + createContentForEvent(listForPrint.get(i)));
 				outputForTesting.add(itemNum + ": " + createContentForEvent(listForPrint.get(i)));
 				break;
 			case TASK_TYPE_FLOATING_LOWERCASE:
-				//System.out.println(itemNum + ": " + createContentForFloating(listForPrint.get(i)));
+				System.out.println(itemNum + ": " + createContentForFloating(listForPrint.get(i)));
 				outputForTesting.add(itemNum + ": " + createContentForFloating(listForPrint.get(i)));
 				break;
 			}
+		}
 		}
 		return outputForTesting;
 	}

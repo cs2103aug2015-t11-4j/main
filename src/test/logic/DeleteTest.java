@@ -7,6 +7,7 @@ import org.junit.Test;
 import main.java.logic.Add;
 import main.java.logic.Command;
 import main.java.logic.Delete;
+import main.java.resources.DataDisplay;
 import main.java.resources.Task;
 import main.java.storage.Storage;
 
@@ -22,19 +23,25 @@ public class DeleteTest {
 	Task task5 = new Task(TYPE_FLOATING, "meet with bob", null, null, null, null, false);
 	Task task6 = new Task(TYPE_FLOATING, "eat breakfast", null, null, null, null, true);
 	Storage storage = Storage.getInstance();
-	Command command1 = new Add(task1);
-	Command command2 = new Add(task2);
-	Command command3 = new Add(task3);
-	Command command4 = new Add(task4);
+	Command command1 = new Add(task1, storage);
+	Command command2 = new Add(task2, storage);
+	Command command3 = new Add(task3, storage);
+	Command command4 = new Add(task4, storage);
 	int itemNum = 1;
-	Command command_del = new Delete(itemNum);
+	Command command_del = new Delete(itemNum, storage);
 
 	
 	@Test
 	public void test() {
 		storage.getTaskList().clear();
-		storage.getTaskList().add(task1);
+		DataDisplay.displayList(storage.getTaskList());
+		command1.execute();
+		command2.execute();
+		command3.execute();
+		command4.execute();
+		DataDisplay.displayList(storage.getTaskList());
 		command_del.execute();
+		DataDisplay.displayList(storage.getTaskList());
 		assertTrue(!storage.getTaskList().contains(task1));
 	}
 

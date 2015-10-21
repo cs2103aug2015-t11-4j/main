@@ -20,7 +20,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.java.logic.Command;
+import main.java.logic.Controller;
 import main.java.logic.LogicInvoker;
+import main.java.resources.ItemForUserScreen;
+import main.java.resources.OutputToUI;
 
 /**
  * 
@@ -201,9 +204,10 @@ public class MainApp extends Application {
         
         tomorrow.add("Edit Developer Guide");*/
     }
+    private static ArrayList<ItemForUserScreen> itemList = Controller.getItemList();//JH
 
     public ObservableList<String> getEvent() {
-        return event;
+    	return createEventList(itemList, event); //JH
     }
     
     public ObservableList<String> getDeadline() {
@@ -211,7 +215,7 @@ public class MainApp extends Application {
     }
     
     public ObservableList<String> getFloating() {
-    	return floating;
+    	return createFloatingList(itemList, floating); //JH
     }
     
     public ObservableList<Text> getComplete() {
@@ -377,21 +381,29 @@ public class MainApp extends Application {
     	}
     }
     
-    public void handleEnterPress(CommandBarController commandBarController, String userInput) {
+    public void handleEnterPress(CommandBarController commandBarController, String _userInput ) {
     	
-    	userInput = userInput.toLowerCase();
+    	_userInput = _userInput.toLowerCase();
+    	Command command = Controller.createCommand(_userInput);
+    	OutputToUI outputToUI = new OutputToUI();
+    	outputToUI = command.execute();
+    	String userInput = outputToUI.getTypeOfListView();
+    	String feedbackMsg = outputToUI.getFeedbackMsg();
+    	ArrayList<ItemForUserScreen> itemList = outputToUI.getItemList();
     	
+
     	if(userInput.equals("summary") || userInput.equals("today") || 
     			userInput.equals("tomorrow") || userInput.equals("tmr")) {
     		addSummaryView();
     		if(userInput.equals("summary") || userInput.equals("today")) {
-    			commandBarController.setFeedback(FEEDBACK_TODAY_SUMMARY);
+    			commandBarController.setFeedback(feedbackMsg);
     		}
     		else {
-    			commandBarController.setFeedback(FEEDBACK_TMR_SUMMARY);
+    			commandBarController.setFeedback(feedbackMsg);
     		}
     		commandBarController.clear();
     	}
+    	
     	
     	else if(userInput.equals("help")) {
     		
@@ -399,7 +411,7 @@ public class MainApp extends Application {
     	}
     	
     	else if(userInput.equals("exit") || userInput.equals("quit")) {
-    		commandBarController.setFeedback(FEEDBACK_EXIT);
+    		commandBarController.setFeedback(feedbackMsg);
     		commandBarController.clear();
     		delay = new PauseTransition(Duration.seconds(1));  //delay closing of GUI window by 1s
     		delay.setOnFinished(new EventHandler<ActionEvent> () {
@@ -429,19 +441,19 @@ public class MainApp extends Application {
     	
     	else if(userInput.equals("deadline")) {
     		addDeadline();
-    		commandBarController.setFeedback(FEEDBACK_DEADLINE);
+    		commandBarController.setFeedback(feedbackMsg);
     		commandBarController.clear();
     	}
     	
     	else if(userInput.equals("event") || userInput.equals("events")) {
     		addEvent();
-    		commandBarController.setFeedback(FEEDBACK_EVENT);
+    		commandBarController.setFeedback(feedbackMsg);
     		commandBarController.clear();
     	}
     	
     	else if(userInput.equals("floating")) {
     		addFloating();
-    		commandBarController.setFeedback(FEEDBACK_FLOATING);
+    		commandBarController.setFeedback(feedbackMsg);
     		commandBarController.clear();
     	}
     	
@@ -450,15 +462,15 @@ public class MainApp extends Application {
     		typeDisplay = (array[1]).trim();
     		if(typeDisplay.equals("all")) {
     			addDisplayAll();
-    			commandBarController.setFeedback(FEEDBACK_DISPLAY);
+    			commandBarController.setFeedback(feedbackMsg);
     		}
     		else if(typeDisplay.equals("completed")) {
     			addComplete();
-    			commandBarController.setFeedback(FEEDBACK_COMPLETE);
+    			commandBarController.setFeedback(feedbackMsg);
     		}
     		else if(typeDisplay.equals("incomplete")) {
     			addIncomplete();
-    			commandBarController.setFeedback(FEEDBACK_INCOMPLETE);
+    			commandBarController.setFeedback(feedbackMsg);
     		}
     		commandBarController.clear();
     	}
@@ -739,9 +751,65 @@ public class MainApp extends Application {
     			default :
     				commandBarController.setFeedback(FEEDBACK_INVALID_COMMAND);
     				break;
-    		}
-    		//commandBarController.clear();*/
+    		}*/
+    		commandBarController.clear();
     	}
     	
     }
+    
+    /*
+     * Below are created by Jiahuan
+     * @author Jiahuan
+     * 
+     */
+    private ObservableList<String> createEventList(ArrayList<ItemForUserScreen> itemList, ObservableList<String> event){
+		event.clear();
+    	for (int i = 0; i < itemList.size(); i ++){
+			if (itemList.get(i).getTaskType().equals("event")){
+				event.add(itemList.get(i).getPrintOnScreenMsg());
+			}
+		}
+    	return event;
+    }
+    
+    private ObservableList<String> createDeadlineList(ArrayList<ItemForUserScreen> itemList, ObservableList<String> deadline){
+    	deadline.clear();
+    	for (int i = 0; i < itemList.size(); i ++){
+			if (itemList.get(i).getTaskType().equals("deadline")){
+				deadline.add(itemList.get(i).getPrintOnScreenMsg());
+			}
+		}
+    	return deadline;
+    }
+    
+    private ObservableList<String> createFloatingList(ArrayList<ItemForUserScreen> itemList, ObservableList<String> floating){
+    	floating.clear();
+    	for (int i = 0; i < itemList.size(); i ++){
+			if (itemList.get(i).getTaskType().equals("floating")){
+				floating.add(itemList.get(i).getPrintOnScreenMsg());
+			}
+		}
+    	return floating;
+    }
+    
+    private ObservableList<String> createIncompleteList(ArrayList<ItemForUserScreen> itemList, ObservableList<String> incomplete){
+    	incomplete.clear();
+    	for (int i = 0; i < itemList.size(); i ++){
+			if (itemList.get(i).getTaskType().equals("incomplete")){
+				incomplete.add(itemList.get(i).getPrintOnScreenMsg());
+			}
+		}
+    	return incomplete;
+    }
+    
+    private ObservableList<String> createCompleteList(ArrayList<ItemForUserScreen> itemList, ObservableList<String> complete){
+    	complete.clear();
+    	for (int i = 0; i < itemList.size(); i ++){
+			if (itemList.get(i).getTaskType().equals("complete")){
+				complete.add(itemList.get(i).getPrintOnScreenMsg());
+			}
+		}
+    	return complete;
+    }
+
 }

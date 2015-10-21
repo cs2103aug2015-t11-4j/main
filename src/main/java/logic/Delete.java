@@ -17,6 +17,7 @@ public class Delete implements Command{
 	public Delete(int itemNum, Storage storage){
 		//this.task = task;
 		this.storage = storage;
+		this.itemNum = itemNum;
 	}
 	@Override
 	public OutputToUI execute() {

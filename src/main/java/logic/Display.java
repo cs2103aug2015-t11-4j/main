@@ -31,9 +31,9 @@ public class Display implements Command {
 			taskList = Search.obtainTodaySummary(storage);
 			typeOfListView = "today";
 			break;
-		case "tommorrow":
+		case "tomorrow":
 			taskList = Search.obtainTommorrowSummary(storage);
-			typeOfListView = "tommorrow";
+			typeOfListView = "tomorrow";
 			break;
 		case "floating":
 			taskList = Search.obtainFloatingTasks(storage);
@@ -49,15 +49,15 @@ public class Display implements Command {
 			break;
 		case "complete":
 			taskList = Search.obtainAllCompleteTasks(storage);
-			typeOfListView = "complete";
+			typeOfListView = "display complete";
 			break;
 		case "incomplete":
 			taskList = Search.obtainAllIncompleteTasks(storage);
-			typeOfListView = "incomplete";
+			typeOfListView = "display incomplete";
 			break;
 		case "all":
 			taskList = Search.obtainAllTasks(storage);
-			typeOfListView = "all";
+			typeOfListView = "display all";
 			break;
 		}
 		printOnScreenMsgList = DataDisplay.displayList(taskList);

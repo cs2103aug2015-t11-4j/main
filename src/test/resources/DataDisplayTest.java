@@ -65,11 +65,11 @@ public class DataDisplayTest {
 		summaryList.add(task3);
 		summaryList.add(task5);
 		ArrayList<String> expected = new ArrayList<String>();
-		expected.add("Deadline");
+		//expected.add("Deadline");
 		expected.add("1: " + task1Print);
-		expected.add("Event");
+		//expected.add("Event");
 		expected.add("2: " + task3Print);
-		expected.add("Floating");
+		//expected.add("Floating");
 		expected.add("3: " + task5Print);
 
 		testDisplaySummary(expected, summaryList);
@@ -88,7 +88,6 @@ public class DataDisplayTest {
 		completeList.add(task4);
 		completeList.add(task6);
 		ArrayList<String> expected = new ArrayList<String>();
-		expected.add("Complete");
 		expected.add("1: " + task2Print);
 		expected.add("2: " + task4Print);
 		expected.add("3: " + task6Print);
@@ -108,7 +107,7 @@ public class DataDisplayTest {
 		incompleteList.add(task3);
 		incompleteList.add(task5);
 		ArrayList<String> expected = new ArrayList<String>();
-		expected.add("Incomplete");
+		//expected.add("Incomplete");
 		expected.add("1: " + task1Print);
 		expected.add("2: " + task3Print);
 		expected.add("3: " + task5Print);
@@ -127,7 +126,7 @@ public class DataDisplayTest {
 		floatingList.add(task5);
 		floatingList.add(task6);
 		ArrayList<String> expected = new ArrayList<String>();
-		expected.add("Floating");
+		//expected.add("Floating");
 		expected.add("1: " + task5Print);
 		expected.add("2: " + task6Print);
 
@@ -145,7 +144,7 @@ public class DataDisplayTest {
 		eventList.add(task4);
 		eventList.add(task3);
 		ArrayList<String> expected = new ArrayList<String>();
-		expected.add("Event");
+		//expected.add("Event");
 		expected.add("1: " + task4Print);
 		expected.add("2: " + task3Print);
 
@@ -163,7 +162,7 @@ public class DataDisplayTest {
 		deadlineList.add(task2);
 		deadlineList.add(task1);
 		ArrayList<String> expected = new ArrayList<String>();
-		expected.add("Deadline");
+		//expected.add("Deadline");
 		expected.add("1: " + task2Print);
 		expected.add("2: " + task1Print);
 
