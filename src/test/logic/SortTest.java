@@ -2,14 +2,15 @@ package test.logic;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
-import main.java.logic.Add;
-import main.java.logic.Command;
+import main.java.logic.Sort;
 import main.java.resources.Task;
-import main.java.storage.Storage;
 
-public class AddTest {
+public class SortTest {
+
 	public static final String TYPE_DEADLINE = "deadline";
 	public static final String TYPE_EVENT = "event";
 	public static final String TYPE_FLOATING = "floating";
@@ -20,21 +21,20 @@ public class AddTest {
 	Task task4 = new Task(TYPE_EVENT, "wash hand with soap", "03/02/2015", "03/02/2015", "0915", "1100", true);
 	Task task5 = new Task(TYPE_FLOATING, "meet with bob", null, null, null, null, false);
 	Task task6 = new Task(TYPE_FLOATING, "eat breakfast", null, null, null, null, true);
-	Storage storage = Storage.getInstance();
-	Command command1 = new Add(task1);
-	Command command2 = new Add(task2);
-	Command command3 = new Add(task3);
-	Command command4 = new Add(task4);
 	
+	ArrayList<Task> sortList = new ArrayList<Task>();
+	ArrayList<Task> sortResult = new ArrayList<Task>();
+	ArrayList<Task> expected = new ArrayList<Task>();
 	
 	@Test
 	public void test() {
-		command1.execute();
-		command2.execute();
-		command3.execute();
-		command4.execute();
-		assertTrue(storage.getTaskList().contains(task2));
+		expected.add(task3);
+		expected.add(task1);
+		expected.add(task2);
+		expected.add(task4);
+		sortResult = Sort.sortByTime(sortList);
 		
+		assertEquals(expected, sortResult);
 	}
 
 }

@@ -53,7 +53,7 @@ public class DataDisplayTest {
 		testTaskTypeCount(expected, summaryList);
 	}
 
-	private void testTaskTypeCount(ArrayList<Integer> expected, ArrayList<Task> summaryList2) {
+	private void testTaskTypeCount(ArrayList<Integer> expected, ArrayList<Task> summaryList) {
 		assertEquals(expected, DataDisplay.countTaskTypeNum(summaryList));
 
 	}

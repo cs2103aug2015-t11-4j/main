@@ -21,11 +21,11 @@ public class DeleteTest {
 	Task task4 = new Task(TYPE_EVENT, "wash hand with soap", "03/02/2015", "03/02/2015", "0915", "1100", true);
 	Task task5 = new Task(TYPE_FLOATING, "meet with bob", null, null, null, null, false);
 	Task task6 = new Task(TYPE_FLOATING, "eat breakfast", null, null, null, null, true);
-	Storage storage = new Storage();
+	Storage storage = Storage.getInstance();
 	Command command1 = new Add(task1);
-	Command command2 = new Add(task1);
-	Command command3 = new Add(task1);
-	Command command4 = new Add(task1);
+	Command command2 = new Add(task2);
+	Command command3 = new Add(task3);
+	Command command4 = new Add(task4);
 	int itemNum = 1;
 	Command command_del = new Delete(itemNum);
 

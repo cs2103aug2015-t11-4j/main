@@ -4,16 +4,21 @@ package main.java.logic;
 import java.util.ArrayList;
 
 import main.java.resources.DataDisplay;
+import main.java.resources.OutputToUI;
+import main.java.storage.Storage;
 
 public class Display implements Command {
 	private ArrayList<String> userInput = new ArrayList<String>();
+	private Storage storage;
 
-	public Display(ArrayList<String> userInput) {
+	public Display(ArrayList<String> userInput, Storage storage) {
 		this.userInput = userInput;
+		this.storage = storage;
 	}
 
 	@Override
-	public void execute() {
+	public OutputToUI execute() {
+		OutputToUI outputToUI = new OutputToUI();
 		switch (userInput.get(1).toLowerCase()){
 		case "today":
 			DataDisplay.displaySummary(Search.obtainTodaySummary());
@@ -39,6 +44,7 @@ public class Display implements Command {
 		case "all":
 			DataDisplay.displayAll(Search.obtainAllTasks());
 		}
+		return outputToUI;
 	}
 
 }

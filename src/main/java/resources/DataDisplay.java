@@ -23,13 +23,12 @@ public class DataDisplay {
 		ArrayList<Integer> taskTypeCount = new ArrayList<Integer>(3);
 		taskTypeCount = countTaskTypeNum(summaryList);
 		// print empty if nothing in list
-		if (summaryList.size()==0){
+		if (summaryList.size() == 0) {
 			System.out.println("No task exists, please add one task to start");
 			outputForTesting.add("No task exists, please add one task to start");
 			return outputForTesting;
 		}
-		
-		
+
 		// print different task with a label above them
 		if (taskTypeCount.get(0) != 0) {
 			System.out.println(LABEL_DEADLINE);
@@ -158,9 +157,9 @@ public class DataDisplay {
 		}
 		return outputForTesting;
 	}
-	
-	//get a strig to display on input box to ask user to update accordingly
-	//TODO: j-unit testing
+
+	// get a strig to display on input box to ask user to update accordingly
+	// TODO: j-unit testing
 	public static String displayTaskNeedForUpdate(Task task) {
 		String outputForTesting = "";
 		switch (task.getTaskType()) {
@@ -204,6 +203,16 @@ public class DataDisplay {
 
 	private static String createContentForDeadline(Task task) {
 		return "By " + task.getEndTime() + ", " + task.getEndDate() + ": " + task.getTaskDescription();
+	}
+
+	public static String feedback(String action, int code) {
+		// TODO: Code = 0: success
+		// Code = 1: fail
+		if (code == 0) {
+			return action + "is successful";
+		}
+		return action + "is not successful, please enter the right format";
+
 	}
 
 }
