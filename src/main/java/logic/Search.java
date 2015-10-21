@@ -19,6 +19,7 @@ public class Search {
      */
     LocalDateTime ldt = LocalDateTime.now();
     
+    
     /*
      * Obtains 10 deadlines, 10 events and 5 floating tasks to be seen in
      * the user's day as a summary
@@ -26,8 +27,8 @@ public class Search {
      * TODO: Verify method is working
      * PREREQUISITE: Storage.taskList must be sorted by date and time
      */
-    public static ArrayList<Task> obtainTodaySummary() {
-        ArrayList<Task> todaySummary = new ArrayList<Task>();
+    public static ArrayList<Task> obtainTodaySummary(Storage storage) {
+        /*ArrayList<Task> todaySummary = new ArrayList<Task>();
         ArrayList<Task> taskList = Storage.getTaskList();
         
         while(todaySummary.size() == 25 || taskList.isEmpty()) {
@@ -52,8 +53,8 @@ public class Search {
                 }
             }
         }
-        Sort.sortTaskList(todaySummary);
-        return todaySummary;
+        Sort.sortTaskList(todaySummary);*/
+        return storage.getTaskList();
     }
     
     /*
@@ -75,69 +76,69 @@ public class Search {
      * TODO: Method is currently incomplete
      * PREREQUISITE: Storage.taskList must be sorted by date and time
      */
-    public static ArrayList<Task> obtainTommorrowSummary() {
-        return null;
+    public static ArrayList<Task> obtainTommorrowSummary(Storage storage) {
+        return storage.getTaskList();
     }
     
     /*
      * Obtains all tasks in the taskList
      */
-    public static ArrayList<Task> obtainAllTasks() {
-        if(!Storage.getTaskList().isEmpty()) {
+    public static ArrayList<Task> obtainAllTasks(Storage storage) {
+        /*if(!Storage.getTaskList().isEmpty()) {
             return Storage.getTaskList();
-        }
-        return null;
+        }*/
+        return storage.getTaskList();
     }
     
     /*
      * Obtains all incomplete tasks in the taskList
      */
-    public static ArrayList<Task> obtainAllIncompleteTasks() {
-        ArrayList<Task> incomplete = new ArrayList<Task>();
+    public static ArrayList<Task> obtainAllIncompleteTasks(Storage storage) {
+/*        ArrayList<Task> incomplete = new ArrayList<Task>();
         
         for(int i = 0; i<Storage.getTaskList().size(); i++) {
             if(Storage.getTaskList().get(i).getIsCompleted() == false) {
                 incomplete.add(Storage.getTaskList().get(i));
             }
         }
-        
-        return incomplete;
+        */
+        return storage.getTaskList();
     }
     
     /*
      * Obtains all complete tasks in the taskList
      */
-    public static ArrayList<Task> obtainAllCompleteTasks() {
-        ArrayList<Task> complete = new ArrayList<Task>();
+    public static ArrayList<Task> obtainAllCompleteTasks(Storage storage) {
+/*        ArrayList<Task> complete = new ArrayList<Task>();
         
         for(int i = 0; i<Storage.getTaskList().size(); i++) {
             if(Storage.getTaskList().get(i).getIsCompleted() == true) {
                 complete.add(Storage.getTaskList().get(i));
             }
         }
-        
-        return complete;
+        */
+        return storage.getTaskList();
     }
     
     /*
      * Obtains all deadline tasks in the taskList
      */
-    public static ArrayList<Task> obtainDeadlineTasks() {
-        ArrayList<Task> deadlines = new ArrayList<Task>();
+    public static ArrayList<Task> obtainDeadlineTasks(Storage storage) {
+/*        ArrayList<Task> deadlines = new ArrayList<Task>();
         
         for(int i = 0; i<Storage.getTaskList().size(); i++) {
             if(Storage.getTaskList().get(i).getTaskType().equals("deadline")) {
                 deadlines.add(Storage.getTaskList().get(i));
             }
         }
-        
-        return deadlines;
+        */
+        return storage.getTaskList();
     }
     
     /*
      * Obtains all tasks approaching deadlines (3 days) in the taskList
      */
-    public ArrayList<Task> obtainApproachingDeadlineTasks() {
+    public ArrayList<Task> obtainApproachingDeadlineTasks(Storage storage) {
         ArrayList<Task> deadlines = new ArrayList<Task>();
         
         for(int i = 0; i<Storage.getTaskList().size(); i++) {
@@ -155,31 +156,31 @@ public class Search {
     /*
      * Obtains all tasks tagged with events as task type in the taskList
      */
-    public static ArrayList<Task> obtainEventTasks() {
-        ArrayList<Task> events = new ArrayList<Task>();
+    public static ArrayList<Task> obtainEventTasks(Storage storage) {
+/*        ArrayList<Task> events = new ArrayList<Task>();
         
         for(int i = 0; i<Storage.getTaskList().size(); i++) {
             if(Storage.getTaskList().get(i).getTaskType().equals("event")) {
                 events.add(Storage.getTaskList().get(i));
             }
         }
-        
-        return events;
+        */
+        return storage.getTaskList();
     }
     
     /*
      * Obtains all tasks tagged with floating as task type in the taskList
      */
-    public static ArrayList<Task> obtainFloatingTasks() {
-        ArrayList<Task> floating = new ArrayList<Task>();
+    public static ArrayList<Task> obtainFloatingTasks(Storage storage) {
+/*        ArrayList<Task> floating = new ArrayList<Task>();
         
         for(int i = 0; i<Storage.getTaskList().size(); i++) {
             if(Storage.getTaskList().get(i).getTaskType().equals("floating")) {
                 floating.add(Storage.getTaskList().get(i));
             }
         }
-        
-        return floating;
+        */
+        return storage.getTaskList();
     }
     
     /*

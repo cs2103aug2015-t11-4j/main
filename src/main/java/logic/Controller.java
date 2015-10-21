@@ -26,7 +26,7 @@ public class Controller {
 			return command = new Update(itemNum, storage);
 		case "delete":
 			itemNum = Integer.parseInt(inputForAction.get(1));
-			return command = new Delete(task,storage);
+			return command = new Delete(itemNum,storage);
 		default:
 			return command = new Display(inputForAction, storage);
 		}

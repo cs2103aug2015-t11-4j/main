@@ -28,35 +28,35 @@ public class Display implements Command {
 		String typeOfListView = null;
 		switch (userInput.get(1).toLowerCase()) {
 		case "today":
-			taskList = Search.obtainTodaySummary();
+			taskList = Search.obtainTodaySummary(storage);
 			typeOfListView = "today";
 			break;
 		case "tommorrow":
-			taskList = Search.obtainTommorrowSummary();
+			taskList = Search.obtainTommorrowSummary(storage);
 			typeOfListView = "tommorrow";
 			break;
 		case "floating":
-			taskList = Search.obtainFloatingTasks();
+			taskList = Search.obtainFloatingTasks(storage);
 			typeOfListView = "floating";
 			break;
 		case "event":
-			taskList = Search.obtainEventTasks();
+			taskList = Search.obtainEventTasks(storage);
 			typeOfListView = "event";
 			break;
 		case "deadline":
-			taskList = Search.obtainDeadlineTasks();
+			taskList = Search.obtainDeadlineTasks(storage);
 			typeOfListView = "deadline";
 			break;
 		case "complete":
-			taskList = Search.obtainAllCompleteTasks();
+			taskList = Search.obtainAllCompleteTasks(storage);
 			typeOfListView = "complete";
 			break;
 		case "incomplete":
-			taskList = Search.obtainAllIncompleteTasks();
+			taskList = Search.obtainAllIncompleteTasks(storage);
 			typeOfListView = "incomplete";
 			break;
 		case "all":
-			taskList = Search.obtainAllTasks();
+			taskList = Search.obtainAllTasks(storage);
 			typeOfListView = "all";
 			break;
 		}
