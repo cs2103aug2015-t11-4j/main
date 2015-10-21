@@ -8,8 +8,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import main.java.resources.Task;
 
@@ -207,15 +205,6 @@ public class Storage {
         return target;
     }
     
-
-    /* 
-     * Sorts task by task type and description in the taskList
-     */
-    public static ArrayList<Task> sortTaskList (ArrayList<Task> taskList) {
-        Collections.sort(taskList, new TaskComparatorByTaskDescription());
-        return taskList;
-    }
-    
 	/* 
      * Displays all tasks to the taskList
      * @@author A0126058-unused due to change of requirements
@@ -245,57 +234,4 @@ public class Storage {
        }
 	}
 	*/
-}
-
-/**
- * Comparator override methods for sorting purposes
- * @@author Lim Yong Zhi
- */
-
-/*
- * Sorts taskList by Task Description
- */
-class TaskComparatorByTaskDescription implements Comparator<Task> {
-    @Override
-    public int compare(Task t1, Task t2) {
-        return t1.getTaskDescription().compareTo(t2.getTaskDescription());
-    }
-}
-
-/*
- * Sorts taskList by Date
- */
-class TaskComparatorByDate implements Comparator<Task> {
-    @Override
-    public int compare(Task t1, Task t2) {
-        if (t1.getStartDate() == null || t2.getStartDate() == null) {
-            return 0;
-        }
-        return t1.getStartDate().compareTo(t2.getStartDate());
-    }
-}
-
-/*
- * Sorts taskList by Time
- */
-class TaskComparatorByTime implements Comparator<Task> {
-    @Override
-    public int compare(Task t1, Task t2) {
-        if (t1.getStartTime() == null || t2.getStartTime() == null) {
-            return 0;
-        }
-        return t1.getStartTime().compareTo(t2.getStartTime());
-    }
-}
-
-
-/*
- * Sorts taskList by Task Type
- * TODO: May not be required
- */
-class TaskComparatorByTaskType implements Comparator<Task> {
-    @Override
-    public int compare(Task t1, Task t2) {
-        return t1.getTaskType().compareTo(t2.getTaskType());
-    }
 }

@@ -52,7 +52,7 @@ public class Search {
                 }
             }
         }
-        Storage.sortTaskList(todaySummary);
+        Sort.sortTaskList(todaySummary);
         return todaySummary;
     }
     
