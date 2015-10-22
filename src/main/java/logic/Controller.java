@@ -3,12 +3,12 @@ package main.java.logic;
 
 import java.util.ArrayList;
 
+import main.java.parser.FlexiCommands;
 import main.java.parser.Parser;
 import main.java.resources.DataDisplay;
 import main.java.resources.ItemForUserScreen;
 import main.java.resources.Task;
 import main.java.storage.Storage;
-import main.java.ui.UI;
 
 public class Controller {
 	public static Command createCommand(String inputFromUser) {
@@ -17,7 +17,7 @@ public class Controller {
 		Command command;
 		Storage storage = Storage.getInstance();
 		int itemNum;
-		switch (inputForAction.get(0).toLowerCase()) {
+		switch (FlexiCommands.flexiCommands(inputForAction.get(0).toLowerCase())) {
 		// if add, need to create task object for storage
 		case "add":
 			task = Parser.createTaskForAdd(inputForAction);
@@ -28,6 +28,8 @@ public class Controller {
 		case "delete":
 			itemNum = Integer.parseInt(inputForAction.get(1));
 			return command = new Delete(itemNum,storage);
+		case "exit":
+			
 		default:
 			return command = new Display(inputForAction, storage);
 		}
