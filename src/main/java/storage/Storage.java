@@ -20,7 +20,6 @@ import main.java.resources.Task;
  * @@author Lim Yong Zhi
  */
 
-
 public class Storage {
     private static ArrayList<Task> taskList; // a global variable for task list (jh)
     static Logger logger = Logger.getLogger("Storage");
@@ -49,28 +48,61 @@ public class Storage {
 	 * Temporary placeholder for creation of file - To be replaced with user's
 	 * directory of choice
 	 */
-	private static String filename = "MyCalender.txt";
-	
+	private static String filename = "Alt4.txt";	
 	
 	/* 
      * Allows user to change the destination of the taskList
      */
 	public static void changeDirectory(String directory) {
-	    filename = directory + filename;
+	    File file = new File(filename = directory + filename);
+	    file.getParentFile().mkdirs();	   
 	}
 	
 	/*
-	 * Retrieves the external file to regenerate the taskList
+	 * Retrieves the directory from external file
 	 * NOTE: External file saves the path of the user's directory of choice 
 	 * to the first line of the external file
 	 * 
 	 * TODO: To allow retrieval of user's directory of choice once set
+	 */
      
-	private static void retrieveDirectory(String directory) throws FileNotFoundException, IOException {
+	public static void retrieveDirectory(String directory) throws FileNotFoundException, IOException {
 	    String[] getDirectory = readExternalFile(0);
 	    changeDirectory(getDirectory[0]);
 	}
-	*/
+	
+    /* 
+     * Reads the external file to regenerate the taskList
+     */
+    public static void regenerateTaskList() throws IOException {
+        logger.log(Level.INFO, "Regenerating internal taskList from external file!");
+        FileReader fr = new FileReader(filename);
+        BufferedReader br = new BufferedReader(fr);
+        
+        String[] getDirectory;
+        @SuppressWarnings("unused")
+        String line;
+        int count = 0;
+        
+        if(!getTaskTypeByItemNum(0).equals("deadlines") 
+                || !getTaskTypeByItemNum(0).equals("event") 
+                || !getTaskTypeByItemNum(0).equals("floating")) { 
+            getDirectory = readExternalFile(0);
+            changeDirectory(getDirectory[0]);
+        }
+        
+        while ((line = br.readLine()) != null) {
+            taskList.add(new Task(getTaskTypeByItemNum(count),
+                    getTaskDescriptionByItemNum(count),
+                    getStartDateByItemNum(count),
+                    getEndDateByItemNum(count),
+                    getStartTimeByItemNum(count),
+                    getEndTimeByItemNum(count),
+                    getIsCompletedByItemNum(count)));
+            count += 1;
+        }
+        br.close();
+    }
 	
 	/* 
      * Adds one task to the taskList and writes to external file
@@ -143,6 +175,7 @@ public class Storage {
 	
 	/* 
      * Deletes a task from the taskList and delete entry from external file
+     * TODO: Deletes task object instead of itemNumber
      */
 	public static int deleteOneItem(int itemNumber) {
 	    logger.log(Level.INFO, "Deleting task {0}", itemNumber);
@@ -158,7 +191,7 @@ public class Storage {
             BufferedWriter bw = new BufferedWriter(fw);
             
             int lineNumber = 0;
-            String line = "";
+            String line;
             
             while ((line = br.readLine()) != null) {
                 lineNumber += 1;
@@ -183,7 +216,7 @@ public class Storage {
 	/* 
      * Obtains task type from task saved in external file
      */
-    public static String getTaskTypeByItemNum(int itemNumber) {
+    private static String getTaskTypeByItemNum(int itemNumber) {
         try {
             String[] target = readExternalFile(itemNumber);
             return target[0];
@@ -195,7 +228,7 @@ public class Storage {
     /* 
      * Obtains task description from task saved in external file
      */
-    public static String getTaskDescriptionByItemNum(int itemNumber) {
+    private static String getTaskDescriptionByItemNum(int itemNumber) {
         try {
             String[] target = readExternalFile(itemNumber);
             return target[1];
@@ -205,12 +238,60 @@ public class Storage {
     }
 
     /* 
-     * Obtains deadline from task saved in external file
+     * Obtains start date from task saved in external file
      */
-    public static String getTaskDeadlineItemNum(int itemNumber) {
+    private static String getStartDateByItemNum(int itemNumber) {
         try {
             String[] target = readExternalFile(itemNumber);
             return target[2];
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    /* 
+     * Obtains end date from task saved in external file
+     */
+    private static String getEndDateByItemNum(int itemNumber) {
+        try {
+            String[] target = readExternalFile(itemNumber);
+            return target[3];
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    /* 
+     * Obtains start time from task saved in external file
+     */
+    private static String getStartTimeByItemNum(int itemNumber) {
+        try {
+            String[] target = readExternalFile(itemNumber);
+            return target[4];
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    /* 
+     * Obtains end time from task saved in external file
+     */
+    private static String getEndTimeByItemNum(int itemNumber) {
+        try {
+            String[] target = readExternalFile(itemNumber);
+            return target[5];
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    /* 
+     * Obtains end date from task saved in external file
+     */
+    private static Boolean getIsCompletedByItemNum(int itemNumber) {
+        try {
+            String[] target = readExternalFile(itemNumber);
+            return Boolean.parseBoolean(target[6]);
         } catch (Exception e) {
             return null;
         }
