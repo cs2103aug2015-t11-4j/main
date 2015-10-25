@@ -50,7 +50,10 @@ public class Storage {
 	private static String filename = "Alt4.txt";	
 	
 	/* 
-     * Allows user to change the destination of the taskList
+     * Allows user to change the destination of the taskList and write actual
+     * taskList location
+     * 
+     * TODO: To allow duplicates of the taskList? Rely on Alt4.txt for location storage?
      */
 	public static void changeDirectory(String directory) {
 	    File file = new File(filename = directory + filename);
@@ -60,8 +63,13 @@ public class Storage {
     /* 
      * Reads the external file to regenerate the taskList
      */
-    public static void regenerateTaskList() throws IOException {
+    public void regenerateTaskList() throws IOException {
         logger.log(Level.INFO, "Regenerating internal taskList from external file!");
+        
+        if(!taskList.isEmpty()) {
+            wipeTaskList();
+        }
+        
         FileReader fr = new FileReader(filename);
         BufferedReader br = new BufferedReader(fr);
         
@@ -84,8 +92,19 @@ public class Storage {
             count += 1;
         }
         br.close();
+        logger.log(Level.INFO, "Completed regeneration of internal taskList from external file");
     }
 
+    /* 
+     * Wipes the current taskList
+     */
+    private void wipeTaskList() {
+        logger.log(Level.INFO, "Wiping taskList!");
+        for(int i = 0; i<taskList.size(); i++) {
+            taskList.remove(i);
+        }
+    }
+    
     /* 
      * Checks the first line external file if it contains a directory
      * and if so, retrieves it.
@@ -94,6 +113,7 @@ public class Storage {
      * to the first line of the external file
      */
     private static boolean retrieveDirectory() throws FileNotFoundException, IOException {
+        logger.log(Level.INFO, "Retrieving directory from external file!");
         String[] getDirectory;
         if(!getTaskTypeByItemNum(0).equals("deadlines") 
                 || !getTaskTypeByItemNum(0).equals("event") 
@@ -108,7 +128,7 @@ public class Storage {
 	/* 
      * Adds one task to the taskList and writes to external file
      */
-	public static int addOneItem(Task task) {
+	public int addOneItem(Task task) {
 	    logger.log(Level.INFO, "Adding {0} to taskList", task.getTaskDescription());
 		taskList.add(task); //(jh) update internal list
 		
@@ -134,7 +154,7 @@ public class Storage {
 	/* 
      * Updates one task to the taskList and writes to external file
      */
-	public static int updateOneItem(int itemNumber, Task task) {
+	public int updateOneItem(int itemNumber, Task task) {
 	    logger.log(Level.INFO, "Updating {0} to taskList", task.getTaskDescription());
 		taskList.set(itemNumber-1, task); //(jh) update internal list
 		
@@ -177,7 +197,7 @@ public class Storage {
 	/* 
      * Deletes a task from the taskList and delete entry from external file
      */
-    public static int deleteOneItem(Task task) {
+    public int deleteOneItem(Task task) {
         logger.log(Level.INFO, "Deleting task {0} from external file", task.getTaskDescription());
         taskList.remove(task); //(jh) update internal list
         
