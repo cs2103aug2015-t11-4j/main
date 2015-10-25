@@ -3,6 +3,8 @@ package main.java.logic;
 
 import java.util.ArrayList;
 
+import main.java.parser.FlexiCommands;
+import main.java.parser.Parser;
 import main.java.resources.DataDisplay;
 import main.java.resources.ItemForUserScreen;
 import main.java.resources.OutputToUI;
@@ -26,7 +28,7 @@ public class Display implements Command {
 		ArrayList<ItemForUserScreen> itemList = new ArrayList<ItemForUserScreen>();
 		String feedbackMsg;
 		String typeOfListView = null;
-		switch (userInput.get(1).toLowerCase()) {
+		switch (FlexiCommands.flexiDisplayCommands(userInput.get(1).toLowerCase())) {
 		case "today":
 			taskList = Search.obtainTodaySummary(storage);
 			typeOfListView = "today";

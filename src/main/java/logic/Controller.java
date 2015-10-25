@@ -29,7 +29,7 @@ public class Controller {
 			itemNum = Integer.parseInt(inputForAction.get(1));
 			return command = new Delete(itemNum,storage);
 		case "exit":
-			
+			return command = new Exit();
 		default:
 			return command = new Display(inputForAction, storage);
 		}
