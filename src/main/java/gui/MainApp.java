@@ -21,7 +21,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import main.java.logic.Command;
 import main.java.logic.Controller;
-import main.java.logic.LogicInvoker;
 import main.java.resources.ItemForUserScreen;
 import main.java.resources.OutputToUI;
 
@@ -89,6 +88,8 @@ public class MainApp extends Application {
     private BorderPane rootLayout;
     private MainApp mainApp;
 
+    //private static ArrayList<ItemForUserScreen> itemList = Controller.getItemList();//JH
+    
     public static void main(String[] args) {
         launch(args);
     }
@@ -98,9 +99,22 @@ public class MainApp extends Application {
     	
     	initRootLayout();
         initPrimaryStage(primaryStage);
+        
+        OutputToUI outputToUI = new OutputToUI();
+        ItemForUserScreen item = new ItemForUserScreen(false, "event", "family outing");
+    	ArrayList<ItemForUserScreen> list = new ArrayList<ItemForUserScreen> ();
+    	list.add(item);
+    	outputToUI.setTypeOfListView("event");
+    	outputToUI.setItemList(list);
+    	
+    	ArrayList<ItemForUserScreen> itemList = outputToUI.getItemList();
 
         // Add components to RootLayout
         addCommandBar(this);
+
+		createDeadlineList(itemList);
+		createEventList(itemList);
+	    createFloatingList(itemList);
         addSummaryView();
     }
 
@@ -793,7 +807,7 @@ public class MainApp extends Application {
      * @author Jiahuan
      * 
      */
-    private ObservableList<String> createEventList(ArrayList<ItemForUserScreen> itemList){
+    private ObservableList<String> createEventList(ArrayList<ItemForUserScreen> itemList) {
 		event.clear();
     	for (int i = 0; i < itemList.size(); i ++){
 			if (itemList.get(i).getTaskType().equals("event")){
@@ -803,7 +817,7 @@ public class MainApp extends Application {
     	return event;
     }
     
-    private ObservableList<String> createDeadlineList(ArrayList<ItemForUserScreen> itemList){
+    private ObservableList<String> createDeadlineList(ArrayList<ItemForUserScreen> itemList) {
     	deadline.clear();
     	for (int i = 0; i < itemList.size(); i ++){
 			if (itemList.get(i).getTaskType().equals("deadline")){
@@ -813,7 +827,7 @@ public class MainApp extends Application {
     	return deadline;
     }
     
-    private ObservableList<String> createFloatingList(ArrayList<ItemForUserScreen> itemList){
+    private ObservableList<String> createFloatingList(ArrayList<ItemForUserScreen> itemList) {
     	floating.clear();
     	for (int i = 0; i < itemList.size(); i ++){
 			if (itemList.get(i).getTaskType().equals("floating")){
