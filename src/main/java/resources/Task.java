@@ -93,4 +93,18 @@ public class Task {
 	public void setCompleted(boolean newTaskStatus) {
 		isCompleted = newTaskStatus;
 	}
+	
+	//Overriding equals() method
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Task) {
+			Task task = (Task) obj;
+			return this.getTaskType().equals(task.getTaskType()) && this.getTaskDescription().equals(task.getTaskDescription()) &&
+					this.getStartDate().equals(task.getStartDate()) && this.getEndDate().equals(task.getEndDate()) &&
+					this.getStartTime().equals(task.getStartTime()) && this.getEndTime().equals(task.getEndTime()) &&
+					this.getIsCompleted() == task.getIsCompleted();
+		}
+		else 
+			return false;
+		}
 }
