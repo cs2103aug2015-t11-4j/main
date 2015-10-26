@@ -25,7 +25,7 @@ public class Search {
     */
     public static ArrayList<Task> obtainTodaySummary(Storage storage) {
         ArrayList<Task> todaySummary = new ArrayList<Task>();
-        ArrayList<Task> taskList = Storage.getTaskList();
+        ArrayList<Task> taskList = storage.getTaskList();
         
         /* 
          *@@Author: Lim Yong Zhi
@@ -94,7 +94,7 @@ public class Search {
     //@@Author: A0124524N wenbin
     public static ArrayList<Task> obtainTommorrowSummary(Storage storage) { 
         ArrayList<Task> tmrSummary = new ArrayList<Task>();
-        ArrayList<Task> taskList = Storage.getTaskList();
+        ArrayList<Task> taskList = storage.getTaskList();
         
         //add only top 10 urgent deadlines into list first
         ArrayList<Task> urgentDeadlines = new ArrayList<Task>();
@@ -132,16 +132,16 @@ public class Search {
     
     //Obtains all tasks in the taskList
     public static ArrayList<Task> obtainAllTasks(Storage storage) {
-            return Storage.getTaskList();
+            return storage.getTaskList();
     }
     
     //Obtains all incomplete tasks in the taskList
     public static ArrayList<Task> obtainAllIncompleteTasks(Storage storage) {
         ArrayList<Task> incomplete = new ArrayList<Task>();
         
-        for(int i = 0; i<Storage.getTaskList().size(); i++) {
-            if(Storage.getTaskList().get(i).getIsCompleted() == false) {
-                incomplete.add(Storage.getTaskList().get(i));
+        for(int i = 0; i<storage.getTaskList().size(); i++) {
+            if(storage.getTaskList().get(i).getIsCompleted() == false) {
+                incomplete.add(storage.getTaskList().get(i));
             }
         }
         return incomplete;
@@ -151,9 +151,9 @@ public class Search {
     public static ArrayList<Task> obtainAllCompleteTasks(Storage storage) {
        ArrayList<Task> complete = new ArrayList<Task>();
         
-        for(int i = 0; i<Storage.getTaskList().size(); i++) {
-            if(Storage.getTaskList().get(i).getIsCompleted() == true) {
-                complete.add(Storage.getTaskList().get(i));
+        for(int i = 0; i<storage.getTaskList().size(); i++) {
+            if(storage.getTaskList().get(i).getIsCompleted() == true) {
+                complete.add(storage.getTaskList().get(i));
             }
         }
         return complete;
@@ -164,9 +164,9 @@ public class Search {
     public static ArrayList<Task> obtainDeadlineTasks(Storage storage) {
         ArrayList<Task> deadlines = new ArrayList<Task>();
         
-        for(int i = 0; i<Storage.getTaskList().size(); i++) {
-            if(Storage.getTaskList().get(i).getTaskType().equals("deadline")) {
-                deadlines.add(Storage.getTaskList().get(i));
+        for(int i = 0; i<storage.getTaskList().size(); i++) {
+            if(storage.getTaskList().get(i).getTaskType().equals("deadline")) {
+                deadlines.add(storage.getTaskList().get(i));
             }
         }
         return deadlines;
@@ -230,9 +230,9 @@ public class Search {
     public static ArrayList<Task> obtainEventTasks(Storage storage) {
     	ArrayList<Task> events = new ArrayList<Task>();
         
-        for(int i = 0; i<Storage.getTaskList().size(); i++) {
-            if(Storage.getTaskList().get(i).getTaskType().equals("event")) {
-                events.add(Storage.getTaskList().get(i));
+        for(int i = 0; i<storage.getTaskList().size(); i++) {
+            if(storage.getTaskList().get(i).getTaskType().equals("event")) {
+                events.add(storage.getTaskList().get(i));
             }
         }
         return events;
@@ -243,25 +243,25 @@ public class Search {
     public static ArrayList<Task> obtainFloatingTasks(Storage storage) {
         ArrayList<Task> floating = new ArrayList<Task>();
         
-        for(int i = 0; i<Storage.getTaskList().size(); i++) {
-            if(Storage.getTaskList().get(i).getTaskType().equals("floating")) {
-                floating.add(Storage.getTaskList().get(i));
+        for(int i = 0; i<storage.getTaskList().size(); i++) {
+            if(storage.getTaskList().get(i).getTaskType().equals("floating")) {
+                floating.add(storage.getTaskList().get(i));
             }
         }
         return floating;
     }
     
     //Searches and retrieves all tasks with the keyword
-    public ArrayList<Task> SearchKeyword(String keyword) {
+    public ArrayList<Task> SearchKeyword(String keyword, Storage storage) {
         ArrayList<Task> results = new ArrayList<Task>();
         
-        for(int i = 0; i<Storage.getTaskList().size(); i++) {
-            if(Storage.getTaskList().get(i).getEndDate().contains(keyword)
-                    || Storage.getTaskList().get(i).getEndTime().contains(keyword)
-                    || Storage.getTaskList().get(i).getStartDate().contains(keyword)
-                    || Storage.getTaskList().get(i).getStartTime().contains(keyword)
-                    || Storage.getTaskList().get(i).getTaskDescription().contains(keyword)) {
-                results.add(Storage.getTaskList().get(i));
+        for(int i = 0; i<storage.getTaskList().size(); i++) {
+            if(storage.getTaskList().get(i).getEndDate().contains(keyword)
+                    || storage.getTaskList().get(i).getEndTime().contains(keyword)
+                    || storage.getTaskList().get(i).getStartDate().contains(keyword)
+                    || storage.getTaskList().get(i).getStartTime().contains(keyword)
+                    || storage.getTaskList().get(i).getTaskDescription().contains(keyword)) {
+                results.add(storage.getTaskList().get(i));
             }
         }
         

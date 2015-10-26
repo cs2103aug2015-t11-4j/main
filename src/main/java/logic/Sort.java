@@ -207,7 +207,7 @@ public class Sort {
 		ArrayList<Task> result = new ArrayList<Task>();
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getTaskType().equals("floating")) {
-				result.add(Storage.getTaskList().get(i));
+				result.add(storage.getTaskList().get(i));
 			}
 		}
 		return result;
@@ -218,7 +218,7 @@ public class Sort {
 		ArrayList<Task> result = new ArrayList<Task>();
 		for (int i = 0; i < list.size(); i++) {
 			if (!list.get(i).getTaskType().equals("floating")) {
-				result.add(Storage.getTaskList().get(i));
+				result.add(storage.getTaskList().get(i));
 			}
 		}
 		return result;
