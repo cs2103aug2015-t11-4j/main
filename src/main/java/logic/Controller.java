@@ -46,6 +46,9 @@ public class Controller {
 			return command = new Delete(itemNum, storage);
 		case "exit":
 			return command = new Exit();
+		case "complete":
+			itemNum = Integer.parseInt(inputForAction.get(1));
+			return command = new Complete(itemNum, storage);
 		default:
 			return command = new Display(inputForAction, storage);
 		}

@@ -2,16 +2,22 @@ package test.logic;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
 import main.java.logic.Add;
 import main.java.logic.Command;
+import main.java.logic.Complete;
+import main.java.logic.Controller;
+import main.java.logic.Incomplete;
 import main.java.resources.DataDisplay;
 import main.java.resources.OutputToUI;
 import main.java.resources.Task;
 import main.java.storage.Storage;
 
-public class AddTest {
+public class IncompleteTest {
+
 	public static final String TYPE_DEADLINE = "deadline";
 	public static final String TYPE_EVENT = "event";
 	public static final String TYPE_FLOATING = "floating";
@@ -23,23 +29,39 @@ public class AddTest {
 	Task task5 = new Task(TYPE_FLOATING, "meet with bob", null, null, null, null, false);
 	Task task6 = new Task(TYPE_FLOATING, "eat breakfast", null, null, null, null, true);
 	Task task7 = new Task(TYPE_DEADLINE, "wake up", null, "01/01/2015", null, "0900", false);
+	Task task8 = new Task(TYPE_DEADLINE, "wash face with cool water", null, "02/02/2015", null, "1100", true);
+	
 	Storage storage = Storage.getInstance();
 	Command command1 = new Add(task1, storage);
 	Command command2 = new Add(task2, storage);
 	Command command3 = new Add(task3, storage);
 	Command command4 = new Add(task4, storage);
-	public OutputToUI outputToUI = new OutputToUI();
+	Command command5 = new Add(task5, storage);
+	Command command6 = new Add(task6, storage);
+	Command displayCommand = Controller.createCommand("display all");
+	int itemNum = 2;
 	
 	@Test
-	public void test() {
+	public void test() throws IOException {
+		Controller.initializeProgram();
+		DataDisplay.displayList(storage.getTaskList());
 		command1.execute();
 		command2.execute();
 		command3.execute();
-		outputToUI = command4.execute();
+		command4.execute();
+		command5.execute();
+		command6.execute();
+		OutputToUI outputToUI=displayCommand.execute();
 		DataDisplay.printOutputToUI(outputToUI);
+		//DataDisplay.displayList(storage.getTaskList());
+		Command command_incomplete = new Incomplete(itemNum, storage);
+		OutputToUI outputToUI2=command_incomplete.execute();
 		DataDisplay.displayList(storage.getTaskList());
-		assertTrue(storage.getTaskList().contains(task7));
-		
+		DataDisplay.printOutputToUI(outputToUI2);
+		task8.setCompleted(false);
+		OutputToUI outputToUI3=displayCommand.execute();
+		DataDisplay.printOutputToUI(outputToUI3);
+		System.out.println(task2.getIsCompleted());
+		assertTrue(storage.getTaskList().contains(task8));
 	}
-
 }
