@@ -424,8 +424,9 @@ public class MainApp extends Application {
     	outputToUI.setItemList(list);*/
     	
     	String userInput = outputToUI.getTypeOfScreen();  //null means no change of screen
-    	String feedbackMsg = outputToUI.getFeedbackMsg();
     	itemList = outputToUI.getItemList();
+    	String feedbackMsg = outputToUI.getFeedbackMsg();
+    	String taskToUpdate = outputToUI.getInputBoxMsg();
 
     	if(_userInput.equals("today") || _userInput.equals("tomorrow")) {
     		createDeadlineList(itemList);
@@ -572,13 +573,6 @@ public class MainApp extends Application {
     			commandBarController.setFeedback(feedbackMsg);
     			commandBarController.clear();
     		}*/
-		
-    		/*else if(itemList.get(0).getTaskType().equals("update")) {
-    			description = itemList.get(0).getPrintOnScreenMsg();
-    			//complete.add(description);
-    			commandBarController.setFeedback(feedbackMsg);
-    			commandBarController.setText(description);
-    		}*/
     		
     		createFloatingList(itemList);
     		createEventList(itemList);
@@ -590,6 +584,11 @@ public class MainApp extends Application {
     		
     		//addDisplayAll();
     		addSummaryView();
+    	}
+    	
+    	if(taskToUpdate != null) {
+    		commandBarController.setText(taskToUpdate);
+    		commandBarController.setFeedback(feedbackMsg);
     	}
 		
 		//handleEnterPress(commandBarController, userInput);
