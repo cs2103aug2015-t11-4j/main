@@ -272,8 +272,8 @@ public class Search {
         }
     }
 
-    public static Task obtainTaskByItemNum(int itemNumber) {
-        return Storage.getTaskList().get(itemNumber-1);
+    public static Task obtainTaskByItemNum(int itemNumber, ArrayList<Task> list) {
+        return list.get(itemNumber-1);
     }
     
     /* @@Author: Lim Yong Zhi

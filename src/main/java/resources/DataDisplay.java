@@ -16,9 +16,6 @@ public class DataDisplay {
 	private static final String TASK_TYPE_EVENT_LOWERCASE = "event";
 	private static final String TASK_TYPE_DEADLINE_LOWERCASE = "deadline";
 
-	
-	
-	
 	// To display summary in the summary list
 	public static ArrayList<String> displaySummary(ArrayList<Task> summaryList) {
 		ArrayList<String> outputForTesting = new ArrayList<String>();
@@ -34,31 +31,34 @@ public class DataDisplay {
 
 		// print different task with a label above them
 		if (taskTypeCount.get(0) != 0) {
-			//System.out.println(LABEL_DEADLINE);
-			//outputForTesting.add(LABEL_DEADLINE);
+			// System.out.println(LABEL_DEADLINE);
+			// outputForTesting.add(LABEL_DEADLINE);
 			for (int i = 0; i < taskTypeCount.get(0); i++) {
 				int itemNum = i + 1;
-			//	System.out.println(itemNum + ": " + createContentForDeadline(summaryList.get(i)));
+				// System.out.println(itemNum + ": " +
+				// createContentForDeadline(summaryList.get(i)));
 				outputForTesting.add(itemNum + ": " + createContentForDeadline(summaryList.get(i)));
 			}
 		}
 		if (taskTypeCount.get(0) != 0) {
-			//System.out.println(LABEL_EVENT);
-			//outputForTesting.add(LABEL_EVENT);
+			// System.out.println(LABEL_EVENT);
+			// outputForTesting.add(LABEL_EVENT);
 			for (int i = 0; i < taskTypeCount.get(1); i++) {
 				int j = i + taskTypeCount.get(0);
 				int itemNum = j + 1;
-			//	System.out.println(itemNum + ": " + createContentForEvent(summaryList.get(j)));
+				// System.out.println(itemNum + ": " +
+				// createContentForEvent(summaryList.get(j)));
 				outputForTesting.add(itemNum + ": " + createContentForEvent(summaryList.get(j)));
 			}
 		}
 		if (taskTypeCount.get(0) != 0) {
-			//System.out.println(LABEL_FLOATING);
-			//outputForTesting.add(LABEL_FLOATING);
+			// System.out.println(LABEL_FLOATING);
+			// outputForTesting.add(LABEL_FLOATING);
 			for (int i = 0; i < taskTypeCount.get(2); i++) {
 				int j = i + taskTypeCount.get(0) + taskTypeCount.get(1);
 				int itemNum = j + 1;
-			//	System.out.println(itemNum + ": " + createContentForFloating(summaryList.get(j)));
+				// System.out.println(itemNum + ": " +
+				// createContentForFloating(summaryList.get(j)));
 				outputForTesting.add(itemNum + ": " + createContentForFloating(summaryList.get(j)));
 			}
 		}
@@ -87,80 +87,80 @@ public class DataDisplay {
 	// Display all tasks including complete and incomplete tasks
 	public static ArrayList<String> displayAll(ArrayList<Task> allList) {
 		ArrayList<String> outputForTesting = new ArrayList<String>();
-		//System.out.println(LABEL_ALL);
+		// System.out.println(LABEL_ALL);
 		outputForTesting = displayList(allList);
-		//outputForTesting.add(0, LABEL_ALL);
+		// outputForTesting.add(0, LABEL_ALL);
 		return outputForTesting;
 	}
 
 	// Display all complete tasks
 	public static ArrayList<String> displayComplete(ArrayList<Task> completeList) {
 		ArrayList<String> outputForTesting = new ArrayList<String>();
-		//System.out.println(LABEL_COMPLETE);
+		// System.out.println(LABEL_COMPLETE);
 		outputForTesting = displayList(completeList);
-		//outputForTesting.add(0, LABEL_COMPLETE);
+		// outputForTesting.add(0, LABEL_COMPLETE);
 		return outputForTesting;
 	}
 
 	// Display all incomplete tasks
 	public static ArrayList<String> displayIncomplete(ArrayList<Task> incompleteList) {
 		ArrayList<String> outputForTesting = new ArrayList<String>();
-		//System.out.println(LABEL_INCOMPLETE);
+		// System.out.println(LABEL_INCOMPLETE);
 		outputForTesting = displayList(incompleteList);
-		//outputForTesting.add(0, LABEL_INCOMPLETE);
+		// outputForTesting.add(0, LABEL_INCOMPLETE);
 		return outputForTesting;
 	}
 
 	// Display all floating tasks
 	public static ArrayList<String> displayFloating(ArrayList<Task> floatingList) {
 		ArrayList<String> outputForTesting = new ArrayList<String>();
-		//System.out.println(LABEL_FLOATING);
+		// System.out.println(LABEL_FLOATING);
 		outputForTesting = displayList(floatingList);
-		//outputForTesting.add(0, LABEL_FLOATING);
+		// outputForTesting.add(0, LABEL_FLOATING);
 		return outputForTesting;
 	}
 
 	// Display all deadline tasks
 	public static ArrayList<String> displayDeadline(ArrayList<Task> deadlineList) {
 		ArrayList<String> outputForTesting = new ArrayList<String>();
-		//System.out.println(LABEL_DEADLINE);
+		// System.out.println(LABEL_DEADLINE);
 		outputForTesting = displayList(deadlineList);
-		//outputForTesting.add(0, LABEL_DEADLINE);
+		// outputForTesting.add(0, LABEL_DEADLINE);
 		return outputForTesting;
 	}
 
 	// Display all event tasks
 	public static ArrayList<String> displayEvent(ArrayList<Task> eventList) {
 		ArrayList<String> outputForTesting = new ArrayList<String>();
-		//System.out.println(LABEL_EVENT);
+		// System.out.println(LABEL_EVENT);
 		outputForTesting = displayList(eventList);
-		//outputForTesting.add(0, LABEL_EVENT);
+		// outputForTesting.add(0, LABEL_EVENT);
 		return outputForTesting;
 	}
 
 	// To display a given list of task in order
 	public static ArrayList<String> displayList(ArrayList<Task> listForPrint) {
 		ArrayList<String> outputForTesting = new ArrayList<String>();
-		if (listForPrint.isEmpty()){
+		if (listForPrint.isEmpty()) {
 			System.out.println("No task. Please enter one to start");
-		}else{
-		for (int i = 0; i < listForPrint.size(); i++) {
-			int itemNum = i + 1;
-			switch (listForPrint.get(i).getTaskType().toLowerCase()) {
-			case TASK_TYPE_DEADLINE_LOWERCASE:
-				System.out.println(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
-				outputForTesting.add(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
-				break;
-			case TASK_TYPE_EVENT_LOWERCASE:
-				System.out.println(itemNum + ": " + createContentForEvent(listForPrint.get(i)));
-				outputForTesting.add(itemNum + ": " + createContentForEvent(listForPrint.get(i)));
-				break;
-			case TASK_TYPE_FLOATING_LOWERCASE:
-				System.out.println(itemNum + ": " + createContentForFloating(listForPrint.get(i)));
-				outputForTesting.add(itemNum + ": " + createContentForFloating(listForPrint.get(i)));
-				break;
+		} else {
+			for (int i = 0; i < listForPrint.size(); i++) {
+				int itemNum = i + 1;
+				switch (listForPrint.get(i).getTaskType().toLowerCase()) {
+				case TASK_TYPE_DEADLINE_LOWERCASE:
+					System.out.println(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
+					outputForTesting.add(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
+					break;
+				case TASK_TYPE_EVENT_LOWERCASE:
+					System.out.println(itemNum + ": " + createContentForEvent(listForPrint.get(i)));
+					outputForTesting.add(itemNum + ": " + createContentForEvent(listForPrint.get(i)));
+					break;
+				case TASK_TYPE_FLOATING_LOWERCASE:
+					System.out.println(itemNum + ": " + createContentForFloating(listForPrint.get(i)));
+					outputForTesting.add(itemNum + ": " + createContentForFloating(listForPrint.get(i)));
+					break;
+				}
 			}
-		}
 		}
 		return outputForTesting;
 	}
@@ -171,15 +171,15 @@ public class DataDisplay {
 		String outputForTesting = "";
 		switch (task.getTaskType()) {
 		case "deadline":
-			//System.out.println("add " + updateContentForDeadline(task));
+			// System.out.println("add " + updateContentForDeadline(task));
 			outputForTesting = "add " + updateContentForDeadline(task);
 			break;
 		case "floating":
-			//System.out.println("add " + updateContentForFloating(task));
+			// System.out.println("add " + updateContentForFloating(task));
 			outputForTesting = "add " + updateContentForFloating(task);
 			break;
 		case "event":
-			//System.out.println("add " + updateContentForEvent(task));
+			// System.out.println("add " + updateContentForEvent(task));
 			outputForTesting = "add " + updateContentForEvent(task);
 			break;
 		}
@@ -215,11 +215,33 @@ public class DataDisplay {
 	public static String feedback(String action, int code) {
 		// TODO: Code = 0: success
 		// Code = 1: fail
-		if (code == 0) {
-			return action + "is successful";
-		}
-		return action + "is not successful, please enter the right format";
+		String feedbackMsg;
 
+		if (code == 0) {
+			feedbackMsg = action + " is successful";
+			System.out.println(feedbackMsg);
+			return feedbackMsg;
+		}
+		feedbackMsg = action + " is not successful, please enter the right format";
+		System.out.println(feedbackMsg);
+		return feedbackMsg;
+	}
+
+	// For testing, to print info in outputToUI
+	public static void printOutputToUI(OutputToUI outputToUI) {
+		ArrayList<ItemForUserScreen> itemList = outputToUI.getItemList();
+		System.out.println("typeOfScreen: " + outputToUI.getTypeOfScreen());
+		System.out.println("ItemList: ");
+		if (itemList == null) {
+			System.out.println("ItemList is empty");
+		} else {
+			for (int i = 0; i < itemList.size(); i++) {
+				System.out.println(itemList.get(i).getIfComplete() + "_" + itemList.get(i).getTaskType() + "_"
+						+ itemList.get(i).getPrintOnScreenMsg());
+			}
+		}
+		System.out.println("FeedbackMsg: " + outputToUI.getFeedbackMsg());
+		System.out.println("inputBoxMsg: " + outputToUI.getInputBoxMsg());
 	}
 
 }

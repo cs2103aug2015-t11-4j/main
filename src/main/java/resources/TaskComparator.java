@@ -10,6 +10,7 @@ import main.java.logic.Sort;
 //comparator that compare iscomplete first then time, then task content string
 	public class TaskComparator implements  Comparator<Task>{
 
+
 	@Override
 	public int compare(Task task1, Task task2) {
 		

@@ -2,16 +2,21 @@ package test.logic;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
 import main.java.logic.Add;
 import main.java.logic.Command;
+import main.java.logic.Controller;
+import main.java.logic.Delete;
+import main.java.logic.Update;
 import main.java.resources.DataDisplay;
 import main.java.resources.OutputToUI;
 import main.java.resources.Task;
 import main.java.storage.Storage;
 
-public class AddTest {
+public class UpdateTest {
 	public static final String TYPE_DEADLINE = "deadline";
 	public static final String TYPE_EVENT = "event";
 	public static final String TYPE_FLOATING = "floating";
@@ -27,18 +32,27 @@ public class AddTest {
 	Command command2 = new Add(task2, storage);
 	Command command3 = new Add(task3, storage);
 	Command command4 = new Add(task4, storage);
-	public OutputToUI outputToUI = new OutputToUI();
+	Command command5 = new Add(task5, storage);
+	Command command6 = new Add(task6, storage);
+	int itemNum = 1;
+	Command displayCommand = Controller.createCommand("display all");
 	
 	@Test
-	public void test() {
+	public void test() throws IOException {
+		Controller.initializeProgram();
+		DataDisplay.displayList(storage.getTaskList());
 		command1.execute();
 		command2.execute();
 		command3.execute();
-		outputToUI = command4.execute();
+		command4.execute();
+		OutputToUI outputToUI=displayCommand.execute();
 		DataDisplay.printOutputToUI(outputToUI);
+		//DataDisplay.displayList(storage.getTaskList());
+		Command command_update = new Update(itemNum, storage);
+		OutputToUI outputToUI2=command_update.execute();
 		DataDisplay.displayList(storage.getTaskList());
-		assertTrue(storage.getTaskList().contains(task2));
-		
+		DataDisplay.printOutputToUI(outputToUI2);
+		assertTrue(!storage.getTaskList().contains(task1));
 	}
 
 }

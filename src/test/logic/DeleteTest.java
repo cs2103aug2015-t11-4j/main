@@ -2,12 +2,16 @@ package test.logic;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
 import main.java.logic.Add;
 import main.java.logic.Command;
+import main.java.logic.Controller;
 import main.java.logic.Delete;
 import main.java.resources.DataDisplay;
+import main.java.resources.OutputToUI;
 import main.java.resources.Task;
 import main.java.storage.Storage;
 
@@ -28,18 +32,21 @@ public class DeleteTest {
 	Command command3 = new Add(task3, storage);
 	Command command4 = new Add(task4, storage);
 	int itemNum = 1;
-	Command command_del = new Delete(itemNum, storage);
+	Command displayCommand = Controller.createCommand("display all");
 
 	
 	@Test
-	public void test() {
-		storage.getTaskList().clear();
+	public void test() throws IOException {
+		Controller.initializeProgram();
 		DataDisplay.displayList(storage.getTaskList());
 		command1.execute();
 		command2.execute();
 		command3.execute();
 		command4.execute();
-		DataDisplay.displayList(storage.getTaskList());
+		OutputToUI outputToUI=displayCommand.execute();
+		DataDisplay.printOutputToUI(outputToUI);
+		//DataDisplay.displayList(storage.getTaskList());
+		Command command_del = new Delete(itemNum, storage);
 		command_del.execute();
 		DataDisplay.displayList(storage.getTaskList());
 		assertTrue(!storage.getTaskList().contains(task1));

@@ -7,7 +7,7 @@ public class Exit implements Command {
 	@Override
 	public OutputToUI execute() {
 		OutputToUI outputToUI = new OutputToUI();
-		outputToUI.setTypeOfListView("exit");
+		outputToUI.setTypeOfScreen("exit");
 		return outputToUI;
 	}
 

@@ -1,5 +1,8 @@
 //@author : Jiahuan
-package main.java.logic;
+
+//Unused after implementing command pattern
+
+/*package main.java.logic;
 import java.util.ArrayList;
 
 import main.java.parser.Parser;
@@ -65,3 +68,4 @@ public class LogicInvoker {
 	}
 
 }
+*/

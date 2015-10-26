@@ -4,21 +4,21 @@ package main.java.resources;
 import java.util.ArrayList;
 
 public class OutputToUI {
-	private String typeOfListView;
+	private String typeOfScreen;
 	private ArrayList<ItemForUserScreen> itemList;
 	private String feedbackMsg;
 	private String inputBoxMsg;
 	
 	public OutputToUI (){
-		typeOfListView = null;
+		typeOfScreen = null;
 		itemList = null;
 		feedbackMsg = null;
 		inputBoxMsg = null;
 	}
 	
-	public OutputToUI(String typeOfListView, ArrayList<ItemForUserScreen> itemList, String feedbackMsg,
+	public OutputToUI(String typeOfScreen, ArrayList<ItemForUserScreen> itemList, String feedbackMsg,
 			String inputBoxMsg) {
-		this.typeOfListView = typeOfListView;
+		this.typeOfScreen = typeOfScreen;
 		this.itemList = itemList;
 		this.feedbackMsg = feedbackMsg;
 		this.inputBoxMsg = inputBoxMsg;
@@ -26,8 +26,8 @@ public class OutputToUI {
 	
 	//Accessor
 	
-	public String getTypeOfListView(){
-		return typeOfListView;
+	public String getTypeOfScreen(){
+		return typeOfScreen;
 	}
 	
 	public ArrayList<ItemForUserScreen> getItemList(){
@@ -43,8 +43,8 @@ public class OutputToUI {
 	}
 	
 	//mutator
-	public void setTypeOfListView(String typeOfListView){
-		this.typeOfListView = typeOfListView;
+	public void setTypeOfScreen(String typeOfScreen){
+		this.typeOfScreen = typeOfScreen;
 	}
 	
 	public void setItemList(ArrayList<ItemForUserScreen> itemList){

@@ -2,16 +2,20 @@ package test.logic;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import main.java.logic.Add;
 import main.java.logic.Command;
+import main.java.logic.Controller;
+import main.java.logic.Display;
 import main.java.resources.DataDisplay;
 import main.java.resources.OutputToUI;
 import main.java.resources.Task;
 import main.java.storage.Storage;
 
-public class AddTest {
+public class DisplayTest {
 	public static final String TYPE_DEADLINE = "deadline";
 	public static final String TYPE_EVENT = "event";
 	public static final String TYPE_FLOATING = "floating";
@@ -27,18 +31,25 @@ public class AddTest {
 	Command command2 = new Add(task2, storage);
 	Command command3 = new Add(task3, storage);
 	Command command4 = new Add(task4, storage);
+	Command command5 = new Add(task5, storage);
+	Command command6 = new Add(task6, storage);
+	//Command displayCommand = Controller.createCommand("display today");
+	//ArrayList<String> inputForAction = new ArrayList<String>();
+	Command displayCommand = Controller.createCommand("display all");
 	public OutputToUI outputToUI = new OutputToUI();
-	
 	@Test
 	public void test() {
+		/*inputForAction.add("display");
+		inputForAction.add("incomplete");
+		Command displayCommand = new Display(inputForAction, storage);*/
 		command1.execute();
 		command2.execute();
 		command3.execute();
-		outputToUI = command4.execute();
+		command4.execute();
+		command5.execute();
+		command6.execute();
+		outputToUI = displayCommand.execute();
 		DataDisplay.printOutputToUI(outputToUI);
-		DataDisplay.displayList(storage.getTaskList());
-		assertTrue(storage.getTaskList().contains(task2));
-		
 	}
 
 }

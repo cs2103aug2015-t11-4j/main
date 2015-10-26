@@ -10,7 +10,7 @@ import main.java.resources.Task;
 import main.java.resources.TaskComparator;
 
 public class Sort {
-	public static final String TYPE_DEADLINE = "deadline";
+/*	public static final String TYPE_DEADLINE = "deadline";
 	public static final String TYPE_EVENT = "event";
 	public static final String TYPE_FLOATING = "floating";
 	public static void main(String arg[]){
@@ -23,7 +23,7 @@ public class Sort {
 		Task task5 = new Task(TYPE_FLOATING, "meet with bob", null, null, null, null, false);
 		Task task6 = new Task(TYPE_FLOATING, "eat breakfast", null, null, null, null, true);
 		System.out.println();
-	}
+	}*/
 	
 	
 	private Task task;

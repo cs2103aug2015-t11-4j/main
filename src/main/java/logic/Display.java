@@ -12,11 +12,12 @@ import main.java.resources.Task;
 import main.java.storage.Storage;
 
 public class Display implements Command {
-	private ArrayList<String> userInput = new ArrayList<String>();
+	private ArrayList<String> inputForAction = new ArrayList<String>();
 	private Storage storage;
+	private History history = History.getInstance();
 
 	public Display(ArrayList<String> userInput, Storage storage) {
-		this.userInput = userInput;
+		this.inputForAction = userInput;
 		this.storage = storage;
 	}
 
@@ -27,42 +28,44 @@ public class Display implements Command {
 		ArrayList<Task> taskList = new ArrayList<Task>();
 		ArrayList<ItemForUserScreen> itemList = new ArrayList<ItemForUserScreen>();
 		String feedbackMsg;
-		String typeOfListView = null;
-		switch (FlexiCommands.flexiDisplayCommands(userInput.get(1).toLowerCase())) {
+		String typeOfScreen = null;
+		//switch (FlexiCommands.flexiDisplayCommands(inputForAction.get(1).toLowerCase())) {
+		switch (inputForAction.get(1).toLowerCase()) {
 		case "today":
 			taskList = Search.obtainTodaySummary(storage);
-			typeOfListView = "today";
+			typeOfScreen = "today";
 			break;
 		case "tomorrow":
 			taskList = Search.obtainTommorrowSummary(storage);
-			typeOfListView = "tomorrow";
+			typeOfScreen = "tomorrow";
 			break;
 		case "floating":
 			taskList = Search.obtainFloatingTasks(storage);
-			typeOfListView = "floating";
+			typeOfScreen = "floating";
 			break;
 		case "event":
 			taskList = Search.obtainEventTasks(storage);
-			typeOfListView = "event";
+			typeOfScreen = "event";
 			break;
 		case "deadline":
 			taskList = Search.obtainDeadlineTasks(storage);
-			typeOfListView = "deadline";
+			typeOfScreen = "deadline";
 			break;
 		case "complete":
 			taskList = Search.obtainAllCompleteTasks(storage);
-			typeOfListView = "display complete";
+			typeOfScreen = "complete";
 			break;
 		case "incomplete":
 			taskList = Search.obtainAllIncompleteTasks(storage);
-			typeOfListView = "display incomplete";
+			typeOfScreen = "incomplete";
 			break;
 		case "all":
 			taskList = Search.obtainAllTasks(storage);
-			typeOfListView = "display all";
+			typeOfScreen = "all";
 			break;
 		}
 		printOnScreenMsgList = DataDisplay.displayList(taskList);
+		history.setScreenList(taskList);
 		for (int i = 0; i < taskList.size(); i++) {
 			itemList.add(new ItemForUserScreen(taskList.get(i).getIsCompleted(), taskList.get(i).getTaskType(),
 					printOnScreenMsgList.get(i)));
@@ -70,7 +73,7 @@ public class Display implements Command {
 		feedbackMsg = "Display successfully";
 		outputToUI.setFeedbackMsg(feedbackMsg);
 		outputToUI.setItemList(itemList);
-		outputToUI.setTypeOfListView(typeOfListView);
+		outputToUI.setTypeOfScreen(typeOfScreen);
 		return outputToUI;
 	}
 

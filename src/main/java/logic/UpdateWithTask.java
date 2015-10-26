@@ -1,5 +1,7 @@
 //@Author:Jiahuan
-package main.java.logic;
+//unused as a new method of update is implemented
+
+/*package main.java.logic;
 
 import main.java.resources.Task;
 import main.java.storage.Storage;
@@ -18,3 +20,4 @@ public class UpdateWithTask implements Command{
 	}
 
 }
+*/
