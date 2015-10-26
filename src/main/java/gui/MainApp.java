@@ -431,8 +431,10 @@ public class MainApp extends Application {
     	itemList = outputToUI.getItemList();
     	String feedbackMsg = outputToUI.getFeedbackMsg();
     	String taskToUpdate = outputToUI.getInputBoxMsg();
+    	
+    	commandBarController.setFeedback(feedbackMsg);
 
-    	if(_userInput.equals("today") || _userInput.equals("tomorrow")) {
+    	if(_userInput.equals("display today") || _userInput.equals("display tomorrow")) {
     		createDeadlineList(itemList);
     		createEventList(itemList);
     		createFloatingList(itemList);
@@ -481,21 +483,21 @@ public class MainApp extends Application {
     		commandBarController.clear();
     	}*/
     	
-    	else if(_userInput.equals("deadline")) {
+    	else if(_userInput.equals("display deadline")) {
 			createDeadlineList(itemList);
 			addDeadline();
 			commandBarController.setFeedback(FEEDBACK_DEADLINE);
 			commandBarController.clear();
 		}
     	
-    	else if(_userInput.equals("event")) {
+    	else if(_userInput.equals("display event")) {
 			createEventList(itemList);
 			addEvent();
 			commandBarController.setFeedback(FEEDBACK_EVENT);
 			commandBarController.clear();
 		}
     	
-    	else if(_userInput.equals("floating")) {
+    	else if(_userInput.equals("display floating")) {
 			createFloatingList(itemList);
 			addFloating();
 			commandBarController.setFeedback(FEEDBACK_FLOATING);
@@ -586,8 +588,8 @@ public class MainApp extends Application {
 			commandBarController.setFeedback(feedbackMsg);
 			commandBarController.clear();
     		
-    		addDisplayAll();
-    		//addSummaryView();
+    		//addDisplayAll();
+    		addSummaryView();
     	}
     	
     	if(taskToUpdate != null) {
@@ -838,9 +840,15 @@ public class MainApp extends Application {
     	
     }
     
-    /*
+    /**
      * Below are created by Jiahuan
      * @author Jiahuan
+     * 
+     */
+    
+    /**
+     * 
+     * edit by Yu Ju 
      * 
      */
     private ObservableList<String> createEventList(ArrayList<ItemForUserScreen> itemList) {
