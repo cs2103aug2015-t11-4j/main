@@ -99,8 +99,8 @@ public class Controller {
 	}
 
 	public static OutputToUI initializeProgram() throws IOException {
-		// storage.regenerateTaskList(); //TODO, Involve this when storage is
-		// correct
+		storage.regenerateTaskList(); //TODO, Involve this when storage is correct
+		
 		ArrayList<Task> taskList = Search.obtainTodaySummary(storage);
 		history.setScreenList(taskList);
 		OutputToUI outputToUI = new OutputToUI();
