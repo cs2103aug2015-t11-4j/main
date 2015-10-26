@@ -64,22 +64,30 @@ public class FlexiCommands {
 		switch (command.toLowerCase()) {
 		case "floating":
 			command = "floating";
+			break;
 		case "event":
 			command = "event";
+			break;
 		case "deadline":
 			command = "deadline";
+			break;
 		case "incomplete":
 			command = "incomplete";
+			break;
 		case "complete":
 			command = "complete";
+			break;
 		case "today":
 			command = "today";
+			break;
 		case "tomorrow":
 		case "tmr":
 		case "tml":
 			command = "tomorrow";
+			break;
 		case "all":
 			command = "all";
+			break;
 		}
 		return command;
 	}
