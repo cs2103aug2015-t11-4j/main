@@ -155,7 +155,9 @@ public class Storage {
 	
 	/* 
      * Updates one task to the taskList and writes to external file
+     * @@author A0126058-unused due to change of requirements
      */
+	/*
 	public int updateOneItem(int itemNumber, Task task) {
 	    logger.log(Level.INFO, "Updating {0} to taskList", task.getTaskDescription());
 		taskList.set(itemNumber-1, task); //(jh) update internal list
@@ -171,12 +173,13 @@ public class Storage {
             String replaceLine = "";
             
             while ((line = br.readLine()) != null) {        
-                lineNumber += 1;
                 input += line + '\n';
                 
                 if (lineNumber == itemNumber) {
                     replaceLine = line + '\n';
                 }
+                
+                lineNumber += 1;
             }
             
             br.close();
@@ -195,6 +198,7 @@ public class Storage {
 		}
 		return 0;
 	}
+	*/
 	
 	/* 
      * Deletes a task from the taskList and delete entry from external file
@@ -216,13 +220,14 @@ public class Storage {
             int count = 0;
             
             while ((line = br.readLine()) != null) {
-                if (task.equals(new Task(getTaskTypeByItemNum(count),
-                        getTaskDescriptionByItemNum(count),
-                        getStartDateByItemNum(count),
-                        getEndDateByItemNum(count),
-                        getStartTimeByItemNum(count),
-                        getEndTimeByItemNum(count),
-                        getIsCompletedByItemNum(count)))) {
+                if (getTaskTypeByItemNum(count).equals(task.getTaskType())
+                        && getTaskDescriptionByItemNum(count).equals(task.getTaskDescription())
+                        && getStartDateByItemNum(count).equals(task.getStartDate())
+                        && getEndDateByItemNum(count).equals(task.getEndDate())
+                        && getStartTimeByItemNum(count).equals(task.getStartTime())
+                        && getEndTimeByItemNum(count).equals(task.getEndDate())
+                        && getIsCompletedByItemNum(count).equals(task.getIsCompleted())
+                        ) {
                     bw.write(line);
                     bw.newLine();
                 }
@@ -244,7 +249,8 @@ public class Storage {
      * Deletes a task from the taskList and deletes the entry from external file
      * by an item number
      * @@author A0126058-unused due to change of requirements
-
+    */
+    /*
     public static int deleteOneItemByItemNum(int itemNumber) {
         logger.log(Level.INFO, "Deleting task {0}", itemNumber);
         taskList.remove(itemNumber-1); //(jh) update internal list
