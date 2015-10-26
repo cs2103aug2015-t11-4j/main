@@ -40,14 +40,14 @@ public class Storage {
     }
     
     //access to task list
-    public static ArrayList<Task> getTaskList(){
+    public ArrayList<Task> getTaskList(){
         return taskList;
     }
     
     /* 
 	 * Generates an alt4 file containing taskList
 	 */
-	private static String filename = "Alt4.txt";	
+	private String filename = "Alt4.txt";	
 	
 	/* 
      * Allows user to change the destination of the taskList and write actual
@@ -55,7 +55,7 @@ public class Storage {
      * 
      * TODO: To allow duplicates of the taskList? Rely on Alt4.txt for location storage?
      */
-	public static void changeDirectory(String directory) {
+	public void changeDirectory(String directory) {
 	    File file = new File(filename = directory + filename);
 	    file.getParentFile().mkdirs();	   
 	}
@@ -112,7 +112,8 @@ public class Storage {
      * NOTE: External file saves the path of the user's directory of choice 
      * to the first line of the external file
      */
-    private static boolean retrieveDirectory() throws FileNotFoundException, IOException {
+    /*
+    private boolean retrieveDirectory() throws FileNotFoundException, IOException {
         logger.log(Level.INFO, "Retrieving directory from external file!");
         String[] getDirectory;
         if(!getTaskTypeByItemNum(0).equals("deadlines") 
@@ -124,6 +125,7 @@ public class Storage {
         }
         return false;
     }
+    */
 	
 	/* 
      * Adds one task to the taskList and writes to external file
@@ -283,7 +285,7 @@ public class Storage {
 	/* 
      * Obtains task type from task saved in external file
      */
-    private static String getTaskTypeByItemNum(int itemNumber) {
+    private String getTaskTypeByItemNum(int itemNumber) {
         try {
             String[] target = readExternalFile(itemNumber);
             return target[0];
@@ -295,7 +297,7 @@ public class Storage {
     /* 
      * Obtains task description from task saved in external file
      */
-    private static String getTaskDescriptionByItemNum(int itemNumber) {
+    private String getTaskDescriptionByItemNum(int itemNumber) {
         try {
             String[] target = readExternalFile(itemNumber);
             return target[1];
@@ -307,7 +309,7 @@ public class Storage {
     /* 
      * Obtains start date from task saved in external file
      */
-    private static String getStartDateByItemNum(int itemNumber) {
+    private String getStartDateByItemNum(int itemNumber) {
         try {
             String[] target = readExternalFile(itemNumber);
             return target[2];
@@ -319,7 +321,7 @@ public class Storage {
     /* 
      * Obtains end date from task saved in external file
      */
-    private static String getEndDateByItemNum(int itemNumber) {
+    private String getEndDateByItemNum(int itemNumber) {
         try {
             String[] target = readExternalFile(itemNumber);
             return target[3];
@@ -331,7 +333,7 @@ public class Storage {
     /* 
      * Obtains start time from task saved in external file
      */
-    private static String getStartTimeByItemNum(int itemNumber) {
+    private String getStartTimeByItemNum(int itemNumber) {
         try {
             String[] target = readExternalFile(itemNumber);
             return target[4];
@@ -343,7 +345,7 @@ public class Storage {
     /* 
      * Obtains end time from task saved in external file
      */
-    private static String getEndTimeByItemNum(int itemNumber) {
+    private String getEndTimeByItemNum(int itemNumber) {
         try {
             String[] target = readExternalFile(itemNumber);
             return target[5];
@@ -355,7 +357,7 @@ public class Storage {
     /* 
      * Obtains end date from task saved in external file
      */
-    private static Boolean getIsCompletedByItemNum(int itemNumber) {
+    private Boolean getIsCompletedByItemNum(int itemNumber) {
         try {
             String[] target = readExternalFile(itemNumber);
             return Boolean.parseBoolean(target[6]);
@@ -367,7 +369,7 @@ public class Storage {
     /*
      * Reads the external file based on its line number
      */
-    private static String[] readExternalFile(int itemNumber) throws FileNotFoundException, IOException {
+    private String[] readExternalFile(int itemNumber) throws FileNotFoundException, IOException {
         FileReader fr = new FileReader(filename);
         BufferedReader br = new BufferedReader(fr);        
            
@@ -395,7 +397,7 @@ public class Storage {
      * Displays all tasks to the taskList
      * @@author A0126058-unused due to change of requirements
      
-	public static void display() {
+	public void display() {
         try {
             File file = new File(filename);
             
