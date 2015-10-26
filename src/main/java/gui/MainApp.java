@@ -88,7 +88,7 @@ public class MainApp extends Application {
     private BorderPane rootLayout;
     private MainApp mainApp;
 
-    //private static ArrayList<ItemForUserScreen> itemList = Controller.getItemList();//JH
+    private static ArrayList<ItemForUserScreen> itemList;
     
     public static void main(String[] args) {
         launch(args);
@@ -101,21 +101,37 @@ public class MainApp extends Application {
         initPrimaryStage(primaryStage);
         
         OutputToUI outputToUI = new OutputToUI();
-        ItemForUserScreen item = new ItemForUserScreen(false, "event", "family outing");
+        /*ItemForUserScreen item = new ItemForUserScreen(false, "event", "family outing");
     	ArrayList<ItemForUserScreen> list = new ArrayList<ItemForUserScreen> ();
     	list.add(item);
     	outputToUI.setTypeOfListView("event");
-    	outputToUI.setItemList(list);
+    	outputToUI.setItemList(list);*/
     	
-    	ArrayList<ItemForUserScreen> itemList = outputToUI.getItemList();
+    	//itemList = outputToUI.getItemList();
+        try {
+			outputToUI = Controller.initializeProgram();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        itemList = outputToUI.getItemList();
 
         // Add components to RootLayout
         addCommandBar(this);
 
-		createDeadlineList(itemList);
-		createEventList(itemList);
-	    createFloatingList(itemList);
-        addSummaryView();
+        /*if(itemList == null) {
+        	addSummaryView();
+        }
+        else {
+        	createDeadlineList(itemList);
+        	createEventList(itemList);
+        	createFloatingList(itemList);
+        	addSummaryView();
+        }*/
+        createDeadlineList(itemList);
+    	createEventList(itemList);
+    	createFloatingList(itemList);
+    	addSummaryView();
     }
 
 	private void initRootLayout() {
@@ -399,21 +415,22 @@ public class MainApp extends Application {
     	Command command = Controller.createCommand(_userInput);
     	OutputToUI outputToUI = new OutputToUI();
     	outputToUI = command.execute();
+    	commandBarController.clear();
     	
-    	ItemForUserScreen item = new ItemForUserScreen(false, "event", "family outing");
+    	/*ItemForUserScreen item = new ItemForUserScreen(false, "event", "family outing");
     	ArrayList<ItemForUserScreen> list = new ArrayList<ItemForUserScreen> ();
     	list.add(item);
-    	outputToUI.setTypeOfListView("event");
-    	outputToUI.setItemList(list);
+    	outputToUI.setTypeOfScreen("event");
+    	outputToUI.setItemList(list);*/
     	
-    	String userInput = outputToUI.getTypeOfListView();  //null means no change of screen
+    	String userInput = outputToUI.getTypeOfScreen();  //null means no change of screen
     	String feedbackMsg = outputToUI.getFeedbackMsg();
-    	ArrayList<ItemForUserScreen> itemList = outputToUI.getItemList();
+    	itemList = outputToUI.getItemList();
 
     	if(_userInput.equals("today") || _userInput.equals("tomorrow")) {
-    		//createDeadlineList(itemList);
-    		//createEventList(itemList);
-    		//createFloatingList(itemList);
+    		createDeadlineList(itemList);
+    		createEventList(itemList);
+    		createFloatingList(itemList);
     		addSummaryView();
     		if(_userInput.equals("today")) {
     			commandBarController.setFeedback(FEEDBACK_TODAY_SUMMARY);
@@ -460,104 +477,120 @@ public class MainApp extends Application {
     	}*/
     	
     	else if(_userInput.equals("deadline")) {
-			//createDeadlineList(itemList);
+			createDeadlineList(itemList);
 			addDeadline();
 			commandBarController.setFeedback(FEEDBACK_DEADLINE);
 			commandBarController.clear();
 		}
     	
     	else if(_userInput.equals("event")) {
-			//createEventList(itemList);
+			createEventList(itemList);
 			addEvent();
 			commandBarController.setFeedback(FEEDBACK_EVENT);
 			commandBarController.clear();
 		}
     	
     	else if(_userInput.equals("floating")) {
-			//createFloatingList(itemList);
+			createFloatingList(itemList);
 			addFloating();
 			commandBarController.setFeedback(FEEDBACK_FLOATING);
 			commandBarController.clear();
 		}
     	
-    	else if(_userInput.equals("display all")) {
-    		//createCompleteList(itemList);
-    		//createIncompleteList(itemList);
+    	/*else if(_userInput.equals("display all")) {
+    		//itemList = outputToUI.getItemList();
+    		createCompleteList(itemList);
+    		createIncompleteList(itemList);
     		addDisplayAll();
     		commandBarController.setFeedback(FEEDBACK_DISPLAY);
     		commandBarController.clear();
-    	}
+    	}*/
     	
     	else if(_userInput.equals("display complete")) {
-    		//createCompleteList(itemList);
+    		createCompleteList(itemList);
     		addComplete();
-    		commandBarController.setFeedback(FEEDBACK_COMPLETE);
-    		commandBarController.clear();
+			commandBarController.setFeedback(FEEDBACK_COMPLETE);
+			commandBarController.clear();
     	}
     	
     	else if(_userInput.equals("display incomplete")) {
-    		//createIncompleteList(itemList);
+    		createIncompleteList(itemList);
     		addIncomplete();
     		commandBarController.setFeedback(FEEDBACK_INCOMPLETE);
     		commandBarController.clear();
     	}
 		
-		if(itemList.get(0).getIfComplete()) {
+    	else if(_userInput.equals("display all")) {
+    		/*if(itemList.get(0).getIfComplete()) {
 			
-			if(itemList.get(0).getTaskType().equals("floating")) {
-				createFloatingList(itemList);
-				//commandBarController.setFeedback(feedbackMsg);
-				//commandBarController.clear();
-			}
+    			if(itemList.get(0).getTaskType().equals("floating")) {
+    				createFloatingList(itemList);
+    				//commandBarController.setFeedback(feedbackMsg);
+    				//commandBarController.clear();
+    			}
 			
-			else if(itemList.get(0).getTaskType().equals("event")) {
-				createEventList(itemList);
-				//commandBarController.setFeedback(feedbackMsg);
-				//commandBarController.clear();
-			}
+    			else if(itemList.get(0).getTaskType().equals("event")) {
+    				createEventList(itemList);
+    				//commandBarController.setFeedback(feedbackMsg);
+    				//commandBarController.clear();
+    			}
 			
-			else if(itemList.get(0).getTaskType().equals("deadline")) {
-				createDeadlineList(itemList);
-				//commandBarController.setFeedback(feedbackMsg);
-				//commandBarController.clear();
-			}
+    			else if(itemList.get(0).getTaskType().equals("deadline")) {
+    				createDeadlineList(itemList);
+    				//commandBarController.setFeedback(feedbackMsg);
+    				//commandBarController.clear();
+    			}
 			
-			createCompleteList(itemList);
+    			createCompleteList(itemList);
+    			//addSummaryView();
+    			commandBarController.setFeedback(feedbackMsg);
+    			commandBarController.clear();
+    		}
+    		
+    		else if(!(itemList.get(0).getIfComplete())) {
+			
+    			if(itemList.get(0).getTaskType().equals("floating")) {
+    				createFloatingList(itemList);
+    				//commandBarController.setFeedback(feedbackMsg);
+    				//commandBarController.clear();
+    			}
+			
+    			else if(itemList.get(0).getTaskType().equals("event")) {
+    				createEventList(itemList);
+					//commandBarController.setFeedback(feedbackMsg);
+    				//commandBarController.clear();
+    			}
+			
+    			else if(itemList.get(0).getTaskType().equals("deadline")) {
+    				createDeadlineList(itemList);
+    				//commandBarController.setFeedback(feedbackMsg);
+    				//commandBarController.clear();
+    			}
+			
+    			createIncompleteList(itemList);
+    			//addSummaryView();
+    			commandBarController.setFeedback(feedbackMsg);
+    			commandBarController.clear();
+    		}*/
+		
+    		/*else if(itemList.get(0).getTaskType().equals("update")) {
+    			description = itemList.get(0).getPrintOnScreenMsg();
+    			//complete.add(description);
+    			commandBarController.setFeedback(feedbackMsg);
+    			commandBarController.setText(description);
+    		}*/
+    		
+    		createFloatingList(itemList);
+    		createEventList(itemList);
+    		createDeadlineList(itemList);
+    		createCompleteList(itemList);
+    		createIncompleteList(itemList);
 			commandBarController.setFeedback(feedbackMsg);
 			commandBarController.clear();
-		}
-		
-		else if(!(itemList.get(0).getIfComplete())) {
-			
-			if(itemList.get(0).getTaskType().equals("floating")) {
-				createFloatingList(itemList);
-				//commandBarController.setFeedback(feedbackMsg);
-				//commandBarController.clear();
-			}
-			
-			else if(itemList.get(0).getTaskType().equals("event")) {
-				createEventList(itemList);
-				//commandBarController.setFeedback(feedbackMsg);
-				//commandBarController.clear();
-			}
-			
-			else if(itemList.get(0).getTaskType().equals("deadline")) {
-				createDeadlineList(itemList);
-				//commandBarController.setFeedback(feedbackMsg);
-				//commandBarController.clear();
-			}
-			
-			createIncompleteList(itemList);
-			commandBarController.setFeedback(feedbackMsg);
-			commandBarController.clear();
-		}
-		
-		else if(itemList.get(0).getTaskType().equals("update")) {
-			description = itemList.get(0).getPrintOnScreenMsg();
-			//complete.add(description);
-			commandBarController.setFeedback(feedbackMsg);
-			commandBarController.setText(description);
-		}
+    		
+    		//addDisplayAll();
+    		addSummaryView();
+    	}
 		
 		//handleEnterPress(commandBarController, userInput);
     	
