@@ -76,11 +76,11 @@ public class Storage {
         @SuppressWarnings("unused")
         String line;
         int count = 0;
-        
+        /*
         if(retrieveDirectory()){
             count = 1;
         }
-        
+        */
         while ((line = br.readLine()) != null) {
             taskList.add(new Task(getTaskTypeByItemNum(count),
                     getTaskDescriptionByItemNum(count),
@@ -373,19 +373,18 @@ public class Storage {
            
         int lineNumber = 0;
         String line = null;
-        String[] target = new String[4];
-        
+        String[] target = new String[7];
+        /*
         //Checks if the first line is a user specified directory for the taskList
         if(retrieveDirectory()){
             lineNumber = 1;
         }
-        
+        */
         while ((line = br.readLine()) != null) {
-            lineNumber += 1;
-        
             if (lineNumber == itemNumber) {
                 target = line.split(";");
             }
+            lineNumber += 1;
         }
       
         br.close();
