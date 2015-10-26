@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.GregorianCalendar;
+
+import main.java.resources.DataDisplay;
 import main.java.resources.Task;
 import main.java.resources.TaskComparator;
 import main.java.storage.Storage;
@@ -16,7 +18,7 @@ public class Sort {
 	public static final String TYPE_EVENT = "event";
 	public static final String TYPE_FLOATING = "floating";
 
-	public static void main(String arg[]) {
+/*	public static void main(String arg[]) {
 
 		Task task1 = new Task(TYPE_DEADLINE, "wake up", null, "01/01/2015", null, "0900", false);
 		Task task2 = new Task(TYPE_DEADLINE, "wash face with cool water", null, "02/02/2015", null, "1100", true);
@@ -52,8 +54,20 @@ public class Sort {
 		list.add(task6);
 		sortList = createSortList(list);
 		printSortList(sortList, list);
+		
+		Storage storage = Storage.getInstance();
+		storage.addOneItem(task1);
+		storage.addOneItem(task2);
+		storage.addOneItem(task3);
+		storage.addOneItem(task4);
+		storage.addOneItem(task5);
+		storage.addOneItem(task6);
+		DataDisplay.displayList(storage.getTaskList());
+		ArrayList<Task> sortResult = sortAll();
+		DataDisplay.displayList(sortResult);
+		
 	}
-	
+	*/
 	private static void printSortList(ArrayList<Sort> sortList, ArrayList<Task> list){
 		Sort sort;
 		for (int i = 0; i < sortList.size(); i++){
@@ -135,6 +149,7 @@ public class Sort {
 
 		ArrayList<Sort> sortListForIncomplete = createSortList(incompleteNonFloatingList);
 		ArrayList<Sort> sortListForComplete = createSortList(completeNonFloatingList);
+		
 		Collections.sort(sortListForIncomplete, new TaskComparator());
 		if (sortListForIncomplete.size()!=0){
 			for (int i = 0; i < sortListForIncomplete.size(); i ++){
@@ -148,7 +163,6 @@ public class Sort {
 			}
 		}
 		
-		// TODO SORT by time
 		if (completeNonFloatingList.size() != 0) {
 			for (int i = 0; i < completeNonFloatingList.size(); i++) {
 				sortResult.add(completeNonFloatingListSorted.get(i));
