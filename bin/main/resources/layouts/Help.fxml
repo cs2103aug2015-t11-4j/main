@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.*?>
+
+<fx:root type="StackPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <TableView fx:id="helpTable" prefHeight="500.0" prefWidth="800.0">
+      <columns>
+        <TableColumn prefWidth="400.0" text="Command" fx:id="commandCol" />
+        <TableColumn prefWidth="122.5" text="Flexi" fx:id="flexiCol" />
+        <TableColumn prefWidth="122.5" text="Format" fx:id="formatCol" />
+        <TableColumn prefWidth="122.5" text="Comments" fx:id="commentCol" />
+        <TableColumn prefWidth="122.5" text="Results" fx:id="resultCol" />
+      </columns>
+    </TableView>
+  </children>
+</fx:root>

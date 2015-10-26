@@ -280,6 +280,10 @@ public class MainApp extends Application {
         rootLayout.setBottom(new CommandBarController(mainApp));
     }
     
+    private void addHelpTable(MainApp mainApp) {
+        rootLayout.setCenter(new HelpTableController(mainApp));
+    }
+    
     private void addSummaryView() {
         try {
         	FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(SUMMARY_LAYOUT_FXML));
@@ -444,7 +448,7 @@ public class MainApp extends Application {
     	
     	
     	else if(_userInput.equals("help")) {
-    		
+    		addHelpTable(this);
     		commandBarController.clear();
     	}
     	
@@ -582,8 +586,8 @@ public class MainApp extends Application {
 			commandBarController.setFeedback(feedbackMsg);
 			commandBarController.clear();
     		
-    		//addDisplayAll();
-    		addSummaryView();
+    		addDisplayAll();
+    		//addSummaryView();
     	}
     	
     	if(taskToUpdate != null) {
@@ -841,7 +845,7 @@ public class MainApp extends Application {
      */
     private ObservableList<String> createEventList(ArrayList<ItemForUserScreen> itemList) {
 		event.clear();
-    	for (int i = 0; i < itemList.size(); i ++){
+    	for (int i = 0; i < itemList.size(); i++){
 			if (itemList.get(i).getTaskType().equals("event")){
 				event.add(itemList.get(i).getPrintOnScreenMsg());
 			}
@@ -851,7 +855,7 @@ public class MainApp extends Application {
     
     private ObservableList<String> createDeadlineList(ArrayList<ItemForUserScreen> itemList) {
     	deadline.clear();
-    	for (int i = 0; i < itemList.size(); i ++){
+    	for (int i = 0; i < itemList.size(); i++){
 			if (itemList.get(i).getTaskType().equals("deadline")){
 				deadline.add(itemList.get(i).getPrintOnScreenMsg());
 			}
@@ -861,7 +865,7 @@ public class MainApp extends Application {
     
     private ObservableList<String> createFloatingList(ArrayList<ItemForUserScreen> itemList) {
     	floating.clear();
-    	for (int i = 0; i < itemList.size(); i ++){
+    	for (int i = 0; i < itemList.size(); i++){
 			if (itemList.get(i).getTaskType().equals("floating")){
 				floating.add(itemList.get(i).getPrintOnScreenMsg());
 			}
@@ -871,10 +875,11 @@ public class MainApp extends Application {
     
     private ObservableList<Text> createIncompleteList(ArrayList<ItemForUserScreen> itemList){
     	incomplete.clear();
-    	for (int i = 0; i < itemList.size(); i ++){
-			if (itemList.get(i).getTaskType().equals("incomplete")){
+    	for (int i = 0; i < itemList.size(); i++){
+			//if (itemList.get(i).getTaskType().equals("incomplete")){
+    		if(!(itemList.get(i).getIfComplete())) {
 				Text text = new Text(itemList.get(i).getPrintOnScreenMsg());
-				text.setFill(Color.GREEN);
+				text.setFill(Color.RED);
 				incomplete.add(text);
 			}
 		}
@@ -883,10 +888,11 @@ public class MainApp extends Application {
     
     private ObservableList<Text> createCompleteList(ArrayList<ItemForUserScreen> itemList){
     	complete.clear();
-    	for (int i = 0; i < itemList.size(); i ++){
-			if (itemList.get(i).getTaskType().equals("complete")){
+    	for (int i = 0; i < itemList.size(); i++){
+			//if (itemList.get(i).getTaskType().equals("complete")){
+			if(itemList.get(i).getIfComplete()) {
 				Text text = new Text(itemList.get(i).getPrintOnScreenMsg());
-				text.setFill(Color.RED);
+				text.setFill(Color.GREEN);
 				complete.add(text);
 			}
 		}
