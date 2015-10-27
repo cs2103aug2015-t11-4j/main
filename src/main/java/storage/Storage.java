@@ -85,11 +85,11 @@ public class Storage {
         @SuppressWarnings("unused")
         String line;
         int count = 0;
-        
+        /*
         if(retrieveDirectory()){
             count = 1;
         }
-        
+        */
         while ((line = br.readLine()) != null) {
             taskList.add(new Task(getTaskTypeByItemNum(count),
                     getTaskDescriptionByItemNum(count),
@@ -156,13 +156,14 @@ public class Storage {
 			
 			bw.newLine();
 			bw.close();
-
-			sortTaskList(taskList);
+			
 			logger.log(Level.INFO, "Completed writing {0} to external file", task.getTaskDescription());
 		} catch (Exception e) {
 		    logger.log(Level.WARNING, "Unable to add {0}", task.getTaskDescription());
 			return -1;
 		}
+		
+		sortTaskList(taskList);
 		return 0;
 	}
 	
@@ -248,8 +249,8 @@ public class Storage {
     /*
      * Sorts the taskList
      */
-    private void sortTaskList(ArrayList<Task> task) {
-        ArrayList<Task> sort = task;
+    private void sortTaskList(ArrayList<Task> tasks) {
+        ArrayList<Task> sort = tasks;
         sort = Sort.sortAll();
         
         wipeTaskList();
