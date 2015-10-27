@@ -49,6 +49,9 @@ public class Controller {
 		case "complete":
 			itemNum = Integer.parseInt(inputForAction.get(1));
 			return command = new Complete(itemNum, storage);
+		case "incomplete":
+			itemNum =Integer.parseInt(inputForAction.get(1));
+			return command = new Incomplete(itemNum, storage);
 		default:
 			return command = new Display(inputForAction, storage);
 		}
