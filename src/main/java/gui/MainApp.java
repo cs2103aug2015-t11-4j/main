@@ -34,7 +34,8 @@ public class MainApp extends Application {
 	
     private static final String WINDOW_TITLE = "ALT4";
     private static final String ROOT_LAYOUT_FXML = "/main/resources/layouts/RootLayout.fxml";
-    private static final String SUMMARY_LAYOUT_FXML = "/main/resources/layouts/Summary.fxml";
+    private static final String TODAY_SUMMARY_LAYOUT_FXML = "/main/resources/layouts/TodaySummary.fxml";
+    private static final String TOMORROW_SUMMARY_LAYOUT_FXML = "/main/resources/layouts/TomorrowSummary.fxml";
     private static final String ALL_LAYOUT_FXML = "/main/resources/layouts/DisplayAll.fxml";
     private static final String FLOATING_LAYOUT_FXML = "/main/resources/layouts/Floating.fxml";
     private static final String DEADLINE_LAYOUT_FXML = "/main/resources/layouts/Deadline.fxml";
@@ -131,7 +132,7 @@ public class MainApp extends Application {
         createDeadlineList(itemList);
     	createEventList(itemList);
     	createFloatingList(itemList);
-    	addSummaryView();
+    	addTodaySummaryView();
     }
 
 	private void initRootLayout() {
@@ -284,9 +285,22 @@ public class MainApp extends Application {
         rootLayout.setCenter(new HelpTableController(mainApp));
     }
     
-    private void addSummaryView() {
+    private void addTodaySummaryView() {
         try {
-        	FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(SUMMARY_LAYOUT_FXML));
+        	FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(TODAY_SUMMARY_LAYOUT_FXML));
+        	AnchorPane page = (AnchorPane) loader.load();
+        	rootLayout.setTop(page);
+        	
+        	SummaryController controller = loader.getController();
+            controller.setMainApp(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void addTomorrowSummaryView() {
+        try {
+        	FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(TOMORROW_SUMMARY_LAYOUT_FXML));
         	AnchorPane page = (AnchorPane) loader.load();
         	rootLayout.setTop(page);
         	
@@ -434,23 +448,29 @@ public class MainApp extends Application {
     	
     	commandBarController.setFeedback(feedbackMsg);
 
-    	if(_userInput.equals("display today") || _userInput.equals("display tomorrow")) {
+    	if(_userInput.equals("display today")) {
     		createDeadlineList(itemList);
     		createEventList(itemList);
     		createFloatingList(itemList);
-    		addSummaryView();
-    		if(_userInput.equals("display today")) {
-    			commandBarController.setFeedback(FEEDBACK_TODAY_SUMMARY);
-    		}
-    		else {
-    			commandBarController.setFeedback(FEEDBACK_TMR_SUMMARY);
-    		}
+    		addTodaySummaryView();
+    		//commandBarController.setFeedback(FEEDBACK_TODAY_SUMMARY);
+    		commandBarController.setFeedback(feedbackMsg);
     		commandBarController.clear();
     	}
     	
+    	else if(_userInput.equals("display tomorrow")) {
+    		createDeadlineList(itemList);
+    		createEventList(itemList);
+    		createFloatingList(itemList);
+    		addTomorrowSummaryView();
+    		//commandBarController.setFeedback(FEEDBACK_TMR_SUMMARY);
+    		commandBarController.setFeedback(feedbackMsg);
+    		commandBarController.clear();
+    	}
     	
     	else if(_userInput.equals("help")) {
     		addHelpTable(this);
+    		commandBarController.setFeedback(feedbackMsg);
     		commandBarController.clear();
     	}
     	
@@ -486,21 +506,24 @@ public class MainApp extends Application {
     	else if(_userInput.equals("display deadline")) {
 			createDeadlineList(itemList);
 			addDeadline();
-			commandBarController.setFeedback(FEEDBACK_DEADLINE);
+			//commandBarController.setFeedback(FEEDBACK_DEADLINE);
+			commandBarController.setFeedback(feedbackMsg);
 			commandBarController.clear();
 		}
     	
     	else if(_userInput.equals("display event")) {
 			createEventList(itemList);
 			addEvent();
-			commandBarController.setFeedback(FEEDBACK_EVENT);
+			//commandBarController.setFeedback(FEEDBACK_EVENT);
+			commandBarController.setFeedback(feedbackMsg);
 			commandBarController.clear();
 		}
     	
     	else if(_userInput.equals("display floating")) {
 			createFloatingList(itemList);
 			addFloating();
-			commandBarController.setFeedback(FEEDBACK_FLOATING);
+			//commandBarController.setFeedback(FEEDBACK_FLOATING);
+			commandBarController.setFeedback(feedbackMsg);
 			commandBarController.clear();
 		}
     	
@@ -516,14 +539,16 @@ public class MainApp extends Application {
     	else if(_userInput.equals("display complete")) {
     		createCompleteList(itemList);
     		addComplete();
-			commandBarController.setFeedback(FEEDBACK_COMPLETE);
+			//commandBarController.setFeedback(FEEDBACK_COMPLETE);
+    		commandBarController.setFeedback(feedbackMsg);
 			commandBarController.clear();
     	}
     	
     	else if(_userInput.equals("display incomplete")) {
     		createIncompleteList(itemList);
     		addIncomplete();
-    		commandBarController.setFeedback(FEEDBACK_INCOMPLETE);
+    		//commandBarController.setFeedback(FEEDBACK_INCOMPLETE);
+    		commandBarController.setFeedback(feedbackMsg);
     		commandBarController.clear();
     	}
 		

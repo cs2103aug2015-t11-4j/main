@@ -10,7 +10,7 @@
   <center>
     <TextField fx:id="commandBar" maxWidth="850.0" onKeyPressed="#onKeyPress">
       <BorderPane.margin>
-        <Insets bottom="15.0" />
+        <Insets bottom="30.0" />
       </BorderPane.margin>
     </TextField>
   </center>
