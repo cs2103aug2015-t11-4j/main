@@ -3,7 +3,6 @@ package main.java.storage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -86,11 +85,11 @@ public class Storage {
         @SuppressWarnings("unused")
         String line;
         int count = 0;
-        /*
+        
         if(retrieveDirectory()){
             count = 1;
         }
-        */
+        
         while ((line = br.readLine()) != null) {
             taskList.add(new Task(getTaskTypeByItemNum(count),
                     getTaskDescriptionByItemNum(count),
@@ -101,8 +100,9 @@ public class Storage {
                     getIsCompletedByItemNum(count)));
             count += 1;
         }
-        Sort.sortAll();
         br.close();
+        
+        sortTaskList(taskList);
         logger.log(Level.INFO, "Completed regeneration of internal taskList from external file");
     }
 
@@ -123,24 +123,18 @@ public class Storage {
      * NOTE: External file saves the path of the user's directory of choice 
      * to the first line of the external file
      */
-    private boolean retrieveDirectory() throws IOException {
-        try {
+    private boolean retrieveDirectory() {
+        String[] getDirectory;
+        
+        if(getTaskTypeByItemNum(0).equals("deadlines") 
+                || getTaskTypeByItemNum(0).equals("event") 
+                || getTaskTypeByItemNum(0).equals("floating")) { 
             logger.log(Level.INFO, "Retrieving directory from external file!");
-            String[] getDirectory;
-            if(!getTaskTypeByItemNum(0).equals("deadlines") 
-                    || !getTaskTypeByItemNum(0).equals("event") 
-                    || !getTaskTypeByItemNum(0).equals("floating")) { 
-                getDirectory = readExternalFile(0);
-                //changeDirectory(getDirectory[0]);
-                return true;
-            } 
-        } catch(Exception e) {
-            File file = new File(filename);   
-
-            if(!file.exists()) {
-                file.createNewFile(); 
-            }
+            getDirectory = readExternalFile(0);
+            filename = getDirectory[0] + filename;
+            return true;
         }
+        
         return false;
     }
 	
@@ -162,7 +156,8 @@ public class Storage {
 			
 			bw.newLine();
 			bw.close();
-			Sort.sortAll();
+
+			sortTaskList(taskList);
 			logger.log(Level.INFO, "Completed writing {0} to external file", task.getTaskDescription());
 		} catch (Exception e) {
 		    logger.log(Level.WARNING, "Unable to add {0}", task.getTaskDescription());
@@ -209,7 +204,8 @@ public class Storage {
             bw.close();
             original.delete();
             temp.renameTo(original);
-            Sort.sortAll();
+
+            sortTaskList(taskList);
         } catch (Exception e) {
             logger.log(Level.WARNING, "Unable to delete task {0} from external file", task.getTaskDescription());
             return -1;
@@ -247,6 +243,17 @@ public class Storage {
             logger.log(Level.WARNING, "Unable to complete task {0} from external file", task.getTaskDescription());
             return -1;
         }
+    }
+    
+    /*
+     * Sorts the taskList
+     */
+    private void sortTaskList(ArrayList<Task> task) {
+        ArrayList<Task> sort = task;
+        sort = Sort.sortAll();
+        
+        wipeTaskList();
+        taskList = sort;
     }
     
 	/* 
