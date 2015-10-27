@@ -45,27 +45,27 @@ public class MainApp extends Application {
     private static final String COMPLETE_LAYOUT_FXML = "/main/resources/layouts/Complete.fxml";
     private static final String INCOMPLETE_LAYOUT_FXML = "/main/resources/layouts/Incomplete.fxml";
     
-    private static final String FEEDBACK_TODAY_SUMMARY = "Today's Summary";
-    private static final String FEEDBACK_TMR_SUMMARY = "Tomorrow's Summary";
-    private static final String FEEDBACK_DISPLAY = "All Events";
-    private static final String FEEDBACK_COMPLETE = "Completed Events";
-    private static final String FEEDBACK_INCOMPLETE = "Incomplete Events";
+    //private static final String FEEDBACK_TODAY_SUMMARY = "Today's Summary";
+    //private static final String FEEDBACK_TMR_SUMMARY = "Tomorrow's Summary";
+    //private static final String FEEDBACK_DISPLAY = "All Events";
+    //private static final String FEEDBACK_COMPLETE = "Completed Events";
+    //private static final String FEEDBACK_INCOMPLETE = "Incomplete Events";
     //private static final String FEEDBACK_TODAY = "Today's Tasks";
     //private static final String FEEDBACK_TOMORROW = "Tomorrow's Tasks";
-    private static final String FEEDBACK_DEADLINE = "Deadline Tasks";
-    private static final String FEEDBACK_EVENT = "Events";
-    private static final String FEEDBACK_FLOATING = "Floating Tasks";
+    //private static final String FEEDBACK_DEADLINE = "Deadline Tasks";
+    //private static final String FEEDBACK_EVENT = "Events";
+    //private static final String FEEDBACK_FLOATING = "Floating Tasks";
     
-    private static final String FEEDBACK_INVALID_COMMAND = "Invalid command.";
-    private static final String FEEDBACK_ADDED = "Successfully Added: ";
-    private static final String FEEDBACK_DELETED = "Successfully Deleted: ";
-    private static final String FEEDBACK_UPDATED = "Successfully Updated ";
+    //private static final String FEEDBACK_INVALID_COMMAND = "Invalid command.";
+    //private static final String FEEDBACK_ADDED = "Successfully Added: ";
+    //private static final String FEEDBACK_DELETED = "Successfully Deleted: ";
+    //private static final String FEEDBACK_UPDATED = "Successfully Updated ";
     private static final String FEEDBACK_EXIT = "Exiting Alt4";
-    private static final String FEEDBACK_UNDONE = "Undone: ";
+    //private static final String FEEDBACK_UNDONE = "Undone: ";
     
-    private static final String TYPE_DEADLINE = "deadline";
-    private static final String TYPE_EVENT = "event";
-    private static final String TYPE_FLOATING = "floating";
+    //private static final String TYPE_DEADLINE = "deadline";
+    //private static final String TYPE_EVENT = "event";
+    //private static final String TYPE_FLOATING = "floating";
     
     private ObservableList<String> event = FXCollections.observableArrayList();
     private ObservableList<String> deadline = FXCollections.observableArrayList();
@@ -75,14 +75,14 @@ public class MainApp extends Application {
     //private ObservableList<String> today = FXCollections.observableArrayList();
     //private ObservableList<String> tomorrow = FXCollections.observableArrayList();
     
-    private String[] arr;
-    private String[] array;
-    private String typeDisplay;  //types of display in command
-    private String command;
-    private String description;
-    private String type;
-    private String newDescription;
-    private int listNum;
+    //private String[] arr;
+    //private String[] array;
+    //private String typeDisplay;  //types of display in command
+    //private String command;
+    //private String description;
+    //private String type;
+    //private String newDescription;
+    //private int listNum;
     private PauseTransition delay;
 	
 	private Stage primaryStage;
@@ -171,6 +171,7 @@ public class MainApp extends Application {
     public MainApp() {
     	/*
     	 * testing GUI
+    	 * stub data
     	 * @@author A0131300-unused because these are used to test GUI
     	 * 
         //event.add(new LocalEvent("Hans"));
@@ -235,31 +236,26 @@ public class MainApp extends Application {
     //private static ArrayList<ItemForUserScreen> itemList = Controller.getItemList();//JH
 
     public ObservableList<String> getEvent() {
-    	//return event;
     	//event = createEventList(itemList); //JH
     	return event;
     }
     
     public ObservableList<String> getDeadline() {
-    	//return deadline;
     	//deadline = createDeadlineList(itemList);
     	return deadline;
     }
     
     public ObservableList<String> getFloating() {
-    	//return floating;
     	//floating = createFloatingList(itemList); //JH
     	return floating;
     }
     
     public ObservableList<Text> getComplete() {
-    	//return complete;
     	//complete = createCompleteList(itemList);
     	return complete;
     }
     
     public ObservableList<Text> getIncomplete() {
-    	//return incomplete;
     	//incomplete = createIncompleteList(itemList);
     	return incomplete;
     }
@@ -428,200 +424,139 @@ public class MainApp extends Application {
     }
     
     public void handleEnterPress(CommandBarController commandBarController, String _userInput ) {
-    	
-    	_userInput = _userInput.toLowerCase();
-    	Command command = Controller.createCommand(_userInput);
-    	OutputToUI outputToUI = new OutputToUI();
-    	outputToUI = command.execute();
-    	commandBarController.clear();
-    	
-    	/*ItemForUserScreen item = new ItemForUserScreen(false, "event", "family outing");
-    	ArrayList<ItemForUserScreen> list = new ArrayList<ItemForUserScreen> ();
-    	list.add(item);
-    	outputToUI.setTypeOfScreen("event");
-    	outputToUI.setItemList(list);*/
-    	
-    	String userInput = outputToUI.getTypeOfScreen();  //null means no change of screen
-    	itemList = outputToUI.getItemList();
-    	String feedbackMsg = outputToUI.getFeedbackMsg();
-    	String taskToUpdate = outputToUI.getInputBoxMsg();
-    	
-    	commandBarController.setFeedback(feedbackMsg);
+    	try {
+    		_userInput = _userInput.toLowerCase();
+    		Command command = Controller.createCommand(_userInput);
+    		OutputToUI outputToUI = new OutputToUI();
+    		outputToUI = command.execute();
+    		commandBarController.clear();
 
-    	if(_userInput.equals("display today")) {
-    		createDeadlineList(itemList);
-    		createEventList(itemList);
-    		createFloatingList(itemList);
-    		addTodaySummaryView();
-    		//commandBarController.setFeedback(FEEDBACK_TODAY_SUMMARY);
+    		/*ItemForUserScreen item = new ItemForUserScreen(false, "event", "family outing");
+    		ArrayList<ItemForUserScreen> list = new ArrayList<ItemForUserScreen> ();
+    		list.add(item);
+    		outputToUI.setTypeOfScreen("event");
+    		outputToUI.setItemList(list);*/
+
+    		String userInput = outputToUI.getTypeOfScreen();  //null means no change of screen
+    		itemList = outputToUI.getItemList();
+    		String feedbackMsg = outputToUI.getFeedbackMsg();
+    		String taskToUpdate = outputToUI.getInputBoxMsg();
+
     		commandBarController.setFeedback(feedbackMsg);
-    		commandBarController.clear();
-    	}
-    	
-    	else if(_userInput.equals("display tomorrow")) {
-    		createDeadlineList(itemList);
-    		createEventList(itemList);
-    		createFloatingList(itemList);
-    		addTomorrowSummaryView();
-    		//commandBarController.setFeedback(FEEDBACK_TMR_SUMMARY);
-    		commandBarController.setFeedback(feedbackMsg);
-    		commandBarController.clear();
-    	}
-    	
-    	else if(_userInput.equals("help")) {
-    		addHelpTable(this);
-    		commandBarController.setFeedback(feedbackMsg);
-    		commandBarController.clear();
-    	}
-    	
-    	else if(_userInput.equals("exit") || _userInput.equals("quit")) {
-    		commandBarController.setFeedback(FEEDBACK_EXIT);
-    		commandBarController.clear();
-    		delay = new PauseTransition(Duration.seconds(1));  //delay closing of GUI window by 1s
-    		delay.setOnFinished(new EventHandler<ActionEvent> () {
-    			@Override
-    			public void handle(ActionEvent event) {
-    				primaryStage.hide();
-    			}
-    		});
-    		delay.play();
-    	}
-    	
-    	/*
-    	 * Display today and tomorrow's tasks individually
-    	 * @@author A0131300-unused due to change in plans
-    	 * 
-    	else if(userInput.equals("today")) {
-    		addToday();
-    		commandBarController.setFeedback(FEEDBACK_TODAY);
-    		commandBarController.clear();
-    	}
-    	
-    	else if(userInput.equals("tomorrow") || userInput.equals("tmr")) {
-    		addTmr();
-    		commandBarController.setFeedback(FEEDBACK_TOMORROW);
-    		commandBarController.clear();
-    	}*/
-    	
-    	else if(_userInput.equals("display deadline")) {
-			createDeadlineList(itemList);
-			addDeadline();
-			//commandBarController.setFeedback(FEEDBACK_DEADLINE);
-			commandBarController.setFeedback(feedbackMsg);
-			commandBarController.clear();
-		}
-    	
-    	else if(_userInput.equals("display event")) {
-			createEventList(itemList);
-			addEvent();
-			//commandBarController.setFeedback(FEEDBACK_EVENT);
-			commandBarController.setFeedback(feedbackMsg);
-			commandBarController.clear();
-		}
-    	
-    	else if(_userInput.equals("display floating")) {
-			createFloatingList(itemList);
-			addFloating();
-			//commandBarController.setFeedback(FEEDBACK_FLOATING);
-			commandBarController.setFeedback(feedbackMsg);
-			commandBarController.clear();
-		}
-    	
-    	/*else if(_userInput.equals("display all")) {
-    		//itemList = outputToUI.getItemList();
-    		createCompleteList(itemList);
-    		createIncompleteList(itemList);
-    		addDisplayAll();
-    		commandBarController.setFeedback(FEEDBACK_DISPLAY);
-    		commandBarController.clear();
-    	}*/
-    	
-    	else if(_userInput.equals("display complete")) {
-    		createCompleteList(itemList);
-    		addComplete();
-			//commandBarController.setFeedback(FEEDBACK_COMPLETE);
-    		commandBarController.setFeedback(feedbackMsg);
-			commandBarController.clear();
-    	}
-    	
-    	else if(_userInput.equals("display incomplete")) {
-    		createIncompleteList(itemList);
-    		addIncomplete();
-    		//commandBarController.setFeedback(FEEDBACK_INCOMPLETE);
-    		commandBarController.setFeedback(feedbackMsg);
-    		commandBarController.clear();
-    	}
-		
-    	else if(_userInput.equals("display all")) {
-    		/*if(itemList.get(0).getIfComplete()) {
-			
-    			if(itemList.get(0).getTaskType().equals("floating")) {
-    				createFloatingList(itemList);
-    				//commandBarController.setFeedback(feedbackMsg);
-    				//commandBarController.clear();
-    			}
-			
-    			else if(itemList.get(0).getTaskType().equals("event")) {
-    				createEventList(itemList);
-    				//commandBarController.setFeedback(feedbackMsg);
-    				//commandBarController.clear();
-    			}
-			
-    			else if(itemList.get(0).getTaskType().equals("deadline")) {
-    				createDeadlineList(itemList);
-    				//commandBarController.setFeedback(feedbackMsg);
-    				//commandBarController.clear();
-    			}
-			
-    			createCompleteList(itemList);
-    			//addSummaryView();
+
+    		if(userInput.equals("today")) {
+    			createDeadlineList(itemList);
+    			createEventList(itemList);
+    			createFloatingList(itemList);
+    			addTodaySummaryView();
+    			//commandBarController.setFeedback(FEEDBACK_TODAY_SUMMARY);
     			commandBarController.setFeedback(feedbackMsg);
     			commandBarController.clear();
     		}
-    		
-    		else if(!(itemList.get(0).getIfComplete())) {
-			
-    			if(itemList.get(0).getTaskType().equals("floating")) {
-    				createFloatingList(itemList);
-    				//commandBarController.setFeedback(feedbackMsg);
-    				//commandBarController.clear();
-    			}
-			
-    			else if(itemList.get(0).getTaskType().equals("event")) {
-    				createEventList(itemList);
-					//commandBarController.setFeedback(feedbackMsg);
-    				//commandBarController.clear();
-    			}
-			
-    			else if(itemList.get(0).getTaskType().equals("deadline")) {
-    				createDeadlineList(itemList);
-    				//commandBarController.setFeedback(feedbackMsg);
-    				//commandBarController.clear();
-    			}
-			
-    			createIncompleteList(itemList);
-    			//addSummaryView();
+
+    		else if(userInput.equals("tomorrow")) {
+    			createDeadlineList(itemList);
+    			createEventList(itemList);
+    			createFloatingList(itemList);
+    			addTomorrowSummaryView();
+    			//commandBarController.setFeedback(FEEDBACK_TMR_SUMMARY);
     			commandBarController.setFeedback(feedbackMsg);
     			commandBarController.clear();
+    		}
+
+    		else if(userInput.equals("help")) {
+    			addHelpTable(this);
+    			commandBarController.setFeedback(feedbackMsg);
+    			commandBarController.clear();
+    		}
+
+    		else if(_userInput.equals("exit")) {
+    			commandBarController.setFeedback(FEEDBACK_EXIT);
+    			commandBarController.clear();
+    			delay = new PauseTransition(Duration.seconds(1));  //delay closing of GUI window by 1s
+    			delay.setOnFinished(new EventHandler<ActionEvent> () {
+    				@Override
+    				public void handle(ActionEvent event) {
+    					primaryStage.hide();
+    				}
+    			});
+    			delay.play();
+    		}
+
+    		/*
+    		 * Display today and tomorrow's tasks individually
+    		 * @@author A0131300-unused due to change in plans
+    		 * 
+    		else if(userInput.equals("today")) {
+    			addToday();
+    			commandBarController.setFeedback(FEEDBACK_TODAY);
+    			commandBarController.clear();
+    		}
+
+    		else if(userInput.equals("tomorrow") || userInput.equals("tmr")) {
+    			addTmr();
+    			commandBarController.setFeedback(FEEDBACK_TOMORROW);
+    			commandBarController.clear();
     		}*/
+
+    		else if(userInput.equals("deadline")) {
+    			createDeadlineList(itemList);
+    			addDeadline();
+    			//commandBarController.setFeedback(FEEDBACK_DEADLINE);
+    			commandBarController.setFeedback(feedbackMsg);
+    			commandBarController.clear();
+    		}
+
+    		else if(userInput.equals("event")) {
+    			createEventList(itemList);
+    			addEvent();
+    			//commandBarController.setFeedback(FEEDBACK_EVENT);
+    			commandBarController.setFeedback(feedbackMsg);
+    			commandBarController.clear();
+    		}
+
+    		else if(userInput.equals("floating")) {
+    			createFloatingList(itemList);
+    			addFloating();
+    			//commandBarController.setFeedback(FEEDBACK_FLOATING);
+    			commandBarController.setFeedback(feedbackMsg);
+    			commandBarController.clear();
+    		}
+
+    		else if(userInput.equals("complete")) {
+    			createCompleteList(itemList);
+    			addComplete();
+    			//commandBarController.setFeedback(FEEDBACK_COMPLETE);
+    			commandBarController.setFeedback(feedbackMsg);
+    			commandBarController.clear();
+    		}
+
+    		else if(userInput.equals("incomplete")) {
+    			createIncompleteList(itemList);
+    			addIncomplete();
+    			//commandBarController.setFeedback(FEEDBACK_INCOMPLETE);
+    			commandBarController.setFeedback(feedbackMsg);
+    			commandBarController.clear();
+    		}
+
+    		else if(userInput.equals("all")) {
+    			createCompleteList(itemList);
+    			createIncompleteList(itemList);
+    			commandBarController.setFeedback(feedbackMsg);
+    			commandBarController.clear();
+
+    			addDisplayAll();
+    		}
+
+    		if(taskToUpdate != null) {
+    			commandBarController.setText(taskToUpdate);
+    			commandBarController.setFeedback(feedbackMsg);
+    		}
     		
-    		//createFloatingList(itemList);
-    		//createEventList(itemList);
-    		//createDeadlineList(itemList);
-    		createCompleteList(itemList);
-    		createIncompleteList(itemList);
-			commandBarController.setFeedback(feedbackMsg);
-			commandBarController.clear();
-    		
-    		addDisplayAll();
-    		//addSummaryView();
+    	} catch (Exception e) {
+    		commandBarController.setFeedback("invalid command");
     	}
     	
-    	if(taskToUpdate != null) {
-    		commandBarController.setText(taskToUpdate);
-    		commandBarController.setFeedback(feedbackMsg);
-    	}
-		
 		//handleEnterPress(commandBarController, userInput);
     	
     	/* 
