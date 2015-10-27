@@ -7,7 +7,7 @@ import main.java.resources.Task;
 import main.java.storage.Storage;
 
 public class Complete implements Command{
-	private boolean ifComplete = true;
+	//private boolean ifComplete = true;
 	private History history = History.getInstance();
 	private int itemNum;
 	private OutputToUI outputToUI = new OutputToUI();
@@ -20,13 +20,15 @@ public class Complete implements Command{
 	
 	@Override
 	public OutputToUI execute() {
+		int code;
 		Task task = Search.obtainTaskByItemNum(itemNum, history.getScreenList());
-		for (int i = 0; i < storage.getTaskList().size(); i++){
+		code = storage.completeOneItem(task);
+		/*for (int i = 0; i < storage.getTaskList().size(); i++){
 			if (storage.getTaskList().get(i).equals(task)){
 				storage.getTaskList().get(i).setCompleted(ifComplete);
 			}
-		}
-		String feedbackMsg = DataDisplay.feedback("Complete", 0);
+		}*/
+		String feedbackMsg = DataDisplay.feedback("Complete", code);
 		outputToUI.setFeedbackMsg(feedbackMsg);
 		return outputToUI;
 	}

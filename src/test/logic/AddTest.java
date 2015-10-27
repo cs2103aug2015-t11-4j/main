@@ -38,7 +38,7 @@ public class AddTest {
 		outputToUI = command4.execute();
 		DataDisplay.printOutputToUI(outputToUI);
 		DataDisplay.displayList(storage.getTaskList());
-		assertTrue(storage.getTaskList().contains(task7));
+		assertTrue(storage.getTaskList().contains(task1));
 		
 	}
 

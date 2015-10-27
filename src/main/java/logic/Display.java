@@ -29,8 +29,8 @@ public class Display implements Command {
 		ArrayList<ItemForUserScreen> itemList = new ArrayList<ItemForUserScreen>();
 		String feedbackMsg;
 		String typeOfScreen = null;
-		//switch (FlexiCommands.flexiDisplayCommands(inputForAction.get(1).toLowerCase())) {
-		switch (inputForAction.get(1).toLowerCase()) {
+		switch (FlexiCommands.flexiDisplayCommands(inputForAction.get(1).toLowerCase())) {
+		//switch (inputForAction.get(1).toLowerCase()) {
 		case "today":
 			taskList = Search.obtainTodaySummary(storage);
 			typeOfScreen = "today";

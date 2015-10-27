@@ -23,12 +23,13 @@ public class Delete implements Command{
 	}
 	@Override
 	public OutputToUI execute() {
+		int code;
 		OutputToUI outputToUI = new OutputToUI();
 		screenList = history.getScreenList();
 		Task task = Search.obtainTaskByItemNum(itemNum, screenList);
-		storage.deleteOneItem(task); //TODO: Storage shall make its methods all non-static
+		code = storage.deleteOneItem(task); //TODO: Storage shall make its methods all non-static
 								  //TODO: Storage returns success or not, a if loop to return feedback respectively
-		outputToUI.setFeedbackMsg(DataDisplay.feedback("delete",0));
+		outputToUI.setFeedbackMsg(DataDisplay.feedback("delete",code));
 		return outputToUI;
 		
 	}

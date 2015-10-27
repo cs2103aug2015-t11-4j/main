@@ -20,11 +20,12 @@ public class Add implements Command{
 	
 	@Override
 	public OutputToUI execute() {
+		int code;
 		OutputToUI outputToUI = new OutputToUI();
 
-		storage.addOneItem(task); //TODO: Storage shall make its methods all non-static
+		code = storage.addOneItem(task); //TODO: Storage shall make its methods all non-static
 								  //TODO: Storage returns success or not, a if loop to return feedback respectively
-		outputToUI.setFeedbackMsg(DataDisplay.feedback("add",0));
+		outputToUI.setFeedbackMsg(DataDisplay.feedback("add",code));
 		return outputToUI;
 	}
 
