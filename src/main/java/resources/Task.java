@@ -10,6 +10,7 @@ public class Task {
 	private String startTime;
 	private String endTime;
 	private boolean isCompleted;
+	private boolean validDTF;
 	
 	/********************** Constructor ************************/
 	//creates an empty task
@@ -22,10 +23,11 @@ public class Task {
 		setStartTime(null);
 		setEndTime(null);
 		setCompleted(false);
+		setValidDT(false);
 	}
 	
 	public Task (String newTaskType, String newTaskDescription, String newStartDate, String newEndDate,
-									String newStartTime, String newEndTime, boolean taskStatus) {
+									String newStartTime, String newEndTime, boolean taskStatus, boolean dateTimeFormat) {
 			
 		setTaskType(newTaskType);
 		setTaskDescription(newTaskDescription);
@@ -34,6 +36,7 @@ public class Task {
 		setStartTime(newStartTime);
 		setEndTime(newEndTime);
 		setCompleted(taskStatus);
+		setValidDT(dateTimeFormat);
 	}
 
 	/********************* Accessors *************************/
@@ -65,6 +68,9 @@ public class Task {
 		return isCompleted;
 	}
 	
+	public boolean getIsDateTimeValid() {
+		return validDTF;
+	}
 	/*********************** Mutators ************************/
 	public void setTaskType(String newTaskType) {
 		taskType = newTaskType;
@@ -94,6 +100,10 @@ public class Task {
 		isCompleted = newTaskStatus;
 	}
 	
+	public void setValidDT(boolean newDTF) {
+		validDTF = newDTF;
+	}
+	
 	//Overriding equals() method
 	@Override
 	public boolean equals(Object obj) {
@@ -106,7 +116,8 @@ public class Task {
 							this.getEndDate().equals(task.getEndDate()) &&
 								this.getStartTime().equals(task.getStartTime()) && 
 									this.getEndTime().equals(task.getEndTime()) &&
-										this.getIsCompleted() == task.getIsCompleted();
+										this.getIsCompleted() == task.getIsCompleted() &&
+											this.getIsDateTimeValid() == task.getIsDateTimeValid();
 		}
 	return result;
 	}
