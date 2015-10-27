@@ -29,6 +29,7 @@ public class Delete implements Command{
 		Task task = Search.obtainTaskByItemNum(itemNum, screenList);
 		code = storage.deleteOneItem(task); //TODO: Storage shall make its methods all non-static
 								  //TODO: Storage returns success or not, a if loop to return feedback respectively
+		outputToUI = Controller.refreshScreen();
 		outputToUI.setFeedbackMsg(DataDisplay.feedback("delete",code));
 		return outputToUI;
 		
