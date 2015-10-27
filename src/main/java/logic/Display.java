@@ -35,10 +35,10 @@ public class Display implements Command {
 			taskList = Search.obtainTodaySummary(storage);
 			typeOfScreen = "today";
 			break;
-		case "tomorrow":
+		/*case "tomorrow":
 			taskList = Search.obtainTommorrowSummary(storage);
 			typeOfScreen = "tomorrow";
-			break;
+			break;*/
 		case "floating":
 			taskList = Search.obtainFloatingTasks(storage);
 			typeOfScreen = "floating";

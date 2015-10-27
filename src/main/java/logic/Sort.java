@@ -130,7 +130,13 @@ public class Sort {
 
 	// sort all by ifcomplete, event/deadline or floating, time, taskcontent
 	public static ArrayList<Task> sortAll() {
+
 		ArrayList<Task> sortResult = new ArrayList<Task>();
+		//return empty list if no task in storage
+		if (storage.getTaskList().size()==0){
+			return sortResult;
+		}
+		
 		ArrayList<Task> incompleteList = new ArrayList<Task>();
 		ArrayList<Task> completeList = new ArrayList<Task>();
 		ArrayList<Task> incompleteFloatingList = new ArrayList<Task>();

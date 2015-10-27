@@ -20,14 +20,15 @@ public class Incomplete implements Command{
 	
 	@Override
 	public OutputToUI execute() {
+		int code;
 		Task task = Search.obtainTaskByItemNum(itemNum, history.getScreenList());
-		storage.incompleteOneItem(task);
+		code = storage.incompleteOneItem(task);
 /*		for (int i = 0; i < storage.getTaskList().size(); i++){
 			if (storage.getTaskList().get(i).equals(task)){
 				storage.getTaskList().get(i).setCompleted(ifComplete);
 			}
 		}*/
-		String feedbackMsg = DataDisplay.feedback("Incomplete", 0);
+		String feedbackMsg = DataDisplay.feedback("Incomplete", code);
 		outputToUI.setFeedbackMsg(feedbackMsg);
 		return outputToUI;
 	}
