@@ -97,8 +97,7 @@ public class Storage {
                     getEndDateByItemNum(count),
                     getStartTimeByItemNum(count),
                     getEndTimeByItemNum(count),
-                    getIsCompletedByItemNum(count),
-                    getIsDateTimeValidByItemNum(count)));
+                    getIsCompletedByItemNum(count)));
             count += 1;
         }
         br.close();
@@ -153,7 +152,7 @@ public class Storage {
 			
 			bw.write(task.getTaskType() + ";" + task.getTaskDescription() + ";" + task.getStartDate()
 					+ ";" + task.getEndDate() + ";" + task.getStartTime() + ";" + task.getEndTime() + ";"
-					+ task.getIsCompleted() + ";" + task.getEndDate() + ";" );
+					+ task.getIsCompleted() + ";" );
 			
 			bw.newLine();
 			bw.close();
@@ -195,7 +194,6 @@ public class Storage {
                         && getStartTimeByItemNum(count).equals(task.getStartTime())
                         && getEndTimeByItemNum(count).equals(task.getEndDate())
                         && getIsCompletedByItemNum(count).equals(task.getIsCompleted())
-                        && getIsDateTimeValidByItemNum(count).equals(task.getIsDateTimeValid())
                         ) {
                     bw.write(line);
                     bw.newLine();
@@ -332,21 +330,12 @@ public class Storage {
     }
     
     /* 
-     * Obtains completion of task saved in external file
+     * Obtains end date from task saved in external file
      */
     private Boolean getIsCompletedByItemNum(int itemNumber) {
         try {
             String[] target = readExternalFile(itemNumber);
             return Boolean.parseBoolean(target[6]);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-    
-    private Boolean getIsDateTimeValidByItemNum(int itemNumber) {
-        try {
-            String[] target = readExternalFile(itemNumber);
-            return Boolean.parseBoolean(target[7]);
         } catch (Exception e) {
             return null;
         }
@@ -362,7 +351,7 @@ public class Storage {
 
             int lineNumber = 0;
             String line = null;
-            String[] target = new String[8];
+            String[] target = new String[7];
             
             /*
             //Checks if the first line is a user specified directory for the taskList
