@@ -110,7 +110,6 @@ public class Controller {
 		ArrayList<ItemForUserScreen> itemList = new ArrayList<ItemForUserScreen>();
 		ArrayList<String> printOnScreenMsgList = DataDisplay.displayList(taskList);
 		String typeOfScreen = "today";
-		history.setCurrentScreen(typeOfScreen);
 		String feedbackMsg = DataDisplay.feedback("init", 0);
 		if (taskList.size() != 0) {
 			for (int i = 0; i < taskList.size(); i++) {
@@ -121,17 +120,6 @@ public class Controller {
 		outputToUI.setFeedbackMsg(feedbackMsg);
 		outputToUI.setItemList(itemList);
 		outputToUI.setTypeOfScreen(typeOfScreen);
-		return outputToUI;
-	}
-	
-	public static OutputToUI refreshScreen() {
-		OutputToUI outputToUI;
-		String typeOfString = history.getCurrentScreen();
-		ArrayList<String> displayInput = new ArrayList<String>();
-		displayInput.add("display");
-		displayInput.add(typeOfString);
-		Command displayCmd = new Display(displayInput, storage);
-		outputToUI = displayCmd.execute();
 		return outputToUI;
 	}
 }

@@ -28,7 +28,6 @@ public class Update implements Command{
 		//TODO: Display this task on to the screen
 		String inputBoxMsg = DataDisplay.displayTaskNeedForUpdate(task);
 		String feedbackMsg = "Please edit the task to update"; //TODO: Include in DataDisplay.feedback
-		outputToUI = Controller.refreshScreen();
 		outputToUI.setInputBoxMsg(inputBoxMsg);
 		outputToUI.setFeedbackMsg(feedbackMsg);
 		return outputToUI;
