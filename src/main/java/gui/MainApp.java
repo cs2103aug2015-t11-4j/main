@@ -439,7 +439,7 @@ public class MainApp extends Application {
     		createEventList(itemList);
     		createFloatingList(itemList);
     		addSummaryView();
-    		if(_userInput.equals("today")) {
+    		if(_userInput.equals("display today")) {
     			commandBarController.setFeedback(FEEDBACK_TODAY_SUMMARY);
     		}
     		else {
@@ -580,16 +580,16 @@ public class MainApp extends Application {
     			commandBarController.clear();
     		}*/
     		
-    		createFloatingList(itemList);
-    		createEventList(itemList);
-    		createDeadlineList(itemList);
+    		//createFloatingList(itemList);
+    		//createEventList(itemList);
+    		//createDeadlineList(itemList);
     		createCompleteList(itemList);
     		createIncompleteList(itemList);
 			commandBarController.setFeedback(feedbackMsg);
 			commandBarController.clear();
     		
-    		//addDisplayAll();
-    		addSummaryView();
+    		addDisplayAll();
+    		//addSummaryView();
     	}
     	
     	if(taskToUpdate != null) {
