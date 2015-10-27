@@ -29,6 +29,7 @@ public class Complete implements Command{
 			}
 		}*/
 		String feedbackMsg = DataDisplay.feedback("Complete", code);
+		outputToUI = Controller.refreshScreen();
 		outputToUI.setFeedbackMsg(feedbackMsg);
 		return outputToUI;
 	}

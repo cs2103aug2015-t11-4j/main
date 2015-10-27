@@ -7,6 +7,7 @@ import main.java.storage.Storage;
 
 public class History {
 	private ArrayList<Task> screenList;
+	private String currentScreen;
 
 	//private constructor
 	private History(){
@@ -29,9 +30,16 @@ public class History {
     	return screenList;
     }
     
+    public String getCurrentScreen(){
+    	return currentScreen;
+    }
+    
+  //mutator 
     public void setScreenList(ArrayList<Task> screenList){
     	this.screenList = screenList;
     }
     
-    //mutator 
+    public void setCurrentScreen(String currentScreen){
+    	this.currentScreen = currentScreen;
+    }
 }

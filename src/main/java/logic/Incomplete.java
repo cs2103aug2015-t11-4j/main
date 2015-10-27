@@ -29,6 +29,7 @@ public class Incomplete implements Command{
 			}
 		}*/
 		String feedbackMsg = DataDisplay.feedback("Incomplete", code);
+		outputToUI = Controller.refreshScreen();
 		outputToUI.setFeedbackMsg(feedbackMsg);
 		return outputToUI;
 	}
