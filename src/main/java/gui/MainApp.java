@@ -424,7 +424,7 @@ public class MainApp extends Application {
     }
     
     public void handleEnterPress(CommandBarController commandBarController, String _userInput ) {
-    	try {
+    	
     		_userInput = _userInput.toLowerCase();
     		Command command = Controller.createCommand(_userInput);
     		OutputToUI outputToUI = new OutputToUI();
@@ -444,118 +444,116 @@ public class MainApp extends Application {
 
     		commandBarController.setFeedback(feedbackMsg);
 
-    		if(userInput.equals("today")) {
-    			createDeadlineList(itemList);
-    			createEventList(itemList);
-    			createFloatingList(itemList);
-    			addTodaySummaryView();
-    			//commandBarController.setFeedback(FEEDBACK_TODAY_SUMMARY);
-    			commandBarController.setFeedback(feedbackMsg);
-    			commandBarController.clear();
-    		}
+    		if(userInput != null) {
+    			if(userInput.equals("today")) {
+    				createDeadlineList(itemList);
+    				createEventList(itemList);
+    				createFloatingList(itemList);
+    				addTodaySummaryView();
+    				//commandBarController.setFeedback(FEEDBACK_TODAY_SUMMARY);
+    				commandBarController.setFeedback(feedbackMsg);
+    				commandBarController.clear();
+    			}
 
-    		else if(userInput.equals("tomorrow")) {
-    			createDeadlineList(itemList);
-    			createEventList(itemList);
-    			createFloatingList(itemList);
-    			addTomorrowSummaryView();
-    			//commandBarController.setFeedback(FEEDBACK_TMR_SUMMARY);
-    			commandBarController.setFeedback(feedbackMsg);
-    			commandBarController.clear();
-    		}
+    			else if(userInput.equals("tomorrow")) {
+    				createDeadlineList(itemList);
+    				createEventList(itemList);
+    				createFloatingList(itemList);
+    				addTomorrowSummaryView();
+    				//commandBarController.setFeedback(FEEDBACK_TMR_SUMMARY);
+    				commandBarController.setFeedback(feedbackMsg);
+    				commandBarController.clear();
+    			}
 
-    		else if(userInput.equals("help")) {
-    			addHelpTable(this);
-    			commandBarController.setFeedback(feedbackMsg);
-    			commandBarController.clear();
-    		}
+    			else if(userInput.equals("help")) {
+    				addHelpTable(this);
+    				commandBarController.setFeedback(feedbackMsg);
+    				commandBarController.clear();
+    			}
 
-    		else if(_userInput.equals("exit")) {
-    			commandBarController.setFeedback(FEEDBACK_EXIT);
-    			commandBarController.clear();
-    			delay = new PauseTransition(Duration.seconds(1));  //delay closing of GUI window by 1s
-    			delay.setOnFinished(new EventHandler<ActionEvent> () {
-    				@Override
-    				public void handle(ActionEvent event) {
-    					primaryStage.hide();
-    				}
-    			});
-    			delay.play();
-    		}
+    			else if(_userInput.equals("exit")) {
+    				commandBarController.setFeedback(FEEDBACK_EXIT);
+    				commandBarController.clear();
+    				delay = new PauseTransition(Duration.seconds(1));  //delay closing of GUI window by 1s
+    				delay.setOnFinished(new EventHandler<ActionEvent> () {
+    					@Override
+    					public void handle(ActionEvent event) {
+    						primaryStage.hide();
+    					}
+    				});
+    				delay.play();
+    			}
 
-    		/*
-    		 * Display today and tomorrow's tasks individually
-    		 * @@author A0131300-unused due to change in plans
-    		 * 
-    		else if(userInput.equals("today")) {
-    			addToday();
-    			commandBarController.setFeedback(FEEDBACK_TODAY);
-    			commandBarController.clear();
-    		}
+    			/*
+    			 * Display today and tomorrow's tasks individually
+    			 * @@author A0131300-unused due to change in plans
+    			 * 
+    			else if(userInput.equals("today")) {
+    				addToday();
+    				commandBarController.setFeedback(FEEDBACK_TODAY);
+    				commandBarController.clear();
+    			}
 
-    		else if(userInput.equals("tomorrow") || userInput.equals("tmr")) {
-    			addTmr();
-    			commandBarController.setFeedback(FEEDBACK_TOMORROW);
-    			commandBarController.clear();
-    		}*/
+    			else if(userInput.equals("tomorrow") || userInput.equals("tmr")) {
+    				addTmr();
+    				commandBarController.setFeedback(FEEDBACK_TOMORROW);
+    				commandBarController.clear();
+    			}*/
 
-    		else if(userInput.equals("deadline")) {
-    			createDeadlineList(itemList);
-    			addDeadline();
-    			//commandBarController.setFeedback(FEEDBACK_DEADLINE);
-    			commandBarController.setFeedback(feedbackMsg);
-    			commandBarController.clear();
-    		}
+    			else if(userInput.equals("deadline")) {
+    				createDeadlineList(itemList);
+    				addDeadline();
+    				//commandBarController.setFeedback(FEEDBACK_DEADLINE);
+    				commandBarController.setFeedback(feedbackMsg);
+    				commandBarController.clear();
+    			}
 
-    		else if(userInput.equals("event")) {
-    			createEventList(itemList);
-    			addEvent();
-    			//commandBarController.setFeedback(FEEDBACK_EVENT);
-    			commandBarController.setFeedback(feedbackMsg);
-    			commandBarController.clear();
-    		}
+    			else if(userInput.equals("event")) {
+    				createEventList(itemList);
+    				addEvent();
+    				//commandBarController.setFeedback(FEEDBACK_EVENT);
+    				commandBarController.setFeedback(feedbackMsg);
+    				commandBarController.clear();
+    			}
 
-    		else if(userInput.equals("floating")) {
-    			createFloatingList(itemList);
-    			addFloating();
-    			//commandBarController.setFeedback(FEEDBACK_FLOATING);
-    			commandBarController.setFeedback(feedbackMsg);
-    			commandBarController.clear();
-    		}
+    			else if(userInput.equals("floating")) {
+    				createFloatingList(itemList);
+    				addFloating();
+    				//commandBarController.setFeedback(FEEDBACK_FLOATING);
+    				commandBarController.setFeedback(feedbackMsg);
+    				commandBarController.clear();
+    			}
 
-    		else if(userInput.equals("complete")) {
-    			createCompleteList(itemList);
-    			addComplete();
-    			//commandBarController.setFeedback(FEEDBACK_COMPLETE);
-    			commandBarController.setFeedback(feedbackMsg);
-    			commandBarController.clear();
-    		}
+    			else if(userInput.equals("complete")) {
+    				createCompleteList(itemList);
+    				addComplete();
+    				//commandBarController.setFeedback(FEEDBACK_COMPLETE);
+    				commandBarController.setFeedback(feedbackMsg);
+    				commandBarController.clear();
+    			}
 
-    		else if(userInput.equals("incomplete")) {
-    			createIncompleteList(itemList);
-    			addIncomplete();
-    			//commandBarController.setFeedback(FEEDBACK_INCOMPLETE);
-    			commandBarController.setFeedback(feedbackMsg);
-    			commandBarController.clear();
-    		}
+    			else if(userInput.equals("incomplete")) {
+    				createIncompleteList(itemList);
+    				addIncomplete();
+    				//commandBarController.setFeedback(FEEDBACK_INCOMPLETE);
+    				commandBarController.setFeedback(feedbackMsg);
+    				commandBarController.clear();
+    			}
 
-    		else if(userInput.equals("all")) {
-    			createCompleteList(itemList);
-    			createIncompleteList(itemList);
-    			commandBarController.setFeedback(feedbackMsg);
-    			commandBarController.clear();
+    			else if(userInput.equals("all")) {
+    				createCompleteList(itemList);
+    				createIncompleteList(itemList);
+    				commandBarController.setFeedback(feedbackMsg);
+    				commandBarController.clear();
 
-    			addDisplayAll();
+    				addDisplayAll();
+    			}
     		}
 
     		if(taskToUpdate != null) {
     			commandBarController.setText(taskToUpdate);
     			commandBarController.setFeedback(feedbackMsg);
     		}
-    		
-    	} catch (Exception e) {
-    		commandBarController.setFeedback("invalid command");
-    	}
     	
 		//handleEnterPress(commandBarController, userInput);
     	
