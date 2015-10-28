@@ -16,12 +16,12 @@ public class Task {
 	//creates an empty task
 	public Task() {
 		
-		setTaskType(null);
-		setTaskDescription(null);
-		setStartDate(null);
-		setEndDate(null);
-		setStartTime(null);
-		setEndTime(null);
+		setTaskType("-");
+		setTaskDescription("-");
+		setStartDate("-");
+		setEndDate("-");
+		setStartTime("-");
+		setEndTime("-");
 		setCompleted(false);
 		setValidDT(false);
 	}

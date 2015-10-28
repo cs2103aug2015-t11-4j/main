@@ -13,23 +13,30 @@ public class Parser {
 	private static final String KEYWORD_FROM = " from ";
 	private static final String KEYWORD_TO = " to ";
 	
-/*	public static void main(String args[]){
-		ArrayList<String> action = retrieveCommand("display complete");
-		action.get(1);
-		System.out.println(action.get(1));
-	}*/
-	/*for testing purposes
+/*	//for testing purposes
 	public static void main(String[] args) {
-
+		
+		String date = "21/12/2015";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate date1 = LocalDate.parse(date, formatter);
+		date1 = date1.plusDays(1);
+		System.out.println(date1.toString());
 		System.out.println("Enter: ");
 		Scanner sc = new Scanner(System.in);
 		String input = sc.nextLine();
 		ArrayList<String> contentListForLogic = retrieveCommand(input);
-		for(int i=0; i<contentListForLogic.size(); i++) {
-			System.out.println(contentListForLogic.get(i));
+		ArrayList<Task> recurring = new ArrayList<Task>();
+		recurring = createRecurringTasks(contentListForLogic);
+		for(int i=0; i<recurring.size(); i++) {
+			System.out.println(recurring.get(i).getTaskDescription() + " ; " +
+					recurring.get(i).getStartDate() + " ; " +
+					recurring.get(i).getEndDate() + " ; " +
+					recurring.get(i).getStartTime() + " ; " +
+					recurring.get(i).getEndTime() + " ; ");
 		}
-//		String tasktype = identifyTaskType(contentListForLogic);
-//		System.out.println(tasktype);
+
+		String tasktype = identifyTaskType(contentListForLogic);
+		System.out.println(tasktype);
 		
 		Task task = createTaskForAdd(contentListForLogic);
 		System.out.println("startdate: " + task.getStartDate());
@@ -38,10 +45,10 @@ public class Parser {
 		System.out.println("TT: " + task.getTaskType());
 		System.out.println("ST: " + task.getStartTime());
 		System.out.println("ET: " + task.getEndTime()); 
+
 		
-		
-	}*/
-	//FOR LOGIC USE ONLY
+	}//
+*/	//FOR LOGIC USE ONLY
 	public final static ArrayList<String> retrieveCommand(String inputFromLogic){
 		
 		ArrayList<String> contentListForLogic = new ArrayList<String>();
@@ -75,6 +82,13 @@ public class Parser {
 		}
 	
 	//FOR LOGIC USE ONLY
+	public final static ArrayList<Task> createRecurringTasks(ArrayList<String> listFromLogic) {
+		ArrayList<Task> recurringTasks = new ArrayList<Task>();
+		recurringTasks = RecurringTask.create(listFromLogic);
+		return recurringTasks;
+	}
+	
+	//FOR LOGIC USE ONLY
 	//formats the display commands with flexicommands
 	public final static ArrayList<String> flexiDisplay(ArrayList<String> listFromLogic) {
 		String displayContent = listFromLogic.remove(1);
@@ -98,7 +112,7 @@ public class Parser {
 			contentListForLogic.add(content[1]);
 		}
 	}
-	private static String identifyTaskType(ArrayList<String> listFromLogic ) {
+	public static String identifyTaskType(ArrayList<String> listFromLogic ) {
 		String taskContent = listFromLogic.get(1);
 		
 		if(taskContent.contains(KEYWORD_BY))
@@ -108,6 +122,7 @@ public class Parser {
 		else
 			return "floating";
 	}
+	
 	//removes all unnecessary whitespaces to 1 whitespace
 	private final static String formatInputForValidParsing (String input) {
 		return input.replaceAll("\\s+", REGEX_WHITESPACE).trim();

@@ -73,37 +73,48 @@ public class Storage {
      * Reads the external file to regenerate the taskList
      */
     public void regenerateTaskList() throws IOException {
-        logger.log(Level.INFO, "Regenerating internal taskList from external file!");
-        
-        if(!taskList.isEmpty()) {
-            wipeTaskList();
+        try {
+            logger.log(Level.INFO, "Regenerating internal taskList from external file!");
+
+            // Ensure internal taskList is emptied before regeneration 
+            if(!taskList.isEmpty()) {
+                wipeTaskList();
+            }
+
+            FileReader fr = new FileReader(filename);
+            BufferedReader br = new BufferedReader(fr);
+
+            @SuppressWarnings("unused")
+            String line;
+            int count = 0;
+            /*
+            if(retrieveDirectory()){
+                count = 1;
+            }
+            */
+            while ((line = br.readLine()) != null) {
+                taskList.add(new Task(getTaskTypeByItemNum(count),
+                        getTaskDescriptionByItemNum(count),
+                        getStartDateByItemNum(count),
+                        getEndDateByItemNum(count),
+                        getStartTimeByItemNum(count),
+                        getEndTimeByItemNum(count),
+                        getIsCompletedByItemNum(count),
+                        getIsDateTimeValidByItemNum(count)));
+                count += 1;
+            }
+            br.close();
+
+            sortTaskList(taskList);
+            logger.log(Level.INFO, "Completed regeneration of internal taskList from external file");
+        } catch (Exception e) {
+            File file = new File(filename);
+
+            if(!file.exists()) {
+                file.createNewFile(); 
+            }
+            logger.log(Level.INFO, "No tasks to generate from external file. Creating {0}.", filename);
         }
-        
-        FileReader fr = new FileReader(filename);
-        BufferedReader br = new BufferedReader(fr);
-        
-        @SuppressWarnings("unused")
-        String line;
-        int count = 0;
-        /*
-        if(retrieveDirectory()){
-            count = 1;
-        }
-        */
-        while ((line = br.readLine()) != null) {
-            taskList.add(new Task(getTaskTypeByItemNum(count),
-                    getTaskDescriptionByItemNum(count),
-                    getStartDateByItemNum(count),
-                    getEndDateByItemNum(count),
-                    getStartTimeByItemNum(count),
-                    getEndTimeByItemNum(count),
-                    getIsCompletedByItemNum(count)));
-            count += 1;
-        }
-        br.close();
-        
-        sortTaskList(taskList);
-        logger.log(Level.INFO, "Completed regeneration of internal taskList from external file");
     }
 
     /* 
@@ -152,7 +163,7 @@ public class Storage {
 			
 			bw.write(task.getTaskType() + ";" + task.getTaskDescription() + ";" + task.getStartDate()
 					+ ";" + task.getEndDate() + ";" + task.getStartTime() + ";" + task.getEndTime() + ";"
-					+ task.getIsCompleted() + ";" );
+					+ task.getIsCompleted() + ";" + task.getEndDate() + ";" );
 			
 			bw.newLine();
 			bw.close();
@@ -194,6 +205,7 @@ public class Storage {
                         && getStartTimeByItemNum(count).equals(task.getStartTime())
                         && getEndTimeByItemNum(count).equals(task.getEndDate())
                         && getIsCompletedByItemNum(count).equals(task.getIsCompleted())
+                        && getIsDateTimeValidByItemNum(count).equals(task.getIsDateTimeValid())
                         ) {
                     bw.write(line);
                     bw.newLine();
@@ -251,8 +263,7 @@ public class Storage {
      */
     private void sortTaskList(ArrayList<Task> tasks) {
         ArrayList<Task> sort = tasks;
-        sort = Sort.sortAll();
-        
+        sort = Sort.sortAll();     
         wipeTaskList();
         taskList = sort;
     }
@@ -261,84 +272,64 @@ public class Storage {
      * Obtains task type from task saved in external file
      */
     private String getTaskTypeByItemNum(int itemNumber) {
-        try {
-            String[] target = readExternalFile(itemNumber);
-            return target[0];
-        } catch (Exception e) {
-            return null;
-        }
+       String[] target = readExternalFile(itemNumber);
+       return target[0];
     }
     
     /* 
      * Obtains task description from task saved in external file
      */
     private String getTaskDescriptionByItemNum(int itemNumber) {
-        try {
-            String[] target = readExternalFile(itemNumber);
-            return target[1];
-        } catch (Exception e) {
-            return null;
-        }
+       String[] target = readExternalFile(itemNumber);
+       return target[1];
     }
 
     /* 
      * Obtains start date from task saved in external file
      */
     private String getStartDateByItemNum(int itemNumber) {
-        try {
-            String[] target = readExternalFile(itemNumber);
-            return target[2];
-        } catch (Exception e) {
-            return null;
-        }
+        String[] target = readExternalFile(itemNumber);
+        return target[2];
     }
     
     /* 
      * Obtains end date from task saved in external file
      */
     private String getEndDateByItemNum(int itemNumber) {
-        try {
-            String[] target = readExternalFile(itemNumber);
-            return target[3];
-        } catch (Exception e) {
-            return null;
-        }
+        String[] target = readExternalFile(itemNumber);
+        return target[3];
     }
     
     /* 
      * Obtains start time from task saved in external file
      */
     private String getStartTimeByItemNum(int itemNumber) {
-        try {
-            String[] target = readExternalFile(itemNumber);
-            return target[4];
-        } catch (Exception e) {
-            return null;
-        }
+        String[] target = readExternalFile(itemNumber);
+        return target[4];
     }
     
     /* 
      * Obtains end time from task saved in external file
      */
     private String getEndTimeByItemNum(int itemNumber) {
-        try {
-            String[] target = readExternalFile(itemNumber);
-            return target[5];
-        } catch (Exception e) {
-            return null;
-        }
+        String[] target = readExternalFile(itemNumber);
+        return target[5];
     }
     
     /* 
-     * Obtains end date from task saved in external file
+     * Obtains completion of task saved in external file
      */
     private Boolean getIsCompletedByItemNum(int itemNumber) {
-        try {
-            String[] target = readExternalFile(itemNumber);
-            return Boolean.parseBoolean(target[6]);
-        } catch (Exception e) {
-            return null;
-        }
+        String[] target = readExternalFile(itemNumber);
+        return Boolean.parseBoolean(target[6]);
+    }
+    
+    /* 
+     * Obtains date/time validity of task saved in external file
+     */
+    private Boolean getIsDateTimeValidByItemNum(int itemNumber) {
+        String[] target = readExternalFile(itemNumber);
+        return Boolean.parseBoolean(target[7]);
     }
     
     /*
@@ -351,7 +342,7 @@ public class Storage {
 
             int lineNumber = 0;
             String line = null;
-            String[] target = new String[7];
+            String[] target = new String[8];
             
             /*
             //Checks if the first line is a user specified directory for the taskList

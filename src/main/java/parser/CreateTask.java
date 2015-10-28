@@ -17,21 +17,21 @@ public class CreateTask {
 	private static final String KEYWORD_TO = " to ";
 	private static final int LENGTH_OF_TO = KEYWORD_TO.length();
 	
-	// for testing purposes
+/*	// for testing purposes
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter :");
 		String inputForAction = sc.nextLine();
-		/*Task task = createEvent("event", input);
+		Task task = createEvent("event", input);
 		System.out.println("startdate: " + task.getStartDate());
 		System.out.println("enddate: " + task.getEndDate());
 		System.out.println("task: " + task.getTaskDescription());
 		System.out.println("TT: " + task.getTaskType());
 		System.out.println("ST: " + task.getStartTime());
-		System.out.println("ET: " + task.getEndTime());*/
+		System.out.println("ET: " + task.getEndTime());
 		System.out.println(FlexiCommands.flexiDisplayCommands(inputForAction.toLowerCase()));		
 	}//
-	
+*/	
 	public final static Task createDeadline(String taskType, String taskContent) {
 		String[] dateTime;
 		
@@ -55,26 +55,26 @@ public class CreateTask {
 				
 			//input comes in date;time format
 			if(DateAndTime.isDate(correctDateTime[0]) && (DateAndTime.isTime(correctDateTime[1]))) 
-				return new Task(taskType, taskDescription, "null", correctDateTime[0], "null", correctDateTime[1], false);
+				return new Task(taskType, taskDescription, "-", correctDateTime[0], "-", correctDateTime[1], false, true);
 			//input comes in time;date format
 			else if(DateAndTime.isDate(correctDateTime[2]) && (DateAndTime.isTime(correctDateTime[3]))) 
-				return new Task(taskType, taskDescription, "null", correctDateTime[2], "null", correctDateTime[3], false);
+				return new Task(taskType, taskDescription, "-", correctDateTime[2], "-", correctDateTime[3], false, true);
 			//input format is both invalid
 			else 
-				return new Task(taskType, "invalid date/time", "null", "invalid", "null", "invalid", false);
+				return new Task(taskType, "-", "-", "-", "-", "-", false, false);
 		}
 		//taskDateTime contains only deadline date
 		else if(DateAndTime.isDate(taskDateTime)) {
 			String date = DateAndTime.reformatDate(taskDateTime);
-			return new Task(taskType, taskDescription, "null", date, "null", "no time specified", false);
+			return new Task(taskType, taskDescription, "-", date, "-", "-", false, true);
 		}
 		//taskDateTime contains only deadline time and set deadline date as today
 		else if(DateAndTime.isTime(taskDateTime)) {
 			String time = DateAndTime.reformatTime(taskDateTime);
-			return new Task(taskType, taskDescription, "null", dateFormat.format(today), "null", time, false);
+			return new Task(taskType, taskDescription, "-", dateFormat.format(today), "-", time, false, true);
 		}
 		else
-			return new Task(taskType, "invalid date/time", "null", "invalid", "null", "invalid", false);
+			return new Task(taskType, "-", "-", "-", "-", "-", false, false);
 	}
 	
 	public final static Task createEvent(String taskType, String taskContent) {
@@ -87,7 +87,7 @@ public class CreateTask {
 		int secondIndexToSplit = taskContent.lastIndexOf(KEYWORD_TO);
 		
 		String taskDescription = taskContent.substring(0, firstIndexToSplit);
-		String taskStart = taskContent.substring(firstIndexToSplit + (LENGTH_OF_FROM ), secondIndexToSplit);
+		String taskStart = taskContent.substring(firstIndexToSplit + (LENGTH_OF_FROM), secondIndexToSplit);
 		String taskEnd = taskContent.substring(secondIndexToSplit + (LENGTH_OF_TO), taskContent.length());
 			
 		//taskStart and taskEnd contains both time and date
@@ -131,7 +131,7 @@ public class CreateTask {
 						correctStartDateTime[3], correctEndDateTime[1]);
 			}
 			else
-				return new Task(taskType, taskDescription, "incorrect date format", "incorrect date format", "incorrect time format" , "incorrect time format", false);
+				return new Task(taskType, taskDescription, "-", "-", "-" , "-", false, false);
 			}
 			//taskStart and taskEnd contains only date
 		else if(DateAndTime.isDate(taskStart) && DateAndTime.isDate(taskEnd)) {
@@ -140,9 +140,9 @@ public class CreateTask {
 			taskDescription = removeSymbol(taskDescription);
 		
 			if(DateAndTime.compareDates(startDate, endDate))
-				return new Task(taskType, taskDescription, startDate, endDate, "no time specified", "no time specified", false);
+				return new Task(taskType, taskDescription, startDate, endDate, "-", "-", false, true);
 			else 
-				return new Task(taskType,"end date/time is earlier than start date/time", "invalid", "invalid", "no time specified", "no time specified", false);
+				return new Task(taskType, "-", "-", "-", "-", "-", false, false);
 		}
 		//taskStart and taskEnd contains only time
 		else if(DateAndTime.isTime(taskStart) && DateAndTime.isTime(taskEnd)) {
@@ -151,25 +151,25 @@ public class CreateTask {
 			taskDescription = removeSymbol(taskDescription);
 			//auto assume is today's event; append today 
 			if(DateAndTime.compareTimes(startTime, endTime))
-				return new Task(taskType, taskDescription, dateFormat.format(today), dateFormat.format(today), startTime, endTime, false);
+				return new Task(taskType, taskDescription, dateFormat.format(today), dateFormat.format(today), startTime, endTime, false, true);
 			else 
-				return new Task(taskType,"end date/time is earlier than start date/time", "no date specified", "no date specified", "invalid", "invalid", false);
+				return new Task(taskType, "-", "-", "-", "-", "-", false, false);
 		}
 		else			
-			return new Task(taskType, "invalid date/time", "invalid", "invalid", "invalid", "invalid", false);
+			return new Task(taskType, "-", "-", "-", "-", "-", false, false);
 	}
 	
 	public final static Task createFloating(String taskType, String taskContent) {
-		return new Task(taskType, removeSymbol(taskContent), "null", "null", "null", "null", false);
+		return new Task(taskType, removeSymbol(taskContent), "-", "-", "-", "-", false, true);
 	}
 	
 	private static Task correctDateComparison(String taskType, String taskDescription, String startDate, 
 													String endDate, String startTime, String endTime) {
 		taskDescription = removeSymbol(taskDescription);
 		if(DateAndTime.compareDates(startDate, endDate) && DateAndTime.compareTimes(startTime, endTime)) 
-			return new Task(taskType, taskDescription, startDate, endDate, startTime, endTime, false);
+			return new Task(taskType, taskDescription, startDate, endDate, startTime, endTime, false, true);
 		else
-			return new Task(taskType, "end date/time is earlier than start date/time", "invalid", "invalid", "invalid", "invalid", false);		
+			return new Task(taskType, "-", "-", "-", "-", "-", false, false);
 	}
 	
 	private static String removeSymbol(String input) {
