@@ -18,7 +18,8 @@ public class SummaryController {
 	@FXML
     private ListView<String> floatingList;
 	
-	private MainApp mainApp;
+	@SuppressWarnings("unused")
+    private MainApp mainApp;
 	
 	public SummaryController() {
 		

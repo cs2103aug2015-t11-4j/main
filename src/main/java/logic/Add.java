@@ -1,8 +1,6 @@
 //@Author:Jiahuan
 package main.java.logic;
 
-import java.util.ArrayList;
-
 import main.java.resources.DataDisplay;
 import main.java.resources.OutputToUI;
 import main.java.resources.Task;
@@ -11,7 +9,7 @@ import main.java.storage.Storage;
 public class Add implements Command{
 	private Task task; 
 	private Storage storage;
-	private History history = History.getInstance();
+	//private History history = History.getInstance();
 
 	//private DataDisplay dataDisplay;
 	

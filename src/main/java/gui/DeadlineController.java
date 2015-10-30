@@ -14,7 +14,8 @@ public class DeadlineController {
 	@FXML
     private ListView<String> deadlineList;
 
-	private MainApp mainApp;
+	@SuppressWarnings("unused")
+    private MainApp mainApp;
 	
 	public DeadlineController() {
 	

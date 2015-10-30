@@ -30,7 +30,10 @@ public class Controller {
 	public static Command createCommand(String inputFromUser) {
 		ArrayList<String> inputForAction = Parser.retrieveCommand(inputFromUser);
 		Task task = null;
-		Command command;
+		
+		@SuppressWarnings("unused")
+        Command command;
+		
 		Storage storage = Storage.getInstance();
 		int itemNum;
 		switch (FlexiCommands.flexiCommands(inputForAction.get(0).toLowerCase())) {

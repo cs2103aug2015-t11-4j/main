@@ -2,12 +2,7 @@
 package main.java.logic;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.GregorianCalendar;
-
-import main.java.resources.DataDisplay;
 import main.java.resources.Task;
 import main.java.resources.TaskComparator;
 import main.java.storage.Storage;
@@ -68,6 +63,8 @@ public class Sort {
 		
 	}
 	*/
+	
+	/*
 	private static void printSortList(ArrayList<Sort> sortList, ArrayList<Task> list){
 		Sort sort;
 		for (int i = 0; i < sortList.size(); i++){
@@ -79,7 +76,8 @@ public class Sort {
 			}
 		}
 	}
-
+    */
+	
 	private static Storage storage = Storage.getInstance();
 	private Task task;
 	private Integer taskTime;
@@ -309,9 +307,11 @@ public class Sort {
 		return new Integer(taskTime);
 	}
 
+	/*
 	private static void p(int toprint) {
 		System.out.println(toprint);
 	}
+    */
 
 	// Yongzhi's Code
 	/*

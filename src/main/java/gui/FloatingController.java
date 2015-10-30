@@ -14,7 +14,8 @@ public class FloatingController {
 	@FXML
     private ListView<String> floatingList;
 	
-	private MainApp mainApp;
+	@SuppressWarnings("unused")
+    private MainApp mainApp;
 	
 	public FloatingController() {
 		

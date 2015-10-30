@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import main.java.logic.Add;
 import main.java.logic.Command;
-import main.java.logic.Complete;
 import main.java.logic.Controller;
 import main.java.logic.Incomplete;
 import main.java.resources.DataDisplay;

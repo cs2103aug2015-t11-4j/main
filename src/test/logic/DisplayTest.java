@@ -1,15 +1,10 @@
 package test.logic;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-
 import org.junit.Test;
 
 import main.java.logic.Add;
 import main.java.logic.Command;
 import main.java.logic.Controller;
-import main.java.logic.Display;
 import main.java.resources.DataDisplay;
 import main.java.resources.OutputToUI;
 import main.java.resources.Task;

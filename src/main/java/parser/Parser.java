@@ -2,7 +2,6 @@ package main.java.parser;
 //@author: A0124524N; wenbin 
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import main.java.resources.Task;
 

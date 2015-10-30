@@ -14,7 +14,8 @@ public class EventController {
 	@FXML
     private ListView<String> eventList;
 	
-	private MainApp mainApp;
+	@SuppressWarnings("unused")
+    private MainApp mainApp;
 	
 	public EventController() {
 		

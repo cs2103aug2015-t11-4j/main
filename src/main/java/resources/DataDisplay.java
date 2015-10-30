@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 public class DataDisplay {
 
-	private static final String LABEL_FLOATING = "Floating";
-	private static final String LABEL_EVENT = "Event";
-	private static final String LABEL_DEADLINE = "Deadline";
-	private static final String LABEL_ALL = "All";
-	private static final String LABEL_COMPLETE = "Complete";
-	private static final String LABEL_INCOMPLETE = "Incomplete";
+	//private static final String LABEL_FLOATING = "Floating";
+	//private static final String LABEL_EVENT = "Event";
+	//private static final String LABEL_DEADLINE = "Deadline";
+	//private static final String LABEL_ALL = "All";
+	//private static final String LABEL_COMPLETE = "Complete";
+	//private static final String LABEL_INCOMPLETE = "Incomplete";
 	private static final String TASK_TYPE_FLOATING_LOWERCASE = "floating";
 	private static final String TASK_TYPE_EVENT_LOWERCASE = "event";
 	private static final String TASK_TYPE_DEADLINE_LOWERCASE = "deadline";

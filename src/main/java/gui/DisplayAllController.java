@@ -17,7 +17,8 @@ public class DisplayAllController {
 	@FXML
     private ListView<Text> incompleteList;
 	
-	private MainApp mainApp;
+	@SuppressWarnings("unused")
+    private MainApp mainApp;
 	
 	public DisplayAllController() {
         

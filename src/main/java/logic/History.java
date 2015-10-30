@@ -3,7 +3,6 @@ package main.java.logic;
 import java.util.ArrayList;
 
 import main.java.resources.Task;
-import main.java.storage.Storage;
 
 public class History {
 	private ArrayList<Task> screenList;

@@ -2,25 +2,15 @@ package main.java.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.Timer;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
-//import main.java.logic.Logic;
-import main.java.storage.Storage;
 
 /**
  * 
@@ -42,15 +32,15 @@ public class ToDoApp extends JFrame{
 	
 	//JTable to display events in table form, currently not used
 	//JScrollPane to be used when table is not enough to show all information
-	static private JTable table;
-	static private JScrollPane tableScrollPane;
+	//static private JTable table;
+	//static private JScrollPane tableScrollPane;
 	
 	static private String command;
 	static private String commandField;
 	static private String[] arr;
 	static private String description;
 	//static private String[] commandFieldArr;
-	static private String [][] records;
+	//static private String [][] records;
 	
 	//static private String format = "%1$5s %2$-40s %3$-20s";
 	//static private String line;

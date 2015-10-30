@@ -134,6 +134,7 @@ public class Storage {
      * NOTE: External file saves the path of the user's directory of choice 
      * to the first line of the external file
      */
+    /*
     private boolean retrieveDirectory() {
         String[] getDirectory;
         
@@ -148,6 +149,7 @@ public class Storage {
         
         return false;
     }
+    */
 	
 	/* 
      * Adds one task to the taskList and writes to external file

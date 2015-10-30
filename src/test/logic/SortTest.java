@@ -1,12 +1,7 @@
 package test.logic;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 
-import org.junit.Test;
-
-import main.java.logic.Sort;
 import main.java.resources.Task;
 
 public class SortTest {

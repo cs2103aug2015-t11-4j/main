@@ -15,7 +15,8 @@ public class CompleteController {
 	@FXML
     private ListView<Text> completeList;
 
-	private MainApp mainApp;
+	@SuppressWarnings("unused")
+    private MainApp mainApp;
 	
 	public CompleteController() {
 	
