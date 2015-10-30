@@ -62,6 +62,9 @@ public class Display implements Command {
 			taskList = Search.obtainAllTasks(storage);
 			typeOfScreen = "all";
 			break;
+		case "help":
+			typeOfScreen = "help";
+			break;
 		}
 		printOnScreenMsgList = DataDisplay.displayList(taskList);
 		history.setScreenList(taskList);

@@ -15,6 +15,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -44,6 +45,7 @@ public class MainApp extends Application {
     //private static final String TOMORROW_LAYOUT_FXML = "/main/resources/layouts/Tomorrow.fxml";
     private static final String COMPLETE_LAYOUT_FXML = "/main/resources/layouts/Complete.fxml";
     private static final String INCOMPLETE_LAYOUT_FXML = "/main/resources/layouts/Incomplete.fxml";
+    private static final String HELP_LAYOUT_FXML = "/main/resources/layouts/Help.fxml";
     
     //private static final String FEEDBACK_TODAY_SUMMARY = "Today's Summary";
     //private static final String FEEDBACK_TMR_SUMMARY = "Tomorrow's Summary";
@@ -277,8 +279,19 @@ public class MainApp extends Application {
         rootLayout.setBottom(new CommandBarController(mainApp));
     }
     
-    private void addHelpTable(MainApp mainApp) {
-        rootLayout.setCenter(new HelpTableController(mainApp));
+    private void addHelpTable() {
+    	try {
+        	FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(HELP_LAYOUT_FXML));
+        	StackPane page = (StackPane) loader.load();
+        	rootLayout.setTop(page);
+        	
+        	HelpTableController controller = loader.getController();
+            controller.setMainApp(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e1) {
+        	System.out.println("Help Table");
+        }
     }
     
     private void addTodaySummaryView() {
@@ -443,6 +456,13 @@ public class MainApp extends Application {
     		String taskToUpdate = outputToUI.getInputBoxMsg();
 
     		commandBarController.setFeedback(feedbackMsg);
+    		
+    		//test UI with testFX
+    		/*if(_userInput.equals("display help")) {
+				addHelpTable();
+				commandBarController.setFeedback(feedbackMsg);
+				commandBarController.clear();
+			}*/
 
     		if(userInput != null) {
     			if(userInput.equals("today")) {
@@ -465,49 +485,14 @@ public class MainApp extends Application {
     				commandBarController.clear();
     			}
 
-    			else if(userInput.equals("help")) {
-    				addHelpTable(this);
+    			else if(userInput.equals("floating")) {
+    				createFloatingList(itemList);
+    				addFloating();
+    				//commandBarController.setFeedback(FEEDBACK_FLOATING);
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			}
-
-    			else if(_userInput.equals("exit")) {
-    				commandBarController.setFeedback(FEEDBACK_EXIT);
-    				commandBarController.clear();
-    				delay = new PauseTransition(Duration.seconds(1));  //delay closing of GUI window by 1s
-    				delay.setOnFinished(new EventHandler<ActionEvent> () {
-    					@Override
-    					public void handle(ActionEvent event) {
-    						primaryStage.hide();
-    					}
-    				});
-    				delay.play();
-    			}
-
-    			/*
-    			 * Display today and tomorrow's tasks individually
-    			 * @@author A0131300-unused due to change in plans
-    			 * 
-    			else if(userInput.equals("today")) {
-    				addToday();
-    				commandBarController.setFeedback(FEEDBACK_TODAY);
-    				commandBarController.clear();
-    			}
-
-    			else if(userInput.equals("tomorrow") || userInput.equals("tmr")) {
-    				addTmr();
-    				commandBarController.setFeedback(FEEDBACK_TOMORROW);
-    				commandBarController.clear();
-    			}*/
-
-    			else if(userInput.equals("deadline")) {
-    				createDeadlineList(itemList);
-    				addDeadline();
-    				//commandBarController.setFeedback(FEEDBACK_DEADLINE);
-    				commandBarController.setFeedback(feedbackMsg);
-    				commandBarController.clear();
-    			}
-
+    			
     			else if(userInput.equals("event")) {
     				createEventList(itemList);
     				addEvent();
@@ -515,11 +500,11 @@ public class MainApp extends Application {
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			}
-
-    			else if(userInput.equals("floating")) {
-    				createFloatingList(itemList);
-    				addFloating();
-    				//commandBarController.setFeedback(FEEDBACK_FLOATING);
+    			
+    			else if(userInput.equals("deadline")) {
+    				createDeadlineList(itemList);
+    				addDeadline();
+    				//commandBarController.setFeedback(FEEDBACK_DEADLINE);
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			}
@@ -548,6 +533,41 @@ public class MainApp extends Application {
 
     				addDisplayAll();
     			}
+    			
+    			else if(userInput.equals("help")) {
+    				addHelpTable();
+    				commandBarController.setFeedback(feedbackMsg);
+    				commandBarController.clear();
+    			}
+    			
+    			else if(_userInput.equals("exit")) {
+    				commandBarController.setFeedback(FEEDBACK_EXIT);
+    				commandBarController.clear();
+    				delay = new PauseTransition(Duration.seconds(1));  //delay closing of GUI window by 1s
+    				delay.setOnFinished(new EventHandler<ActionEvent> () {
+    					@Override
+    					public void handle(ActionEvent event) {
+    						primaryStage.hide();
+    					}
+    				});
+    				delay.play();
+    			}
+    			
+    			/*
+    			 * Display today and tomorrow's tasks individually
+    			 * @@author A0131300-unused due to change in plans
+    			 * 
+    			else if(userInput.equals("today")) {
+    				addToday();
+    				commandBarController.setFeedback(FEEDBACK_TODAY);
+    				commandBarController.clear();
+    			}
+
+    			else if(userInput.equals("tomorrow") || userInput.equals("tmr")) {
+    				addTmr();
+    				commandBarController.setFeedback(FEEDBACK_TOMORROW);
+    				commandBarController.clear();
+    			}*/
     		}
 
     		if(taskToUpdate != null) {

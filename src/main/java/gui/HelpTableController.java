@@ -1,43 +1,18 @@
 package main.java.gui;
 
-import java.io.IOException;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.StackPane;
-
 /**
  * 
  * @author Yu Ju
  *
  */
 
-public class HelpTableController extends StackPane {
-
-//private MainApp mainApp;
+public class HelpTableController {
     
-    @FXML
-    private TableView<TaskEvent> helpTable;
-    @FXML
-    private TableColumn<TaskEvent, String> commandCol;
-    @FXML
-    private TableColumn<TaskEvent, String> flexiCol;
-    @FXML
-    private TableColumn<TaskEvent, String> formatCol;
-    @FXML
-    private TableColumn<TaskEvent, String> commentCol;
-    @FXML
-    private TableColumn<TaskEvent, String> resultCol;
+	@SuppressWarnings("unused")
+    private MainApp mainApp;
 
-    private static final String OVERVIEW_LAYOUT_FXML = "/main/resources/layouts/Help.fxml";
-
-    public HelpTableController(MainApp mainApp) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(OVERVIEW_LAYOUT_FXML));
+    public HelpTableController() {
+        /*FXMLLoader loader = new FXMLLoader(getClass().getResource(OVERVIEW_LAYOUT_FXML));
         loader.setController(this);
         loader.setRoot(this);
 
@@ -45,9 +20,9 @@ public class HelpTableController extends StackPane {
             loader.load();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
         
-        ObservableList<TaskEvent> helpData = FXCollections.observableArrayList();
+        /*ObservableList<TaskEvent> helpData = FXCollections.observableArrayList();
         
         helpData.add(new TaskEvent("add", "create\na\nc", "Deadline\nadd (content) by date;time\nadd (content) by date\nadd (content) by time",
                 "1. Keyword \"by\" must be present\n2. If only time is specified, date will be automatically assumed as the daye the task is added.", 
@@ -66,8 +41,12 @@ public class HelpTableController extends StackPane {
     	flexiCol.setCellValueFactory(new PropertyValueFactory<TaskEvent, String>("startDate"));
     	formatCol.setCellValueFactory(new PropertyValueFactory<TaskEvent, String>("endDate"));
     	commentCol.setCellValueFactory(new PropertyValueFactory<TaskEvent, String>("startTime"));
-    	resultCol.setCellValueFactory(new PropertyValueFactory<TaskEvent, String>("endTime"));
+    	resultCol.setCellValueFactory(new PropertyValueFactory<TaskEvent, String>("endTime"));*/
     	
     	//this.mainApp = mainApp;
     }
+    
+    public void setMainApp(MainApp mainApp) {
+		this.mainApp = mainApp;
+	}
 }
