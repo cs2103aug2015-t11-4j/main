@@ -1,10 +1,13 @@
 package main.java.gui;
 
 import javafx.fxml.FXML;
+
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 
 /**
+ * This class handles the ListView of complete tasks by adding them into the list that is
+ * to be displayed to the user.
  * 
  * @author Yu Ju
  *

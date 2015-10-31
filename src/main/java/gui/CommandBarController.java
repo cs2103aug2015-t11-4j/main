@@ -4,12 +4,15 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 
 /**
+ * This class handles the TextField that the user inputs commands in and the Label
+ * that shows feedback of action performed by the programme.
  * 
  * @author Yu Ju
  *

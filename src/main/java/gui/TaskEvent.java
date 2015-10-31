@@ -1,9 +1,7 @@
 package main.java.gui;
 
 /**
- * 
  * @author Yu Ju
- *
  */
 
 public class TaskEvent {

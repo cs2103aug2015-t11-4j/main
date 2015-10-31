@@ -1,12 +1,15 @@
 package main.java.gui;
 
 import javafx.fxml.FXML;
+
 import javafx.scene.control.ListView;
 
 /**
+ * This class handles the summary scenes that include today and tomorrow's tasks.
+ * The three ListViews are the lists that would be shown in a summary view.
+ * This class adds tasks into the lists that are to be displayed to the user.
  * 
  * @author Yu Ju
- *
  */
 
 public class SummaryController {
