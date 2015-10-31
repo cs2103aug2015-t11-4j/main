@@ -29,6 +29,7 @@ public class FlexiCommands {
 				return "display";
 			// exit command
 			case "exit":
+			case "quit":
 				return "exit";
 			//help command
 			case "help":
