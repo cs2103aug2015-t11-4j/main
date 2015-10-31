@@ -19,13 +19,14 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import javafx.stage.Stage;
-
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import main.java.logic.Command;
@@ -41,6 +42,7 @@ public class MainApp extends Application {
 	
     private static final String WINDOW_TITLE = "ALT4";
     private static final String ROOT_LAYOUT_FXML = "/main/resources/layouts/RootLayout.fxml";
+    private static final String ROOT_LAYOUT2_FXML = "/main/resources/layouts/RootLayout2.fxml";
     private static final String TODAY_SUMMARY_LAYOUT_FXML = "/main/resources/layouts/TodaySummary.fxml";
     private static final String TOMORROW_SUMMARY_LAYOUT_FXML = "/main/resources/layouts/TomorrowSummary.fxml";
     private static final String ALL_LAYOUT_FXML = "/main/resources/layouts/DisplayAll.fxml";
@@ -108,6 +110,7 @@ public class MainApp extends Application {
 	
 	private Stage primaryStage;
     private BorderPane rootLayout;
+    private BorderPane rootLayout2;
     //private MainApp mainApp;
 
     private static ArrayList<ItemForUserScreen> itemList;
@@ -158,6 +161,9 @@ public class MainApp extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle(WINDOW_TITLE);
         Scene scene = new Scene(rootLayout);
+        //scene.setFill(Color.TRANSPARENT);
+        //rootLayout.setBackground(Background.EMPTY);
+        //this.primaryStage.initStyle(StageStyle.TRANSPARENT);
         this.primaryStage.setScene(scene);
         this.primaryStage.show();
         
@@ -285,13 +291,33 @@ public class MainApp extends Application {
         rootLayout.setBottom(new CommandBarController(mainApp));
     }
     
-    private void addHelpTable() {
+    private void addHelpTable(Stage stage) {
+    	
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource(ROOT_LAYOUT2_FXML));
+        try {
+            rootLayout2 = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.primaryStage = stage;
+        Scene scene = new Scene(rootLayout2);
+        scene.setFill(Color.TRANSPARENT);
+        rootLayout2.setBackground(Background.EMPTY);
+        this.primaryStage.initStyle(StageStyle.TRANSPARENT);
+        this.primaryStage.setScene(scene);
+        this.primaryStage.show();
+    	
     	try {
-        	FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(HELP_LAYOUT_FXML));
-        	StackPane page = (StackPane) loader.load();
-        	rootLayout.setTop(page);
+        	FXMLLoader loader2 = new FXMLLoader(MainApp.class.getResource(HELP_LAYOUT_FXML));
+        	StackPane page = (StackPane) loader2.load();
+        	//page.setStyle("-fx-background-color: rgba(230, 230, 250, 0.5)"); //lavendar
+        	//page.setStyle("-fx-background-color: rgba(205, 197, 191, 0.5)");  //seashell3
+        	//page.setStyle("-fx-background-color: rgba(000, 229, 238, 0.5)");  //turquoise2
+        	page.setStyle("-fx-background-color: rgba(150, 150, 150, 0.5)");  //grey59
+        	rootLayout2.setCenter(page);
+        	//rootLayout.setTop(page);
         	
-        	HelpTableController controller = loader.getController();
+        	HelpTableController controller = loader2.getController();
             controller.setMainApp(this);
         } catch (IOException e) {
             e.printStackTrace();
@@ -463,8 +489,10 @@ public class MainApp extends Application {
 
     		commandBarController.setFeedback(feedbackMsg);
     		
+    		Stage secondaryStage = new Stage();
+    		
     		//test UI with testFX
-    		/*if(_userInput.equals("display help")) {
+    		/*if (_userInput.equals("display help")) {
 				addHelpTable();
 				commandBarController.setFeedback(feedbackMsg);
 				commandBarController.clear();
@@ -520,12 +548,11 @@ public class MainApp extends Application {
     			} else if (userInput.equals(DISPLAY_ALL_SCENE)) {
     				createCompleteList(itemList);
     				createIncompleteList(itemList);
+    				addDisplayAll();
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
-
-    				addDisplayAll();
     			} else if (userInput.equals(HELP_SCENE)) {
-    				addHelpTable();
+    				addHelpTable(secondaryStage);
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			} else if (_userInput.equals(EXIT_SCENE)) {

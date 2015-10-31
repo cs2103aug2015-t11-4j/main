@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.*?>
 
-<StackPane opacity="1.0" prefHeight="600.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="main.java.gui.HelpTableController">
+<StackPane opacity="1.0" prefHeight="600.0" prefWidth="750.0" style="" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="main.java.gui.HelpTableController">
   <!-- TODO Add Nodes -->
   <children>
     <AnchorPane prefHeight="600.0" prefWidth="750.0">
