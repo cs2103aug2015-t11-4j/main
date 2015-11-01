@@ -324,6 +324,15 @@ public class MainApp extends Application {
         } catch (NullPointerException e1) {
         	System.out.println("Help Table");
         }
+    	
+    	scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent key) {
+              if (key.getCode()==KeyCode.ESCAPE) {
+            	  primaryStage.close();
+              }
+            }
+        });
     }
     
     private void addTodaySummaryView() {
