@@ -73,35 +73,35 @@ public class Task {
 	}
 	/*********************** Mutators ************************/
 	public void setTaskType(String newTaskType) {
-		taskType = newTaskType;
+		this.taskType = newTaskType;
 	}
 	
 	public void setTaskDescription(String newTaskDescription) {
-		taskDescription = newTaskDescription;
+		this.taskDescription = newTaskDescription;
 	}
 	
 	public void setStartDate(String newStartDate) {
-		startDate = newStartDate;
+		this.startDate = newStartDate;
 	}
 	
 	public void setEndDate(String newEndDate) {
-		endDate = newEndDate;
+		this.endDate = newEndDate;
 	}
 	
 	public void setStartTime(String newStartTime) {
-		startTime = newStartTime;
+		this.startTime = newStartTime;
 	}
 	
 	public void setEndTime(String newEndTime) {
-		endTime = newEndTime;
+		this.endTime = newEndTime;
 	}
 	
 	public void setCompleted(boolean newTaskStatus) {
-		isCompleted = newTaskStatus;
+		this.isCompleted = newTaskStatus;
 	}
 	
 	public void setValidDT(boolean newDTF) {
-		validDTF = newDTF;
+		this.validDTF = newDTF;
 	}
 	
 	//Overriding equals() method
