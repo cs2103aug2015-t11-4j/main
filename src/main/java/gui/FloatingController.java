@@ -1,7 +1,11 @@
 package main.java.gui;
 
-import javafx.fxml.FXML;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 /**
@@ -17,6 +21,9 @@ public class FloatingController {
 	@FXML
     private ListView<String> floatingList;
 	
+	@FXML
+    private Label clock;
+	
 	@SuppressWarnings("unused")
     private MainApp mainApp;
 	
@@ -28,5 +35,10 @@ public class FloatingController {
 		this.mainApp = mainApp;
 		
 		floatingList.setItems(mainApp.getFloating());
+		
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	    //get current date time with Date()
+	    Date date = new Date();
+	    clock.setText(dateFormat.format(date));
 	}
 }
