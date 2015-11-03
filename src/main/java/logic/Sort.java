@@ -23,11 +23,11 @@ public class Sort {
 		Task task4 = new Task(TYPE_EVENT, "wash hand with soap", "03/02/2015", "03/02/2015", "0915", "1100", true, false);
 		Task task5 = new Task(TYPE_FLOATING, "meet with bob", "null", "null", "null", "null", false, false);
 		Task task6 = new Task(TYPE_FLOATING, "eat breakfast", "null", "null", "null", "null", true, false);
-		Task task7 = new Task(TYPE_DEADLINE, "wake up", "null", "01/01/2015", "null", "0900", false, false);	
-		int taskTime = createTaskTime(task1);
-		int taskTime2 = createTaskTime(task4);
-		int taskDate = createTaskDate(task1);
-		int taskDate2 = createTaskDate(task3);
+		//Task task7 = new Task(TYPE_DEADLINE, "wake up", "null", "01/01/2015", "null", "0900", false, false);	
+		//int taskTime = createTaskTime(task1);
+		//int taskTime2 = createTaskTime(task4);
+		//int taskDate = createTaskDate(task1);
+		//int taskDate2 = createTaskDate(task3);
 /*		p(taskTime);
 		p(taskTime2);
 		p(taskDate);
