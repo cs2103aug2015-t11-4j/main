@@ -73,9 +73,9 @@ public class DateAndTime {
 					else 
 						invalidYear = true;
 				}
-/*				else { //year is not specified; append current year to it
+				else { //year is not specified; append current year to it
 					date = date + "/" + currentYear;
-				}	*/
+				}	
 			}
 			//format is in dd.mm.yyyy or dd.mm
 			else if (input.contains(REGEX_DOT)) {
@@ -105,9 +105,9 @@ public class DateAndTime {
 					else 
 						invalidYear = true;
 				}
-/*				else { //year is not specified; append current year to it
+				else { //year is not specified; append current year to it
 					date = date + "/" + currentYear;
-				}*/	
+				}	
 			}
 			else 
 				invalidDateFormat = true;
@@ -130,16 +130,16 @@ public class DateAndTime {
 			case "jan":
 			case "january":
 				if(isValidDD(dateList.get(0), dateList.get(1))) {
-					date = dateList.get(0) + "/1";
+					date = dateList.get(0) + "/1/";
 					if(dateList.size() == 3) {//year is specified
 						if(isValidYear(dateList.get(2)))
-							date = date + "/" + dateList.get(2);
+							date = date  + dateList.get(2);
 						else 
 							invalidYear = true;
 					}
-/*					else { //year is not specified; append current year to it
+					else { //year is not specified; append current year to it
 						date = date + currentYear;
-					}	*/
+					}	
 				}
 				else
 					date = "invalid day";
@@ -148,10 +148,10 @@ public class DateAndTime {
 			case "feb":
 			case "february":
 				if(isValidDD(dateList.get(0), dateList.get(1))) {
-					date = dateList.get(0) + "/2";
+					date = dateList.get(0) + "/2/";
 					if(dateList.size() == 3) {//year is specified
 						if(isValidYear(dateList.get(2)))
-							date = date + "/" + dateList.get(2);
+							date = date  + dateList.get(2);
 						else 
 							invalidYear = true;
 					}
@@ -166,16 +166,16 @@ public class DateAndTime {
 			case "mar":
 			case "march":
 				if(isValidDD(dateList.get(0), dateList.get(1))) {
-					date = dateList.get(0) + "/3";
+					date = dateList.get(0) + "/3/";
 					if(dateList.size() == 3) {//year is specified
 						if(isValidYear(dateList.get(2)))
-							date = date + "/" + dateList.get(2);
+							date = date  + dateList.get(2);
 						else 
 							invalidYear = true;
 					}
-/*					else { //year is not specified; append current year to it
+					else { //year is not specified; append current year to it
 						date = date + currentYear;
-					}*/	
+					}	
 				}
 				else
 					date = "invalid day";
@@ -184,16 +184,16 @@ public class DateAndTime {
 			case "apr":
 			case "april":
 				if(isValidDD(dateList.get(0), dateList.get(1))) {
-					date = dateList.get(0) + "/4";
+					date = dateList.get(0) + "/4/";
 					if(dateList.size() == 3) {//year is specified
 						if(isValidYear(dateList.get(2)))
-							date = date + "/" + dateList.get(2);
+							date = date + dateList.get(2);
 						else 
 							invalidYear = true;
 					}
-/*					else { //year is not specified; append current year to it
+					else { //year is not specified; append current year to it
 						date = date + currentYear;
-					}	*/
+					}	
 				}
 				else
 					date = "invalid day";
@@ -201,16 +201,16 @@ public class DateAndTime {
 			//may
 			case "may":
 				if(isValidDD(dateList.get(0), dateList.get(1))) {
-					date = dateList.get(0) + "/5";
+					date = dateList.get(0) + "/5/";
 					if(dateList.size() == 3) {//year is specified
 						if(isValidYear(dateList.get(2)))
-							date = date + "/" + dateList.get(2);
+							date = date  + dateList.get(2);
 						else 
 							invalidYear = true;
 					}
-/*					else { //year is not specified; append current year to it
+					else { //year is not specified; append current year to it
 						date = date + currentYear;
-					}*/	
+					}	
 				}
 				else
 					date = "invalid day";
@@ -219,16 +219,16 @@ public class DateAndTime {
 			case "jun":
 			case "june":
 				if(isValidDD(dateList.get(0), dateList.get(1))) {
-					date = dateList.get(0) + "/6";
+					date = dateList.get(0) + "/6/";
 					if(dateList.size() == 3) {//year is specified
 						if(isValidYear(dateList.get(2)))
-							date = date + "/" + dateList.get(2);
+							date = date  + dateList.get(2);
 						else 
 							invalidYear = true;
 					}
-/*					else { //year is not specified; append current year to it
+					else { //year is not specified; append current year to it
 						date = date + currentYear;
-					}	*/
+					}	
 				}
 				else
 					date = "invalid day";
@@ -237,16 +237,16 @@ public class DateAndTime {
 			case "jul":
 			case "july":
 				if(isValidDD(dateList.get(0), dateList.get(1))) {
-					date = dateList.get(0) + "/7";
+					date = dateList.get(0) + "/7/";
 					if(dateList.size() == 3) {//year is specified
 						if(isValidYear(dateList.get(2)))
-							date = date + "/" + dateList.get(2);
+							date = date  + dateList.get(2);
 						else 
 							invalidYear = true;
 					}
-/*					else { //year is not specified; append current year to it
+					else { //year is not specified; append current year to it
 						date = date + currentYear;
-					}	*/
+					}	
 				}
 				else
 					date = "invalid day";
@@ -255,16 +255,16 @@ public class DateAndTime {
 			case "aug":
 			case "august":
 				if(isValidDD(dateList.get(0), dateList.get(1))) {
-					date = dateList.get(0) + "/8";
+					date = dateList.get(0) + "/8/";
 					if(dateList.size() == 3) {//year is specified
 						if(isValidYear(dateList.get(2)))
-							date = date + "/" + dateList.get(2);
+							date = date + dateList.get(2);
 						else 
 							invalidYear = true;
 					}
-/*					else { //year is not specified; append current year to it
+					else { //year is not specified; append current year to it
 						date = date + currentYear;
-					}	*/
+					}	
 				}
 				else
 					date = "invalid day";
@@ -273,16 +273,16 @@ public class DateAndTime {
 			case "sept":
 			case "september":
 				if(isValidDD(dateList.get(0), dateList.get(1))) {
-					date = dateList.get(0) + "/9";
+					date = dateList.get(0) + "/9/";
 					if(dateList.size() == 3) {//year is specified
 						if(isValidYear(dateList.get(2)))
-							date = date + "/" + dateList.get(2);
+							date = date + dateList.get(2);
 						else 
 							invalidYear = true;
 					}
-	/*				else { //year is not specified; append current year to it
+					else { //year is not specified; append current year to it
 						date = date + currentYear;
-					}	*/
+					}	
 				}
 				else
 					date = "invalid day";
@@ -291,16 +291,16 @@ public class DateAndTime {
 			case "oct":
 			case "october":
 				if(isValidDD(dateList.get(0), dateList.get(1))) {
-					date = dateList.get(0) + "/10";
+					date = dateList.get(0) + "/10/";
 					if(dateList.size() == 3) {//year is specified
 						if(isValidYear(dateList.get(2)))
-							date = date + "/" + dateList.get(2);
+							date = date + dateList.get(2);
 						else 
 							invalidYear = true;
 					}
-/*					else { //year is not specified; append current year to it
+					else { //year is not specified; append current year to it
 						date = date + currentYear;
-					}	*/
+					}	
 				}
 				else
 					date = "invalid day";
@@ -309,16 +309,16 @@ public class DateAndTime {
 			case "nov":
 			case "november":
 				if(isValidDD(dateList.get(0), dateList.get(1))) {
-					date = dateList.get(0) + "/11";
+					date = dateList.get(0) + "/11/";
 					if(dateList.size() == 3) {//year is specified
 						if(isValidYear(dateList.get(2)))
-							date = date + "/" + dateList.get(2);
+							date = date + dateList.get(2);
 						else 
 							invalidYear = true;
 					}
-/*					else { //year is not specified; append current year to it
+					else { //year is not specified; append current year to it
 						date = date + currentYear;
-					}*/	
+					}	
 				}
 				else
 					date = "invalid day";
@@ -327,16 +327,16 @@ public class DateAndTime {
 			case "dec":
 			case "december":
 				if(isValidDD(dateList.get(0), dateList.get(1))) {
-					date = dateList.get(0) + "/12";
+					date = dateList.get(0) + "/12/";
 					if(dateList.size() == 3) {//year is specified
 						if(isValidYear(dateList.get(2)))
-							date = date + "/" + dateList.get(2);
+							date = date + dateList.get(2);
 						else 
 							invalidYear = true;
 					}
-/*					else { //year is not specified; append current year to it
+					else { //year is not specified; append current year to it
 						date = date + currentYear;
-					}*/	
+					}	
 				}
 				else
 					date = "invalid day";
