@@ -104,8 +104,21 @@ public class Storage {
                 count += 1;
             }
             br.close();
-
-            sortTaskList(taskList);
+            
+            /*
+            // For testing purposes
+            for(int i = 0; i<taskList.size(); i++) {
+                logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getTaskType());
+                logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getTaskDescription());
+                logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getStartDate());
+                logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getEndDate());
+                logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getStartTime());
+                logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getEndTime());
+                logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getIsCompleted());
+                logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getIsDateTimeValid());
+            }
+            */
+            
             logger.log(Level.INFO, "Completed regeneration of internal taskList from external file");
         } catch (Exception e) {
             File file = new File(filename);
@@ -187,47 +200,38 @@ public class Storage {
         logger.log(Level.INFO, "Deleting task {0} from external file", task.getTaskDescription());
         taskList.remove(task); //(jh) update internal list
         
-        try {
-            File original = new File(filename);
+        try {         
             FileReader fr = new FileReader(filename);
             BufferedReader br = new BufferedReader(fr);
             
-            File temp = new File("~Alt4.tmp");
-            FileWriter fw = new FileWriter("~Alt4.tmp", true);
-            BufferedWriter bw = new BufferedWriter(fw);
+            String input = "";
+            String line;
             
-            String line = null;
-            int count = 0;
-            
-            while ((line = br.readLine()) != null) {
-                if (getTaskTypeByItemNum(count).equals(task.getTaskType())
-                        && getTaskDescriptionByItemNum(count).equals(task.getTaskDescription())
-                        && getStartDateByItemNum(count).equals(task.getStartDate())
-                        && getEndDateByItemNum(count).equals(task.getEndDate())
-                        && getStartTimeByItemNum(count).equals(task.getStartTime())
-                        && getEndTimeByItemNum(count).equals(task.getEndDate())
-                        && getIsCompletedByItemNum(count).equals(task.getIsCompleted())
-                        && getIsDateTimeValidByItemNum(count).equals(task.getIsDateTimeValid())
-                        ) {
-                    bw.write(line);
-                    bw.newLine();
-                }
-                count += 1;
+            while ((line = br.readLine()) != null) {        
+                input += line + '\n';
             }
             
             br.close();
+            
+            FileWriter fw = new FileWriter(filename);
+            BufferedWriter bw = new BufferedWriter(fw);
+            
+            bw.write(input.replaceAll(task.getTaskType() + ";" + task.getTaskDescription() 
+            + ";" + task.getStartDate() + ";" + task.getEndDate() + ";" + task.getStartTime()
+            + ";" + task.getEndTime() + ";" + task.getIsCompleted() + ";" + task.getIsDateTimeValid() 
+            + ";" + "\n", ""));
+            
             bw.close();
-            original.delete();
-            temp.renameTo(original);
 
             sortTaskList(taskList);
+            logger.log(Level.INFO, "Deleted {0} from external file", task.getTaskDescription());
+            return 0;
         } catch (Exception e) {
             logger.log(Level.WARNING, "Unable to delete task {0} from external file", task.getTaskDescription());
             return -1;
         }
-        return 0;
     }
-	
+    
     /* 
      * Set task to complete saved in external file
      */
@@ -296,7 +300,7 @@ public class Storage {
             + ";" + task.getEndTime() + ";" + task.getIsCompleted() + ";" + task.getIsDateTimeValid() + ";"));
             
             bw.close();
-            logger.log(Level.INFO, "Reverted completed task {0} from external file", task.getTaskDescription());
+            logger.log(Level.INFO, "Reverted completion of task {0} from external file", task.getTaskDescription());
             return 0;
         } catch (Exception e) {
             logger.log(Level.WARNING, "Unable to incomplete task {0} from external file", task.getTaskDescription());
