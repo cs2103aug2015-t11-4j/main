@@ -119,6 +119,7 @@ public class Storage {
             }
             */
             
+            sortTaskList(taskList);
             logger.log(Level.INFO, "Completed regeneration of internal taskList from external file");
         } catch (Exception e) {
             File file = new File(filename);
@@ -262,6 +263,8 @@ public class Storage {
             + ";" + task.getEndTime() + ";" + task.getIsCompleted() + ";" + task.getIsDateTimeValid() + ";"));
             
             bw.close();
+            
+            sortTaskList(taskList);
             logger.log(Level.INFO, "Completed task {0} from external file", task.getTaskDescription());
             return 0;
         } catch (Exception e) {
@@ -300,6 +303,8 @@ public class Storage {
             + ";" + task.getEndTime() + ";" + task.getIsCompleted() + ";" + task.getIsDateTimeValid() + ";"));
             
             bw.close();
+            
+            sortTaskList(taskList);
             logger.log(Level.INFO, "Reverted completion of task {0} from external file", task.getTaskDescription());
             return 0;
         } catch (Exception e) {
