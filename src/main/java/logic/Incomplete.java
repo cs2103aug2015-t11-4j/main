@@ -22,6 +22,10 @@ public class Incomplete implements Command{
 	public OutputToUI execute() {
 		int code;
 		Task task = Search.obtainTaskByItemNum(itemNum, history.getScreenList());
+		System.out.println("***");
+		DataDisplay.displayList(history.getScreenList());
+		System.out.println("***");
+		
 		code = storage.incompleteOneItem(task);
 /*		for (int i = 0; i < storage.getTaskList().size(); i++){
 			if (storage.getTaskList().get(i).equals(task)){

@@ -152,35 +152,35 @@ public class Sort {
 		ArrayList<Task> completeNonFloatingListSorted = new ArrayList<Task>();
 		
 		incompleteList = Search.obtainAllIncompleteTasks(storage);
-		System.out.println("***");
-		System.out.println("incompleteList:");
-		DataDisplay.displayList(incompleteList);
-		System.out.println("***");
+		//System.out.println("***");
+		//System.out.println("incompleteList:");
+		//DataDisplay.displayList(incompleteList);
+		//System.out.println("***");
 		completeList = Search.obtainAllCompleteTasks(storage);
-		System.out.println("***");
+		/*System.out.println("***");
 		System.out.println("completeList:");
 		DataDisplay.displayList(completeList);
-		System.out.println("***");
+		System.out.println("***");*/
 		incompleteFloatingList = getFloatingList(incompleteList);
-		System.out.println("***");
+		/*System.out.println("***");
 		System.out.println("incompleteFloatingList:");
 		DataDisplay.displayList(incompleteFloatingList);
-		System.out.println("***");
+		System.out.println("***");*/
 		completeFloatingList = getFloatingList(completeList);
-		System.out.println("***");
+		/*System.out.println("***");
 		System.out.println("completeFloatingList:");
 		DataDisplay.displayList(completeFloatingList);
-		System.out.println("***");
+		System.out.println("***");*/
 		incompleteNonFloatingList = getNonFloatingList(incompleteList);
-		System.out.println("***");
+		/*System.out.println("***");
 		System.out.println("incompleteNonFloatingList:");
 		DataDisplay.displayList(incompleteNonFloatingList);
-		System.out.println("***");
+		System.out.println("***");*/
 		completeNonFloatingList = getNonFloatingList(completeList);
-		System.out.println("***");
+		/*System.out.println("***");
 		System.out.println("completeList:");
 		DataDisplay.displayList(completeList);
-		System.out.println("***");
+		System.out.println("***");*/
 
 		ArrayList<Sort> sortListForIncomplete = createSortList(incompleteNonFloatingList);
 		ArrayList<Sort> sortListForComplete = createSortList(completeNonFloatingList);

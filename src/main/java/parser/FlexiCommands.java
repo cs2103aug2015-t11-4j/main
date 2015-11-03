@@ -55,6 +55,8 @@ public class FlexiCommands {
 			case "recur":
 			case "r":
 				return "recurring";
+			case "incomplete":
+				return "incomplete";
 			default:
 				return "invalid command";	
 		}

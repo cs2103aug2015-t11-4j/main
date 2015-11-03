@@ -20,13 +20,16 @@ public class CompleteTest {
 	public static final String TYPE_EVENT = "event";
 	public static final String TYPE_FLOATING = "floating";
 	
-	Task task1 = new Task(TYPE_DEADLINE, "wake up", null, "01/01/2015", null, "0900", false, false);
-	Task task2 = new Task(TYPE_DEADLINE, "wash face with cool water", null, "02/02/2015", null, "1100", true, false);
+	Task task1 = new Task(TYPE_DEADLINE, "wake up", "null", "01/01/2015", "null", "0900", false, false);
+	Task task2 = new Task(TYPE_DEADLINE, "wash face with cool water", "null", "02/02/2015", "null", "1100", true, false);
 	Task task3 = new Task(TYPE_EVENT, "go toilet", "01/01/2015", "01/02/2015", "0900", "1000", false, false);
 	Task task4 = new Task(TYPE_EVENT, "wash hand with soap", "03/02/2015", "03/02/2015", "0915", "1100", true, false);
-	Task task5 = new Task(TYPE_FLOATING, "meet with bob", null, null, null, null, false, false);
-	Task task6 = new Task(TYPE_FLOATING, "eat breakfast", null, null, null, null, true, false);
-	Task task7 = new Task(TYPE_DEADLINE, "wake up", null, "01/01/2015", null, "0900", false, false);	Storage storage = Storage.getInstance();
+	Task task5 = new Task(TYPE_FLOATING, "meet with bob", "null", "null", "null", "null", false, false);
+	Task task6 = new Task(TYPE_FLOATING, "eat breakfast", "null", "null", "null", "null", true, false);
+	Task task7 = new Task(TYPE_DEADLINE, "wake up", "null", "01/01/2015", "null", "0900", true, false);	
+	
+	
+	Storage storage = Storage.getInstance();
 	Command command1 = new Add(task1, storage);
 	Command command2 = new Add(task2, storage);
 	Command command3 = new Add(task3, storage);
@@ -34,11 +37,12 @@ public class CompleteTest {
 	Command command5 = new Add(task5, storage);
 	Command command6 = new Add(task6, storage);
 	Command displayCommand = Controller.createCommand("display all");
-	int itemNum = 1;
+	int itemNum = 5;
 	
 	@Test
 	public void test() throws IOException {
 		Controller.initializeProgram();
+		storage.getTaskList().clear();
 		DataDisplay.displayList(storage.getTaskList());
 		command1.execute();
 		command2.execute();

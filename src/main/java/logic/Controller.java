@@ -53,6 +53,7 @@ public class Controller {
 			itemNum = Integer.parseInt(inputForAction.get(1));
 			return command = new Complete(itemNum, storage);
 		case "incomplete":
+			System.out.println("**********INSIDE INCOMPLETE*********");
 			itemNum =Integer.parseInt(inputForAction.get(1));
 			return command = new Incomplete(itemNum, storage);
 		default:
