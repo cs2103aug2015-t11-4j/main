@@ -16,13 +16,14 @@ public class DataDisplayTest {
 	public static final String TYPE_FLOATING = "floating";
 
 	// initialize different task object that fits different requirement
-	Task task1 = new Task(TYPE_DEADLINE, "wake up", null, "01/01/2015", null, "0900", false, false);
-	Task task2 = new Task(TYPE_DEADLINE, "wash face with cool water", null, "02/02/2015", null, "1100", true, false);
+
+	Task task1 = new Task(TYPE_DEADLINE, "wake up", "null", "01/01/2015", "null", "0900", false, false);
+	Task task2 = new Task(TYPE_DEADLINE, "wash face with cool water", "null", "02/02/2015", "null", "1100", true, false);
 	Task task3 = new Task(TYPE_EVENT, "go toilet", "01/01/2015", "01/02/2015", "0900", "1000", false, false);
 	Task task4 = new Task(TYPE_EVENT, "wash hand with soap", "03/02/2015", "03/02/2015", "0915", "1100", true, false);
-	Task task5 = new Task(TYPE_FLOATING, "meet with bob", null, null, null, null, false, false);
-	Task task6 = new Task(TYPE_FLOATING, "eat breakfast", null, null, null, null, true, false);
-	Task task7 = new Task(TYPE_DEADLINE, "wake up", null, "01/01/2015", null, "0900", false, false);
+	Task task5 = new Task(TYPE_FLOATING, "meet with bob", "null", "null", "null", "null", false, false);
+	Task task6 = new Task(TYPE_FLOATING, "eat breakfast", "null", "null", "null", "null", true, false);
+	Task task7 = new Task(TYPE_DEADLINE, "wake up", "null", "01/01/2015", "null", "0900", false, false);	
 	// expected print format for each task
 	String task1Print = "By 0900, 01/01/2015: wake up";
 	String task2Print = "By 1100, 02/02/2015: wash face with cool water";

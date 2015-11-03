@@ -3,6 +3,8 @@ package main.java.logic;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import main.java.resources.DataDisplay;
 import main.java.resources.Task;
 import main.java.resources.TaskComparator;
 import main.java.storage.Storage;
@@ -13,30 +15,31 @@ public class Sort {
 	public static final String TYPE_EVENT = "event";
 	public static final String TYPE_FLOATING = "floating";
 
-/*	public static void main(String arg[]) {
+	public static void main(String arg[]) {
 
-		Task task1 = new Task(TYPE_DEADLINE, "wake up", null, "01/01/2015", null, "0900", false);
-		Task task2 = new Task(TYPE_DEADLINE, "wash face with cool water", null, "02/02/2015", null, "1100", true);
-		Task task3 = new Task(TYPE_EVENT, "go toilet", "01/01/2015", "01/02/2015", "0900", "1000", false);
-		Task task4 = new Task(TYPE_EVENT, "wash hand with soap", "03/02/2015", "03/02/2015", "0915", "1100", true);
-		Task task5 = new Task(TYPE_FLOATING, "meet with bob", null, null, null, null, false);
-		Task task6 = new Task(TYPE_FLOATING, "eat breakfast", null, null, null, null, true);
+		Task task1 = new Task(TYPE_DEADLINE, "wake up", "null", "01/01/2015", "null", "0900", false, false);
+		Task task2 = new Task(TYPE_DEADLINE, "wash face with cool water", "null", "02/02/2015", "null", "1100", true, false);
+		Task task3 = new Task(TYPE_EVENT, "go toilet", "01/01/2015", "01/02/2015", "0900", "1000", false, false);
+		Task task4 = new Task(TYPE_EVENT, "wash hand with soap", "03/02/2015", "03/02/2015", "0915", "1100", true, false);
+		Task task5 = new Task(TYPE_FLOATING, "meet with bob", "null", "null", "null", "null", false, false);
+		Task task6 = new Task(TYPE_FLOATING, "eat breakfast", "null", "null", "null", "null", true, false);
+		Task task7 = new Task(TYPE_DEADLINE, "wake up", "null", "01/01/2015", "null", "0900", false, false);	
 		int taskTime = createTaskTime(task1);
 		int taskTime2 = createTaskTime(task4);
 		int taskDate = createTaskDate(task1);
 		int taskDate2 = createTaskDate(task3);
-		p(taskTime);
+/*		p(taskTime);
 		p(taskTime2);
 		p(taskDate);
-		p(taskDate2);
+		p(taskDate2);*/
 		
 		
-		Sort sort = new Sort(task1, createTaskDate(task1), createTaskTime(task1), task1.getTaskDescription());
+/*		Sort sort = new Sort(task1, createTaskDate(task1), createTaskTime(task1), task1.getTaskDescription());
 		if(sort.getTask().equals(task1)){
 			p(sort.getTaskDate());
 			p(sort.getTaskTime());
 			System.out.println(sort.getTaskContent());
-		}
+		}*/
 		
 		ArrayList<Task> list = new ArrayList<Task>();
 		ArrayList<Sort> sortList = new ArrayList <Sort>();
@@ -62,9 +65,9 @@ public class Sort {
 		DataDisplay.displayList(sortResult);
 		
 	}
-	*/
 	
-	/*
+	
+	
 	private static void printSortList(ArrayList<Sort> sortList, ArrayList<Task> list){
 		Sort sort;
 		for (int i = 0; i < sortList.size(); i++){
@@ -76,7 +79,11 @@ public class Sort {
 			}
 		}
 	}
-    */
+	
+	private static void p(int i){
+		System.out.println(i);
+	}
+    
 	
 	private static Storage storage = Storage.getInstance();
 	private Task task;
@@ -145,11 +152,35 @@ public class Sort {
 		ArrayList<Task> completeNonFloatingListSorted = new ArrayList<Task>();
 		
 		incompleteList = Search.obtainAllIncompleteTasks(storage);
+		System.out.println("***");
+		System.out.println("incompleteList:");
+		DataDisplay.displayList(incompleteList);
+		System.out.println("***");
 		completeList = Search.obtainAllCompleteTasks(storage);
+		System.out.println("***");
+		System.out.println("completeList:");
+		DataDisplay.displayList(completeList);
+		System.out.println("***");
 		incompleteFloatingList = getFloatingList(incompleteList);
+		System.out.println("***");
+		System.out.println("incompleteFloatingList:");
+		DataDisplay.displayList(incompleteFloatingList);
+		System.out.println("***");
 		completeFloatingList = getFloatingList(completeList);
+		System.out.println("***");
+		System.out.println("completeFloatingList:");
+		DataDisplay.displayList(completeFloatingList);
+		System.out.println("***");
 		incompleteNonFloatingList = getNonFloatingList(incompleteList);
+		System.out.println("***");
+		System.out.println("incompleteNonFloatingList:");
+		DataDisplay.displayList(incompleteNonFloatingList);
+		System.out.println("***");
 		completeNonFloatingList = getNonFloatingList(completeList);
+		System.out.println("***");
+		System.out.println("completeList:");
+		DataDisplay.displayList(completeList);
+		System.out.println("***");
 
 		ArrayList<Sort> sortListForIncomplete = createSortList(incompleteNonFloatingList);
 		ArrayList<Sort> sortListForComplete = createSortList(completeNonFloatingList);
@@ -211,7 +242,7 @@ public class Sort {
 		ArrayList<Task> result = new ArrayList<Task>();
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getTaskType().equals("floating")) {
-				result.add(storage.getTaskList().get(i));
+				result.add(list.get(i));
 			}
 		}
 		return result;
@@ -222,7 +253,7 @@ public class Sort {
 		ArrayList<Task> result = new ArrayList<Task>();
 		for (int i = 0; i < list.size(); i++) {
 			if (!list.get(i).getTaskType().equals("floating")) {
-				result.add(storage.getTaskList().get(i));
+				result.add(list.get(i));
 			}
 		}
 		return result;
@@ -245,7 +276,7 @@ public class Sort {
 	 * 
 	 * return sortList; }
 	 */
-	// create calendar from task timing TODO
+	// create calendar from task timing 
 
 	private static int createTaskDate(Task task) {
 		int taskDate = 0;

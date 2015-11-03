@@ -148,15 +148,15 @@ public class DataDisplay {
 				int itemNum = i + 1;
 				switch (listForPrint.get(i).getTaskType().toLowerCase()) {
 				case TASK_TYPE_DEADLINE_LOWERCASE:
-					//System.out.println(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
+					System.out.println(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
 					outputForTesting.add(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
 					break;
 				case TASK_TYPE_EVENT_LOWERCASE:
-					//System.out.println(itemNum + ": " + createContentForEvent(listForPrint.get(i)));
+					System.out.println(itemNum + ": " + createContentForEvent(listForPrint.get(i)));
 					outputForTesting.add(itemNum + ": " + createContentForEvent(listForPrint.get(i)));
 					break;
 				case TASK_TYPE_FLOATING_LOWERCASE:
-					//System.out.println(itemNum + ": " + createContentForFloating(listForPrint.get(i)));
+					System.out.println(itemNum + ": " + createContentForFloating(listForPrint.get(i)));
 					outputForTesting.add(itemNum + ": " + createContentForFloating(listForPrint.get(i)));
 					break;
 				}
