@@ -14,6 +14,7 @@
     <ListView fx:id="deadlineList" prefHeight="170.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
     <ListView fx:id="eventList" prefHeight="170.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="260.0" />
     <ListView fx:id="floatingList" prefHeight="170.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="460.0" />
+    <Label fx:id="clock" prefHeight="30.0" prefWidth="150.0" text="" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
     <Label alignment="CENTER" prefHeight="30.0" text="Today's Summary" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
   </children>
 </AnchorPane>

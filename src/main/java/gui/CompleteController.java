@@ -1,7 +1,12 @@
 package main.java.gui;
 
-import javafx.fxml.FXML;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 
@@ -17,6 +22,9 @@ public class CompleteController {
 
 	@FXML
     private ListView<Text> completeList;
+	
+	@FXML
+    private Label clock;
 
 	@SuppressWarnings("unused")
     private MainApp mainApp;
@@ -29,5 +37,20 @@ public class CompleteController {
 		this.mainApp = mainApp;
 		
 		completeList.setItems(mainApp.getComplete());
+		
+		//DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	    //get current date time with Date()
+	    Date date = new Date();
+	    //System.out.println(dateFormat.format(date));
+	 
+	    //get current date time with Calendar()
+	    //Calendar cal = Calendar.getInstance();
+	    //System.out.println(dateFormat.format(cal.getTime()));
+		
+		//Text date = new Text(Integer.toString(cal.get(Calendar.DATE)));
+		//clock.setText(Integer.toString(cal.get(Calendar.DATE))); 
+	    clock.setText(dateFormat.format(date));
 	}
+
 }

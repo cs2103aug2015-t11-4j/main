@@ -8,7 +8,8 @@
 <AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="main.java.gui.FloatingController">
   <!-- TODO Add Nodes -->
   <children>
-    <Label prefHeight="30.0" text="Floating Tasks" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
+    <Label prefHeight="30.0" text="Floating Tasks" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="0.0" />
     <ListView fx:id="floatingList" prefHeight="570.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
+    <Label fx:id="clock" prefHeight="30.0" prefWidth="150.0" text="" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
   </children>
 </AnchorPane>
