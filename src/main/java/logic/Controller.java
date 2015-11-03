@@ -129,10 +129,10 @@ public class Controller {
 	
 	public static OutputToUI refreshScreen() {
 		OutputToUI outputToUI;
-		String typeOfString = history.getCurrentScreen();
+		String typeOfScreen = history.getCurrentScreen();
 		ArrayList<String> displayInput = new ArrayList<String>();
 		displayInput.add("display");
-		displayInput.add(typeOfString);
+		displayInput.add(typeOfScreen);
 		Command displayCmd = new Display(displayInput, storage);
 		outputToUI = displayCmd.execute();
 		return outputToUI;

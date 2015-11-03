@@ -68,6 +68,7 @@ public class Display implements Command {
 		}
 		printOnScreenMsgList = DataDisplay.displayList(taskList);
 		history.setScreenList(taskList);
+		history.setCurrentScreen(typeOfScreen);
 		for (int i = 0; i < taskList.size(); i++) {
 			itemList.add(new ItemForUserScreen(taskList.get(i).getIsCompleted(), taskList.get(i).getTaskType(),
 					printOnScreenMsgList.get(i)));
