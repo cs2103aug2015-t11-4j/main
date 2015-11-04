@@ -183,24 +183,7 @@ public class MainApp extends Application {
             public void handle(KeyEvent key) {
               if (key.getCode() == KeyCode.ESCAPE) {  //close window
             	  primaryStage.close();
-              } /*else if (key.getCode() == KeyCode.F5) {  //minimise the window
-            	  primaryStage.setIconified(true);
-              } else if (key.getCode() == KeyCode.F6) {  //restore window
-            	  primaryStage.setIconified(false);
-            	  //primaryStage.setWidth((double)900);
-            	  //primaryStage.setHeight((double)700);
-              } else if (key.getCode() == KeyCode.F7) {  //maximise the window
-            	  primaryStage.setMaximized(true);
-              } else if (key.getCode() == KeyCode.F8) {  //restore to original size
-            	  primaryStage.setMaximized(false);
-              }*/
-            }
-        });
-        
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent key) {
-              if (key.getCode() == KeyCode.F5) {  //minimise the window
+              } else if (key.getCode() == KeyCode.F5) {  //minimise the window
             	  primaryStage.setIconified(true);
               } else if (key.getCode() == KeyCode.F6) {  //restore window
             	  primaryStage.setIconified(false);
