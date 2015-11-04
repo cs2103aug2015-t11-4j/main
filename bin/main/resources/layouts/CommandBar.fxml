@@ -9,7 +9,7 @@
 
 <fx:root type="BorderPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <center>
-    <TextField fx:id="commandBar" maxWidth="850.0" onKeyPressed="#onKeyPress">
+    <TextField fx:id="commandBar" maxWidth="850.0" onKeyPressed="#onKeyPress" prefHeight="45.0" text="">
       <BorderPane.margin>
         <Insets bottom="30.0" />
       </BorderPane.margin>
