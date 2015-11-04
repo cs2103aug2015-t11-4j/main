@@ -4,14 +4,23 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="630.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="main.java.gui.DisplayAllController">
+<AnchorPane prefHeight="650.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="main.java.gui.DisplayAllController">
   <children>
-    <Label prefHeight="30.0" prefWidth="880.0" text="Completed Tasks" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="30.0" />
-    <Label prefHeight="30.0" prefWidth="880.0" text="Incomplete Tasks" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="330.0" />
-    <ListView id="complete" fx:id="completeList" prefHeight="270.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0" />
-    <ListView fx:id="incompleteList" prefHeight="270.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="360.0" />
-    <Label alignment="CENTER" contentDisplay="LEFT" prefHeight="30.0" text="All Tasks" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-    <Label fx:id="clock" prefHeight="30.0" prefWidth="150.0" text="" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    <Label prefHeight="35.0" prefWidth="880.0" text="Completed Tasks" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0">
+      <font>
+        <Font size="25.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label font="$x1" prefHeight="35.0" prefWidth="880.0" text="Incomplete Tasks" AnchorPane.bottomAnchor="270.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+    <ListView id="complete" fx:id="completeList" prefHeight="270.0" prefWidth="900.0" AnchorPane.bottomAnchor="305.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
+    <ListView fx:id="incompleteList" prefHeight="270.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+    <Label alignment="CENTER" contentDisplay="LEFT" prefHeight="35.0" text="All Tasks" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <font>
+        <Font size="27.0" />
+      </font>
+    </Label>
+    <Label fx:id="clock" font="$x1" prefHeight="30.0" prefWidth="150.0" text="" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
   </children>
 </AnchorPane>

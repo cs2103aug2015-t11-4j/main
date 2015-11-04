@@ -7,6 +7,7 @@ import java.util.Date;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.text.Text;
 
 /**
  * This class handles the ListView of urgent deadline tasks by adding them into the list
@@ -19,7 +20,7 @@ import javafx.scene.control.ListView;
 public class DeadlineController {
 
 	@FXML
-    private ListView<String> deadlineList;
+    private ListView<Text> deadlineList;
 	
 	@FXML
     private Label clock;

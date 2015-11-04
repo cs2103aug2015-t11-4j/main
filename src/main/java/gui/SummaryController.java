@@ -7,6 +7,7 @@ import java.util.Date;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.text.Text;
 
 /**
  * This class handles the summary scenes that include today and tomorrow's tasks.
@@ -19,11 +20,11 @@ import javafx.scene.control.ListView;
 public class SummaryController {
 
 	@FXML
-    private ListView<String> deadlineList;
+    private ListView<Text> deadlineList;
 	@FXML
-    private ListView<String> eventList;
+    private ListView<Text> eventList;
 	@FXML
-    private ListView<String> floatingList;
+    private ListView<Text> floatingList;
 	
 	@FXML
     private Label clock;

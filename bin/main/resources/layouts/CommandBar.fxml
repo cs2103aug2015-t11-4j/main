@@ -5,6 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <fx:root type="BorderPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <center>
@@ -15,6 +16,10 @@
     </TextField>
   </center>
   <top>
-    <Label fx:id="feedback" focusTraversable="false" BorderPane.alignment="CENTER" />
+    <Label fx:id="feedback" focusTraversable="false" BorderPane.alignment="CENTER">
+      <font>
+        <Font size="20.0" />
+      </font>
+    </Label>
   </top>
 </fx:root>

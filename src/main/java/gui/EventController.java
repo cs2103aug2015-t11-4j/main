@@ -7,6 +7,7 @@ import java.util.Date;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.text.Text;
 
 /**
  * This class handles the ListView of events by adding them into the list that is to be displayed
@@ -19,7 +20,7 @@ import javafx.scene.control.ListView;
 public class EventController {
 
 	@FXML
-    private ListView<String> eventList;
+    private ListView<Text> eventList;
 	
 	@FXML
     private Label clock;

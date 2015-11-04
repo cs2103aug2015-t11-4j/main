@@ -46,9 +46,7 @@ public class CompleteController {
 	    //get current date time with Calendar()
 	    //Calendar cal = Calendar.getInstance();
 	    //System.out.println(dateFormat.format(cal.getTime()));
-		
-		//Text date = new Text(Integer.toString(cal.get(Calendar.DATE)));
-		//clock.setText(Integer.toString(cal.get(Calendar.DATE))); 
+
 	    clock.setText(dateFormat.format(date));
 	}
 
