@@ -4,12 +4,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="main.java.gui.DeadlineController">
   <!-- TODO Add Nodes -->
   <children>
-    <Label prefHeight="30.0" text="Urgent Deadline Tasks" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="0.0" />
-    <ListView fx:id="deadlineList" prefHeight="570.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0" />
-    <Label fx:id="clock" prefHeight="30.0" prefWidth="150.0" text="" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    <Label prefHeight="35.0" text="Urgent Deadline Tasks" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="0.0">
+      <font>
+        <Font size="25.0" fx:id="x1" />
+      </font>
+    </Label>
+    <ListView fx:id="deadlineList" prefHeight="570.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0" />
+    <Label fx:id="clock" font="$x1" prefHeight="35.0" prefWidth="150.0" text="" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
   </children>
 </AnchorPane>

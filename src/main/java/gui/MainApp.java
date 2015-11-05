@@ -23,6 +23,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import javafx.stage.Stage;
@@ -90,9 +91,9 @@ public class MainApp extends Application {
     //private static final String TYPE_COMPLETE = "complete";
     //private static final String TYPE_INCOMPLETE = "incomplete";
     
-    private ObservableList<String> event = FXCollections.observableArrayList();
-    private ObservableList<String> deadline = FXCollections.observableArrayList();
-    private ObservableList<String> floating = FXCollections.observableArrayList();
+    private ObservableList<Text> event = FXCollections.observableArrayList();
+    private ObservableList<Text> deadline = FXCollections.observableArrayList();
+    private ObservableList<Text> floating = FXCollections.observableArrayList();
     private ObservableList<Text> complete = FXCollections.observableArrayList();
     private ObservableList<Text> incomplete = FXCollections.observableArrayList();
     //private ObservableList<String> today = FXCollections.observableArrayList();
@@ -109,6 +110,7 @@ public class MainApp extends Application {
     private PauseTransition delay;
 	
 	private Stage primaryStage;
+	private Stage secondaryStage;
     private BorderPane rootLayout;
     private BorderPane rootLayout2;
     //private MainApp mainApp;
@@ -156,6 +158,15 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
+	
+	private void initHelpRootLayout() {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(ROOT_LAYOUT2_FXML));
+        try {
+            rootLayout2 = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void initPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -170,7 +181,7 @@ public class MainApp extends Application {
         scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent key) {
-              if (key.getCode()==KeyCode.ESCAPE) {  //close window
+              if (key.getCode() == KeyCode.ESCAPE) {  //close window
             	  primaryStage.close();
               } else if (key.getCode() == KeyCode.F5) {  //minimise the window
             	  primaryStage.setIconified(true);
@@ -182,6 +193,26 @@ public class MainApp extends Application {
             	  primaryStage.setMaximized(true);
               } else if (key.getCode() == KeyCode.F8) {  //restore to original size
             	  primaryStage.setMaximized(false);
+              }
+            }
+        });
+    }
+    
+    private void initSecondaryStage(Stage secondaryStage) {
+    	this.secondaryStage = secondaryStage;
+        Scene scene = new Scene(rootLayout2);
+        scene.setFill(Color.TRANSPARENT);
+        rootLayout2.setBackground(Background.EMPTY);
+        this.secondaryStage.initStyle(StageStyle.TRANSPARENT);
+        this.secondaryStage.setScene(scene);
+        this.secondaryStage.show();
+        
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent key) {
+              if (key.getCode() == KeyCode.ESCAPE) {
+            	  secondaryStage.close();
+            	  //primaryStage.close();
               }
             }
         });
@@ -259,17 +290,17 @@ public class MainApp extends Application {
     
     //private static ArrayList<ItemForUserScreen> itemList = Controller.getItemList();//JH
 
-    public ObservableList<String> getEvent() {
+    public ObservableList<Text> getEvent() {
     	//event = createEventList(itemList); //JH
     	return event;
     }
     
-    public ObservableList<String> getDeadline() {
+    public ObservableList<Text> getDeadline() {
     	//deadline = createDeadlineList(itemList);
     	return deadline;
     }
     
-    public ObservableList<String> getFloating() {
+    public ObservableList<Text> getFloating() {
     	//floating = createFloatingList(itemList); //JH
     	return floating;
     }
@@ -301,21 +332,10 @@ public class MainApp extends Application {
         rootLayout.setBottom(new CommandBarController(mainApp));
     }
     
-    private void addHelpTable(Stage stage) {
-    	
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource(ROOT_LAYOUT2_FXML));
-        try {
-            rootLayout2 = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        this.primaryStage = stage;
-        Scene scene = new Scene(rootLayout2);
-        scene.setFill(Color.TRANSPARENT);
-        rootLayout2.setBackground(Background.EMPTY);
-        this.primaryStage.initStyle(StageStyle.TRANSPARENT);
-        this.primaryStage.setScene(scene);
-        this.primaryStage.show();
+    private void addHelpTable() {
+        initHelpRootLayout();
+        secondaryStage = new Stage();
+        initSecondaryStage(secondaryStage);
     	
     	try {
         	FXMLLoader loader2 = new FXMLLoader(MainApp.class.getResource(HELP_LAYOUT_FXML));
@@ -323,7 +343,8 @@ public class MainApp extends Application {
         	//page.setStyle("-fx-background-color: rgba(230, 230, 250, 0.5)"); //lavendar
         	//page.setStyle("-fx-background-color: rgba(205, 197, 191, 0.5)");  //seashell3
         	//page.setStyle("-fx-background-color: rgba(000, 229, 238, 0.5)");  //turquoise2
-        	page.setStyle("-fx-background-color: rgba(150, 150, 150, 0.5)");  //grey59
+        	//page.setStyle("-fx-background-color: rgba(150, 150, 150, 0.5)");  //grey59
+        	page.setStyle("-fx-background-color: rgba(204, 204, 204)");  //grey80
         	rootLayout2.setCenter(page);
         	//rootLayout.setTop(page);
         	
@@ -335,14 +356,15 @@ public class MainApp extends Application {
         	System.out.println("Help Table");
         }
     	
-    	scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+    	/*scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent key) {
               if (key.getCode() == KeyCode.ESCAPE) {
-            	  primaryStage.close();
+            	  secondaryStage.close();
+            	  //primaryStage.close();
               }
             }
-        });
+        });*/
     }
     
     private void addTodaySummaryView() {
@@ -508,7 +530,7 @@ public class MainApp extends Application {
 
     		commandBarController.setFeedback(feedbackMsg);
     		
-    		Stage secondaryStage = new Stage();
+    		//Stage secondaryStage = new Stage();
     		
     		//test UI with testFX
     		/*if (_userInput.equals("display help")) {
@@ -571,7 +593,8 @@ public class MainApp extends Application {
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			} else if (userInput.equals(HELP_SCENE)) {
-    				addHelpTable(secondaryStage);
+    				//addHelpTable(secondaryStage);
+    				addHelpTable();
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			} else if (_userInput.equals(EXIT_SCENE)) {
@@ -846,31 +869,37 @@ public class MainApp extends Application {
      * @param itemList list of tasks from storage
      * @return list of tasks
      */
-    private ObservableList<String> createEventList(ArrayList<ItemForUserScreen> itemList) {
+    private ObservableList<Text> createEventList(ArrayList<ItemForUserScreen> itemList) {
 		event.clear();
     	for (int i = 0; i < itemList.size(); i++) {
 			if (itemList.get(i).getTaskType().equals(TYPE_EVENT)){
-				event.add(itemList.get(i).getPrintOnScreenMsg());
+				Text text = new Text(itemList.get(i).getPrintOnScreenMsg());
+				text.setFont(Font.font ("System", 20));
+				event.add(text);
 			}
 		}
     	return event;
     }
     
-    private ObservableList<String> createDeadlineList(ArrayList<ItemForUserScreen> itemList) {
+    private ObservableList<Text> createDeadlineList(ArrayList<ItemForUserScreen> itemList) {
     	deadline.clear();
     	for (int i = 0; i < itemList.size(); i++) {
 			if (itemList.get(i).getTaskType().equals(TYPE_DEADLINE)){
-				deadline.add(itemList.get(i).getPrintOnScreenMsg());
+				Text text = new Text(itemList.get(i).getPrintOnScreenMsg());
+				text.setFont(Font.font ("System", 20));
+				deadline.add(text);
 			}
 		}
     	return deadline;
     }
     
-    private ObservableList<String> createFloatingList(ArrayList<ItemForUserScreen> itemList) {
+    private ObservableList<Text> createFloatingList(ArrayList<ItemForUserScreen> itemList) {
     	floating.clear();
     	for (int i = 0; i < itemList.size(); i++) {
 			if (itemList.get(i).getTaskType().equals(TYPE_FLOATING)){
-				floating.add(itemList.get(i).getPrintOnScreenMsg());
+				Text text = new Text(itemList.get(i).getPrintOnScreenMsg());
+				text.setFont(Font.font ("System", 20));
+				floating.add(text);
 			}
 		}
     	return floating;
@@ -882,6 +911,7 @@ public class MainApp extends Application {
 			//if (itemList.get(i).getTaskType().equals(TYPE_INCOMPLETE)){
     		if (!(itemList.get(i).getIfComplete())) {
 				Text text = new Text(itemList.get(i).getPrintOnScreenMsg());
+				text.setFont(Font.font ("System", 20));
 				text.setFill(Color.RED);
 				incomplete.add(text);
 			}
@@ -895,6 +925,7 @@ public class MainApp extends Application {
 			//if (itemList.get(i).getTaskType().equals(TYPE_COMPELTE)){
 			if (itemList.get(i).getIfComplete()) {
 				Text text = new Text(itemList.get(i).getPrintOnScreenMsg());
+				text.setFont(Font.font ("System", 20));
 				text.setFill(Color.GREEN);
 				complete.add(text);
 			}

@@ -7,6 +7,7 @@ import java.util.Date;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.text.Text;
 
 /**
  * This class handles the ListView of floating tasks by adding the them into the list
@@ -19,7 +20,7 @@ import javafx.scene.control.ListView;
 public class FloatingController {
 
 	@FXML
-    private ListView<String> floatingList;
+    private ListView<Text> floatingList;
 	
 	@FXML
     private Label clock;
