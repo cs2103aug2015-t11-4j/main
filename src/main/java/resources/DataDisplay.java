@@ -204,11 +204,21 @@ public class DataDisplay {
 	}
 
 	private static String createContentForEvent(Task task) {
+		if (task.getEndTime().equals("-")){
+			return "From "  + task.getStartDate() + " to " 
+					+ task.getEndDate() + ": " + task.getTaskDescription();
+		}
 		return "From " + task.getStartTime() + ", " + task.getStartDate() + " to " + task.getEndTime() + ", "
 				+ task.getEndDate() + ": " + task.getTaskDescription();
 	}
 
 	private static String createContentForDeadline(Task task) {
+
+		if (task.getEndTime().equals("-")){
+			return "By " + task.getEndDate() + ": " + task.getTaskDescription();
+		} 
+
+		
 		return "By " + task.getEndTime() + ", " + task.getEndDate() + ": " + task.getTaskDescription();
 	}
 

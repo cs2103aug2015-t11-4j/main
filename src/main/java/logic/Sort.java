@@ -317,16 +317,16 @@ public class Sort {
 
 	private static int createTaskTime(Task task) {
 		int taskTime = 0;
-		if (task.getTaskType().equals("event")) {
+		if (task.getEndTime().equals("-")){
+			return taskTime;
+		} else if (task.getTaskType().equals("event")) {
 			int hour = Integer.parseInt(task.getStartTime().substring(0, 2));
 			int minute = Integer.parseInt(task.getStartTime().substring(2));
 			taskTime = minute + hour * 100;
 			//p(hour);
 			//p(minute);
 			//System.out.println(taskTime);
-		}
-
-		if (task.getTaskType().equals("deadline")) {
+		} else if (task.getTaskType().equals("deadline")) {
 			int hour = Integer.parseInt(task.getEndTime().substring(0, 2));
 			int minute = Integer.parseInt(task.getEndTime().substring(2));
 			taskTime = minute + hour * 100;
