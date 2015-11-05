@@ -2,12 +2,16 @@ package main.java.logic;
 
 import main.java.resources.OutputToUI;
 
-public class Exit implements Command {
-
+public class Redo implements Command{
+	private History history = History.getInstance();
+	
+	public Redo(){}
+	
 	@Override
 	public OutputToUI execute() {
-		OutputToUI outputToUI = new OutputToUI();
-		outputToUI.setTypeOfScreen("exit");
+		Command command = history.popCommandToRedoList();
+		OutputToUI outputToUI = command.redo();
+		history.pushCommandToUndoList(command);
 		return outputToUI;
 	}
 

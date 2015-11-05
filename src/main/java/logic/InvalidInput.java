@@ -1,13 +1,21 @@
 package main.java.logic;
 
+import main.java.resources.DataDisplay;
 import main.java.resources.OutputToUI;
 
-public class Exit implements Command {
-
+public class InvalidInput implements Command{
+	private History history;
+	
+	
+	public InvalidInput(){
+		history = History.getInstance();
+	}
+	
 	@Override
 	public OutputToUI execute() {
-		OutputToUI outputToUI = new OutputToUI();
-		outputToUI.setTypeOfScreen("exit");
+		OutputToUI outputToUI = Controller.refreshScreen();
+		
+		outputToUI.setFeedbackMsg(DataDisplay.feedback("Invalid input",1));
 		return outputToUI;
 	}
 

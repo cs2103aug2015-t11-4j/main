@@ -9,4 +9,6 @@ public interface Command {
 	OutputToUI outputToUI = new OutputToUI();
 
 	OutputToUI execute();
+	OutputToUI undo();
+	OutputToUI redo();
 }

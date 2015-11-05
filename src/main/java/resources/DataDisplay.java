@@ -16,7 +16,132 @@ public class DataDisplay {
 	private static final String TASK_TYPE_EVENT_LOWERCASE = "event";
 	private static final String TASK_TYPE_DEADLINE_LOWERCASE = "deadline";
 
-	// To display summary in the summary list
+	
+
+	// To display a given list of task in order
+	public static ArrayList<String> displayList(ArrayList<Task> listForPrint) {
+		ArrayList<String> outputForTesting = new ArrayList<String>();
+		if (listForPrint.isEmpty()) {
+			System.out.println("No task. Please enter one to start");
+		} else {
+			for (int i = 0; i < listForPrint.size(); i++) {
+				int itemNum = i + 1;
+				switch (listForPrint.get(i).getTaskType().toLowerCase()) {
+				case TASK_TYPE_DEADLINE_LOWERCASE:
+					System.out.println(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
+					outputForTesting.add(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
+					break;
+				case TASK_TYPE_EVENT_LOWERCASE:
+					System.out.println(itemNum + ": " + createContentForEvent(listForPrint.get(i)));
+					outputForTesting.add(itemNum + ": " + createContentForEvent(listForPrint.get(i)));
+					break;
+				case TASK_TYPE_FLOATING_LOWERCASE:
+					System.out.println(itemNum + ": " + createContentForFloating(listForPrint.get(i)));
+					outputForTesting.add(itemNum + ": " + createContentForFloating(listForPrint.get(i)));
+					break;
+				}
+			}
+		}
+		return outputForTesting;
+	}
+
+	// get a strig to display on input box to ask user to update accordingly
+	// TODO: j-unit testing
+	public static String displayTaskNeedForUpdate(Task task) {
+		String outputForTesting = "";
+		switch (task.getTaskType()) {
+		case "deadline":
+			// System.out.println("add " + updateContentForDeadline(task));
+			outputForTesting = "add " + updateContentForDeadline(task);
+			break;
+		case "floating":
+			// System.out.println("add " + updateContentForFloating(task));
+			outputForTesting = "add " + updateContentForFloating(task);
+			break;
+		case "event":
+			// System.out.println("add " + updateContentForEvent(task));
+			outputForTesting = "add " + updateContentForEvent(task);
+			break;
+		}
+		return outputForTesting;
+	}
+
+	private static String updateContentForDeadline(Task task) {
+		return task.getTaskDescription() + " by " + task.getEndDate() + ";" + task.getEndTime();
+	}
+
+	private static String updateContentForFloating(Task task) {
+		return createContentForFloating(task);
+	}
+
+	private static String updateContentForEvent(Task task) {
+		return task.getTaskDescription() + " from " + task.getStartDate() + ";" + task.getStartTime() + " to "
+				+ task.getEndDate() + ";" + task.getEndTime();
+	}
+
+	private static String createContentForFloating(Task task) {
+		return task.getTaskDescription();
+	}
+
+	private static String createContentForEvent(Task task) {
+		if (task.getEndTime().equals("-")){
+			return "From "  + task.getStartDate() + " to " 
+					+ task.getEndDate() + ": " + task.getTaskDescription();
+		}
+		return "From " + task.getStartTime() + ", " + task.getStartDate() + " to " + task.getEndTime() + ", "
+				+ task.getEndDate() + ": " + task.getTaskDescription();
+	}
+
+	private static String createContentForDeadline(Task task) {
+
+		if (task.getEndTime().equals("-")){
+			return "By " + task.getEndDate() + ": " + task.getTaskDescription();
+		} 
+
+		
+		return "By " + task.getEndTime() + ", " + task.getEndDate() + ": " + task.getTaskDescription();
+	}
+
+	public static String feedback(String action, int code) {
+		// TODO: Code = 0: success
+		// Code = 1: fail
+		String feedbackMsg;
+
+		if (code == 0) {
+			feedbackMsg = action + " is successful";
+			System.out.println(feedbackMsg);
+			return feedbackMsg;
+		} else if (code == 1){
+			feedbackMsg = action + ", please refer to help for the right format";
+			System.out.println(feedbackMsg);
+			return feedbackMsg;
+		}
+		feedbackMsg = action + " is not successful, please enter the right format";
+		System.out.println(feedbackMsg);
+		return feedbackMsg;
+	}
+
+	// For testing, to print info in outputToUI
+	public static void printOutputToUI(OutputToUI outputToUI) {
+		ArrayList<ItemForUserScreen> itemList = outputToUI.getItemList();
+		System.out.println("typeOfScreen: " + outputToUI.getTypeOfScreen());
+		System.out.println("ItemList: ");
+		if (itemList == null) {
+			System.out.println("ItemList is empty");
+		} else {
+			for (int i = 0; i < itemList.size(); i++) {
+				System.out.println(itemList.get(i).getIfComplete() + "_" + itemList.get(i).getTaskType() + "_"
+						+ itemList.get(i).getPrintOnScreenMsg());
+			}
+		}
+		System.out.println("FeedbackMsg: " + outputToUI.getFeedbackMsg());
+		System.out.println("inputBoxMsg: " + outputToUI.getInputBoxMsg());
+	}
+	
+	
+	//Unused due to change of screen listviews
+	/*
+	 * // To display summary in the summary list
 	public static ArrayList<String> displaySummary(ArrayList<Task> summaryList) {
 		ArrayList<String> outputForTesting = new ArrayList<String>();
 		// To get a count of how many different type of tasks are there
@@ -137,121 +262,7 @@ public class DataDisplay {
 		// outputForTesting.add(0, LABEL_EVENT);
 		return outputForTesting;
 	}
-
-	// To display a given list of task in order
-	public static ArrayList<String> displayList(ArrayList<Task> listForPrint) {
-		ArrayList<String> outputForTesting = new ArrayList<String>();
-		if (listForPrint.isEmpty()) {
-			System.out.println("No task. Please enter one to start");
-		} else {
-			for (int i = 0; i < listForPrint.size(); i++) {
-				int itemNum = i + 1;
-				switch (listForPrint.get(i).getTaskType().toLowerCase()) {
-				case TASK_TYPE_DEADLINE_LOWERCASE:
-					System.out.println(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
-					outputForTesting.add(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
-					break;
-				case TASK_TYPE_EVENT_LOWERCASE:
-					System.out.println(itemNum + ": " + createContentForEvent(listForPrint.get(i)));
-					outputForTesting.add(itemNum + ": " + createContentForEvent(listForPrint.get(i)));
-					break;
-				case TASK_TYPE_FLOATING_LOWERCASE:
-					System.out.println(itemNum + ": " + createContentForFloating(listForPrint.get(i)));
-					outputForTesting.add(itemNum + ": " + createContentForFloating(listForPrint.get(i)));
-					break;
-				}
-			}
-		}
-		return outputForTesting;
-	}
-
-	// get a strig to display on input box to ask user to update accordingly
-	// TODO: j-unit testing
-	public static String displayTaskNeedForUpdate(Task task) {
-		String outputForTesting = "";
-		switch (task.getTaskType()) {
-		case "deadline":
-			// System.out.println("add " + updateContentForDeadline(task));
-			outputForTesting = "add " + updateContentForDeadline(task);
-			break;
-		case "floating":
-			// System.out.println("add " + updateContentForFloating(task));
-			outputForTesting = "add " + updateContentForFloating(task);
-			break;
-		case "event":
-			// System.out.println("add " + updateContentForEvent(task));
-			outputForTesting = "add " + updateContentForEvent(task);
-			break;
-		}
-		return outputForTesting;
-	}
-
-	private static String updateContentForDeadline(Task task) {
-		return task.getTaskDescription() + " by " + task.getEndDate() + ";" + task.getEndTime();
-	}
-
-	private static String updateContentForFloating(Task task) {
-		return createContentForFloating(task);
-	}
-
-	private static String updateContentForEvent(Task task) {
-		return task.getTaskDescription() + " from " + task.getStartDate() + ";" + task.getStartTime() + " to "
-				+ task.getEndDate() + ";" + task.getEndTime();
-	}
-
-	private static String createContentForFloating(Task task) {
-		return task.getTaskDescription();
-	}
-
-	private static String createContentForEvent(Task task) {
-		if (task.getEndTime().equals("-")){
-			return "From "  + task.getStartDate() + " to " 
-					+ task.getEndDate() + ": " + task.getTaskDescription();
-		}
-		return "From " + task.getStartTime() + ", " + task.getStartDate() + " to " + task.getEndTime() + ", "
-				+ task.getEndDate() + ": " + task.getTaskDescription();
-	}
-
-	private static String createContentForDeadline(Task task) {
-
-		if (task.getEndTime().equals("-")){
-			return "By " + task.getEndDate() + ": " + task.getTaskDescription();
-		} 
-
-		
-		return "By " + task.getEndTime() + ", " + task.getEndDate() + ": " + task.getTaskDescription();
-	}
-
-	public static String feedback(String action, int code) {
-		// TODO: Code = 0: success
-		// Code = 1: fail
-		String feedbackMsg;
-
-		if (code == 0) {
-			feedbackMsg = action + " is successful";
-			System.out.println(feedbackMsg);
-			return feedbackMsg;
-		}
-		feedbackMsg = action + " is not successful, please enter the right format";
-		System.out.println(feedbackMsg);
-		return feedbackMsg;
-	}
-
-	// For testing, to print info in outputToUI
-	public static void printOutputToUI(OutputToUI outputToUI) {
-		ArrayList<ItemForUserScreen> itemList = outputToUI.getItemList();
-		System.out.println("typeOfScreen: " + outputToUI.getTypeOfScreen());
-		System.out.println("ItemList: ");
-		if (itemList == null) {
-			System.out.println("ItemList is empty");
-		} else {
-			for (int i = 0; i < itemList.size(); i++) {
-				System.out.println(itemList.get(i).getIfComplete() + "_" + itemList.get(i).getTaskType() + "_"
-						+ itemList.get(i).getPrintOnScreenMsg());
-			}
-		}
-		System.out.println("FeedbackMsg: " + outputToUI.getFeedbackMsg());
-		System.out.println("inputBoxMsg: " + outputToUI.getInputBoxMsg());
-	}
+	*/
+	
 
 }

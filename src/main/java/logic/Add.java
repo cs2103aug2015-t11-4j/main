@@ -1,4 +1,4 @@
-//@Author:Jiahuan
+//@@Author: Jiahuan
 package main.java.logic;
 
 import main.java.resources.DataDisplay;
@@ -9,7 +9,7 @@ import main.java.storage.Storage;
 public class Add implements Command{
 	private Task task; 
 	private Storage storage;
-	//private History history = History.getInstance();
+	private History history = History.getInstance();
 
 	//private DataDisplay dataDisplay;
 	
@@ -30,8 +30,34 @@ public class Add implements Command{
 		outputToUI = Controller.refreshScreen();
 				
 		outputToUI.setFeedbackMsg(DataDisplay.feedback("add",code));
+		
+/*		//Below is the part for Undo
+		int itemNum = Search.obtainItemNumByTask(task, storage.getTaskList());
+		Command cmd = new Delete(itemNum, storage);
+		history.getUndoCommandList().push(cmd);*/
 		return outputToUI;
 	}
+
+	@Override
+	public OutputToUI undo() {
+		int code;
+		
+		OutputToUI outputToUI = new OutputToUI();
+		
+		code = storage.deleteOneItem(task);
+		
+		outputToUI = Controller.refreshScreen();
+		
+		outputToUI.setFeedbackMsg(DataDisplay.feedback("Undo", code));
+		return outputToUI;
+	}
+
+	@Override
+	public OutputToUI redo() {
+		OutputToUI outputToUI = this.execute();
+		return outputToUI;
+	}
+
 
 
 

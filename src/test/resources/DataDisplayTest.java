@@ -40,7 +40,8 @@ public class DataDisplayTest {
 	ArrayList<Task> deadlineList = new ArrayList<Task>();
 	ArrayList<Task> eventList = new ArrayList<Task>();
 
-	@Test
+	// not used due to the change in screen listview
+	/*@Test
 	// Task Type count
 	public void testTaskTypeCountFunction() {
 		summaryList.add(task1);
@@ -174,5 +175,5 @@ public class DataDisplayTest {
 		assertEquals(expected, DataDisplay.displayDeadline(deadlineList));
 
 	}
-
+*/
 }

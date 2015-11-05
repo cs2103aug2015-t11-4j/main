@@ -276,6 +276,17 @@ public class Search {
         return list.get(itemNumber-1);
     }
     
+    public static int obtainItemNumByTask(Task task, ArrayList<Task> list){
+		int size = list.size();
+		int itemNum = 0;
+		for (int i = 0; i < size; i ++){
+			if (list.get(i).equals(task))
+				itemNum = i+1;
+		}
+    	return itemNum;
+    }
+    
+    
     /* @@Author: Lim Yong Zhi
      * Return the corrected month format to compare with date stored in taskList
      * Example: 01 (January) is returned instead of 1

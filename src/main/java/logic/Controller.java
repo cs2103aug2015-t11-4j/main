@@ -40,25 +40,52 @@ public class Controller {
 		// if add, need to create task object for storage
 		case "add":
 			task = Parser.createTaskForAdd(inputForAction);
-			return command = new Add(task, storage);
+			command = new Add(task, storage);
+			//history.getUndoCommandList().push(command);
+			history.pushCommandToUndoList(command);
+			break;
 		case "update":
 			itemNum = Integer.parseInt(inputForAction.get(1));
-			return command = new Update(itemNum, storage);
+			command = new Update(itemNum, storage);
+			//history.getUndoCommandList().push(command);
+			history.pushCommandToUndoList(command);
+			break;
 		case "delete":
 			itemNum = Integer.parseInt(inputForAction.get(1));
-			return command = new Delete(itemNum, storage);
+			command = new Delete(itemNum, storage);
+			//history.getUndoCommandList().push(command);
+			history.pushCommandToUndoList(command);
+			break;
 		case "exit":
-			return command = new Exit();
+			command = new Exit();
+			break;
 		case "complete":
 			itemNum = Integer.parseInt(inputForAction.get(1));
-			return command = new Complete(itemNum, storage);
+			command = new Complete(itemNum, storage);
+			//history.getUndoCommandList().push(command);
+			history.pushCommandToUndoList(command);
+			break;
 		case "incomplete":
-			System.out.println("**********INSIDE INCOMPLETE*********");
+			//System.out.println("**********INSIDE INCOMPLETE*********");
 			itemNum =Integer.parseInt(inputForAction.get(1));
-			return command = new Incomplete(itemNum, storage);
+			command = new Incomplete(itemNum, storage);
+			//history.getUndoCommandList().push(command);
+			history.pushCommandToUndoList(command);
+			break;
+		case "undo":
+			command = new Undo();
+			break;
+		case "redo":
+			command = new Redo();
+			break;
+		case "display":
+			command = new Display(inputForAction, storage);
+			break;
+		case "invalid command":
 		default:
-			return command = new Display(inputForAction, storage);
+			return command = new InvalidInput();
 		}
+		return command;
 	}
 
 	// Testing

@@ -1,16 +1,21 @@
 package main.java.logic;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 import main.java.resources.Task;
 
 public class History {
 	private ArrayList<Task> screenList;
 	private String currentScreen;
-
+	private Stack<Command> undoCommandList;
+	private Stack<Command> redoCommandList;
+	
 	//private constructor
 	private History(){
 	screenList = new ArrayList<Task>();
+	redoCommandList = new Stack<Command>();
+	undoCommandList = new Stack<Command>();
 	}
 
 	//create history object
@@ -33,6 +38,14 @@ public class History {
     	return currentScreen;
     }
     
+    public Stack<Command> getUndoCommandList(){
+    	return undoCommandList;
+    }
+    
+    public Stack<Command> getRedoCommandList(){
+    	return redoCommandList;
+    }
+    
   //mutator 
     public void setScreenList(ArrayList<Task> screenList){
     	this.screenList = screenList;
@@ -40,5 +53,23 @@ public class History {
     
     public void setCurrentScreen(String currentScreen){
     	this.currentScreen = currentScreen;
+    }
+    
+    public void pushCommandToUndoList(Command command){
+    	undoCommandList.push(command);
+    }
+    
+    public Command popCommandToUndoList(){
+    	Command command = undoCommandList.pop();
+    	return command;
+    }
+    
+    public void pushCommandToRedoList(Command command){
+    	redoCommandList.push(command);
+    }
+    
+    public Command popCommandToRedoList(){
+    	Command command = redoCommandList.pop();
+    	return command;
     }
 }

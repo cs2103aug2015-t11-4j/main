@@ -13,17 +13,20 @@ public class Update implements Command{
 	private Storage storage;
 	private History history = History.getInstance();
 	private ArrayList<Task> screenList;
+	private Task task;
 	
 	public Update(int itemNum, Storage storage){
 		this.itemNum=itemNum;
 		this.storage = storage;
+		screenList = history.getScreenList();
+		Task task = Search.obtainTaskByItemNum(itemNum, screenList); // Put in history so it can be restored
+		this.task = task;
 	}
 	
 	@Override
 	public OutputToUI execute() {
 		OutputToUI outputToUI = new OutputToUI();
-		screenList = history.getScreenList();
-		Task task = Search.obtainTaskByItemNum(itemNum, screenList); // Put in history so it can be restored
+		
 		storage.deleteOneItem(task);
 		//TODO: Display this task on to the screen
 		String inputBoxMsg = DataDisplay.displayTaskNeedForUpdate(task);
@@ -34,9 +37,27 @@ public class Update implements Command{
 		return outputToUI;
 	}
 
+	@Override
+	public OutputToUI undo() {
+		Command command = history.popCommandToUndoList();
+		command.undo();
+		OutputToUI outputToUI = Controller.refreshScreen();
+		int code = storage.addOneItem(task);
+		outputToUI.setFeedbackMsg(DataDisplay.feedback("Undo", code));
+		outputToUI = Controller.refreshScreen();
+		return outputToUI;
+	}
+
+	@Override
+	public OutputToUI redo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
 
-//@Author:Jiahuan-unused
+//@@Author: Jiahuan
+//-unused
 //unused as a new method of update is implemented
 
 /*package main.java.logic;

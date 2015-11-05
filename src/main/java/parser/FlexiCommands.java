@@ -37,6 +37,9 @@ public class FlexiCommands {
 			//undo command
 			case "undo":
 				return "undo";
+			// redo command
+			case "redo":
+				return "redo";
 			//complete command
 			case "complete":
 			case "completed":
