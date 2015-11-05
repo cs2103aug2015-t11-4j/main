@@ -77,7 +77,7 @@ public class Search {
         //add only top 5 events into list
         int counterFloating = 0;
         for(int i=0; i<taskList.size(); i++) {
-        	if(taskList.get(i).getTaskType().equals("floating")) {
+        	if(taskList.get(i).getTaskType().equals("floating") && taskList.get(i).getIsCompleted() == false) {
         		todaySummary.add(taskList.get(i));
             	counterFloating++;
         	}
@@ -119,7 +119,7 @@ public class Search {
         //add only top 5 events into list
         int counterFloating = 0;
         for(int i=0; i<taskList.size(); i++) {
-        	if(taskList.get(i).getTaskType().equals("floating")) {
+        	if(taskList.get(i).getTaskType().equals("floating") && taskList.get(i).getIsCompleted() == false) {
         		tmrSummary.add(taskList.get(i));
             	counterFloating++;
         	}
@@ -194,7 +194,7 @@ public class Search {
     	String dayAfter = date.plusDays(2).format(formatter);
     	//assumes that fullStorageTaskList is already sorted according to increasing date
     	for(int i=0; i<fullStorageTaskList.size(); i++) {
-    		if(fullStorageTaskList.get(i).getTaskType().equals("deadline")) {
+    		if(fullStorageTaskList.get(i).getTaskType().equals("deadline") && fullStorageTaskList.get(i).getIsCompleted() == false) {
         		//find all deadlines due today and add to list
         		if(fullStorageTaskList.get(i).getEndDate().equals(today))
         			urgentDeadlines.add(fullStorageTaskList.get(i));
@@ -217,7 +217,7 @@ public class Search {
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     	String today = date.format(formatter);
     	for(int i=0; i<fullStorageTaskList.size(); i++) {
-    		if(fullStorageTaskList.get(i).getTaskType().equals("event")) {
+    		if(fullStorageTaskList.get(i).getTaskType().equals("event") && fullStorageTaskList.get(i).getIsCompleted() == false) {
     			if(fullStorageTaskList.get(i).getStartDate().equals(today))
     				eventsToday.add(fullStorageTaskList.get(i));
     		}
