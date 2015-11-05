@@ -22,6 +22,17 @@ public class FlexiCommands {
 			case "edit":
 			case "e":
 				return "update";
+			//new update functions
+			case "-n":
+				return "-n";
+			case "-sd":
+				return "-sd";
+			case "-st":
+				return "-st";
+			case "-ed":
+				return "-ed";
+			case "-et":
+				return "-et";
 			//display task commands
 			case "display":
 			case "view":
