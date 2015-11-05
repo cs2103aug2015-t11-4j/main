@@ -165,7 +165,9 @@ public class CreateTask {
 	private static Task correctDateComparison(String taskType, String taskDescription, String startDate, 
 													String endDate, String startTime, String endTime) {
 		taskDescription = removeSymbol(taskDescription);
-		if(DateAndTime.compareDates(startDate, endDate) && DateAndTime.compareTimes(startTime, endTime)) 
+		if(DateAndTime.compareDates(startDate, endDate)) 
+			return new Task(taskType, taskDescription, startDate, endDate, startTime, endTime, false, true);
+		else if(startDate.equals(endDate)  && DateAndTime.compareTimes(startTime, endTime))
 			return new Task(taskType, taskDescription, startDate, endDate, startTime, endTime, false, true);
 		else
 			return new Task(taskType, "-", "-", "-", "-", "-", false, false);
