@@ -9,20 +9,20 @@
 <AnchorPane prefHeight="650.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="main.java.gui.SummaryController">
   <!-- TODO Add Nodes -->
   <children>
-    <Label prefHeight="35.0" prefWidth="880.0" text="Urgent Deadline Tasks" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0">
+    <Label prefHeight="35.0" prefWidth="880.0" style="-fx-background-color: rgba(255, 165, 079);" text="  Urgent Deadline Tasks" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
       <font>
         <Font size="25.0" fx:id="x1" />
       </font>
     </Label>
-    <Label font="$x1" prefHeight="35.0" prefWidth="880.0" text="Events" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="240.0" />
-    <Label font="$x1" prefHeight="35.0" prefWidth="880.0" text="Floating Tasks" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="445.0" />
+    <Label font="$x1" prefHeight="35.0" prefWidth="880.0" style="-fx-background-color: rgba(255, 106, 106);" text="  Events" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="240.0" />
+    <Label font="$x1" prefHeight="35.0" prefWidth="880.0" style="-fx-background-color: rgba(058, 095, 205);" text="  Floating Tasks" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="445.0" />
     <ListView fx:id="deadlineList" prefHeight="170.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
     <ListView fx:id="eventList" prefHeight="170.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="275.0" />
     <ListView fx:id="floatingList" prefHeight="170.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-    <Label fx:id="clock" font="$x1" prefHeight="30.0" prefWidth="150.0" text="" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    <Label fx:id="clock" font="$x1" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: rgba(000, 000, 000);" text="" textFill="#66ffed" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
     <Label alignment="CENTER" prefHeight="35.0" text="Today's Summary" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <font>
-        <Font size="27.0" />
+        <Font name="System Bold" size="27.0" />
       </font>
     </Label>
   </children>

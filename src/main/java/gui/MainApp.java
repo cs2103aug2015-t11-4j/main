@@ -186,7 +186,11 @@ public class MainApp extends Application {
               } else if (key.getCode() == KeyCode.F5) {  //minimise the window
             	  primaryStage.setIconified(true);
               } else if (key.getCode() == KeyCode.F6) {  //restore window
-            	  primaryStage.setIconified(false);
+            	  if (primaryStage.isShowing()) {
+            		  //primaryStage.setIconified(false);
+            		  primaryStage.show();
+            	  }
+            	  //primaryStage.setIconified(false);
             	  //primaryStage.setWidth((double)900);
             	  //primaryStage.setHeight((double)700);
               } else if (key.getCode() == KeyCode.F7) {  //maximise the window
@@ -210,9 +214,22 @@ public class MainApp extends Application {
         scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent key) {
-              if (key.getCode() == KeyCode.ESCAPE) {
+              if ((key.getCode() == KeyCode.ESCAPE) || (key.getCode() == KeyCode.ENTER) ||
+            	 (key.getCode() == KeyCode.ALT) || (key.getCode() == KeyCode.A) || 
+            	 (key.getCode() == KeyCode.B) || (key.getCode() == KeyCode.C) || 
+            	 (key.getCode() == KeyCode.D) || (key.getCode() == KeyCode.E) ||
+            	 (key.getCode() == KeyCode.F) || (key.getCode() == KeyCode.G) ||
+            	 (key.getCode() == KeyCode.H) || (key.getCode() == KeyCode.I) ||
+            	 (key.getCode() == KeyCode.J) || (key.getCode() == KeyCode.K) ||
+            	 (key.getCode() == KeyCode.L) || (key.getCode() == KeyCode.M) ||
+            	 (key.getCode() == KeyCode.N) || (key.getCode() == KeyCode.O) ||
+            	 (key.getCode() == KeyCode.P) || (key.getCode() == KeyCode.Q) ||
+            	 (key.getCode() == KeyCode.R) || (key.getCode() == KeyCode.S) ||
+            	 (key.getCode() == KeyCode.T) || (key.getCode() == KeyCode.U) ||
+            	 (key.getCode() == KeyCode.V) || (key.getCode() == KeyCode.W) ||
+            	 (key.getCode() == KeyCode.X) || (key.getCode() == KeyCode.Y) ||
+            	 (key.getCode() == KeyCode.Z)) {
             	  secondaryStage.close();
-            	  //primaryStage.close();
               }
             }
         });
@@ -355,16 +372,6 @@ public class MainApp extends Application {
         } catch (NullPointerException e1) {
         	System.out.println("Help Table");
         }
-    	
-    	/*scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent key) {
-              if (key.getCode() == KeyCode.ESCAPE) {
-            	  secondaryStage.close();
-            	  //primaryStage.close();
-              }
-            }
-        });*/
     }
     
     private void addTodaySummaryView() {
@@ -530,14 +537,7 @@ public class MainApp extends Application {
 
     		commandBarController.setFeedback(feedbackMsg);
     		
-    		//Stage secondaryStage = new Stage();
-    		
     		//test UI with testFX
-    		/*if (_userInput.equals("display help")) {
-				addHelpTable();
-				commandBarController.setFeedback(feedbackMsg);
-				commandBarController.clear();
-			}*/
 
     		if (userInput != null) {
     			if (userInput.equals(TODAY_SCENE)) {
@@ -593,11 +593,10 @@ public class MainApp extends Application {
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			} else if (userInput.equals(HELP_SCENE)) {
-    				//addHelpTable(secondaryStage);
     				addHelpTable();
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
-    			} else if (_userInput.equals(EXIT_SCENE)) {
+    			} else if (userInput.equals(EXIT_SCENE)) {
     				commandBarController.setFeedback(FEEDBACK_EXIT);
     				commandBarController.clear();
     				//delay closing of GUI window by 1s
@@ -716,16 +715,13 @@ public class MainApp extends Application {
     				type = arr[1];
     	    		description = (arr[2]).trim();
     				//Logic.takeAction(userInput);
-    	    		if(type.equals(TYPE_DEADLINE)) {
+    	    		if (type.equals(TYPE_DEADLINE)) {
     					deadline.add(description);
-    				}
-    				else if(type.equals(TYPE_EVENT)) {
+    				} else if(type.equals(TYPE_EVENT)) {
     					event.add(description);
-    				}
-    				else if(type.equals(TYPE_FLOATING)) {
+    				} else if(type.equals(TYPE_FLOATING)) {
     					floating.add(description);
-    				}
-    				else {
+    				} else {
     					description = type + " " + description;
     					floating.add(description);
     				}
@@ -908,7 +904,6 @@ public class MainApp extends Application {
     private ObservableList<Text> createIncompleteList(ArrayList<ItemForUserScreen> itemList) {
     	incomplete.clear();
     	for (int i = 0; i < itemList.size(); i++) {
-			//if (itemList.get(i).getTaskType().equals(TYPE_INCOMPLETE)){
     		if (!(itemList.get(i).getIfComplete())) {
 				Text text = new Text(itemList.get(i).getPrintOnScreenMsg());
 				text.setFont(Font.font ("System", 20));
@@ -922,7 +917,6 @@ public class MainApp extends Application {
     private ObservableList<Text> createCompleteList(ArrayList<ItemForUserScreen> itemList) {
     	complete.clear();
     	for (int i = 0; i < itemList.size(); i++) {
-			//if (itemList.get(i).getTaskType().equals(TYPE_COMPELTE)){
 			if (itemList.get(i).getIfComplete()) {
 				Text text = new Text(itemList.get(i).getPrintOnScreenMsg());
 				text.setFont(Font.font ("System", 20));

@@ -34,31 +34,111 @@
                 <Insets left="10.0" fx:id="x1" />
               </GridPane.margin>
             </Label>
-            <Label font="$x2" text="Change save directory" GridPane.columnIndex="0" GridPane.margin="$x1" GridPane.rowIndex="9" />
-            <Label font="$x2" text="Search for a task" GridPane.columnIndex="0" GridPane.margin="$x1" GridPane.rowIndex="10" />
-            <Label font="$x2" text="Display all tasks" GridPane.columnIndex="0" GridPane.margin="$x1" GridPane.rowIndex="11" />
-            <Label font="$x2" text="Display today/tomorrows's overview" GridPane.columnIndex="0" GridPane.margin="$x1" GridPane.rowIndex="12" />
-            <Label font="$x2" text="Display deadline/event/floating tasks" GridPane.columnIndex="0" GridPane.margin="$x1" GridPane.rowIndex="13" />
-            <Label font="$x2" text="Exit ALT4" GridPane.columnIndex="0" GridPane.margin="$x1" GridPane.rowIndex="14" />
-            <Label font="$x2" text="add &lt;content&gt; by &lt;d;t&gt;" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="0" />
-            <Label font="$x2" text="add &lt;content&gt; from &lt;d;t&gt; to &lt;d;t&gt;" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="1" />
-            <Label font="$x2" text="add &lt;content&gt;" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="2" />
-            <Label font="$x2" text="delete &lt;task number&gt;" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="3" />
-            <Label font="$x2" text="update &lt;task number&gt;" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="4" />
-            <Label font="$x2" text="undo" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="5" />
-            <Label font="$x2" text="redo" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="6" />
-            <Label font="$x2" text="complete &lt;task number&gt;" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="7" />
+            <Label font="$x2" text="Set save directory" GridPane.columnIndex="0" GridPane.rowIndex="9">
+              <GridPane.margin>
+                <Insets left="10.0" fx:id="x1" />
+              </GridPane.margin>
+            </Label>
+            <Label font="$x2" text="Search for a task" GridPane.columnIndex="0" GridPane.rowIndex="10">
+              <GridPane.margin>
+                <Insets left="10.0" fx:id="x1" />
+              </GridPane.margin>
+            </Label>
+            <Label font="$x2" text="Display all tasks" GridPane.columnIndex="0" GridPane.rowIndex="11">
+              <GridPane.margin>
+                <Insets left="10.0" fx:id="x1" />
+              </GridPane.margin>
+            </Label>
+            <Label font="$x2" text="Display today/tomorrows's overview" GridPane.columnIndex="0" GridPane.rowIndex="12">
+              <GridPane.margin>
+                <Insets left="10.0" fx:id="x1" />
+              </GridPane.margin>
+            </Label>
+            <Label font="$x2" text="Display deadline/event/floating tasks" GridPane.columnIndex="0" GridPane.rowIndex="13">
+              <GridPane.margin>
+                <Insets left="10.0" fx:id="x1" />
+              </GridPane.margin>
+            </Label>
+            <Label font="$x2" text="Exit ALT4" GridPane.columnIndex="0" GridPane.rowIndex="14">
+              <GridPane.margin>
+                <Insets left="10.0" fx:id="x1" />
+              </GridPane.margin>
+            </Label>
+            <Label font="$x2" text="add &lt;content&gt; by &lt;d;t&gt;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+              <GridPane.margin>
+                <Insets left="10.0" fx:id="x1" />
+              </GridPane.margin>
+            </Label>
+            <Label font="$x2" text="add &lt;content&gt; from &lt;d;t&gt; to &lt;d;t&gt;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <GridPane.margin>
+                <Insets left="10.0" fx:id="x1" />
+              </GridPane.margin>
+            </Label>
+            <Label font="$x2" text="add &lt;content&gt;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+              <GridPane.margin>
+                <Insets left="10.0" fx:id="x1" />
+              </GridPane.margin>
+            </Label>
+            <Label font="$x2" text="delete &lt;task number&gt;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+              <GridPane.margin>
+                <Insets left="10.0" fx:id="x1" />
+              </GridPane.margin>
+            </Label>
+            <Label font="$x2" text="update &lt;task number&gt;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+              <GridPane.margin>
+                <Insets left="10.0" fx:id="x1" />
+              </GridPane.margin>
+            </Label>
+            <Label font="$x2" text="undo" GridPane.columnIndex="1" GridPane.rowIndex="5">
+              <GridPane.margin>
+                <Insets left="10.0" fx:id="x1" />
+              </GridPane.margin>
+            </Label>
+            <Label font="$x2" text="redo" GridPane.columnIndex="1" GridPane.rowIndex="6">
+              <GridPane.margin>
+                <Insets left="10.0" fx:id="x1" />
+              </GridPane.margin>
+            </Label>
+            <Label font="$x2" text="complete &lt;task number&gt;" GridPane.columnIndex="1" GridPane.rowIndex="7">
+              <GridPane.margin>
+                <Insets left="10.0" fx:id="x1" />
+              </GridPane.margin>
+            </Label>
             <Label font="$x2" text="incomplete &lt;task number&gt;" GridPane.columnIndex="1" GridPane.rowIndex="8">
               <GridPane.margin>
                 <Insets left="10.0" fx:id="x1" />
               </GridPane.margin>
             </Label>
-            <Label font="$x2" text="move &lt;directory&gt;" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="9" />
-            <Label font="$x2" text="search &lt;keyword&gt;" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="10" />
-            <Label font="$x2" text="display all" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="11" />
-            <Label font="$x2" text="display today/ tomorrow" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="12" />
-            <Label font="$x2" text="display deadline/event/floating" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="13" />
-            <Label font="$x2" text="exit" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="14" />
+            <Label font="$x2" text="set &lt;path name&gt;" GridPane.columnIndex="1" GridPane.rowIndex="9">
+              <GridPane.margin>
+                <Insets left="10.0" fx:id="x1" />
+              </GridPane.margin>
+            </Label>
+            <Label font="$x2" text="search &lt;keyword&gt;" GridPane.columnIndex="1" GridPane.rowIndex="10">
+              <GridPane.margin>
+                <Insets left="10.0" fx:id="x1" />
+              </GridPane.margin>
+            </Label>
+            <Label font="$x2" text="display all" GridPane.columnIndex="1" GridPane.rowIndex="11">
+              <GridPane.margin>
+                <Insets left="10.0" fx:id="x1" />
+              </GridPane.margin>
+            </Label>
+            <Label font="$x2" text="display today/ tomorrow" GridPane.columnIndex="1" GridPane.rowIndex="12">
+              <GridPane.margin>
+                <Insets left="10.0" fx:id="x1" />
+              </GridPane.margin>
+            </Label>
+            <Label font="$x2" text="display deadline/event/floating" GridPane.columnIndex="1" GridPane.rowIndex="13">
+              <GridPane.margin>
+                <Insets left="10.0" fx:id="x1" />
+              </GridPane.margin>
+            </Label>
+            <Label font="$x2" text="exit" GridPane.columnIndex="1" GridPane.rowIndex="14">
+              <GridPane.margin>
+                <Insets left="10.0" fx:id="x1" />
+              </GridPane.margin>
+            </Label>
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

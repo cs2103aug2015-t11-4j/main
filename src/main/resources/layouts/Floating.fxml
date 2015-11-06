@@ -9,12 +9,12 @@
 <AnchorPane prefHeight="605.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="main.java.gui.FloatingController">
   <!-- TODO Add Nodes -->
   <children>
-    <Label prefHeight="35.0" text="Floating Tasks" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="0.0">
+    <Label prefHeight="35.0" style="-fx-background-color: rgba(058, 095, 205);" text="  Floating Tasks" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="0.0">
       <font>
         <Font size="25.0" fx:id="x1" />
       </font>
     </Label>
     <ListView fx:id="floatingList" prefHeight="570.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0" />
-    <Label fx:id="clock" font="$x1" prefHeight="35.0" prefWidth="150.0" text="" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    <Label fx:id="clock" font="$x1" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: rgba(000, 000, 000);" text="" textFill="#66ffed" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
   </children>
 </AnchorPane>

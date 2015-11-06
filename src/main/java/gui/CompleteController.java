@@ -47,7 +47,7 @@ public class CompleteController {
 	    //Calendar cal = Calendar.getInstance();
 	    //System.out.println(dateFormat.format(cal.getTime()));
 
-	    clock.setText(dateFormat.format(date));
+	    clock.setText(" " + dateFormat.format(date));
 	}
 
 }

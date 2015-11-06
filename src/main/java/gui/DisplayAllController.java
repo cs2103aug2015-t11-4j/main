@@ -43,6 +43,6 @@ public class DisplayAllController {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	    //get current date time with Date()
 	    Date date = new Date();
-	    clock.setText(dateFormat.format(date));
+	    clock.setText(" " + dateFormat.format(date));
 	}
 }
