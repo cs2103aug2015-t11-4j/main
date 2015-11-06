@@ -55,22 +55,26 @@ public class Controller {
 		case "-n":
 			inputForUpdate = Parser.retrieveInputForUpdate(inputForAction.get(1));
 			itemNum = Integer.parseInt(inputForUpdate.get(0));
-			System.out.printf(inputForUpdate.get(0)+"**"+ inputForUpdate.get(1));
+			//System.out.printf(inputForUpdate.get(0)+"**"+ inputForUpdate.get(1));
 			contentForUpdate = inputForUpdate.get(1);
 			command = new UpdateName(itemNum, contentForUpdate);
 			history.pushCommandToUndoList(command);
 			break;
-/*		case "-st":
-			itemNum = Integer.parseInt(inputForAction.get(1));
+		case "-st":
+			inputForUpdate = Parser.retrieveInputForUpdate(inputForAction.get(1));
+			itemNum = Integer.parseInt(inputForUpdate.get(0));
+			contentForUpdate = inputForUpdate.get(1);
 			command = new UpdateStartTime(itemNum, contentForUpdate);
 			history.pushCommandToUndoList(command);
 			break;
-		case "-sd":
-			itemNum = Integer.parseInt(inputForAction.get(1));
+			case "-sd":
+			inputForUpdate = Parser.retrieveInputForUpdate(inputForAction.get(1));
+			itemNum = Integer.parseInt(inputForUpdate.get(0));
+			contentForUpdate = inputForUpdate.get(1);
 			command = new UpdateStartDate(itemNum, contentForUpdate);
 			history.pushCommandToUndoList(command);
 			break;
-		case "-et":
+/*		case "-et":
 			itemNum = Integer.parseInt(inputForAction.get(1));
 			command = new UpdateEndTime(itemNum, contentForUpdate);
 			history.pushCommandToUndoList(command);

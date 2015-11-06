@@ -28,15 +28,15 @@ public class DataDisplay {
 				int itemNum = i + 1;
 				switch (listForPrint.get(i).getTaskType().toLowerCase()) {
 				case TASK_TYPE_DEADLINE_LOWERCASE:
-					System.out.println(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
+					//System.out.println(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
 					outputForTesting.add(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
 					break;
 				case TASK_TYPE_EVENT_LOWERCASE:
-					System.out.println(itemNum + ": " + createContentForEvent(listForPrint.get(i)));
+					//System.out.println(itemNum + ": " + createContentForEvent(listForPrint.get(i)));
 					outputForTesting.add(itemNum + ": " + createContentForEvent(listForPrint.get(i)));
 					break;
 				case TASK_TYPE_FLOATING_LOWERCASE:
-					System.out.println(itemNum + ": " + createContentForFloating(listForPrint.get(i)));
+					//System.out.println(itemNum + ": " + createContentForFloating(listForPrint.get(i)));
 					outputForTesting.add(itemNum + ": " + createContentForFloating(listForPrint.get(i)));
 					break;
 				}
@@ -117,6 +117,22 @@ public class DataDisplay {
 			return feedbackMsg;
 		}else if (code == 2){
 			feedbackMsg = action + " is not successful. Task description cannot be empty.";
+			System.out.println(feedbackMsg);
+			return feedbackMsg;
+		}else if (code == 3){
+			feedbackMsg = action + " is not successful. Task start time cannot be empty.";
+			System.out.println(feedbackMsg);
+			return feedbackMsg;
+		}else if (code == 4){
+			feedbackMsg = action + " is not successful. No start time for this task or the new time is not a valid format.";
+			System.out.println(feedbackMsg);
+			return feedbackMsg;
+		}else if (code == 5){
+			feedbackMsg = action + " is not successful. Task start date cannot be empty.";
+			System.out.println(feedbackMsg);
+			return feedbackMsg;
+		}else if (code == 6){
+			feedbackMsg = action + " is not successful. No start date for this task or the new date is not a valid format.";
 			System.out.println(feedbackMsg);
 			return feedbackMsg;
 		}
