@@ -1,5 +1,6 @@
+//@@Author: Jiahuan
 package main.java.resources;
-//@Author: Jiahuan
+
 
 public class ItemForUserScreen {
 	private boolean ifComplete;

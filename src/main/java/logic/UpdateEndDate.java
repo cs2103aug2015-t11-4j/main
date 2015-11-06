@@ -9,10 +9,9 @@ import main.java.resources.OutputToUI;
 import main.java.resources.Task;
 import main.java.storage.Storage;
 
-public class UpdateStartTime implements Command{
-
+public class UpdateEndDate implements Command{
 	private Storage storage = Storage.getInstance();
-	private String newStartTime;//TODO change each copy
+	private String newEndDate;//TODO change each copy
 	//private int itemNum;
 	private Task oldTask;
 	private Task newTask;
@@ -20,17 +19,17 @@ public class UpdateStartTime implements Command{
 	private History history = History.getInstance();
 	
 	
-	public UpdateStartTime(int itemNum, String newStartTime){
-		this.newStartTime = newStartTime;
+	public UpdateEndDate(int itemNum, String newEndDate){
+		this.newEndDate = newEndDate;
 		screenList = history.getScreenList();
 		this.oldTask = Search.obtainTaskByItemNum(itemNum, screenList);
-		if (oldTask.getStartTime().equals("-")||DateAndTime.reformatTime(newStartTime).equals("invalid time format")){
+		if (oldTask.getEndDate().equals("-")||DateAndTime.reformatDate(newEndDate).equals("invalid date format")){
 			newTask = new Task();
 		} else {
 		newTask = new Task (oldTask.getTaskType(), oldTask.getTaskDescription(), oldTask.getStartDate(), oldTask.getEndDate(),
 				oldTask.getStartTime(), oldTask.getEndTime(), oldTask.getIsCompleted(),
 				oldTask.getIsDateTimeValid()/*, int newRecurringID*/);
-		newTask.setStartTime(DateAndTime.reformatTime(newStartTime));
+		newTask.setEndDate(DateAndTime.reformatDate(newEndDate));
 		}
 	}
 	
@@ -40,18 +39,19 @@ public class UpdateStartTime implements Command{
 		
 		String feedbackMsg;
 		//If empty, return feedback msg saying task description cannot be empty
-		if (newStartTime.isEmpty()){
+		if (newEndDate.isEmpty()){
 			//System.out.println("Inside empty");
-			code = 3;
+			code = 5;
 			feedbackMsg = DataDisplay.feedback("Update", code);
 			outputToUI.setFeedbackMsg(feedbackMsg);
 			return outputToUI;
 		} else if (newTask.equals(new Task())){
-			code = 4;
+			code = 6;
 			feedbackMsg = DataDisplay.feedback("Update", code);
 			outputToUI.setFeedbackMsg(feedbackMsg);
 			return outputToUI;
 		}
+		System.out.printf(newEndDate);
 		storage.deleteOneItem(oldTask);
 		System.out.println("Ouside empty");
 		storage.addOneItem(newTask);

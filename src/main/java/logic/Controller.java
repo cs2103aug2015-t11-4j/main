@@ -1,4 +1,4 @@
-//@Author:Jiahuan
+//@@Author: Jiahuan
 package main.java.logic;
 
 import java.io.IOException;
@@ -74,16 +74,20 @@ public class Controller {
 			command = new UpdateStartDate(itemNum, contentForUpdate);
 			history.pushCommandToUndoList(command);
 			break;
-/*		case "-et":
-			itemNum = Integer.parseInt(inputForAction.get(1));
+		case "-et":
+			inputForUpdate = Parser.retrieveInputForUpdate(inputForAction.get(1));
+			itemNum = Integer.parseInt(inputForUpdate.get(0));
+			contentForUpdate = inputForUpdate.get(1);
 			command = new UpdateEndTime(itemNum, contentForUpdate);
 			history.pushCommandToUndoList(command);
 			break;
 		case "-ed":
-			itemNum = Integer.parseInt(inputForAction.get(1));
+			inputForUpdate = Parser.retrieveInputForUpdate(inputForAction.get(1));
+			itemNum = Integer.parseInt(inputForUpdate.get(0));
+			contentForUpdate = inputForUpdate.get(1);
 			command = new UpdateEndDate(itemNum, contentForUpdate);
 			history.pushCommandToUndoList(command);
-			break;*/
+			break;
 		case "delete":
 			itemNum = Integer.parseInt(inputForAction.get(1));
 			command = new Delete(itemNum, storage);

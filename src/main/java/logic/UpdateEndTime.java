@@ -9,10 +9,9 @@ import main.java.resources.OutputToUI;
 import main.java.resources.Task;
 import main.java.storage.Storage;
 
-public class UpdateStartTime implements Command{
-
+public class UpdateEndTime implements Command{
 	private Storage storage = Storage.getInstance();
-	private String newStartTime;//TODO change each copy
+	private String newEndTime;//TODO change each copy
 	//private int itemNum;
 	private Task oldTask;
 	private Task newTask;
@@ -20,17 +19,17 @@ public class UpdateStartTime implements Command{
 	private History history = History.getInstance();
 	
 	
-	public UpdateStartTime(int itemNum, String newStartTime){
-		this.newStartTime = newStartTime;
+	public UpdateEndTime(int itemNum, String newEndTime){
+		this.newEndTime = newEndTime;
 		screenList = history.getScreenList();
 		this.oldTask = Search.obtainTaskByItemNum(itemNum, screenList);
-		if (oldTask.getStartTime().equals("-")||DateAndTime.reformatTime(newStartTime).equals("invalid time format")){
+		if (oldTask.getEndTime().equals("-")||DateAndTime.reformatTime(newEndTime).equals("invalid time format")){
 			newTask = new Task();
 		} else {
 		newTask = new Task (oldTask.getTaskType(), oldTask.getTaskDescription(), oldTask.getStartDate(), oldTask.getEndDate(),
 				oldTask.getStartTime(), oldTask.getEndTime(), oldTask.getIsCompleted(),
 				oldTask.getIsDateTimeValid()/*, int newRecurringID*/);
-		newTask.setStartTime(DateAndTime.reformatTime(newStartTime));
+		newTask.setEndTime(DateAndTime.reformatTime(newEndTime));
 		}
 	}
 	
@@ -40,14 +39,14 @@ public class UpdateStartTime implements Command{
 		
 		String feedbackMsg;
 		//If empty, return feedback msg saying task description cannot be empty
-		if (newStartTime.isEmpty()){
+		if (newEndTime.isEmpty()){
 			//System.out.println("Inside empty");
-			code = 3;
+			code = 7;
 			feedbackMsg = DataDisplay.feedback("Update", code);
 			outputToUI.setFeedbackMsg(feedbackMsg);
 			return outputToUI;
 		} else if (newTask.equals(new Task())){
-			code = 4;
+			code = 8;
 			feedbackMsg = DataDisplay.feedback("Update", code);
 			outputToUI.setFeedbackMsg(feedbackMsg);
 			return outputToUI;

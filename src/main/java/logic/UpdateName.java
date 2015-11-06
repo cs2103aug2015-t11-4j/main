@@ -1,3 +1,4 @@
+//@@Author: Jiahuan
 package main.java.logic;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class UpdateName implements Command{
 		screenList = history.getScreenList();
 		this.oldTask = Search.obtainTaskByItemNum(itemNum, screenList);
 		newTask = new Task (oldTask.getTaskType(), oldTask.getTaskDescription(), oldTask.getStartDate(), oldTask.getEndDate(),
-				oldTask.getStartDate(), oldTask.getEndTime(), oldTask.getIsCompleted(),
+				oldTask.getStartTime(), oldTask.getEndTime(), oldTask.getIsCompleted(),
 				oldTask.getIsDateTimeValid()/*, int newRecurringID*/);
 		newTask.setTaskDescription(newName);
 	}

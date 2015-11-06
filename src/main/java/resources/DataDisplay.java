@@ -1,4 +1,4 @@
-//@Author: Jiahuan
+//@@Author: Jiahuan
 
 package main.java.resources;
 
@@ -133,6 +133,14 @@ public class DataDisplay {
 			return feedbackMsg;
 		}else if (code == 6){
 			feedbackMsg = action + " is not successful. No start date for this task or the new date is not a valid format.";
+			System.out.println(feedbackMsg);
+			return feedbackMsg;
+		}else if (code == 7){
+			feedbackMsg = action + " is not successful. Task end time cannot be empty.";
+			System.out.println(feedbackMsg);
+			return feedbackMsg;
+		}else if (code == 8){
+			feedbackMsg = action + " is not successful. No end time for this task or the new time is not a valid format.";
 			System.out.println(feedbackMsg);
 			return feedbackMsg;
 		}
