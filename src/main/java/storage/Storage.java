@@ -100,7 +100,8 @@ public class Storage {
                         getStartTimeByItemNum(count),
                         getEndTimeByItemNum(count),
                         getIsCompletedByItemNum(count),
-                        getIsDateTimeValidByItemNum(count)));
+                        getIsDateTimeValidByItemNum(count),
+                        getRecurringIDByItemNum(count)));
                 count += 1;
             }
             br.close();
@@ -179,7 +180,7 @@ public class Storage {
 			
 			bw.write(task.getTaskType() + ";" + task.getTaskDescription() + ";" + task.getStartDate()
 					+ ";" + task.getEndDate() + ";" + task.getStartTime() + ";" + task.getEndTime() + ";"
-					+ task.getIsCompleted() + ";" + task.getIsDateTimeValid() + ";" );
+					+ task.getIsCompleted() + ";" + task.getIsDateTimeValid() + ";" + task.getRecurringID() + ";" );
 			
 			bw.newLine();
 			bw.close();
@@ -220,7 +221,7 @@ public class Storage {
             bw.write(input.replaceAll(task.getTaskType() + ";" + task.getTaskDescription() 
             + ";" + task.getStartDate() + ";" + task.getEndDate() + ";" + task.getStartTime()
             + ";" + task.getEndTime() + ";" + task.getIsCompleted() + ";" + task.getIsDateTimeValid() 
-            + ";" + "\n", ""));
+            + ";" + task.getRecurringID() + ";" + "\n", ""));
             
             bw.close();
 
@@ -261,7 +262,8 @@ public class Storage {
 
                 bw.write(input.replaceAll(replaceLine, task.getTaskType() + ";" + task.getTaskDescription() 
                 + ";" + task.getStartDate() + ";" + task.getEndDate() + ";" + task.getStartTime()
-                + ";" + task.getEndTime() + ";" + task.getIsCompleted() + ";" + task.getIsDateTimeValid() + ";"));
+                + ";" + task.getEndTime() + ";" + task.getIsCompleted() + ";" + task.getIsDateTimeValid() 
+                + ";" + task.getRecurringID() + ";"));
 
                 bw.close();
 
@@ -293,7 +295,8 @@ public class Storage {
                 String line;
                 String replaceLine = task.getTaskType() + ";" + task.getTaskDescription() 
                 + ";" + task.getStartDate() + ";" + task.getEndDate() + ";" + task.getStartTime()
-                + ";" + task.getEndTime() + ";" + true + ";" + task.getIsDateTimeValid() + ";";
+                + ";" + task.getEndTime() + ";" + true + ";" + task.getIsDateTimeValid() 
+                + ";" + task.getRecurringID() + ";";
 
                 while ((line = br.readLine()) != null) {        
                     input += line + '\n';
@@ -306,7 +309,8 @@ public class Storage {
 
                 bw.write(input.replaceAll(replaceLine, task.getTaskType() + ";" + task.getTaskDescription() 
                 + ";" + task.getStartDate() + ";" + task.getEndDate() + ";" + task.getStartTime()
-                + ";" + task.getEndTime() + ";" + task.getIsCompleted() + ";" + task.getIsDateTimeValid() + ";"));
+                + ";" + task.getEndTime() + ";" + task.getIsCompleted() + ";" + task.getIsDateTimeValid() 
+                + ";" + task.getrecurringID() + ";"));
 
                 bw.close();
 
@@ -397,6 +401,14 @@ public class Storage {
         return Boolean.parseBoolean(target[7]);
     }
     
+    /* 
+     * Obtains date/time validity of task saved in external file
+     */
+    private int getRecurringIDByItemNum(int itemNumber) {
+        String[] target = readExternalFile(itemNumber);
+        return Integer.parseInt(target[8]);
+    }
+    
     /*
      * Reads the external file based on its line number
      */
@@ -407,7 +419,7 @@ public class Storage {
 
             int lineNumber = 0;
             String line = null;
-            String[] target = new String[8];
+            String[] target = new String[9];
             
             /*
             //Checks if the first line is a user specified directory for the taskList

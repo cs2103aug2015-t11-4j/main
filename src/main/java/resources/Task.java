@@ -11,7 +11,7 @@ public class Task {
 	private String endTime;
 	private boolean isCompleted;
 	private boolean validDTF;
-/*	private int recurringID;*/
+	private int recurringID;
 	
 	/********************** Constructor ************************/
 	//creates an empty task
@@ -25,12 +25,12 @@ public class Task {
 		setEndTime("-");
 		setCompleted(false);
 		setValidDT(false);
-/*		setRecurringID(0);*/
+		setRecurringID(0);
 	}
 	
 	public Task (String newTaskType, String newTaskDescription, String newStartDate, String newEndDate,
 									String newStartTime, String newEndTime, boolean taskStatus,
-									boolean dateTimeFormat/*, int newRecurringID*/) {
+									boolean dateTimeFormat, int newRecurringID) {
 			
 		setTaskType(newTaskType);
 		setTaskDescription(newTaskDescription);
@@ -40,7 +40,7 @@ public class Task {
 		setEndTime(newEndTime);
 		setCompleted(taskStatus);
 		setValidDT(dateTimeFormat);
-/*		setRecurringID(newRecurringID);*/
+		setRecurringID(newRecurringID);
 	}
 
 	/********************* Accessors *************************/
@@ -76,9 +76,9 @@ public class Task {
 		return validDTF;
 	}
 	
-/*	public int getRecurringID() {
+	public int getRecurringID() {
 		return recurringID;
-	}*/
+	}
 	/*********************** Mutators ************************/
 	public void setTaskType(String newTaskType) {
 		this.taskType = newTaskType;
@@ -112,9 +112,9 @@ public class Task {
 		this.validDTF = newDTF;
 	}
 	
-/*	public void setRecurringID(int newRecurringID) {
+	public void setRecurringID(int newRecurringID) {
 		this.recurringID = newRecurringID;
-	}*/
+	}
 	
 	//Overriding equals() method
 	@Override
@@ -129,8 +129,8 @@ public class Task {
 								this.getStartTime().equals(task.getStartTime()) && 
 									this.getEndTime().equals(task.getEndTime()) &&
 										this.getIsCompleted() == task.getIsCompleted() &&
-											this.getIsDateTimeValid() == task.getIsDateTimeValid() /*&& 
-												this.getRecurringID() == task.getRecurringID()*/;
+											this.getIsDateTimeValid() == task.getIsDateTimeValid() && 
+												this.getRecurringID() == task.getRecurringID();
 		}
 	return result;
 	}
