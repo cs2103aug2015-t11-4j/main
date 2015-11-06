@@ -81,9 +81,12 @@ public class Parser {
 		}
 	
 	//FOR LOGIC USE ONLY
-	public final static ArrayList<Task> createRecurringTasks(ArrayList<String> listFromLogic) {
+	public final static ArrayList<Task> createRecurringTasks(ArrayList<String> listFromLogic/*, int recurringID*/) {
 		ArrayList<Task> recurringTasks = new ArrayList<Task>();
 		recurringTasks = RecurringTask.create(listFromLogic);
+/*		for(int i=0; i<recurringTasks.size(); i++) {
+			recurringTasks.get(i).setRecurringID(recurringID);
+		}*/
 		return recurringTasks;
 	}
 	
@@ -141,8 +144,9 @@ public class Parser {
 		output.add(content[0]);
 		if (content.length==1){
 			output.add("");
-		}else{
-		output.add(content[1]);
+		}
+		else{
+			output.add(content[1]);
 		}
 		return output;
 	}

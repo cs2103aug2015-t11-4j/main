@@ -71,6 +71,8 @@ public class FlexiCommands {
 				return "recurring";
 			case "incomplete":
 				return "incomplete";
+			case "set":
+				return "set";
 			default:
 				return "invalid command";	
 		}
