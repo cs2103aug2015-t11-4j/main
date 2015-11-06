@@ -11,13 +11,15 @@ public class History {
 	private String currentScreen;
 	private Stack<Command> undoCommandList;
 	private Stack<Command> redoCommandList;
-	private int recurID;
+	private int nextRecurID = 1;
 	
 	//private constructor
 	private History(){
 	screenList = new ArrayList<Task>();
 	redoCommandList = new Stack<Command>();
 	undoCommandList = new Stack<Command>();
+	
+	
 	}
 
 	//create history object
@@ -58,8 +60,8 @@ public class History {
     	return command;
     }
     
-    public int getRecurID(){
-    	return recurID;
+    public int getNextRecurID(){
+    	return nextRecurID;
     }
     
   //mutator 
@@ -80,7 +82,11 @@ public class History {
     	redoCommandList.push(command);
     }
     
+    public void setRecurID(){
+    	nextRecurID = Search.obtainLargestRecurID()+1;
+    }
+    
     public void updateRecurID(){
-    	recurID++;
+    	nextRecurID++;
     }
 }

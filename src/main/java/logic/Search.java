@@ -285,6 +285,20 @@ public class Search {
 		}
     	return itemNum;
     }
+    //@@Author: Jiahuan
+	public static int obtainLargestRecurID() {
+		Storage storage = Storage.getInstance();
+		int temp, largestRecurID = 0;
+		for (int i = 0; 1 < storage.getTaskList().size(); i++){
+			System.out.println("RecurID is" + storage.getTaskList().get(i).getRecurringID());
+			if (storage.getTaskList().get(i).getRecurringID() > largestRecurID){
+				
+				temp = storage.getTaskList().get(i).getRecurringID();
+				largestRecurID = temp;
+			}
+		}
+		return largestRecurID;
+	}
     
     
     /* @@Author: Lim Yong Zhi

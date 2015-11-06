@@ -28,7 +28,7 @@ public class UpdateEndTime implements Command{
 		} else {
 		newTask = new Task (oldTask.getTaskType(), oldTask.getTaskDescription(), oldTask.getStartDate(), oldTask.getEndDate(),
 				oldTask.getStartTime(), oldTask.getEndTime(), oldTask.getIsCompleted(),
-				oldTask.getIsDateTimeValid()/*, int newRecurringID*/);
+				oldTask.getIsDateTimeValid(), oldTask.getRecurringID());
 		newTask.setEndTime(DateAndTime.reformatTime(newEndTime));
 		}
 	}

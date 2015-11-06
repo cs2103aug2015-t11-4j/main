@@ -310,7 +310,7 @@ public class Storage {
                 bw.write(input.replaceAll(replaceLine, task.getTaskType() + ";" + task.getTaskDescription() 
                 + ";" + task.getStartDate() + ";" + task.getEndDate() + ";" + task.getStartTime()
                 + ";" + task.getEndTime() + ";" + task.getIsCompleted() + ";" + task.getIsDateTimeValid() 
-                + ";" + task.getrecurringID() + ";"));
+                + ";" + task.getRecurringID() + ";"));
 
                 bw.close();
 

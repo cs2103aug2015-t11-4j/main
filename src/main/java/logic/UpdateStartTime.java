@@ -29,7 +29,7 @@ public class UpdateStartTime implements Command{
 		} else {
 		newTask = new Task (oldTask.getTaskType(), oldTask.getTaskDescription(), oldTask.getStartDate(), oldTask.getEndDate(),
 				oldTask.getStartTime(), oldTask.getEndTime(), oldTask.getIsCompleted(),
-				oldTask.getIsDateTimeValid()/*, int newRecurringID*/);
+				oldTask.getIsDateTimeValid(), oldTask.getRecurringID());
 		newTask.setStartTime(DateAndTime.reformatTime(newStartTime));
 		}
 	}

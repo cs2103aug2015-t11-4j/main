@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import main.java.logic.History;
 import main.java.resources.Task;
 
 public class RecurringTask {
@@ -14,7 +15,9 @@ public class RecurringTask {
 	private static final String KEYWORD_TIMES = " times";
 
 	public final static ArrayList<Task> create(ArrayList<String> listFromLogic) {
+		History history = History.getInstance();
 		ArrayList<Task> recurringTasks = new ArrayList<Task>();
+		int recurID = history.getNextRecurID();
 		
 		//input must contain keywords for and times
 		if (listFromLogic.get(1).contains(KEYWORD_FOR) && listFromLogic.get(1).contains(KEYWORD_TIMES)) {
@@ -31,8 +34,16 @@ public class RecurringTask {
 			temp.add(taskContent);
 			Task task = new Task();
 			
+			/*System.out.println("******");
+			System.out.println(temp.get(0));
+			System.out.println(temp.get(1));
+			System.out.println("******");*/
+			
 			switch(Parser.identifyTaskType(temp)) {
 				case "deadline":
+					/*System.out.println("******");
+					System.out.println("Inside recur deadline");
+					System.out.println("******");*/
 					task = CreateTask.createDeadline(Parser.identifyTaskType(temp), taskContent); 
 					break;
 				case "event":
@@ -61,7 +72,7 @@ public class RecurringTask {
 						recurEndDate = LocalDate.parse(recurringEndDate, formatter);
 
 						for(int i=0; i<recurTimes; i++) {
-							recurringTasks.add(new Task("deadline", taskDescription, startDate, recurringEndDate, startTime, endTime, false, true ));
+							recurringTasks.add(new Task("deadline", taskDescription, startDate, recurringEndDate, startTime, endTime, false, true, recurID ));
 							recurEndDate = recurEndDate.plusDays(1);
 							recurringEndDate = recurEndDate.format(formatter);
 							task.setEndDate(recurringEndDate);
@@ -72,7 +83,7 @@ public class RecurringTask {
 						recurEndDate = LocalDate.parse(recurringEndDate, formatter);
 
 						for(int i=0; i<recurTimes; i++) {
-							recurringTasks.add(new Task("event", taskDescription, startDate, recurringEndDate, startTime, endTime, false, true ));
+							recurringTasks.add(new Task("event", taskDescription, startDate, recurringEndDate, startTime, endTime, false, true , recurID));
 							recurEndDate = recurEndDate.plusWeeks(1);
 							recurringEndDate = recurEndDate.format(formatter);
 							task.setEndDate(recurringEndDate);
@@ -83,7 +94,7 @@ public class RecurringTask {
 						recurEndDate = LocalDate.parse(recurringEndDate, formatter);
 
 						for(int i=0; i<recurTimes; i++) {
-							recurringTasks.add(new Task("event", taskDescription, startDate, recurringEndDate, startTime, endTime, false, true ));
+							recurringTasks.add(new Task("event", taskDescription, startDate, recurringEndDate, startTime, endTime, false, true , recurID));
 							recurEndDate = recurEndDate.plusMonths(1);
 							recurringEndDate = recurEndDate.format(formatter);
 							task.setEndDate(recurringEndDate);
@@ -94,7 +105,7 @@ public class RecurringTask {
 						recurEndDate = LocalDate.parse(recurringEndDate, formatter);
 
 						for(int i=0; i<recurTimes; i++) {
-							recurringTasks.add(new Task("event", taskDescription, startDate, recurringEndDate, startTime, endTime, false, true ));
+							recurringTasks.add(new Task("event", taskDescription, startDate, recurringEndDate, startTime, endTime, false, true , recurID ));
 							recurEndDate = recurEndDate.plusYears(1);
 							recurringEndDate = recurEndDate.format(formatter);
 							task.setEndDate(recurringEndDate);
@@ -116,7 +127,7 @@ public class RecurringTask {
 						recurEndDate = LocalDate.parse(recurringEndDate, formatter);
 						
 						for(int i=0; i<recurTimes; i++) {
-							recurringTasks.add(new Task("event", taskDescription, recurringStartDate, recurringEndDate, startTime, endTime, false, true ));
+							recurringTasks.add(new Task("event", taskDescription, recurringStartDate, recurringEndDate, startTime, endTime, false, true , recurID));
 							recurStartDate = recurStartDate.plusDays(1);
 							recurEndDate = recurEndDate.plusDays(1);
 							recurringStartDate = recurStartDate.format(formatter);
@@ -130,7 +141,7 @@ public class RecurringTask {
 						recurEndDate = LocalDate.parse(recurringEndDate, formatter);
 						
 						for(int i=0; i<recurTimes; i++) {
-							recurringTasks.add(new Task("event", taskDescription, recurringStartDate, recurringEndDate, startTime, endTime, false, true ));
+							recurringTasks.add(new Task("event", taskDescription, recurringStartDate, recurringEndDate, startTime, endTime, false, true , recurID));
 							recurStartDate = recurStartDate.plusWeeks(1);
 							recurEndDate = recurEndDate.plusWeeks(1);
 							recurringStartDate = recurStartDate.format(formatter);
@@ -144,7 +155,7 @@ public class RecurringTask {
 						recurEndDate = LocalDate.parse(recurringEndDate, formatter);
 						
 						for(int i=0; i<recurTimes; i++) {
-							recurringTasks.add(new Task("event", taskDescription, recurringStartDate, recurringEndDate, startTime, endTime, false, true ));
+							recurringTasks.add(new Task("event", taskDescription, recurringStartDate, recurringEndDate, startTime, endTime, false, true , recurID));
 							recurStartDate = recurStartDate.plusMonths(1);
 							recurEndDate = recurEndDate.plusMonths(1);
 							recurringStartDate = recurStartDate.format(formatter);
@@ -158,7 +169,7 @@ public class RecurringTask {
 						recurEndDate = LocalDate.parse(recurringEndDate, formatter);
 						
 						for(int i=0; i<recurTimes; i++) {
-							recurringTasks.add(new Task("event", taskDescription, recurringStartDate, recurringEndDate, startTime, endTime, false, true ));
+							recurringTasks.add(new Task("event", taskDescription, recurringStartDate, recurringEndDate, startTime, endTime, false, true , recurID));
 							recurStartDate = recurStartDate.plusYears(1);
 							recurEndDate = recurEndDate.plusYears(1);
 							recurringStartDate = recurStartDate.format(formatter);

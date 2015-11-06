@@ -31,10 +31,6 @@ public class Add implements Command{
 				
 		outputToUI.setFeedbackMsg(DataDisplay.feedback("add",code));
 		
-/*		//Below is the part for Undo
-		int itemNum = Search.obtainItemNumByTask(task, storage.getTaskList());
-		Command cmd = new Delete(itemNum, storage);
-		history.getUndoCommandList().push(cmd);*/
 		return outputToUI;
 	}
 

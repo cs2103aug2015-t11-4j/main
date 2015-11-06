@@ -46,6 +46,10 @@ public class Controller {
 			//history.getUndoCommandList().push(command);
 			history.pushCommandToUndoList(command);
 			break;
+		case "recurring":
+			ArrayList<Task> recurList = Parser.createRecurringTasks(inputForAction);
+			command = new Recur(recurList);
+			break;
 		case "update":
 			itemNum = Integer.parseInt(inputForAction.get(1));
 			command = new Update(itemNum, storage);

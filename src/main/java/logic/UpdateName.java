@@ -25,7 +25,7 @@ public class UpdateName implements Command{
 		this.oldTask = Search.obtainTaskByItemNum(itemNum, screenList);
 		newTask = new Task (oldTask.getTaskType(), oldTask.getTaskDescription(), oldTask.getStartDate(), oldTask.getEndDate(),
 				oldTask.getStartTime(), oldTask.getEndTime(), oldTask.getIsCompleted(),
-				oldTask.getIsDateTimeValid()/*, int newRecurringID*/);
+				oldTask.getIsDateTimeValid(), oldTask.getRecurringID());
 		newTask.setTaskDescription(newName);
 	}
 	
