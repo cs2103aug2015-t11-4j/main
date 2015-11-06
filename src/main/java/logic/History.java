@@ -11,6 +11,7 @@ public class History {
 	private String currentScreen;
 	private Stack<Command> undoCommandList;
 	private Stack<Command> redoCommandList;
+	private int recurID;
 	
 	//private constructor
 	private History(){
@@ -47,6 +48,20 @@ public class History {
     	return redoCommandList;
     }
     
+    public Command popCommandToRedoList(){
+    	Command command = redoCommandList.pop();
+    	return command;
+    }
+    
+    public Command popCommandToUndoList(){
+    	Command command = undoCommandList.pop();
+    	return command;
+    }
+    
+    public int getRecurID(){
+    	return recurID;
+    }
+    
   //mutator 
     public void setScreenList(ArrayList<Task> screenList){
     	this.screenList = screenList;
@@ -59,18 +74,13 @@ public class History {
     public void pushCommandToUndoList(Command command){
     	undoCommandList.push(command);
     }
-    
-    public Command popCommandToUndoList(){
-    	Command command = undoCommandList.pop();
-    	return command;
-    }
+
     
     public void pushCommandToRedoList(Command command){
     	redoCommandList.push(command);
     }
     
-    public Command popCommandToRedoList(){
-    	Command command = redoCommandList.pop();
-    	return command;
+    public void updateRecurID(){
+    	recurID++;
     }
 }
