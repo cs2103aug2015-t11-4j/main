@@ -110,6 +110,10 @@ public class Controller {
 			//history.getUndoCommandList().push(command);
 			history.pushCommandToUndoList(command);
 			break;
+		case "set":
+			command = new SetPath(inputForAction.get(1));
+			history.pushCommandToUndoList(command);
+			break;
 		case "undo":
 			command = new Undo();
 			break;

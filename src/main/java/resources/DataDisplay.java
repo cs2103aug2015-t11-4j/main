@@ -143,6 +143,10 @@ public class DataDisplay {
 			feedbackMsg = action + " is not successful. No end time for this task or the new time is not a valid format.";
 			System.out.println(feedbackMsg);
 			return feedbackMsg;
+		}else if (code == 9){
+			feedbackMsg = action + " is not successful. There is no task to be " + action.toLowerCase() + "ne" ;
+			System.out.println(feedbackMsg);
+			return feedbackMsg;
 		}
 		feedbackMsg = action + " is not successful, please enter the right format";
 		System.out.println(feedbackMsg);
