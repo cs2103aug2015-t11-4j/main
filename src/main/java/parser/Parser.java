@@ -133,5 +133,18 @@ public class Parser {
 		else 
 			return true;
 	}
+
+	public static ArrayList<String> retrieveInputForUpdate(String string) {
+		ArrayList<String> output = new ArrayList<String>();
+		String content[] = string.split(REGEX_WHITESPACE, 2);
+		System.out.println(content.length);
+		output.add(content[0]);
+		if (content.length==1){
+			output.add("");
+		}else{
+		output.add(content[1]);
+		}
+		return output;
+	}
 	
 }

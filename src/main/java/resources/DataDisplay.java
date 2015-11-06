@@ -110,9 +110,13 @@ public class DataDisplay {
 		if (code == 0) {
 			feedbackMsg = action + " is successful";
 			System.out.println(feedbackMsg);
-			return feedbackMsg;
-		} else if (code == 1){
+			return feedbackMsg;	
+		}else if (code == 1){
 			feedbackMsg = action + ", please refer to help for the right format";
+			System.out.println(feedbackMsg);
+			return feedbackMsg;
+		}else if (code == 2){
+			feedbackMsg = action + " is not successful. Task description cannot be empty.";
 			System.out.println(feedbackMsg);
 			return feedbackMsg;
 		}
