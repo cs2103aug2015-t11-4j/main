@@ -55,7 +55,7 @@ public class Storage {
      * 
      * TODO: To allow duplicates of the taskList? Rely on Alt4.txt for location storage?
      */
-	public void changeDirectory(String directory) {
+	public int changeDirectory(String directory) {
 	    try {
 	        File file = new File(filename = directory + filename);
 
@@ -64,8 +64,10 @@ public class Storage {
 	        }
 
 	        file.getParentFile().mkdirs();
+	        return 0;
 	    } catch (Exception e) {
 	        logger.log(Level.WARNING, "Unable to create external file in {0}!", directory);
+	        return -1;
 	    }
 	}
 	
