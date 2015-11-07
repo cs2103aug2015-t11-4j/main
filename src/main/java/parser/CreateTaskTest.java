@@ -6,7 +6,9 @@ import org.junit.Test;
 
 import main.java.resources.Task;
 
-//@author: yuju 
+/**
+ * @@author yuju 
+ */
 
 public class CreateTaskTest {
 

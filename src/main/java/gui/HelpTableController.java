@@ -1,9 +1,10 @@
-//@author: yuju 
 package main.java.gui;
 
 /**
  * This class handles the quick help table that displays basic features of the programme.
  *
+ *
+ * @@author yuju
  */
 
 public class HelpTableController {

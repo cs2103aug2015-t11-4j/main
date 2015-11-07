@@ -1,4 +1,3 @@
-//@author: yuju 
 package main.java.gui;
 
 import java.text.DateFormat;
@@ -14,6 +13,7 @@ import javafx.scene.text.Text;
  * This class handles the ListView of complete tasks by adding them into the list that is
  * to be displayed to the user.
  *
+ * @@author yuju
  */
 
 public class CompleteController {
