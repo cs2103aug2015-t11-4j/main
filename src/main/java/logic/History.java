@@ -1,6 +1,7 @@
 //@@Author: Jiahuan
 package main.java.logic;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -12,6 +13,7 @@ public class History {
 	private Stack<Command> undoCommandList;
 	private Stack<Command> redoCommandList;
 	private int nextRecurID = 1;
+	private Command searchCommand;
 	
 	//private constructor
 	private History(){
@@ -64,6 +66,10 @@ public class History {
     	return nextRecurID;
     }
     
+    public Command gerSearchCommand(){
+    	return searchCommand;
+    }
+    
   //mutator 
     public void setScreenList(ArrayList<Task> screenList){
     	this.screenList = screenList;
@@ -87,12 +93,16 @@ public class History {
 		
 	}
 	
-    public void setRecurID(){
+    public void setRecurID() throws IOException{
     	nextRecurID = Search.obtainLargestRecurID()+1;
     }
     
     public void updateRecurID(){
     	nextRecurID++;
+    }
+    
+    public void setSearchCommand(Command command){
+    	searchCommand = command;
     }
 
 }

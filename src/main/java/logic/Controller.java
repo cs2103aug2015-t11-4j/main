@@ -14,6 +14,13 @@ import main.java.storage.Storage;
 
 public class Controller {
 
+	//test
+	public static void main(String[] arg){
+		Command command = createCommand("recur daily testing by 11/11 for 2 times");
+		OutputToUI outputToUI = command.execute();
+		System.out.println(outputToUI.getItemList());
+	}
+	
 	private static History history = History.getInstance();
 
 	/*
@@ -47,8 +54,8 @@ public class Controller {
 			//history.pushCommandToUndoList(command);
 			break;
 		case "recurring":
-			ArrayList<Task> recurList = Parser.createRecurringTasks(inputForAction);
-			command = new Recur(recurList);
+			//ArrayList<Task> recurList = Parser.createRecurringTasks(inputForAction);
+			command = new Recur(inputForAction);
 			//history.pushCommandToUndoList(command);
 			break;
 		case "update":
@@ -208,7 +215,8 @@ public class Controller {
 	
 	public static OutputToUI refreshScreen() {
 		OutputToUI outputToUI;
-		String typeOfScreen = history.getCurrentScreen();
+		//String typeOfScreen = history.getCurrentScreen();
+		String typeOfScreen = "all";
 		ArrayList<String> displayInput = new ArrayList<String>();
 		displayInput.add("display");
 		displayInput.add(typeOfScreen);

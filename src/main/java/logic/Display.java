@@ -60,8 +60,14 @@ public class Display implements Command {
 			break;
 		//@@author:wenbin
 		case "search":
-		//
-		case "all":
+/*			//@@Author: Jiahuan
+			outputToUI = history.gerSearchCommand().execute();
+			itemList = outputToUI.getItemList();
+			typeOfScreen = outputToUI.getTypeOfScreen();
+			
+			break;
+		//@@Author: Jiahuan
+*/		case "all":
 			taskList = Search.obtainAllTasks(storage);
 			typeOfScreen = "all";
 			break;
@@ -72,9 +78,11 @@ public class Display implements Command {
 		printOnScreenMsgList = DataDisplay.displayList(taskList);
 		history.setScreenList(taskList);
 		history.setCurrentScreen(typeOfScreen);
-		for (int i = 0; i < taskList.size(); i++) {
-			itemList.add(new ItemForUserScreen(taskList.get(i).getIsCompleted(), taskList.get(i).getTaskType(),
-					printOnScreenMsgList.get(i)));
+		if (!taskList.isEmpty()){
+			for (int i = 0; i < taskList.size(); i++) {
+				itemList.add(new ItemForUserScreen(taskList.get(i).getIsCompleted(), 
+						taskList.get(i).getTaskType(), printOnScreenMsgList.get(i)));
+			}
 		}
 		feedbackMsg = "Display successfully";
 		outputToUI.setFeedbackMsg(feedbackMsg);
