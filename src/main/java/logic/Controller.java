@@ -101,8 +101,13 @@ public class Controller {
 			//history.pushCommandToUndoList(command);
 			break;
 		case "delete":
-			itemNum = Integer.parseInt(inputForAction.get(1));
-			command = new Delete(itemNum, storage);
+			String content[] = inputForAction.get(1).split(" ", 2);
+			itemNum = Integer.parseInt(content[0]);
+			String deletePara = "";
+			if (content.length == 2){
+				deletePara = FlexiCommands.flexiDisplayCommands(content[1]);
+			}
+			command = new Delete(itemNum, deletePara, storage);
 			//history.getUndoCommandList().push(command);
 			//history.pushCommandToUndoList(command);
 			break;
