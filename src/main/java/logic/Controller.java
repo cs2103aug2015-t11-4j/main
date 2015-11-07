@@ -127,6 +127,10 @@ public class Controller {
 		case "display":
 			command = new Display(inputForAction, storage);
 			break;
+		//@@author:wenbin
+		case "search" :
+			command = new SearchKeyword(inputForAction, storage);
+			break;
 		case "invalid command":
 		default:
 			return command = new InvalidInput();

@@ -55,6 +55,7 @@ public class MainApp extends Application {
     private static final String COMPLETE_LAYOUT_FXML = "/main/resources/layouts/Complete.fxml";
     private static final String INCOMPLETE_LAYOUT_FXML = "/main/resources/layouts/Incomplete.fxml";
     private static final String HELP_LAYOUT_FXML = "/main/resources/layouts/Help.fxml";
+    private static final String SEARCH_LAYOUT_FXML = "/main/resources/layouts/Search.fxml";
     
     private static final String TODAY_SCENE = "today";
     private static final String TOMORROW_SCENE = "tomorrow";
@@ -66,6 +67,7 @@ public class MainApp extends Application {
     private static final String DISPLAY_ALL_SCENE = "all";
     private static final String HELP_SCENE = "help";
     private static final String EXIT_SCENE = "exit";
+    private static final String SEARCH_SCENE = "search";
     
     //private static final String FEEDBACK_TODAY_SUMMARY = "Today's Summary";
     //private static final String FEEDBACK_TMR_SUMMARY = "Tomorrow's Summary";
@@ -96,6 +98,7 @@ public class MainApp extends Application {
     private ObservableList<Text> floating = FXCollections.observableArrayList();
     private ObservableList<Text> complete = FXCollections.observableArrayList();
     private ObservableList<Text> incomplete = FXCollections.observableArrayList();
+    private ObservableList<Text> search = FXCollections.observableArrayList();
     //private ObservableList<String> today = FXCollections.observableArrayList();
     //private ObservableList<String> tomorrow = FXCollections.observableArrayList();
     
@@ -332,6 +335,12 @@ public class MainApp extends Application {
     	return incomplete;
     }
     
+    //@@author: wenbin
+    public ObservableList<Text> getSearch() {
+    	//incomplete = createIncompleteList(itemList);
+    	return search;
+    }
+    
     
     /*
 	 * Display today and tomorrow's tasks individually
@@ -508,6 +517,20 @@ public class MainApp extends Application {
         }
     }
     
+    //@@author: wenbin
+    private void addSearch() {
+    	try {
+        	FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(SEARCH_LAYOUT_FXML));
+        	AnchorPane page = (AnchorPane) loader.load();
+        	rootLayout.setTop(page);
+        	
+        	SearchController controller = loader.getController();
+            controller.setMainApp(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void handleKeyPress(CommandBarController commandBarController,
             				   KeyCode key,
             				   String userInput) {
@@ -583,6 +606,13 @@ public class MainApp extends Application {
     			} else if (userInput.equals(INCOMPLETE_SCENE)) {
     				createIncompleteList(itemList);
     				addIncomplete();
+    				//commandBarController.setFeedback(FEEDBACK_INCOMPLETE);
+    				commandBarController.setFeedback(feedbackMsg);
+    				commandBarController.clear();
+    			//@@author:wenbin
+    			} else if (userInput.equals(SEARCH_SCENE)) {
+    				createSearchList(itemList);
+    				addSearch();
     				//commandBarController.setFeedback(FEEDBACK_INCOMPLETE);
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
@@ -912,6 +942,19 @@ public class MainApp extends Application {
 			}
 		}
     	return incomplete;
+    }
+    
+    //@@author:wenbin
+    private ObservableList<Text> createSearchList(ArrayList<ItemForUserScreen> itemList) {
+    	search.clear();
+    	for (int i = 0; i < itemList.size(); i++) {
+    		if (!(itemList.get(i).getIfComplete())) {
+				Text text = new Text(itemList.get(i).getPrintOnScreenMsg());
+				text.setFont(Font.font ("System", 20));
+				search.add(text);
+			}
+		}
+    	return search;
     }
     
     private ObservableList<Text> createCompleteList(ArrayList<ItemForUserScreen> itemList) {

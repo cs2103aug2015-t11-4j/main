@@ -23,6 +23,7 @@ public class Search {
      * the user's day as a summary
      * PREREQUISITE: Storage.taskList must be sorted by date and time
     */
+	
     public static ArrayList<Task> obtainTodaySummary(Storage storage) {
         ArrayList<Task> todaySummary = new ArrayList<Task>();
         ArrayList<Task> taskList = storage.getTaskList();
@@ -252,7 +253,7 @@ public class Search {
     }
     
     //Searches and retrieves all tasks with the keyword
-    public ArrayList<Task> SearchKeyword(String keyword, Storage storage) {
+    public static ArrayList<Task> obtainSearchResults(String keyword, Storage storage) {
         ArrayList<Task> results = new ArrayList<Task>();
         
         for(int i = 0; i<storage.getTaskList().size(); i++) {
@@ -264,12 +265,7 @@ public class Search {
                 results.add(storage.getTaskList().get(i));
             }
         }
-        
-        if(results.isEmpty()) {
-            return null;
-        } else {
-            return results;
-        }
+        return results;
     }
 
     public static Task obtainTaskByItemNum(int itemNumber, ArrayList<Task> list) {

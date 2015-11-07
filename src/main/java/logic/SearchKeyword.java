@@ -1,21 +1,20 @@
-//@@Author: Jiahuan
+//@@Author: wenbin
 package main.java.logic;
 
 import java.util.ArrayList;
 
-import main.java.parser.FlexiCommands;
 import main.java.resources.DataDisplay;
 import main.java.resources.ItemForUserScreen;
 import main.java.resources.OutputToUI;
 import main.java.resources.Task;
 import main.java.storage.Storage;
 
-public class Display implements Command {
+public class SearchKeyword implements Command {
 	private ArrayList<String> inputForAction = new ArrayList<String>();
 	private Storage storage;
 	private History history = History.getInstance();
 
-	public Display(ArrayList<String> userInput, Storage storage) {
+	public SearchKeyword(ArrayList<String> userInput, Storage storage) {
 		this.inputForAction = userInput;
 		this.storage = storage;
 	}
@@ -28,47 +27,10 @@ public class Display implements Command {
 		ArrayList<ItemForUserScreen> itemList = new ArrayList<ItemForUserScreen>();
 		String feedbackMsg;
 		String typeOfScreen = null;
-		switch (FlexiCommands.flexiDisplayCommands(inputForAction.get(1).toLowerCase())) {
-		//switch (inputForAction.get(1).toLowerCase()) {
-		case "today":
-			taskList = Search.obtainTodaySummary(storage);
-			typeOfScreen = "today";
-			break;
-		case "tomorrow":
-			taskList = Search.obtainTommorrowSummary(storage);
-			typeOfScreen = "tomorrow";
-			break;
-		case "floating":
-			taskList = Search.obtainFloatingTasks(storage);
-			typeOfScreen = "floating";
-			break;
-		case "event":
-			taskList = Search.obtainEventTasks(storage);
-			typeOfScreen = "event";
-			break;
-		case "deadline":
-			taskList = Search.obtainDeadlineTasks(storage);
-			typeOfScreen = "deadline";
-			break;
-		case "complete":
-			taskList = Search.obtainAllCompleteTasks(storage);
-			typeOfScreen = "complete";
-			break;
-		case "incomplete":
-			taskList = Search.obtainAllIncompleteTasks(storage);
-			typeOfScreen = "incomplete";
-			break;
-		//@@author:wenbin
-		case "search":
-		//
-		case "all":
-			taskList = Search.obtainAllTasks(storage);
-			typeOfScreen = "all";
-			break;
-		case "help":
-			typeOfScreen = "help";
-			break;
-		}
+		
+		taskList = Search.obtainSearchResults(inputForAction.get(1).toLowerCase(), storage);
+		typeOfScreen = "search";
+		
 		printOnScreenMsgList = DataDisplay.displayList(taskList);
 		history.setScreenList(taskList);
 		history.setCurrentScreen(typeOfScreen);
