@@ -215,8 +215,8 @@ public class Controller {
 	
 	public static OutputToUI refreshScreen() {
 		OutputToUI outputToUI;
-		//String typeOfScreen = history.getCurrentScreen();
-		String typeOfScreen = "all";
+		String typeOfScreen = history.getCurrentScreen();
+		//String typeOfScreen = "all";
 		ArrayList<String> displayInput = new ArrayList<String>();
 		displayInput.add("display");
 		displayInput.add(typeOfScreen);

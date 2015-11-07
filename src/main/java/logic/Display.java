@@ -75,6 +75,9 @@ public class Display implements Command {
 			typeOfScreen = "help";
 			break;
 		}
+		
+//		System.out.println("Inside display.execute() : ");
+		
 		printOnScreenMsgList = DataDisplay.displayList(taskList);
 		history.setScreenList(taskList);
 		history.setCurrentScreen(typeOfScreen);

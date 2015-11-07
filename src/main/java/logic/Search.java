@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import main.java.resources.DataDisplay;
 import main.java.resources.Task;
 import main.java.storage.Storage;
 
@@ -304,10 +305,18 @@ public class Search {
     //@@Author: Jiahuan
 	public static int obtainLargestRecurID() throws IOException {
 		Storage storage = Storage.getInstance();
+		/*ArrayList<Task> tempList = storage.getTaskList();
+		System.out.println("Inside search.largestRecurID(), before regenerateTaskList : ");
+		DataDisplay.displayList(tempList);*/
 		storage.regenerateTaskList();
+		/*tempList = storage.getTaskList();
+		System.out.println("Inside search.largestRecurID(), after regenerateTaskList : ");
+		DataDisplay.displayList(tempList);*/
 		int temp, largestRecurID = 0;
+	//	System.out.println("Inside Search.obtainLargestrecurID() : " + storage.getTaskList().size());
 		for (int i = 0; i < storage.getTaskList().size(); i++){
-			System.out.println("RecurID is" + storage.getTaskList().get(i).getRecurringID());
+			
+	//		System.out.println("RecurID is" + storage.getTaskList().get(i).getRecurringID());
 			if (storage.getTaskList().get(i).getRecurringID() > largestRecurID){
 				
 				temp = storage.getTaskList().get(i).getRecurringID();

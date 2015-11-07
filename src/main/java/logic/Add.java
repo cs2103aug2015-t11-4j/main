@@ -28,10 +28,11 @@ public class Add implements Command{
 								  //TODO: Storage returns success or not, a if loop to return feedback respectively
 		
 		outputToUI = Controller.refreshScreen();
-				
+		//DataDisplay.printOutputToUI(outputToUI);
 		outputToUI.setFeedbackMsg(DataDisplay.feedback("add",code));
 		history.pushCommandToUndoList(this);
 		history.clearRedoList();
+		DataDisplay.printOutputToUI(outputToUI);
 		return outputToUI;
 	}
 
