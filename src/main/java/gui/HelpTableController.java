@@ -1,9 +1,8 @@
+//@author: yuju 
 package main.java.gui;
 
 /**
  * This class handles the quick help table that displays basic features of the programme.
- * 
- * @author Yu Ju
  *
  */
 
@@ -13,7 +12,11 @@ public class HelpTableController {
     private MainApp mainApp;
 
     public HelpTableController() {
-        /*FXMLLoader loader = new FXMLLoader(getClass().getResource(OVERVIEW_LAYOUT_FXML));
+    	/* 
+	     * setting stub data for testing
+	     * @@author A0131300-unused as this section is for testing
+	     *
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(OVERVIEW_LAYOUT_FXML));
         loader.setController(this);
         loader.setRoot(this);
 
@@ -21,9 +24,9 @@ public class HelpTableController {
             loader.load();
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
         
-        /*ObservableList<TaskEvent> helpData = FXCollections.observableArrayList();
+        ObservableList<TaskEvent> helpData = FXCollections.observableArrayList();
         
         helpData.add(new TaskEvent("add", "create\na\nc", "Deadline\nadd (content) by date;time\nadd (content) by date\nadd (content) by time",
                 "1. Keyword \"by\" must be present\n2. If only time is specified, date will be automatically assumed as the daye the task is added.", 
@@ -42,9 +45,9 @@ public class HelpTableController {
     	flexiCol.setCellValueFactory(new PropertyValueFactory<TaskEvent, String>("startDate"));
     	formatCol.setCellValueFactory(new PropertyValueFactory<TaskEvent, String>("endDate"));
     	commentCol.setCellValueFactory(new PropertyValueFactory<TaskEvent, String>("startTime"));
-    	resultCol.setCellValueFactory(new PropertyValueFactory<TaskEvent, String>("endTime"));*/
+    	resultCol.setCellValueFactory(new PropertyValueFactory<TaskEvent, String>("endTime"));
     	
-    	//this.mainApp = mainApp;
+    	this.mainApp = mainApp;*/
     }
     
     public void setMainApp(MainApp mainApp) {

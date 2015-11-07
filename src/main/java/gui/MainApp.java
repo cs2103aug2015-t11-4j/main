@@ -1,3 +1,4 @@
+//@author: yuju 
 package main.java.gui;
 
 import java.io.IOException;
@@ -34,10 +35,6 @@ import main.java.logic.Command;
 import main.java.logic.Controller;
 import main.java.resources.ItemForUserScreen;
 import main.java.resources.OutputToUI;
-
-/**
- * @author Yu Ju
- */
 
 public class MainApp extends Application {
 	
@@ -333,6 +330,7 @@ public class MainApp extends Application {
     	return search;
     }
     
+    //@author: yuju 
     
     /*
 	 * Display today and tomorrow's tasks individually
@@ -521,6 +519,8 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
+
+    //@author: yuju     
     
     public void handleKeyPress(CommandBarController commandBarController,
             				   KeyCode key,
@@ -600,6 +600,7 @@ public class MainApp extends Application {
     				addSearch();
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
+    			//@author: yuju 
     			} else if (userInput.equals(DISPLAY_ALL_SCENE)) {
     				createCompleteList(itemList);
     				createIncompleteList(itemList);
@@ -644,9 +645,6 @@ public class MainApp extends Application {
     			commandBarController.setFeedback(feedbackMsg);
     		}
     }
-    		
-    	
-		//handleEnterPress(commandBarController, userInput);
     	
     	/* 
 	     * Determines user input
@@ -668,7 +666,7 @@ public class MainApp extends Application {
 			else if(type.equals(TYPE_FLOATING)) {
 				floating.add(description);
 			}
-			commandBarController.setFeedback(FEEDBACK_DELETED + description);  //des being task name
+			commandBarController.setFeedback(FEEDBACK_DELETED + description); 
     	}
     	
     	list.get(1).getTaskType();
@@ -688,16 +686,8 @@ public class MainApp extends Application {
     		handleEnterPress(commandBarController, list.get(0));
     		
     		listView.getItems().remove(item);  // Here I remove the item form my list.
-    		remove item from incomplete list when user is done with it and add it into complete list*/
+    		remove item from incomplete list when user is done with it and add it into complete list
     		
-//****************************************************************************************//
-//***********************below is all used for testing before*****************************//
-//****************************************************************************************//
-    		
-    		/* 
-    	     * Determines user input
-    	     * @@author A0131300-unused as this section is for testing the GUI separately
-    	     *
     		arr = userInput.split(" ", 3);
     		command = arr[0];
     	
@@ -854,6 +844,7 @@ public class MainApp extends Application {
      * 
      * @author Jiahuan
      * edit by Yu Ju
+     * 
      * @param itemList list of tasks from storage
      * @return list of tasks
      */
