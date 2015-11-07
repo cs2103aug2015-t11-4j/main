@@ -139,9 +139,7 @@ public class Storage {
      */
     private void wipeTaskList() {
         logger.log(Level.WARNING, "Wiping taskList!");
-        for(int i = 0; i<taskList.size(); i++) {
-            taskList.remove(i);
-        }
+        taskList.clear();
     }
     
     /* 
