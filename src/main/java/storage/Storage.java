@@ -47,17 +47,19 @@ public class Storage {
     /* 
 	 * Generates an alt4 file containing taskList
 	 */
-	private String filename = "Alt4.txt";	
-	
+    private String directory = "";
+    private String filename = directory + "Alt4.txt";
+		
 	/* 
      * Allows user to change the destination of the taskList and write actual
      * taskList location
      * 
      * TODO: To allow duplicates of the taskList? Rely on Alt4.txt for location storage?
      */
-	public int changeDirectory(String directory) {
+	public int changeDirectory(String setDirectory) {
 	    try {
-	        File file = new File(filename = directory + filename);
+	        directory = setDirectory;
+	        File file = new File(directory, filename);
 
 	        if(!file.exists()) {
 	            file.createNewFile(); 
@@ -151,7 +153,6 @@ public class Storage {
      * NOTE: External file saves the path of the user's directory of choice 
      * to the first line of the external file
      */
-    /*
     private boolean retrieveDirectory() {
         String[] getDirectory;
         
@@ -166,8 +167,7 @@ public class Storage {
         
         return false;
     }
-    */
-	
+    	
 	/* 
      * Adds one task to the taskList and writes to external file
      */
@@ -177,7 +177,7 @@ public class Storage {
 		
 		try {
 		    logger.log(Level.INFO, "Writing {0} to external file", task.getTaskDescription());
-			FileWriter fw = new FileWriter(filename, true);
+			FileWriter fw = new FileWriter(directory + "\\" + filename, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			
 			bw.write(task.getTaskType() + ";" + task.getTaskDescription() + ";" + task.getStartDate()
@@ -217,7 +217,7 @@ public class Storage {
             
             br.close();
             
-            FileWriter fw = new FileWriter(filename);
+            FileWriter fw = new FileWriter(directory + "\\" + filename);
             BufferedWriter bw = new BufferedWriter(fw);
             
             bw.write(input.replaceAll(task.getTaskType() + ";" + task.getTaskDescription() 
@@ -259,7 +259,7 @@ public class Storage {
 
                 br.close();
 
-                FileWriter fw = new FileWriter(filename);
+                FileWriter fw = new FileWriter(directory + "\\" + filename);
                 BufferedWriter bw = new BufferedWriter(fw);
 
                 bw.write(input.replaceAll(replaceLine, task.getTaskType() + ";" + task.getTaskDescription() 
@@ -306,7 +306,7 @@ public class Storage {
 
                 br.close();
 
-                FileWriter fw = new FileWriter(filename);
+                FileWriter fw = new FileWriter(directory + "\\" + filename);
                 BufferedWriter bw = new BufferedWriter(fw);
 
                 bw.write(input.replaceAll(replaceLine, task.getTaskType() + ";" + task.getTaskDescription() 
