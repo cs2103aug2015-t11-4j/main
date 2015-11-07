@@ -22,6 +22,7 @@ public class SearchKeyword implements Command {
 	@Override
 	public OutputToUI execute() {
 		OutputToUI outputToUI = new OutputToUI();
+		int code = 0;
 		ArrayList<String> printOnScreenMsgList = new ArrayList<String>();
 		ArrayList<Task> taskList = new ArrayList<Task>();
 		ArrayList<ItemForUserScreen> itemList = new ArrayList<ItemForUserScreen>();
@@ -34,11 +35,12 @@ public class SearchKeyword implements Command {
 		printOnScreenMsgList = DataDisplay.displayList(taskList);
 		history.setScreenList(taskList);
 		history.setCurrentScreen(typeOfScreen);
+		history.setSearchCommand(this);
 		for (int i = 0; i < taskList.size(); i++) {
 			itemList.add(new ItemForUserScreen(taskList.get(i).getIsCompleted(), taskList.get(i).getTaskType(),
 					printOnScreenMsgList.get(i)));
 		}
-		feedbackMsg = "Display successfully";
+		feedbackMsg = DataDisplay.feedback("Search", code);
 		outputToUI.setFeedbackMsg(feedbackMsg);
 		outputToUI.setItemList(itemList);
 		outputToUI.setTypeOfScreen(typeOfScreen);

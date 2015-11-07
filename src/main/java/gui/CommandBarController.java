@@ -1,4 +1,3 @@
-//@author: yuju 
 package main.java.gui;
 
 import java.io.IOException;
@@ -15,6 +14,7 @@ import javafx.scene.layout.BorderPane;
  * This class handles the TextField that the user inputs commands in and the Label
  * that shows feedback of action performed by the programme.
  *
+ * @@author yuju
  */
 
 public class CommandBarController extends BorderPane {

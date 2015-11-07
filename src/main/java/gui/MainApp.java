@@ -1,4 +1,6 @@
-//@author: yuju 
+/**
+ * @@author yuju 
+ */
 package main.java.gui;
 
 import java.io.IOException;
@@ -330,7 +332,9 @@ public class MainApp extends Application {
     	return search;
     }
     
-    //@author: yuju 
+    /**
+     * @@author yuju 
+     */
     
     /*
 	 * Display today and tomorrow's tasks individually
@@ -360,7 +364,7 @@ public class MainApp extends Application {
         	//page.setStyle("-fx-background-color: rgba(205, 197, 191, 0.5)");  //seashell3
         	//page.setStyle("-fx-background-color: rgba(000, 229, 238, 0.5)");  //turquoise2
         	//page.setStyle("-fx-background-color: rgba(150, 150, 150, 0.5)");  //grey59
-        	page.setStyle("-fx-background-color: rgba(204, 204, 204)");  //grey80
+        	//page.setStyle("-fx-background-color: rgba(204, 204, 204)");  //grey80
         	rootLayout2.setCenter(page);
         	
         	HelpTableController controller = loader2.getController();
@@ -520,7 +524,9 @@ public class MainApp extends Application {
         }
     }
 
-    //@author: yuju     
+    /**
+     * @@author yuju 
+     */     
     
     public void handleKeyPress(CommandBarController commandBarController,
             				   KeyCode key,
@@ -600,7 +606,9 @@ public class MainApp extends Application {
     				addSearch();
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
-    			//@author: yuju 
+    			/**
+    			 * @@author yuju 
+    			 */ 
     			} else if (userInput.equals(DISPLAY_ALL_SCENE)) {
     				createCompleteList(itemList);
     				createIncompleteList(itemList);

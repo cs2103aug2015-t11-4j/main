@@ -1,5 +1,6 @@
 package main.java.logic;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -93,7 +94,7 @@ public class Search {
      * PREREQUISITE: Storage.taskList must be sorted by date and time
      */
     //@@Author: A0124524N wenbin
-    public static ArrayList<Task> obtainTommorrowSummary(Storage storage) { 
+    public static ArrayList<Task> obtainTomorrowSummary(Storage storage) { 
         ArrayList<Task> tmrSummary = new ArrayList<Task>();
         ArrayList<Task> taskList = storage.getTaskList();
         
@@ -301,10 +302,11 @@ public class Search {
     }
     
     //@@Author: Jiahuan
-	public static int obtainLargestRecurID() {
+	public static int obtainLargestRecurID() throws IOException {
 		Storage storage = Storage.getInstance();
+		storage.regenerateTaskList();
 		int temp, largestRecurID = 0;
-		for (int i = 0; 1 < storage.getTaskList().size(); i++){
+		for (int i = 0; i < storage.getTaskList().size(); i++){
 			System.out.println("RecurID is" + storage.getTaskList().get(i).getRecurringID());
 			if (storage.getTaskList().get(i).getRecurringID() > largestRecurID){
 				
