@@ -7,7 +7,7 @@ import org.junit.Test;
 import main.java.resources.Task;
 
 /**
- * @author Yu Ju
+ * @@author yuju 
  */
 
 public class CreateTaskTest {

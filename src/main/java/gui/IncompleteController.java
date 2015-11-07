@@ -12,9 +12,8 @@ import javafx.scene.text.Text;
 /**
  * This class handles the ListView of incomplete tasks by adding the them into the list
  * that is to be displayed to the user.
- * 
- * @author Yu Ju
  *
+ * @@author yuju
  */
 
 public class IncompleteController {

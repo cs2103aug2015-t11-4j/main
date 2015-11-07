@@ -11,7 +11,7 @@ import javafx.scene.text.Text;
 
 /**
  * 
- * @author wenbin
+ * @@author wenbin
  *
  */
 

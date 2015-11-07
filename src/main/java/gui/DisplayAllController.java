@@ -12,9 +12,8 @@ import javafx.scene.text.Text;
 /**
  * This class handles the display all scene which shows ListViews of both complete and incomplete
  * tasks by adding the tasks into the respective lists that are to be displayed to the user.
- * 
- * @author Yu Ju
  *
+ * @@author yuju
  */
 
 public class DisplayAllController {

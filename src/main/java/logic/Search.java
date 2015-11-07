@@ -94,7 +94,7 @@ public class Search {
      * PREREQUISITE: Storage.taskList must be sorted by date and time
      */
     //@@Author: A0124524N wenbin
-    public static ArrayList<Task> obtainTommorrowSummary(Storage storage) { 
+    public static ArrayList<Task> obtainTomorrowSummary(Storage storage) { 
         ArrayList<Task> tmrSummary = new ArrayList<Task>();
         ArrayList<Task> taskList = storage.getTaskList();
         
