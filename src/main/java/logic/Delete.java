@@ -2,6 +2,7 @@
 package main.java.logic;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import main.java.resources.DataDisplay;
@@ -17,14 +18,22 @@ public class Delete implements Command{
 	private Storage storage;
 	private ArrayList<Task> screenList;
 	private Task task;
+	private ArrayList<Task> recurTaskList;
+	private String deletePara;
 	
-	public Delete(int itemNum, Storage storage){
+	public Delete(int itemNum, String deletePara, Storage storage){
 		//this.task = task;
 		this.itemNum = itemNum;
 		this.storage = storage;
+		this.deletePara = deletePara;
 		this.screenList = history.getScreenList();
 		Task task = Search.obtainTaskByItemNum(itemNum, screenList);
 		this.task = task;
+		if (deletePara.equals("all")){
+			recurTaskList = Search.obtainRecurTaskListByItemNum(itemNum, screenList);
+		}else{
+			recurTaskList = new ArrayList<Task>();
+		}
 	}
 	@Override
 	public OutputToUI execute() {
@@ -35,11 +44,24 @@ public class Delete implements Command{
 			outputToUI = Controller.refreshScreen();
 			outputToUI.setFeedbackMsg(DataDisplay.feedback(String.valueOf(itemNum),code));
 			return outputToUI;
+		} else if (!recurTaskList.isEmpty()){
+			code = -1;
+			
+			int size = recurTaskList.size();
+			for (int i = 0; i < size; i++){
+				Task recurTask = recurTaskList.get(i);
+				code = storage.deleteOneItem(recurTask);
+			}
+			outputToUI = Controller.refreshScreen();
+			outputToUI.setFeedbackMsg(DataDisplay.feedback("Delete recurring tasks",code));
+			history.pushCommandToUndoList(this);
+			history.clearRedoList();
+			return outputToUI;
 		}
 		
 		code = storage.deleteOneItem(task); 
 		outputToUI = Controller.refreshScreen();
-		outputToUI.setFeedbackMsg(DataDisplay.feedback("delete",code));
+		outputToUI.setFeedbackMsg(DataDisplay.feedback("Delete",code));
 		history.pushCommandToUndoList(this);
 		history.clearRedoList();
 		return outputToUI;
@@ -49,9 +71,29 @@ public class Delete implements Command{
 	public OutputToUI undo() {
 		int code;
 		OutputToUI outputToUI = new OutputToUI();
-
-		code = storage.addOneItem(task); //TODO: Storage shall make its methods all non-static
-								  //TODO: Storage returns success or not, a if loop to return feedback respectively
+		if (!recurTaskList.isEmpty()){
+			code = -1;
+			try {
+				history.setRecurID();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			int recurID = history.getNextRecurID();
+			int size = recurTaskList.size();
+			for (int i = 0; i < size; i++){
+				recurTaskList.get(i).setRecurringID(recurID);
+				Task recurTask = recurTaskList.get(i);
+				code = storage.addOneItem(recurTask);
+			}
+			outputToUI = Controller.refreshScreen();
+			outputToUI.setFeedbackMsg(DataDisplay.feedback("Delete recurring tasks",code));
+			history.pushCommandToUndoList(this);
+			history.clearRedoList();
+			return outputToUI;
+		}
+		
+		code = storage.addOneItem(task); 
 		outputToUI = Controller.refreshScreen();
 		outputToUI.setFeedbackMsg(DataDisplay.feedback("Undo",code));
 		return outputToUI;
