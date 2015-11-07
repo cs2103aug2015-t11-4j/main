@@ -105,7 +105,6 @@ public class FlexiCommands {
 			command = "tomorrow";
 			break;
 		case "all":
-		case "All":
 			command = "all";
 			break;
 		}
