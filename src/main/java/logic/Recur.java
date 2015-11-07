@@ -28,7 +28,7 @@ public class Recur implements Command{
 		int code = 0;
 		OutputToUI outputToUI = new OutputToUI();
 		for (int i = 0; i < recurList.size(); i++){
-			Task task = recurList.get(0);
+			Task task = recurList.get(i);
 			code = storage.addOneItem(task); 
 			//needs to handle if some task is added while others are not
 			/*if (code != 0){
