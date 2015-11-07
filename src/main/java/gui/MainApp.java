@@ -69,23 +69,28 @@ public class MainApp extends Application {
     private static final String EXIT_SCENE = "exit";
     private static final String SEARCH_SCENE = "search";
     
-    //private static final String FEEDBACK_TODAY_SUMMARY = "Today's Summary";
-    //private static final String FEEDBACK_TMR_SUMMARY = "Tomorrow's Summary";
-    //private static final String FEEDBACK_DISPLAY = "All Events";
-    //private static final String FEEDBACK_COMPLETE = "Completed Events";
-    //private static final String FEEDBACK_INCOMPLETE = "Incomplete Events";
-    //private static final String FEEDBACK_TODAY = "Today's Tasks";
-    //private static final String FEEDBACK_TOMORROW = "Tomorrow's Tasks";
-    //private static final String FEEDBACK_DEADLINE = "Deadline Tasks";
-    //private static final String FEEDBACK_EVENT = "Events";
-    //private static final String FEEDBACK_FLOATING = "Floating Tasks";
+    /*
+	 * testing GUI
+	 * stub feedback
+	 * @@author A0131300-unused because there is change of plans
+	 *
+    private static final String FEEDBACK_TODAY_SUMMARY = "Today's Summary";
+    private static final String FEEDBACK_TMR_SUMMARY = "Tomorrow's Summary";
+    private static final String FEEDBACK_DISPLAY = "All Events";
+    private static final String FEEDBACK_COMPLETE = "Completed Events";
+    private static final String FEEDBACK_INCOMPLETE = "Incomplete Events";
+    private static final String FEEDBACK_TODAY = "Today's Tasks";
+    private static final String FEEDBACK_TOMORROW = "Tomorrow's Tasks";
+    private static final String FEEDBACK_DEADLINE = "Deadline Tasks";
+    private static final String FEEDBACK_EVENT = "Events";
+    private static final String FEEDBACK_FLOATING = "Floating Tasks";
     
-    //private static final String FEEDBACK_INVALID_COMMAND = "Invalid command.";
-    //private static final String FEEDBACK_ADDED = "Successfully Added: ";
-    //private static final String FEEDBACK_DELETED = "Successfully Deleted: ";
-    //private static final String FEEDBACK_UPDATED = "Successfully Updated ";
+    private static final String FEEDBACK_INVALID_COMMAND = "Invalid command.";
+    private static final String FEEDBACK_ADDED = "Successfully Added: ";
+    private static final String FEEDBACK_DELETED = "Successfully Deleted: ";
+    private static final String FEEDBACK_UPDATED = "Successfully Updated ";
+    private static final String FEEDBACK_UNDONE = "Undone: ";*/
     private static final String FEEDBACK_EXIT = "Exiting Alt4";
-    //private static final String FEEDBACK_UNDONE = "Undone: ";
     
     private static final String TYPE_DEADLINE = "deadline";
     private static final String TYPE_EVENT = "event";
@@ -102,14 +107,18 @@ public class MainApp extends Application {
     //private ObservableList<String> today = FXCollections.observableArrayList();
     //private ObservableList<String> tomorrow = FXCollections.observableArrayList();
     
-    //private String[] arr;
-    //private String[] array;
-    //private String typeDisplay;  //types of display in command
-    //private String command;
-    //private String description;
-    //private String type;
-    //private String newDescription;
-    //private int listNum;
+    /*
+	 * testing
+	 * @@author A0131300-unused because there is change of plans
+	 *
+    private String[] arr;
+    private String[] array;
+    private String typeDisplay;  //types of display in command
+    private String command;
+    private String description;
+    private String type;
+    private String newDescription;
+    private int listNum;*/
     private PauseTransition delay;
 	
 	private Stage primaryStage;
@@ -131,18 +140,13 @@ public class MainApp extends Application {
         initPrimaryStage(primaryStage);
         
         OutputToUI outputToUI = new OutputToUI();
-        /*ItemForUserScreen item = new ItemForUserScreen(false, "event", "family outing");
-    	ArrayList<ItemForUserScreen> list = new ArrayList<ItemForUserScreen> ();
-    	list.add(item);
-    	outputToUI.setTypeOfListView("event");
-    	outputToUI.setItemList(list);*/
-    	
-    	//itemList = outputToUI.getItemList();
+        
         try {
 			outputToUI = Controller.initializeProgram();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+        
         itemList = outputToUI.getItemList();
 
         // Add components to RootLayout
@@ -237,8 +241,6 @@ public class MainApp extends Application {
             }
         });
     }
-    
-    //private static ArrayList<ItemForUserScreen> itemList = Controller.getItemList();//JH
 
     /**
      * Constructor
@@ -248,10 +250,7 @@ public class MainApp extends Application {
     	 * testing GUI
     	 * stub data
     	 * @@author A0131300-unused because these are used to test GUI
-    	 * 
-        //event.add(new LocalEvent("Hans"));
-        //event.add(new LocalEvent("Ruth"));
-    	
+    	 *    	
     	event.add("school activites");
         event.add("community service");
         event.add("cca");
@@ -289,8 +288,8 @@ public class MainApp extends Application {
         Text t3 = new Text("Study for mid-terms");
         t3.setFill(Color.GREEN);
         
-        //complete.add("hello");
-        //complete.add("world");
+        complete.add("hello");
+        complete.add("world");
         complete.add(text);
         complete.add(t2);
         complete.add(t3);
@@ -298,8 +297,8 @@ public class MainApp extends Application {
         Text text2 = new Text("Adde All V0.2 Features");
         text2.setFill(Color.RED);
         
-        //incomplete.add("not yet");
-        //incomplete.add("undone");
+        incomplete.add("not yet");
+        incomplete.add("undone");
         incomplete.add(text2);
         
         today.add("Change GUI");
@@ -307,37 +306,30 @@ public class MainApp extends Application {
         tomorrow.add("Edit Developer Guide");*/
     	
     }
-    
-    //private static ArrayList<ItemForUserScreen> itemList = Controller.getItemList();//JH
 
     public ObservableList<Text> getEvent() {
-    	//event = createEventList(itemList); //JH
     	return event;
     }
     
     public ObservableList<Text> getDeadline() {
-    	//deadline = createDeadlineList(itemList);
     	return deadline;
     }
     
     public ObservableList<Text> getFloating() {
-    	//floating = createFloatingList(itemList); //JH
+
     	return floating;
     }
     
     public ObservableList<Text> getComplete() {
-    	//complete = createCompleteList(itemList);
     	return complete;
     }
     
     public ObservableList<Text> getIncomplete() {
-    	//incomplete = createIncompleteList(itemList);
     	return incomplete;
     }
     
     //@@author: wenbin
     public ObservableList<Text> getSearch() {
-    	//incomplete = createIncompleteList(itemList);
     	return search;
     }
     
@@ -372,7 +364,6 @@ public class MainApp extends Application {
         	//page.setStyle("-fx-background-color: rgba(150, 150, 150, 0.5)");  //grey59
         	page.setStyle("-fx-background-color: rgba(204, 204, 204)");  //grey80
         	rootLayout2.setCenter(page);
-        	//rootLayout.setTop(page);
         	
         	HelpTableController controller = loader2.getController();
             controller.setMainApp(this);
@@ -547,13 +538,7 @@ public class MainApp extends Application {
     		outputToUI = command.execute();
     		commandBarController.clear();
 
-    		/*ItemForUserScreen item = new ItemForUserScreen(false, "event", "family outing");
-    		ArrayList<ItemForUserScreen> list = new ArrayList<ItemForUserScreen> ();
-    		list.add(item);
-    		outputToUI.setTypeOfScreen("event");
-    		outputToUI.setItemList(list);*/
-
-    		String userInput = outputToUI.getTypeOfScreen();  //null means no change of screen
+    		String userInput = outputToUI.getTypeOfScreen();
     		itemList = outputToUI.getItemList();
     		String feedbackMsg = outputToUI.getFeedbackMsg();
     		String taskToUpdate = outputToUI.getInputBoxMsg();
@@ -613,7 +598,6 @@ public class MainApp extends Application {
     			} else if (userInput.equals(SEARCH_SCENE)) {
     				createSearchList(itemList);
     				addSearch();
-    				//commandBarController.setFeedback(FEEDBACK_INCOMPLETE);
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			} else if (userInput.equals(DISPLAY_ALL_SCENE)) {
@@ -674,7 +658,7 @@ public class MainApp extends Application {
     			userInput.substring(0, 3).equals("del") ||
     			userInput.substring(0, 1).equals("d")) {
     		listNum = Integer.parseInt(userInput.substring(7));
-			//Logic.takeAction(userInput);
+			Logic.takeAction(userInput);
 			if(type.equals(TYPE_DEADLINE)) {
 				deadline.remove(listNum);
 			}
@@ -685,48 +669,26 @@ public class MainApp extends Application {
 				floating.add(description);
 			}
 			commandBarController.setFeedback(FEEDBACK_DELETED + description);  //des being task name
-    	}*/
+    	}
     	
-    	//list.get(1).getTaskType();
+    	list.get(1).getTaskType();
     	
-    	//else {
+    	else {
     		
-    		//Command command = createCommand(userInput);
-    		//command.execute();
+    		Command command = createCommand(userInput);
+    		command.execute();
     		
-    		//update (num)
-    		//commandBarController.setText(string event returned by logic);
+    		update (num)
+    		commandBarController.setText(string event returned by logic);
     		
-    		/* 1:
-    		 * handleEnterPress(commandBarController, "(get first param)") 
-    		 * to update and show list immediately after action
-    		 * 
-    		 * 2:
-    		 * type = list.get(1);
-    		 * description = get the rest of the string?
-    		 * 
-    		 * 3:
-    		 * commandBarController.setFeedback(feedback msg);
-    		 * 
-    		 * 4:
-    		 * commandBarController.setText("event to be updated");
-    		 */
-    		
-    		/*4 param:
-    		 * String type of ListView (complete, incomplete, all, floating...)
-    		 * ArrayList<ThreeString> obj
-    		 * Feedback msg
-    		 * String for input box (for update)
-    		 */
-    		
-    		/*ArrayList<String> list = new ArrayList<String>();
+    		ArrayList<String> list = new ArrayList<String>();
     		Command command = createCommand(userInput);
     		list = command.execute();
     		
-    		handleEnterPress(commandBarController, list.get(0));*/
+    		handleEnterPress(commandBarController, list.get(0));
     		
-    		//listView.getItems().remove(item);  // Here I remove the item form my list.
-    		//remove item from incomplete list when user is done with it and add it into complete list
+    		listView.getItems().remove(item);  // Here I remove the item form my list.
+    		remove item from incomplete list when user is done with it and add it into complete list*/
     		
 //****************************************************************************************//
 //***********************below is all used for testing before*****************************//
@@ -944,19 +906,6 @@ public class MainApp extends Application {
     	return incomplete;
     }
     
-    //@@author:wenbin
-    private ObservableList<Text> createSearchList(ArrayList<ItemForUserScreen> itemList) {
-    	search.clear();
-    	for (int i = 0; i < itemList.size(); i++) {
-    		if (!(itemList.get(i).getIfComplete())) {
-				Text text = new Text(itemList.get(i).getPrintOnScreenMsg());
-				text.setFont(Font.font ("System", 20));
-				search.add(text);
-			}
-		}
-    	return search;
-    }
-    
     private ObservableList<Text> createCompleteList(ArrayList<ItemForUserScreen> itemList) {
     	complete.clear();
     	for (int i = 0; i < itemList.size(); i++) {
@@ -968,5 +917,18 @@ public class MainApp extends Application {
 			}
 		}
     	return complete;
+    }    
+    
+    //@@author:wenbin
+    private ObservableList<Text> createSearchList(ArrayList<ItemForUserScreen> itemList) {
+    	search.clear();
+    	for (int i = 0; i < itemList.size(); i++) {
+    		if (!(itemList.get(i).getIfComplete())) {
+				Text text = new Text(itemList.get(i).getPrintOnScreenMsg());
+				text.setFont(Font.font ("System", 20));
+				search.add(text);
+			}
+		}
+    	return search;
     }
 }
