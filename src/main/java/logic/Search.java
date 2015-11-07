@@ -285,6 +285,22 @@ public class Search {
 		}
     	return itemNum;
     }
+    
+    //@@author: wenbin
+    public static ArrayList<Task> obtainRecurTaskListByItemNum(int itemNumber, ArrayList<Task> list) {
+    	Task target = list.get(itemNumber-1);
+    	int recurGroupID = target.getRecurringID();
+    	Storage storage = Storage.getInstance();
+    	ArrayList<Task> recurTaskGroup = new ArrayList<Task>();
+    	
+    	for(int i=0; i<storage.getTaskList().size(); i++) {
+    		if(storage.getTaskList().get(i).getRecurringID() == recurGroupID) {
+    			recurTaskGroup.add(storage.getTaskList().get(i));
+    		}
+    	}
+    	return recurTaskGroup;
+    }
+    
     //@@Author: Jiahuan
 	public static int obtainLargestRecurID() {
 		Storage storage = Storage.getInstance();

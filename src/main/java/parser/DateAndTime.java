@@ -5,6 +5,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import main.java.resources.Task;
 public class DateAndTime {
 	
 	private static final String REGEX_WHITESPACE = " ";
@@ -477,6 +479,37 @@ public class DateAndTime {
 			return false;
 		else 
 			return (Integer.parseInt(timeA) <= Integer.parseInt(timeB));
+	}
+	//for logic updating checking
+	public final static boolean isValidUpdateET(Task event, String newET) {
+		//if same date; ST must be earlier than or equal to newET
+		if(event.getEndDate().equals(event.getStartDate())) {
+			if(compareTimes(event.getStartTime(), newET)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		//if different dates(ED is later than SD), ET can be any time
+		else 
+			return true;
+	}
+	
+	//for logic updating checking
+	public final static boolean isValidUpdateST(Task event, String newST) {
+		//if same date; newST must be earlier than or equal to ET
+		if(event.getEndDate().equals(event.getStartDate())) {
+			if(compareTimes(newST, event.getEndTime())) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		//if different dates(ED is later than SD), ET can be any time
+		else 
+			return true;
 	}
 	
 	private static boolean isValid12Format(String time) {

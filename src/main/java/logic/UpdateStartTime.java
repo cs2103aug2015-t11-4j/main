@@ -18,19 +18,32 @@ public class UpdateStartTime implements Command{
 	private Task newTask;
 	private ArrayList<Task> screenList;
 	private History history = History.getInstance();
-	
+	private ArrayList<Task> oldRecurTaskGroup = new ArrayList<Task>();
+	private ArrayList<Task> newRecurTaskGroup = new ArrayList<Task>();
 	
 	public UpdateStartTime(int itemNum, String newStartTime){
 		this.newStartTime = newStartTime;
 		screenList = history.getScreenList();
 		this.oldTask = Search.obtainTaskByItemNum(itemNum, screenList);
-		if (oldTask.getStartTime().equals("-")||DateAndTime.reformatTime(newStartTime).equals("invalid time format")){
+		if (oldTask.getStartTime().equals("-")||DateAndTime.reformatTime(newStartTime).equals("invalid time format")||!DateAndTime.isValidUpdateST(oldTask, newStartTime)){
 			newTask = new Task();
-		} else {
-		newTask = new Task (oldTask.getTaskType(), oldTask.getTaskDescription(), oldTask.getStartDate(), oldTask.getEndDate(),
-				oldTask.getStartTime(), oldTask.getEndTime(), oldTask.getIsCompleted(),
-				oldTask.getIsDateTimeValid(), oldTask.getRecurringID());
-		newTask.setStartTime(DateAndTime.reformatTime(newStartTime));
+		} else if(oldTask.getRecurringID() == 0) {
+			newTask = new Task (oldTask.getTaskType(), oldTask.getTaskDescription(), oldTask.getStartDate(), oldTask.getEndDate(),
+					oldTask.getStartTime(), oldTask.getEndTime(), oldTask.getIsCompleted(),
+					oldTask.getIsDateTimeValid(), oldTask.getRecurringID());
+			newTask.setStartTime(DateAndTime.reformatTime(newStartTime));
+		}
+		//@@author:wenbin
+		else {
+			this.oldRecurTaskGroup = Search.obtainRecurTaskListByItemNum(itemNum, screenList);
+			for(int i=0; i<oldRecurTaskGroup.size(); i++) {
+				this.oldTask = oldRecurTaskGroup.get(i);
+				newTask = new Task (oldTask.getTaskType(), oldTask.getTaskDescription(), oldTask.getStartDate(), oldTask.getEndDate(),
+						oldTask.getStartTime(), oldTask.getEndTime(), oldTask.getIsCompleted(),
+						oldTask.getIsDateTimeValid(), oldTask.getRecurringID());
+				newTask.setStartTime(DateAndTime.reformatTime(newStartTime));
+				this.newRecurTaskGroup.add(newTask);
+			}
 		}
 	}
 	
@@ -52,9 +65,19 @@ public class UpdateStartTime implements Command{
 			outputToUI.setFeedbackMsg(feedbackMsg);
 			return outputToUI;
 		}
-		storage.deleteOneItem(oldTask);
-		System.out.println("Ouside empty");
-		storage.addOneItem(newTask);
+		if(this.oldRecurTaskGroup.isEmpty()) {
+			storage.deleteOneItem(oldTask);
+			System.out.println("Ouside empty");
+			storage.addOneItem(newTask);
+		}
+		//@@author:wenbin
+		else {
+			for(int i=0; i<this.newRecurTaskGroup.size(); i++) {
+				storage.deleteOneItem(oldRecurTaskGroup.get(i));
+				System.out.println("Outside empty");
+				storage.addOneItem(newRecurTaskGroup.get(i));
+			}
+		}
 		OutputToUI outputToUI = Controller.refreshScreen();
 		code = 0;
 		feedbackMsg = DataDisplay.feedback("Update", code);
