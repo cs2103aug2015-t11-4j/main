@@ -35,7 +35,7 @@ public class Display implements Command {
 			typeOfScreen = "today";
 			break;
 		case "tomorrow":
-			taskList = Search.obtainTommorrowSummary(storage);
+			taskList = Search.obtainTomorrowSummary(storage);
 			typeOfScreen = "tomorrow";
 			break;
 		case "floating":
