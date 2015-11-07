@@ -35,7 +35,7 @@ public class Complete implements Command{
 		String feedbackMsg = DataDisplay.feedback("Complete", code);
 		outputToUI = Controller.refreshScreen();
 		outputToUI.setFeedbackMsg(feedbackMsg);
-		
+		history.pushCommandToUndoList(this);
 		return outputToUI;
 	}
 
@@ -46,6 +46,7 @@ public class Complete implements Command{
 		String feedbackMsg = DataDisplay.feedback("Undo", code);
 		outputToUI = Controller.refreshScreen();
 		outputToUI.setFeedbackMsg(feedbackMsg);
+		history.clearRedoList();
 		return outputToUI;
 	}
 
@@ -53,6 +54,7 @@ public class Complete implements Command{
 	@Override
 	public OutputToUI redo() {
 		OutputToUI outputToUI = this.execute();
+		
 		return outputToUI;
 	}
 	

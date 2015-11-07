@@ -269,6 +269,9 @@ public class Search {
     }
 
     public static Task obtainTaskByItemNum(int itemNumber, ArrayList<Task> list) {
+    	if (list.size()<itemNumber){
+    		return new Task();
+    	}
         return list.get(itemNumber-1);
     }
     

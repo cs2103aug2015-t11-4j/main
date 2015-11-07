@@ -40,7 +40,8 @@ public class Recur implements Command{
 		outputToUI = Controller.refreshScreen();
 				
 		outputToUI.setFeedbackMsg(DataDisplay.feedback("Recurring",code));
-		
+		history.pushCommandToUndoList(this);
+		history.clearRedoList();
 		return outputToUI;
 
 	}

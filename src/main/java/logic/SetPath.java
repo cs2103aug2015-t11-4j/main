@@ -17,8 +17,9 @@ public class SetPath implements Command{
 	public OutputToUI execute() {
 		storage.changeDirectory(newPath);
 		OutputToUI outputToUI = Controller.refreshScreen();
-		String feedbackMsg = DataDisplay.feedback("Set new Directory", 0);
+		String feedbackMsg = DataDisplay.feedback("Set new directory", 0);
 		outputToUI.setFeedbackMsg(feedbackMsg);
+		history.pushCommandToUndoList(this);
 		return outputToUI;
 	}
 

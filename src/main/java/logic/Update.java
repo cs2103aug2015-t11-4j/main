@@ -26,7 +26,13 @@ public class Update implements Command{
 	@Override
 	public OutputToUI execute() {
 		OutputToUI outputToUI = new OutputToUI();
-		
+		int code;
+		if (task.equals(new Task())){
+			code = 10; 
+			outputToUI = Controller.refreshScreen();
+			outputToUI.setFeedbackMsg(DataDisplay.feedback(String.valueOf(itemNum),code));
+			return outputToUI;
+		}
 		storage.deleteOneItem(task);
 		//TODO: Display this task on to the screen
 		String inputBoxMsg = DataDisplay.displayTaskNeedForUpdate(task);
@@ -34,6 +40,8 @@ public class Update implements Command{
 		outputToUI = Controller.refreshScreen();
 		outputToUI.setInputBoxMsg(inputBoxMsg);
 		outputToUI.setFeedbackMsg(feedbackMsg);
+		history.pushCommandToUndoList(this);
+		history.clearRedoList();
 		return outputToUI;
 	}
 

@@ -12,7 +12,7 @@ public class UpdateName implements Command{
 
 	private Storage storage = Storage.getInstance();
 	private String newName;
-	//private int itemNum;
+	private int itemNum;
 	private Task oldTask;
 	private Task newTask;
 	private ArrayList<Task> screenList;
@@ -22,6 +22,7 @@ public class UpdateName implements Command{
 	
 	public UpdateName(int itemNum, String newName ){
 		this.newName = newName;
+		this.itemNum = itemNum;
 		screenList = history.getScreenList();
 		this.oldTask = Search.obtainTaskByItemNum(itemNum, screenList);
 		if(oldTask.getRecurringID() == 0) {
@@ -44,11 +45,18 @@ public class UpdateName implements Command{
 		}
 	}
 	
+	//@@Author: Jiahuan
 	@Override
 	public OutputToUI execute() {
 		int code;
-		
+		OutputToUI outputToUI= new OutputToUI();
 		String feedbackMsg;
+		if (oldTask.equals(new Task())){
+			code = 10; 
+			outputToUI = Controller.refreshScreen();
+			outputToUI.setFeedbackMsg(DataDisplay.feedback(String.valueOf(itemNum),code));
+			return outputToUI;
+		}
 		//If empty, return feedback msg saying task description cannot be empty
 		if (newName.isEmpty()){
 			//System.out.println("Inside empty");
@@ -59,36 +67,47 @@ public class UpdateName implements Command{
 		} 
 		if(this.oldRecurTaskGroup.isEmpty()) {
 			storage.deleteOneItem(oldTask);
-			System.out.println("Ouside empty");
+			//System.out.println("Ouside empty");
 			storage.addOneItem(newTask);
 		}
 		//@@author:wenbin
 		else {
 			for(int i=0; i<this.newRecurTaskGroup.size(); i++) {
 				storage.deleteOneItem(oldRecurTaskGroup.get(i));
-				System.out.println("Outside empty");
+				//System.out.println("Outside empty");
 				storage.addOneItem(newRecurTaskGroup.get(i));
+			}
+		}
+		outputToUI = Controller.refreshScreen();
+		code = 0;
+		feedbackMsg = DataDisplay.feedback("Update", code);
+		outputToUI.setFeedbackMsg(feedbackMsg);
+		history.pushCommandToUndoList(this);
+		history.clearRedoList();
+		return outputToUI;
+	}
+	
+	//@@Author: Jiahuan
+	@Override
+	public OutputToUI undo() {
+		int code;
+		
+		String feedbackMsg;
+		if(this.oldRecurTaskGroup.isEmpty()) {
+			storage.deleteOneItem(newTask);
+			storage.addOneItem(oldTask);
+		} else  {
+			for(int i=0; i<this.newRecurTaskGroup.size(); i++) {
+				storage.deleteOneItem(newRecurTaskGroup.get(i));
+				//System.out.println("Outside empty");
+				storage.addOneItem(oldRecurTaskGroup.get(i));
 			}
 		}
 		OutputToUI outputToUI = Controller.refreshScreen();
 		code = 0;
 		feedbackMsg = DataDisplay.feedback("Update", code);
 		outputToUI.setFeedbackMsg(feedbackMsg);
-
-		return outputToUI;
-	}
-
-	@Override
-	public OutputToUI undo() {
-		int code;
 		
-		String feedbackMsg;
-		storage.deleteOneItem(newTask);
-		storage.addOneItem(oldTask);
-		OutputToUI outputToUI = Controller.refreshScreen();
-		code = 0;
-		feedbackMsg = DataDisplay.feedback("Update", code);
-		outputToUI.setFeedbackMsg(feedbackMsg);
 		return outputToUI;
 	}
 

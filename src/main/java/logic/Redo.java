@@ -11,7 +11,8 @@ public class Redo implements Command{
 	
 	@Override
 	public OutputToUI execute() {
-		if (history.getUndoCommandList().isEmpty()){
+		int code = 0;
+		if (history.getRedoCommandList().isEmpty()){
 			OutputToUI outputToUI = Controller.refreshScreen();
 			String feedbackMsg = DataDisplay.feedback("Redo", 9);
 			outputToUI.setFeedbackMsg(feedbackMsg);
@@ -19,6 +20,7 @@ public class Redo implements Command{
 		}
 		Command command = history.popCommandToRedoList();
 		OutputToUI outputToUI = command.redo();
+		outputToUI.setFeedbackMsg(DataDisplay.feedback("Redo", code));
 		history.pushCommandToUndoList(command);
 		return outputToUI;
 	}

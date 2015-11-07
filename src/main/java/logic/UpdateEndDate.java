@@ -12,7 +12,7 @@ import main.java.storage.Storage;
 public class UpdateEndDate implements Command{
 	private Storage storage = Storage.getInstance();
 	private String newEndDate;//TODO change each copy
-	//private int itemNum;
+	private int itemNum;
 	private Task oldTask;
 	private Task newTask;
 	private ArrayList<Task> screenList;
@@ -21,6 +21,7 @@ public class UpdateEndDate implements Command{
 	
 	public UpdateEndDate(int itemNum, String newEndDate){
 		this.newEndDate = newEndDate;
+		this.itemNum = itemNum;
 		screenList = history.getScreenList();
 		this.oldTask = Search.obtainTaskByItemNum(itemNum, screenList);
 		if (oldTask.getEndDate().equals("-")||DateAndTime.reformatDate(newEndDate).equals("invalid date format")){
@@ -36,8 +37,14 @@ public class UpdateEndDate implements Command{
 	@Override
 	public OutputToUI execute() {
 		int code;
-		
+		OutputToUI outputToUI = new OutputToUI();
 		String feedbackMsg;
+		if (oldTask.equals(new Task())){
+			code = 10; 
+			outputToUI = Controller.refreshScreen();
+			outputToUI.setFeedbackMsg(DataDisplay.feedback(String.valueOf(itemNum),code));
+			return outputToUI;
+		}
 		//If empty, return feedback msg saying task description cannot be empty
 		if (newEndDate.isEmpty()){
 			//System.out.println("Inside empty");
@@ -55,11 +62,12 @@ public class UpdateEndDate implements Command{
 		storage.deleteOneItem(oldTask);
 		System.out.println("Ouside empty");
 		storage.addOneItem(newTask);
-		OutputToUI outputToUI = Controller.refreshScreen();
+		outputToUI = Controller.refreshScreen();
 		code = 0;
 		feedbackMsg = DataDisplay.feedback("Update", code);
 		outputToUI.setFeedbackMsg(feedbackMsg);
-
+		history.pushCommandToUndoList(this);
+		history.clearRedoList();
 		return outputToUI;
 	}
 

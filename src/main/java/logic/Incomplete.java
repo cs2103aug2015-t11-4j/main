@@ -13,12 +13,14 @@ public class Incomplete implements Command{
 	private OutputToUI outputToUI = new OutputToUI();
 	private Storage storage = Storage.getInstance();
 	private Task task;
+	private int itemNum;
 	
 	public Incomplete(int itemNum, Storage storage){
-		//this.itemNum = itemNum;
+		this.itemNum = itemNum;
 		this.storage = storage;
 		Task task = Search.obtainTaskByItemNum(itemNum, history.getScreenList());
 		this.task = task;
+		
 	}
 	
 	@Override
@@ -35,9 +37,17 @@ public class Incomplete implements Command{
 				storage.getTaskList().get(i).setCompleted(ifComplete);
 			}
 		}*/
+		if (task.equals(new Task())){
+			code = 10; 
+			outputToUI = Controller.refreshScreen();
+			outputToUI.setFeedbackMsg(DataDisplay.feedback(String.valueOf(itemNum),code));
+			return outputToUI;
+		}
 		String feedbackMsg = DataDisplay.feedback("Incomplete", code);
 		outputToUI = Controller.refreshScreen();
 		outputToUI.setFeedbackMsg(feedbackMsg);
+		history.pushCommandToUndoList(this);
+		history.clearRedoList();
 		return outputToUI;
 	}
 

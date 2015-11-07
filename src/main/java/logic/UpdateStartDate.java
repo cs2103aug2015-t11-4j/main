@@ -13,7 +13,7 @@ public class UpdateStartDate implements Command{
 
 	private Storage storage = Storage.getInstance();
 	private String newStartDate;//TODO change each copy
-	//private int itemNum;
+	private int itemNum;
 	private Task oldTask;
 	private Task newTask;
 	private ArrayList<Task> screenList;
@@ -22,6 +22,7 @@ public class UpdateStartDate implements Command{
 	
 	public UpdateStartDate(int itemNum, String newStartDate){
 		this.newStartDate = newStartDate;
+		this.itemNum = itemNum;
 		screenList = history.getScreenList();
 		this.oldTask = Search.obtainTaskByItemNum(itemNum, screenList);
 		if (oldTask.getStartDate().equals("-")||DateAndTime.reformatDate(newStartDate).equals("invalid date format")){
@@ -37,8 +38,14 @@ public class UpdateStartDate implements Command{
 	@Override
 	public OutputToUI execute() {
 		int code;
-		
+		OutputToUI outputToUI = new OutputToUI();
 		String feedbackMsg;
+		if (oldTask.equals(new Task())){
+			code = 10; 
+			outputToUI = Controller.refreshScreen();
+			outputToUI.setFeedbackMsg(DataDisplay.feedback(String.valueOf(itemNum),code));
+			return outputToUI;
+		}
 		//If empty, return feedback msg saying task description cannot be empty
 		if (newStartDate.isEmpty()){
 			//System.out.println("Inside empty");
@@ -56,11 +63,12 @@ public class UpdateStartDate implements Command{
 		storage.deleteOneItem(oldTask);
 		System.out.println("Ouside empty");
 		storage.addOneItem(newTask);
-		OutputToUI outputToUI = Controller.refreshScreen();
+		outputToUI = Controller.refreshScreen();
 		code = 0;
 		feedbackMsg = DataDisplay.feedback("Update", code);
 		outputToUI.setFeedbackMsg(feedbackMsg);
-
+		history.pushCommandToUndoList(this);
+		history.clearRedoList();
 		return outputToUI;
 	}
 

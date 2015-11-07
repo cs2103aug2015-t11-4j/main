@@ -12,7 +12,7 @@ import main.java.storage.Storage;
 public class UpdateEndTime implements Command{
 	private Storage storage = Storage.getInstance();
 	private String newEndTime;//TODO change each copy
-	//private int itemNum;
+	private int itemNum;
 	private Task oldTask;
 	private Task newTask;
 	private ArrayList<Task> screenList;
@@ -23,6 +23,7 @@ public class UpdateEndTime implements Command{
 	
 	public UpdateEndTime(int itemNum, String newEndTime){
 		this.newEndTime = newEndTime;
+		this.itemNum = itemNum;
 		screenList = history.getScreenList();
 		this.oldTask = Search.obtainTaskByItemNum(itemNum, screenList);
 		if (oldTask.getEndTime().equals("-")||DateAndTime.reformatTime(newEndTime).equals("invalid time format")||!DateAndTime.isValidUpdateET(oldTask, newEndTime)){
@@ -33,6 +34,7 @@ public class UpdateEndTime implements Command{
 					oldTask.getStartTime(), oldTask.getEndTime(), oldTask.getIsCompleted(),
 					oldTask.getIsDateTimeValid(), oldTask.getRecurringID());
 			newTask.setEndTime(DateAndTime.reformatTime(newEndTime));
+			history.pushCommandToUndoList(this);
 		}
 		//@@author:wenbin
 		else {
@@ -45,14 +47,21 @@ public class UpdateEndTime implements Command{
 				newTask.setEndTime(DateAndTime.reformatTime(newEndTime));
 				this.newRecurTaskGroup.add(newTask);
 			}
+			
 		}
 	}
-	
+	//@@Author: Jiahuan
 	@Override
 	public OutputToUI execute() {
 		int code;
-		
+		OutputToUI outputToUI = new OutputToUI();
 		String feedbackMsg;
+		if (oldTask.equals(new Task())){
+			code = 10; 
+			outputToUI = Controller.refreshScreen();
+			outputToUI.setFeedbackMsg(DataDisplay.feedback(String.valueOf(itemNum),code));
+			return outputToUI;
+		}
 		//If empty, return feedback msg saying task description cannot be empty
 		if (newEndTime.isEmpty()){
 			//System.out.println("Inside empty");
@@ -79,11 +88,13 @@ public class UpdateEndTime implements Command{
 				storage.addOneItem(newRecurTaskGroup.get(i));
 			}
 		}
-		OutputToUI outputToUI = Controller.refreshScreen();
+		//@@Author: Jiahuan
+		outputToUI = Controller.refreshScreen();
 		code = 0;
 		feedbackMsg = DataDisplay.feedback("Update", code);
 		outputToUI.setFeedbackMsg(feedbackMsg);
-
+		history.pushCommandToUndoList(this);
+		history.clearRedoList();
 		return outputToUI;
 	}
 

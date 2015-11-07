@@ -81,7 +81,12 @@ public class History {
     public void pushCommandToRedoList(Command command){
     	redoCommandList.push(command);
     }
-    
+
+	public void clearRedoList() {
+		redoCommandList.clear();
+		
+	}
+	
     public void setRecurID(){
     	nextRecurID = Search.obtainLargestRecurID()+1;
     }
@@ -89,4 +94,5 @@ public class History {
     public void updateRecurID(){
     	nextRecurID++;
     }
+
 }

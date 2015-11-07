@@ -44,17 +44,18 @@ public class Controller {
 			task = Parser.createTaskForAdd(inputForAction);
 			command = new Add(task, storage);
 			//history.getUndoCommandList().push(command);
-			history.pushCommandToUndoList(command);
+			//history.pushCommandToUndoList(command);
 			break;
 		case "recurring":
 			ArrayList<Task> recurList = Parser.createRecurringTasks(inputForAction);
 			command = new Recur(recurList);
+			//history.pushCommandToUndoList(command);
 			break;
 		case "update":
 			itemNum = Integer.parseInt(inputForAction.get(1));
 			command = new Update(itemNum, storage);
 			//history.getUndoCommandList().push(command);
-			history.pushCommandToUndoList(command);
+			//history.pushCommandToUndoList(command);
 			break;
 		case "-n":
 			inputForUpdate = Parser.retrieveInputForUpdate(inputForAction.get(1));
@@ -62,41 +63,41 @@ public class Controller {
 			//System.out.printf(inputForUpdate.get(0)+"**"+ inputForUpdate.get(1));
 			contentForUpdate = inputForUpdate.get(1);
 			command = new UpdateName(itemNum, contentForUpdate);
-			history.pushCommandToUndoList(command);
+			//history.pushCommandToUndoList(command);
 			break;
 		case "-st":
 			inputForUpdate = Parser.retrieveInputForUpdate(inputForAction.get(1));
 			itemNum = Integer.parseInt(inputForUpdate.get(0));
 			contentForUpdate = inputForUpdate.get(1);
 			command = new UpdateStartTime(itemNum, contentForUpdate);
-			history.pushCommandToUndoList(command);
+			//history.pushCommandToUndoList(command);
 			break;
 			case "-sd":
 			inputForUpdate = Parser.retrieveInputForUpdate(inputForAction.get(1));
 			itemNum = Integer.parseInt(inputForUpdate.get(0));
 			contentForUpdate = inputForUpdate.get(1);
 			command = new UpdateStartDate(itemNum, contentForUpdate);
-			history.pushCommandToUndoList(command);
+			//history.pushCommandToUndoList(command);
 			break;
 		case "-et":
 			inputForUpdate = Parser.retrieveInputForUpdate(inputForAction.get(1));
 			itemNum = Integer.parseInt(inputForUpdate.get(0));
 			contentForUpdate = inputForUpdate.get(1);
 			command = new UpdateEndTime(itemNum, contentForUpdate);
-			history.pushCommandToUndoList(command);
+			//history.pushCommandToUndoList(command);
 			break;
 		case "-ed":
 			inputForUpdate = Parser.retrieveInputForUpdate(inputForAction.get(1));
 			itemNum = Integer.parseInt(inputForUpdate.get(0));
 			contentForUpdate = inputForUpdate.get(1);
 			command = new UpdateEndDate(itemNum, contentForUpdate);
-			history.pushCommandToUndoList(command);
+			//history.pushCommandToUndoList(command);
 			break;
 		case "delete":
 			itemNum = Integer.parseInt(inputForAction.get(1));
 			command = new Delete(itemNum, storage);
 			//history.getUndoCommandList().push(command);
-			history.pushCommandToUndoList(command);
+			//history.pushCommandToUndoList(command);
 			break;
 		case "exit":
 			command = new Exit();
@@ -105,18 +106,18 @@ public class Controller {
 			itemNum = Integer.parseInt(inputForAction.get(1));
 			command = new Complete(itemNum, storage);
 			//history.getUndoCommandList().push(command);
-			history.pushCommandToUndoList(command);
+			//history.pushCommandToUndoList(command);
 			break;
 		case "incomplete":
 			//System.out.println("**********INSIDE INCOMPLETE*********");
 			itemNum =Integer.parseInt(inputForAction.get(1));
 			command = new Incomplete(itemNum, storage);
 			//history.getUndoCommandList().push(command);
-			history.pushCommandToUndoList(command);
+			//history.pushCommandToUndoList(command);
 			break;
 		case "set":
 			command = new SetPath(inputForAction.get(1));
-			history.pushCommandToUndoList(command);
+			//history.pushCommandToUndoList(command);
 			break;
 		case "undo":
 			command = new Undo();
@@ -217,7 +218,8 @@ public class Controller {
 	}
 }
 
-//@author : Jiahuan-unused
+//@author : Jiahuan
+//unused
 
 //Unused after implementing command pattern
 

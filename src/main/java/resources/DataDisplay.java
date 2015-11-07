@@ -147,6 +147,10 @@ public class DataDisplay {
 			feedbackMsg = action + " is not successful. There is no task to be " + action.toLowerCase() + "ne" ;
 			System.out.println(feedbackMsg);
 			return feedbackMsg;
+		}else if (code == 10){
+			feedbackMsg = "Unsuccessful. There is no task No. " + action + " on screen" ;
+			System.out.println(feedbackMsg);
+			return feedbackMsg;
 		}
 		feedbackMsg = action + " is not successful, please enter the right format";
 		System.out.println(feedbackMsg);

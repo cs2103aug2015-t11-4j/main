@@ -14,6 +14,7 @@ public class Undo implements Command{
 	
 	@Override
 	public OutputToUI execute() {
+		int code = 0;
 		if (history.getUndoCommandList().isEmpty()){
 			OutputToUI outputToUI = Controller.refreshScreen();
 			String feedbackMsg = DataDisplay.feedback("Undo", 9);
@@ -22,6 +23,8 @@ public class Undo implements Command{
 		}
 		command = history.popCommandToUndoList();
 		OutputToUI outputToUI = command.undo();
+		System.out.println("inside undo success");
+		outputToUI.setFeedbackMsg(DataDisplay.feedback("Undo", code));
 		history.pushCommandToRedoList(command);
 		return outputToUI;
 	}

@@ -20,6 +20,7 @@ public class Delete implements Command{
 	
 	public Delete(int itemNum, Storage storage){
 		//this.task = task;
+		this.itemNum = itemNum;
 		this.storage = storage;
 		this.screenList = history.getScreenList();
 		Task task = Search.obtainTaskByItemNum(itemNum, screenList);
@@ -29,11 +30,18 @@ public class Delete implements Command{
 	public OutputToUI execute() {
 		int code;
 		OutputToUI outputToUI = new OutputToUI();
-
-		code = storage.deleteOneItem(task); //TODO: Storage shall make its methods all non-static
-								  //TODO: Storage returns success or not, a if loop to return feedback respectively
+		if (task.equals(new Task())){
+			code = 10; 
+			outputToUI = Controller.refreshScreen();
+			outputToUI.setFeedbackMsg(DataDisplay.feedback(String.valueOf(itemNum),code));
+			return outputToUI;
+		}
+		
+		code = storage.deleteOneItem(task); 
 		outputToUI = Controller.refreshScreen();
 		outputToUI.setFeedbackMsg(DataDisplay.feedback("delete",code));
+		history.pushCommandToUndoList(this);
+		history.clearRedoList();
 		return outputToUI;
 		
 	}

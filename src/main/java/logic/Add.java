@@ -30,7 +30,8 @@ public class Add implements Command{
 		outputToUI = Controller.refreshScreen();
 				
 		outputToUI.setFeedbackMsg(DataDisplay.feedback("add",code));
-		
+		history.pushCommandToUndoList(this);
+		history.clearRedoList();
 		return outputToUI;
 	}
 
@@ -50,7 +51,9 @@ public class Add implements Command{
 
 	@Override
 	public OutputToUI redo() {
+		int code = 0;
 		OutputToUI outputToUI = this.execute();
+		outputToUI.setFeedbackMsg(DataDisplay.feedback("Redo", code));
 		return outputToUI;
 	}
 
