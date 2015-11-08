@@ -8,6 +8,8 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -26,19 +28,30 @@ public class SearchTest {
 	public static final String TYPE_FLOATING = "floating";
 	
 	public static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    public static Date date = new Date();
+    public static Date today = new Date();
     
-    Task task1 = new Task(TYPE_DEADLINE, "report submission", "null", dateFormat.format(date), "null", "2359", false, false, 0);
-	Task task2 = new Task(TYPE_DEADLINE, "essay", "null", "09/11/2015", "null", "1200", false, false, 0);
-	Task task3 = new Task(TYPE_EVENT, "family outing", dateFormat.format(date), dateFormat.format(date), "0900", "1300", true, false, 0);
-	Task task4 = new Task(TYPE_EVENT, "welfare pack distribution", "28/11/2015", "29/11/2015", "1200", "1800", false, false, 0);
+    private static final LocalDateTime TODAY = LocalDateTime.now();
+	private static final LocalDateTime TMR = TODAY.plusDays(1);
+	private static final LocalDateTime TDL = TODAY.plusDays(3);  //three days later
+	private static final LocalDateTime TWENTYDAYS = TODAY.plusDays(20);  //20 days later
+	private static final LocalDateTime TWENTYONEDAYS = TODAY.plusDays(21);  //21 days later
+
+	public static Date tmr = Date.from(TMR.atZone(ZoneId.systemDefault()).toInstant());
+	public static Date tdl = Date.from(TDL.atZone(ZoneId.systemDefault()).toInstant());
+	public static Date twenty = Date.from(TWENTYDAYS.atZone(ZoneId.systemDefault()).toInstant());
+	public static Date twentyone = Date.from(TWENTYONEDAYS.atZone(ZoneId.systemDefault()).toInstant());
+    
+    Task task1 = new Task(TYPE_DEADLINE, "report submission", "null", dateFormat.format(today), "null", "2359", false, false, 0);
+	Task task2 = new Task(TYPE_DEADLINE, "essay", "null", dateFormat.format(tmr), "null", "1200", false, false, 0);
+	Task task3 = new Task(TYPE_EVENT, "family outing", dateFormat.format(today), dateFormat.format(today), "0900", "1300", true, false, 0);
+	Task task4 = new Task(TYPE_EVENT, "welfare pack distribution", dateFormat.format(twenty), dateFormat.format(twentyone), "1200", "1800", false, false, 0);
 	Task task5 = new Task(TYPE_FLOATING, "meeting with friends", "null", "null", "null", "null", false, false, 0);
 	Task task6 = new Task(TYPE_FLOATING, "dinner with family", "null", "null", "null", "null", true, false, 0);
 	
-	Task task7 = new Task(TYPE_DEADLINE, "report submission", "null", "09/11/2015", "null", "2359", true, false, 0);
-	Task task8 = new Task(TYPE_DEADLINE, "essay", "null", "11/11/2015", "null", "1200", false, false, 0);
-	Task task9 = new Task(TYPE_EVENT, "family outing", "09/11/2015", "09/11/2015", "0900", "1300", false, false, 0);
-	Task task10 = new Task(TYPE_EVENT, "welfare pack distribution", "28/11/2015", "29/11/2015", "1200", "1800", false, false, 0);
+	Task task7 = new Task(TYPE_DEADLINE, "report submission", "null", dateFormat.format(tmr), "null", "2359", true, false, 0);
+	Task task8 = new Task(TYPE_DEADLINE, "essay", "null", dateFormat.format(tdl), "null", "1200", false, false, 0);
+	Task task9 = new Task(TYPE_EVENT, "family outing", dateFormat.format(tmr), dateFormat.format(tmr), "0900", "1300", false, false, 0);
+	Task task10 = new Task(TYPE_EVENT, "welfare pack distribution", dateFormat.format(twenty), dateFormat.format(twentyone), "1200", "1800", false, false, 0);
 	Task task11 = new Task(TYPE_FLOATING, "class gathering", "null", "null", "null", "null", false, false, 0);
 	Task task12 = new Task(TYPE_FLOATING, "dinner with relatives", "null", "null", "null", "null", true, false, 0);
 	
