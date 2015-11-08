@@ -1,4 +1,4 @@
-//@@Author: Jiahuan
+//@@author Jiahuan
 package main.java.logic;
 
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class UpdateStartTime implements Command{
 			
 		}
 	}
-	//@@Author: Jiahuan
+	//@@Author Jiahuan
 	@Override
 	public OutputToUI execute() {
 		int code;

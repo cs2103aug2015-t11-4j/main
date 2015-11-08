@@ -1,4 +1,4 @@
-//@Author: Jiahuan
+//@@author Jiahuan
 package main.java.logic;
 
 import java.util.ArrayList;
@@ -19,7 +19,11 @@ public class Update implements Command{
 		this.itemNum=itemNum;
 		this.storage = storage;
 		screenList = history.getScreenList();
-		Task task = Search.obtainTaskByItemNum(itemNum, screenList); // Put in history so it can be restored
+		Task task = new Task();
+		if (itemNum !=0){
+			task = Search.obtainTaskByItemNum(itemNum, screenList);
+		}
+		
 		this.task = task;
 	}
 	
@@ -27,7 +31,13 @@ public class Update implements Command{
 	public OutputToUI execute() {
 		OutputToUI outputToUI = new OutputToUI();
 		int code;
-		if (task.equals(new Task())){
+		if (itemNum == 0){
+			code = -1;
+			String feedbackMsg = DataDisplay.feedback("Update", code);
+			outputToUI = Controller.refreshScreen();
+			outputToUI.setFeedbackMsg(feedbackMsg);
+			return outputToUI;
+		}else if (task.equals(new Task())){
 			code = 10; 
 			outputToUI = Controller.refreshScreen();
 			outputToUI.setFeedbackMsg(DataDisplay.feedback(String.valueOf(itemNum),code));

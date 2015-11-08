@@ -1,4 +1,4 @@
-//@@Author: Jiahuan
+//@@author Jiahuan
 package main.java.logic;
 
 import java.io.IOException;

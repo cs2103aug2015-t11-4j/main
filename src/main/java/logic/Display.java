@@ -1,4 +1,4 @@
-//@@Author: Jiahuan
+//@@author Jiahuan
 package main.java.logic;
 
 import java.util.ArrayList;
@@ -60,19 +60,23 @@ public class Display implements Command {
 			break;
 		//@@author:wenbin
 		case "search":
-/*			//@@Author: Jiahuan
+/*			//@@author: Jiahuan
 			outputToUI = history.gerSearchCommand().execute();
 			itemList = outputToUI.getItemList();
 			typeOfScreen = outputToUI.getTypeOfScreen();
 			
 			break;
-		//@@Author: Jiahuan
+		//@@author: Jiahuan
 */		case "all":
 			taskList = Search.obtainAllTasks(storage);
 			typeOfScreen = "all";
 			break;
 		case "help":
 			typeOfScreen = "help";
+			break;
+		case "invalid display":
+		default:
+			typeOfScreen = "null";
 			break;
 		}
 		
@@ -87,7 +91,11 @@ public class Display implements Command {
 						taskList.get(i).getTaskType(), printOnScreenMsgList.get(i)));
 			}
 		}
-		feedbackMsg = "Display successfully";
+		if (typeOfScreen == "null"){
+			feedbackMsg = DataDisplay.feedback("Display", -1);
+		} else {
+			feedbackMsg = DataDisplay.feedback("Display", 0);
+		}
 		outputToUI.setFeedbackMsg(feedbackMsg);
 		outputToUI.setItemList(itemList);
 		outputToUI.setTypeOfScreen(typeOfScreen);

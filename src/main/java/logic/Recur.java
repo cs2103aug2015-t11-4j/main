@@ -1,4 +1,4 @@
-//@@Author: Jiahuan
+//@@author Jiahuan
 package main.java.logic;
 
 import java.io.IOException;
@@ -39,6 +39,12 @@ public class Recur implements Command{
 	public OutputToUI execute() {
 		int code = 0;
 		OutputToUI outputToUI = new OutputToUI();
+		if (recurList.isEmpty()){
+			outputToUI = Controller.refreshScreen();
+			outputToUI.setFeedbackMsg(DataDisplay.feedback("Recurring",-1));
+			return outputToUI;
+		}
+		
 		for (int i = 0; i < recurList.size(); i++){
 			Task task = recurList.get(i);
 			code = storage.addOneItem(task); 

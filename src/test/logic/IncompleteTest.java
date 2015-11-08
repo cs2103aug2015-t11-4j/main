@@ -1,3 +1,4 @@
+//@@author Jiahuan
 package test.logic;
 
 import static org.junit.Assert.*;
@@ -29,7 +30,7 @@ public class IncompleteTest {
 	Task task6 = new Task(TYPE_FLOATING, "eat breakfast", "null", "null", "null", "null", true, false, 0);
 	Task task7 = new Task(TYPE_DEADLINE, "wake up", "null", "01/01/2015", "null", "0900", false, false, 0);			
 	
-	Task task8 = new Task(TYPE_DEADLINE, "wash face with cool water", "null", "02/02/2015", "null", "1100", true, false, 0);
+	Task task8 = new Task(TYPE_EVENT, "wash hand with soap", "03/02/2015", "03/02/2015", "0915", "1100", false, false, 0);
 	
 	Storage storage = Storage.getInstance();
 	Command command1 = new Add(task1, storage);

@@ -1,4 +1,4 @@
-//@@Author: Jiahuan
+//@@author Jiahuan
 package main.java.logic;
 
 import java.util.ArrayList;
@@ -50,7 +50,8 @@ public class UpdateEndTime implements Command{
 			
 		}
 	}
-	//@@Author: Jiahuan
+	//@@author
+	//@@author Jiahuan
 	@Override
 	public OutputToUI execute() {
 		int code;

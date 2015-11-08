@@ -1,4 +1,4 @@
-//@@Author: Jiahuan
+//@@author Jiahuan
 
 package main.java.resources;
 
@@ -112,7 +112,7 @@ public class DataDisplay {
 			System.out.println(feedbackMsg);
 			return feedbackMsg;	
 		}else if (code == 1){
-			feedbackMsg = action + ", please refer to help for the right format";
+			feedbackMsg = action + ", please refer to help for the correct format";
 			System.out.println(feedbackMsg);
 			return feedbackMsg;
 		}else if (code == 2){
@@ -152,7 +152,7 @@ public class DataDisplay {
 			System.out.println(feedbackMsg);
 			return feedbackMsg;
 		}
-		feedbackMsg = action + " is not successful, please enter the right format";
+		feedbackMsg = action + " is not successful, please enter the correct format";
 		System.out.println(feedbackMsg);
 		return feedbackMsg;
 	}

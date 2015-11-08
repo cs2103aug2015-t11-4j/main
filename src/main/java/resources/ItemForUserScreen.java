@@ -1,4 +1,5 @@
-//@@Author: Jiahuan
+//@@author Jiahuan
+
 package main.java.resources;
 
 

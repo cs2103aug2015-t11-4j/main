@@ -1,4 +1,4 @@
-//@@Author: Jiahuan
+//@@author Jiahuan
 package main.java.logic;
 
 import main.java.resources.DataDisplay;
@@ -23,13 +23,18 @@ public class Add implements Command{
 	public OutputToUI execute() {
 		int code;
 		OutputToUI outputToUI = new OutputToUI();
-
-		code = storage.addOneItem(task); //TODO: Storage shall make its methods all non-static
-								  //TODO: Storage returns success or not, a if loop to return feedback respectively
+		if (!task.getIsDateTimeValid()){
+			outputToUI = Controller.refreshScreen();
+			//DataDisplay.printOutputToUI(outputToUI);
+			outputToUI.setFeedbackMsg(DataDisplay.feedback("Add",-1));
+			DataDisplay.printOutputToUI(outputToUI);
+			return outputToUI;
+		}
+		code = storage.addOneItem(task); 
 		
 		outputToUI = Controller.refreshScreen();
 		//DataDisplay.printOutputToUI(outputToUI);
-		outputToUI.setFeedbackMsg(DataDisplay.feedback("add",code));
+		outputToUI.setFeedbackMsg(DataDisplay.feedback("Add",code));
 		history.pushCommandToUndoList(this);
 		history.clearRedoList();
 		DataDisplay.printOutputToUI(outputToUI);

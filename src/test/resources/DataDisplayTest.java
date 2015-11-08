@@ -1,4 +1,4 @@
-//@Author: Jiahuan
+//@@author Jiahuan
 package test.resources;
 
 import static org.junit.Assert.*;

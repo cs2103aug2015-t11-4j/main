@@ -1,3 +1,4 @@
+//@@author Jiahuan
 package test.logic;
 
 import static org.junit.Assert.*;
@@ -37,7 +38,7 @@ public class UpdateTest {
 	int itemNum = 1;
 	Command displayCommand = Controller.createCommand("display all");
 	
-	@Test
+/*	@Test
 	public void test() throws IOException {
 		Controller.initializeProgram();
 		DataDisplay.displayList(storage.getTaskList());
@@ -54,5 +55,5 @@ public class UpdateTest {
 		DataDisplay.printOutputToUI(outputToUI2);
 		assertTrue(!storage.getTaskList().contains(task1));
 	}
-
+*/
 }

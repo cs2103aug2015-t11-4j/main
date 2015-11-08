@@ -1,4 +1,4 @@
-//@@Author: Jiahuan
+//@@author Jiahuan
 package main.java.logic;
 
 import java.io.IOException;
@@ -59,7 +59,11 @@ public class Controller {
 			//history.pushCommandToUndoList(command);
 			break;
 		case "update":
-			itemNum = Integer.parseInt(inputForAction.get(1));
+			try{
+				itemNum = Integer.parseInt(inputForAction.get(1));
+			}catch (NumberFormatException e) {
+				itemNum = 0;
+			}
 			command = new Update(itemNum, storage);
 			//history.getUndoCommandList().push(command);
 			//history.pushCommandToUndoList(command);
@@ -102,7 +106,11 @@ public class Controller {
 			break;
 		case "delete":
 			String content[] = inputForAction.get(1).split(" ", 2);
+			try{
 			itemNum = Integer.parseInt(content[0]);
+			} catch (NumberFormatException e){
+				itemNum = 0;
+			}
 			String deletePara = "";
 			if (content.length == 2){
 				deletePara = FlexiCommands.flexiDisplayCommands(content[1]);

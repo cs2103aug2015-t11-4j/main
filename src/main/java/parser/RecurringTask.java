@@ -1,3 +1,4 @@
+//author wenbin
 package main.java.parser;
 
 import java.time.LocalDate;
@@ -175,6 +176,8 @@ public class RecurringTask {
 							recurringStartDate = recurStartDate.format(formatter);
 							recurringEndDate = recurEndDate.format(formatter);
 						}
+						break;
+					default :
 						break;
 				}
 			}

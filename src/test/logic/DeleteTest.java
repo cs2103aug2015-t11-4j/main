@@ -1,3 +1,5 @@
+//@@author Jiahuan
+
 package test.logic;
 
 import static org.junit.Assert.*;
@@ -35,6 +37,7 @@ public class DeleteTest {
 	Command command3 = new Add(task3, storage);
 	Command command4 = new Add(task4, storage);
 	int itemNum = 1;
+	String deleteType = "";
 	Command displayCommand = Controller.createCommand("display all");
 
 	
@@ -50,10 +53,10 @@ public class DeleteTest {
 		OutputToUI outputToUI=displayCommand.execute();
 		DataDisplay.printOutputToUI(outputToUI);
 		//DataDisplay.displayList(storage.getTaskList());
-		Command command_del = new Delete(itemNum, storage);
+		Command command_del = new Delete(itemNum, deleteType, storage);
 		command_del.execute();
 		DataDisplay.displayList(storage.getTaskList());
-		assertTrue(!storage.getTaskList().contains(task1));
+		assertTrue(!storage.getTaskList().contains(task2));
 	}
 
 }
