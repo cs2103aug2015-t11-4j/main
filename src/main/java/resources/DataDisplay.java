@@ -104,7 +104,6 @@ public class DataDisplay {
 
 	public static String feedback(String action, int code) {
 		// TODO: Code = 0: success
-		// Code = 1: fail
 		String feedbackMsg;
 
 		if (code == 0) {
@@ -112,7 +111,7 @@ public class DataDisplay {
 			System.out.println(feedbackMsg);
 			return feedbackMsg;	
 		}else if (code == 1){
-			feedbackMsg = action + ", please refer to help for the correct format";
+            feedbackMsg = action + " is not a valid format, please refer to HELP for the correct format";
 			System.out.println(feedbackMsg);
 			return feedbackMsg;
 		}else if (code == 2){

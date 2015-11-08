@@ -75,7 +75,7 @@ public class FlexiCommands {
 			case "set":
 				return "set";
 			default:
-				return "invalid command";	
+				return command;	
 		}
 	}
 	
@@ -122,7 +122,6 @@ public class FlexiCommands {
 			break;
 		//@@author: A0124524N; wenbin 
 		default:
-			command = "invalid display";
 			break;
 		}
 		return command;

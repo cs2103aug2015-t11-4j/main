@@ -271,7 +271,7 @@ public class Search {
     }
 
     public static Task obtainTaskByItemNum(int itemNumber, ArrayList<Task> list) {
-    	if (list.size()<itemNumber){
+    	if (list.size()<itemNumber || itemNumber <= 0){
     		return new Task();
     	}
         return list.get(itemNumber-1);
@@ -289,10 +289,14 @@ public class Search {
     
     //@@author: wenbin
     public static ArrayList<Task> obtainRecurTaskListByItemNum(int itemNumber, ArrayList<Task> list) {
+        ArrayList<Task> recurTaskGroup = new ArrayList<Task>();
+        if (list.size()<itemNumber || itemNumber <= 0){
+            return recurTaskGroup;
+        }
+
     	Task target = list.get(itemNumber-1);
     	int recurGroupID = target.getRecurringID();
     	Storage storage = Storage.getInstance();
-    	ArrayList<Task> recurTaskGroup = new ArrayList<Task>();
     	
     	for(int i=0; i<storage.getTaskList().size(); i++) {
     		if(storage.getTaskList().get(i).getRecurringID() == recurGroupID) {

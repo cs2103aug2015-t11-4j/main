@@ -1,24 +1,22 @@
-//@@author Jiahuan
 package main.java.logic;
 
-import main.java.resources.DataDisplay;
 import main.java.resources.OutputToUI;
+import main.java.storage.Storage;
 
-public class InvalidInput implements Command{
-	private History history;
-	private String invalidInput;
+public class Help implements Command{
+	private History history  = History.getInstance();
+	private Storage storage = Storage.getInstance();
 	
-	
-	public InvalidInput(String invalidInput){
-		history = History.getInstance();
-		this.invalidInput = invalidInput;
+	public Help(){
+		
 	}
+	
 	
 	@Override
 	public OutputToUI execute() {
 		OutputToUI outputToUI = Controller.refreshScreen();
-		
-		outputToUI.setFeedbackMsg(DataDisplay.feedback(invalidInput,1));
+		outputToUI.setFeedbackMsg("Help is displayed");
+		outputToUI.setTypeOfScreen("help");
 		return outputToUI;
 	}
 
@@ -33,5 +31,5 @@ public class InvalidInput implements Command{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 }

@@ -92,6 +92,8 @@ public class Display implements Command {
 		}
 		if (typeOfScreen == "null"){
 			feedbackMsg = DataDisplay.feedback("Display", -1);
+		} else if(typeOfScreen == "help"){
+			feedbackMsg = "Help is displayed";
 		} else {
 			feedbackMsg = DataDisplay.feedback("Display", 0);
 		}

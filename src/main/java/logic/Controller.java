@@ -14,12 +14,6 @@ import main.java.storage.Storage;
 
 public class Controller {
 
-	//test
-	public static void main(String[] arg){
-		Command command = createCommand("recur daily testing by 11/11 for 2 times");
-		OutputToUI outputToUI = command.execute();
-		System.out.println(outputToUI.getItemList());
-	}
 	
 	private static History history = History.getInstance();
 
@@ -107,17 +101,30 @@ public class Controller {
 		case "delete":
 			String content[] = inputForAction.get(1).split(" ", 2);
 			try{
-			itemNum = Integer.parseInt(content[0]);
+			//itemNum = Integer.parseInt(content[0]);
+                itemNum = Integer.parseInt(content[0]);
+                String deletePara = "";
+                if (content.length == 2){
+                    if (content[1].equals("all")){ 
+                        deletePara = FlexiCommands.flexiDisplayCommands(content[1]);
+                        command = new Delete(itemNum, deletePara, storage);
+                    }else {
+                        command = new InvalidInput(content[1]);
+                    }
+                }else {
+                    command = new Delete(itemNum, deletePara, storage);
+                }
 			} catch (NumberFormatException e){
-				itemNum = 0;
+				//itemNum = 0;
+                command = new InvalidInput(content[0]);
 			}
-			String deletePara = "";
+			/*String deletePara = "";
 			if (content.length == 2){
 				deletePara = FlexiCommands.flexiDisplayCommands(content[1]);
 			}
 			command = new Delete(itemNum, deletePara, storage);
 			//history.getUndoCommandList().push(command);
-			//history.pushCommandToUndoList(command);
+			//history.pushCommandToUndoList(command);*/
 			break;
 		case "exit":
 			command = new Exit();
@@ -151,9 +158,12 @@ public class Controller {
 		case "search" :
 			command = new SearchKeyword(inputForAction, storage);
 			break;
+		case "help":
+			command = new Help();
+			break;
 		case "invalid command":
 		default:
-			return command = new InvalidInput();
+			return command = new InvalidInput(inputForAction.get(0));
 		}
 		return command;
 	}
@@ -310,3 +320,10 @@ public class LogicInvoker {
 
 }
 */
+
+/*//test
+public static void main(String[] arg){
+	Command command = createCommand("recur daily testing by 11/11 for 2 times");
+	OutputToUI outputToUI = command.execute();
+	System.out.println(outputToUI.getItemList());
+}*/
