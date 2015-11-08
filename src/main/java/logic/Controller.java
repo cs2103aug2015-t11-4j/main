@@ -119,8 +119,12 @@ public class Controller {
 			break;
 		case "incomplete":
 			//System.out.println("**********INSIDE INCOMPLETE*********");
-			itemNum =Integer.parseInt(inputForAction.get(1));
-			command = new Incomplete(itemNum, storage);
+			try{
+                itemNum = Integer.parseInt(inputForAction.get(1));     
+                command = new Incomplete(itemNum, storage);
+			} catch (NumberFormatException e){
+                command = new InvalidInput(inputForAction.get(1));
+			}
 			break;
 		case "set":
 			command = new SetPath(inputForAction.get(1));

@@ -26,17 +26,12 @@ public class Incomplete implements Command{
 	@Override
 	public OutputToUI execute() {
 		int code;
-		
+		//un-used
 		//System.out.println("***");
 		//DataDisplay.displayList(history.getScreenList());
 		//System.out.println("***");
 		
 		code = storage.incompleteOneItem(task);
-/*		for (int i = 0; i < storage.getTaskList().size(); i++){
-			if (storage.getTaskList().get(i).equals(task)){
-				storage.getTaskList().get(i).setCompleted(ifComplete);
-			}
-		}*/
 		if (task.equals(new Task())){
 			code = 10; 
 			outputToUI = Controller.refreshScreen();
