@@ -293,9 +293,12 @@ public class Search {
         if (list.size()<itemNumber || itemNumber <= 0){
             return recurTaskGroup;
         }
-
+        
     	Task target = list.get(itemNumber-1);
     	int recurGroupID = target.getRecurringID();
+    	if (recurGroupID == 0){
+    		return recurTaskGroup;
+    	}
     	Storage storage = Storage.getInstance();
     	
     	for(int i=0; i<storage.getTaskList().size(); i++) {
@@ -329,7 +332,7 @@ public class Search {
 		}
 		return largestRecurID;
 	}
-    
+    //author
     
     /* @@Author: Lim Yong Zhi
      * Return the corrected month format to compare with date stored in taskList

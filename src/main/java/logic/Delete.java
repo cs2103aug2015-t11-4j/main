@@ -56,6 +56,11 @@ public class Delete implements Command{
 			outputToUI = Controller.refreshScreen();
 			outputToUI.setFeedbackMsg(DataDisplay.feedback(String.valueOf(itemNum),code));
 			return outputToUI;
+		} else if (recurTaskList.isEmpty()){
+			code = 11; 
+			outputToUI = Controller.refreshScreen();
+			outputToUI.setFeedbackMsg(DataDisplay.feedback(String.valueOf(itemNum),code));
+			return outputToUI;
 		} else if (!recurTaskList.isEmpty()){
 			code = -1;
 			
@@ -74,6 +79,8 @@ public class Delete implements Command{
 		code = storage.deleteOneItem(task); 
 		outputToUI = Controller.refreshScreen();
 		outputToUI.setFeedbackMsg(DataDisplay.feedback("Delete",code));
+		history.pushCommandToUndoList(this);
+		history.clearRedoList();
 		return outputToUI;
 		
 	}

@@ -150,6 +150,10 @@ public class DataDisplay {
 			feedbackMsg = "Unsuccessful. There is no task No. " + action + " on screen" ;
 			System.out.println(feedbackMsg);
 			return feedbackMsg;
+		}else if (code == 11){
+			feedbackMsg = "Delete recurring tasks is not successful, task No. "+ action + " is not a recurring task" ;
+			System.out.println(feedbackMsg);
+			return feedbackMsg;
 		}
 		feedbackMsg = action + " is not successful, please enter the correct format";
 		System.out.println(feedbackMsg);

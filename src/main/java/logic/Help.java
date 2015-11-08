@@ -1,12 +1,9 @@
+//@@author Jiahuan
 package main.java.logic;
 
 import main.java.resources.OutputToUI;
-import main.java.storage.Storage;
 
 public class Help implements Command{
-	private History history  = History.getInstance();
-	private Storage storage = Storage.getInstance();
-	
 	public Help(){
 		
 	}
