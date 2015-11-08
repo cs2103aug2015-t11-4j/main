@@ -27,10 +27,11 @@ public class Delete implements Command{
 		this.storage = storage;
 		this.deletePara = deletePara;
 		this.screenList = history.getScreenList();
-		Task task = new Task();
+		/*Task task = new Task();
 		if (itemNum != 0){
 			task = Search.obtainTaskByItemNum(itemNum, screenList);
-		}
+		}*/
+        Task task = Search.obtainTaskByItemNum(itemNum, screenList);
 		this.task = task;
 		if (deletePara.equals("all")){
 			recurTaskList = Search.obtainRecurTaskListByItemNum(itemNum, screenList);
@@ -42,14 +43,15 @@ public class Delete implements Command{
 	public OutputToUI execute() {
 		int code;
 		OutputToUI outputToUI = new OutputToUI();
-		if (itemNum == 0){
+		/*if (itemNum == 0){
 			code = -1;
 			outputToUI = Controller.refreshScreen();
 			outputToUI.setFeedbackMsg(DataDisplay.feedback("Delete",code));
 			history.pushCommandToUndoList(this);
 			history.clearRedoList();
 			return outputToUI;
-		}else if (task.equals(new Task())){
+		}else*/ 
+		if (task.equals(new Task())){
 			code = 10; 
 			outputToUI = Controller.refreshScreen();
 			outputToUI.setFeedbackMsg(DataDisplay.feedback(String.valueOf(itemNum),code));

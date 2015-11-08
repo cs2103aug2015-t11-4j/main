@@ -158,6 +158,9 @@ public class Controller {
 		case "search" :
 			command = new SearchKeyword(inputForAction, storage);
 			break;
+		case "help":
+			command = new Help();
+			break;
 		case "invalid command":
 		default:
 			return command = new InvalidInput(inputForAction.get(0));

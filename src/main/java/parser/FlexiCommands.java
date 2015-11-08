@@ -114,6 +114,9 @@ public class FlexiCommands {
 		case "all":
 			command = "all";
 			break;
+		case "help":
+			command = "help";
+			break;
 		default:
 			command = "invalid display";
 			break;
