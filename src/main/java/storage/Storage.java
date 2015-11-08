@@ -52,84 +52,115 @@ public class Storage {
     
     private String directory = "";
     private String filename = "Alt4.txt";
+    private final int SUCCESS = 0;
+    private final int FAILURE = -1;
     
 	/** 
-     * Allows user to change the destination of the taskList and then writes to the
+     * Allows user to change the destination of the external file and then writes to the
      * new location.
      * 
      * Returns an integer if the process is successful (0) or unsuccessful (-1).
      * 
-     * @param  setDirectory     a string containing a path in the file system
+     * @param  setDirectory a string containing a path in the file system
      * @return an integer containing a success (0) or failure (-1) code
      */
 	public int changeDirectory(String setDirectory) {
-	    try {
-	        if (setDirectory.equals("default") || setDirectory.equals("\\") || setDirectory.equals("/")) {
-	            File file = new File(directory + "\\" + filename);
-	            file.delete();
-	            
-	            directory = "";
-                filename = "Alt4.txt";
-                
-                // Blanks off the file
-                FileWriter fw2 = new FileWriter(filename, false);
-                BufferedWriter bw2 = new BufferedWriter(fw2);
-
-                bw2.write("");
-                
-                // Copies all existing tasks in the taskList onto the default location
-                FileWriter fw1 = new FileWriter(filename, true);
-                BufferedWriter bw1 = new BufferedWriter(fw1);
-                
-                for(int i = 0; i<taskList.size(); i++) {
-                    bw1.write(taskList.get(i).getTaskType() + ";" + taskList.get(i).getTaskDescription() + ";" + taskList.get(i).getStartDate()
-                    + ";" + taskList.get(i).getEndDate() + ";" + taskList.get(i).getStartTime() + ";" + taskList.get(i).getEndTime() + ";"
-                    + taskList.get(i).getIsCompleted() + ";" + taskList.get(i).getIsDateTimeValid() + ";" + taskList.get(i).getRecurringID() + ";" );
-
-                    bw1.newLine();
-                }
-                
-                bw1.close();
-                bw2.close();
-	        } else {
-                directory = setDirectory;
-                
-                File file = new File(directory, filename);
-
-                if(file.exists()) {
-                    file.createNewFile(); 
-                }
-
-                file.getParentFile().mkdirs();
-                
-                // Copies all existing tasks in the taskList onto the new location
-                FileWriter fw1 = new FileWriter(directory + "\\" + filename, true);
-                BufferedWriter bw1 = new BufferedWriter(fw1);
-                
-                for(int i = 0; i<taskList.size(); i++) {
-                    bw1.write(taskList.get(i).getTaskType() + ";" + taskList.get(i).getTaskDescription() + ";" + taskList.get(i).getStartDate()
-                    + ";" + taskList.get(i).getEndDate() + ";" + taskList.get(i).getStartTime() + ";" + taskList.get(i).getEndTime() + ";"
-                    + taskList.get(i).getIsCompleted() + ";" + taskList.get(i).getIsDateTimeValid() + ";" + taskList.get(i).getRecurringID() + ";" );
-
-                    bw1.newLine();
-                }
-
-                // Writes the user's set directory onto the first line
-                FileWriter fw2 = new FileWriter(filename, false);
-                BufferedWriter bw2 = new BufferedWriter(fw2);
-
-                bw2.write(directory + ";");
-                
-                bw1.close();
-                bw2.close();    
-	        }
-	        return 0;
-	    } catch (Exception e) {
-	        logger.log(Level.WARNING, "Unable to create external file in {0}!", directory);
-	        return -1;
+	    int code = 0;  
+	    
+	    if (setDirectory.equals("default") || setDirectory.equals("\\") || setDirectory.equals("/")) {
+	        code = performDirectoryDefaults();
+	    } else {
+	        code = performDirectoryChange(setDirectory);    
 	    }
+	    
+	    return code;
 	}
 	
+	/**
+	 * Returns the external file location to defaults. Default location is relative to Alt4.java.
+	 * 
+	 * @return an integer containing a success (0) or failure (-1) code
+	 */
+    private int performDirectoryDefaults() {
+        try {
+            File file = new File(directory + "\\" + filename);
+            file.delete();
+
+            directory = "";
+            filename = "Alt4.txt";
+
+            // Blanks off the file
+            FileWriter fw2 = new FileWriter(filename, false);
+            BufferedWriter bw2 = new BufferedWriter(fw2);
+
+            bw2.write("");
+
+            // Copies all existing tasks in the taskList onto the default location
+            FileWriter fw1 = new FileWriter(filename, true);
+            BufferedWriter bw1 = new BufferedWriter(fw1);
+
+            for(int i = 0; i<taskList.size(); i++) {
+                bw1.write(taskList.get(i).getTaskType() + ";" + taskList.get(i).getTaskDescription() + ";" + taskList.get(i).getStartDate()
+                        + ";" + taskList.get(i).getEndDate() + ";" + taskList.get(i).getStartTime() + ";" + taskList.get(i).getEndTime() + ";"
+                        + taskList.get(i).getIsCompleted() + ";" + taskList.get(i).getIsDateTimeValid() + ";" + taskList.get(i).getRecurringID() + ";" );
+
+                bw1.newLine();
+            }
+
+            bw1.close();
+            bw2.close();
+            return SUCCESS;
+        } catch (Exception e) {
+            logger.log(Level.WARNING, "Unable to create external file in {0}!", directory);
+            return FAILURE;
+        }
+    }
+    
+    /**
+     * Performs the change of the destination of the external file by providing a directory path to setDirectory.
+     * 
+     * @param setDirectory  a string containing a path in the file system
+     * @return an integer containing a success (0) or failure (-1) code
+     */
+    private int performDirectoryChange(String setDirectory) {
+        try {
+            directory = setDirectory;
+
+            File file = new File(directory, filename);
+
+            if(file.exists()) {
+                file.createNewFile(); 
+            }
+
+            file.getParentFile().mkdirs();
+
+            // Copies all existing tasks in the taskList onto the new location
+            FileWriter fw1 = new FileWriter(directory + "\\" + filename, true);
+            BufferedWriter bw1 = new BufferedWriter(fw1);
+
+            for(int i = 0; i<taskList.size(); i++) {
+                bw1.write(taskList.get(i).getTaskType() + ";" + taskList.get(i).getTaskDescription() + ";" + taskList.get(i).getStartDate()
+                        + ";" + taskList.get(i).getEndDate() + ";" + taskList.get(i).getStartTime() + ";" + taskList.get(i).getEndTime() + ";"
+                        + taskList.get(i).getIsCompleted() + ";" + taskList.get(i).getIsDateTimeValid() + ";" + taskList.get(i).getRecurringID() + ";" );
+
+                bw1.newLine();
+            }
+
+            // Writes the user's set directory onto the first line
+            FileWriter fw2 = new FileWriter(filename, false);
+            BufferedWriter bw2 = new BufferedWriter(fw2);
+
+            bw2.write(directory + ";");
+
+            bw1.close();
+            bw2.close();
+            return SUCCESS;
+        } catch (Exception e) {
+            logger.log(Level.WARNING, "Unable to create external file in {0}!", directory);
+            return FAILURE;
+        }
+    }
+    
     /** 
      * Reads the external file to regenerate the taskList.
      * 
@@ -145,6 +176,7 @@ public class Storage {
                 wipeTaskList();
             }
             
+            // Checks if the first line of the external file is a directory path
             if(retrieveDirectory()) {
                 filename = directory + "\\" + filename;
             }
@@ -209,7 +241,7 @@ public class Storage {
         taskList.clear();
     }
     
-    /* 
+    /** 
      * Checks the first line external file if it contains a directory
      * and if so, retrieves it.
      * <p>
@@ -256,16 +288,15 @@ public class Storage {
 					+ task.getIsCompleted() + ";" + task.getIsDateTimeValid() + ";" + task.getRecurringID() + ";" );
 			
 			bw.newLine();
-			bw.close();
-			
+			bw.close();			
+
+            sortTaskList(taskList);
 			logger.log(Level.INFO, "Completed writing {0} to external file", task.getTaskDescription());
+	        return SUCCESS;
 		} catch (Exception e) {
 		    logger.log(Level.WARNING, "Unable to add {0}", task.getTaskDescription());
-			return -1;
+			return FAILURE;
 		}
-		
-		sortTaskList(taskList);
-		return 0;
 	}
 	
 	/** 
@@ -304,10 +335,10 @@ public class Storage {
 
             sortTaskList(taskList);
             logger.log(Level.INFO, "Deleted {0} from external file", task.getTaskDescription());
-            return 0;
+            return SUCCESS;
         } catch (Exception e) {
             logger.log(Level.WARNING, "Unable to delete task {0} from external file", task.getTaskDescription());
-            return -1;
+            return FAILURE;
         }
     }
     
@@ -353,14 +384,14 @@ public class Storage {
 
                 sortTaskList(taskList);
                 logger.log(Level.INFO, "Completed task {0} from external file", task.getTaskDescription());
-                return 0;
+                return SUCCESS;
             } else {
                 logger.log(Level.WARNING, "Task {0} is already completed!", task.getTaskDescription());
-                return -1;
+                return FAILURE;
             }
         } catch (Exception e) {
             logger.log(Level.WARNING, "Unable to complete task {0} from external file", task.getTaskDescription());
-            return -1;
+            return FAILURE;
         }
     }
     
@@ -407,14 +438,14 @@ public class Storage {
 
                 sortTaskList(taskList);
                 logger.log(Level.INFO, "Reverted completion of task {0} from external file", task.getTaskDescription());
-                return 0;
+                return SUCCESS;
             } else {
                 logger.log(Level.WARNING, "Task {0} is never completed!", task.getTaskDescription());
-                return -1;
+                return FAILURE;
             }
         } catch (Exception e) {
             logger.log(Level.WARNING, "Unable to incomplete task {0} from external file", task.getTaskDescription());
-            return -1;
+            return FAILURE;
         }
     }
     
