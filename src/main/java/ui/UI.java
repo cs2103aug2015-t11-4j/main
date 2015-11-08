@@ -1,10 +1,11 @@
-package main.java.ui;
-//@@Author: Jiahuan 
+/*
+ * @@author A0104278 
+ */
 
- 
+package main.java.ui;
+
 import java.util.Scanner; 
 
- 
 public class UI { 
  	public static void welcome(){ 
  		System.out.println("Welcome to ALT4, your personlized agenda manager"); 

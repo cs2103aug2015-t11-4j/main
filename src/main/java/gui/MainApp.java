@@ -1,11 +1,12 @@
 /**
- * @@author yuju 
+ * @@author A0131300
  * 
  * Followed tutorial from:
  * http://code.makery.ch/library/javafx-2-tutorial/
  * 
  * Followed Collate
  */
+
 package main.java.gui;
 
 import java.io.IOException;
@@ -306,13 +307,13 @@ public class MainApp extends Application {
     	return incomplete;
     }
     
-	//@@author: A0124524N; wenbin 
+	//@@author A0124524
     public ObservableList<Text> getSearch() {
     	return search;
     }
     
     /**
-     * @@author yuju 
+     * @@author A0131300
      */
     private void addCommandBar(MainApp mainApp) {
         rootLayout.setBottom(new CommandBarController(mainApp));
@@ -441,7 +442,7 @@ public class MainApp extends Application {
         }
     }
     
-	//@@author: A0124524N; wenbin 
+	//@@author: A0124524
     private void addSearch() {
     	try {
         	FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(SEARCH_LAYOUT_FXML));
@@ -456,7 +457,7 @@ public class MainApp extends Application {
     }
 
     /**
-     * @@author yuju 
+     * @@author A0131300
      */ 
     public void callToday() {
     	createDeadlineList(itemList);
@@ -564,13 +565,13 @@ public class MainApp extends Application {
     				callIncomplete();
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
-    		    //@@author: A0124524N; wenbin 
+    		    //@@author A0124524
     			} else if (userInput.equals(SEARCH_SCENE)) {
     				callSearch();
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			/**
-    			 * @@author yuju 
+    			 * @@author A0131300
     			 */ 
     			} else if (userInput.equals(DISPLAY_ALL_SCENE)) {
     				callDisplayAll();
@@ -604,7 +605,7 @@ public class MainApp extends Application {
     /**
      * Return list of tasks to be added into the respective listviews
      * 
-     * @@author Jiahuan, yuju
+     * @@author A0104278
      * 
      * @param itemList list of tasks from storage
      * @return list of tasks
@@ -671,7 +672,7 @@ public class MainApp extends Application {
     	return complete;
     }    
     
-	//@@author: A0124524N; wenbin 
+	//@@author A0124524
     private ObservableList<Text> createSearchList(ArrayList<ItemForUserScreen> itemList) {
     	search.clear();
     	for (int i = 0; i < itemList.size(); i++) {
@@ -687,7 +688,8 @@ public class MainApp extends Application {
     /*
 	 * testing GUI
 	 * stub feedback
-	 * @@author A0131300-unused because there is change of plans
+	 * @@author A0131300-unused 
+	 * Reason: Change of program requirements
 	 *
 	private static final String TODAY_LAYOUT_FXML = "/main/resources/layouts/Today.fxml";
     private static final String TOMORROW_LAYOUT_FXML = "/main/resources/layouts/Tomorrow.fxml";
@@ -728,7 +730,8 @@ public class MainApp extends Application {
     /*
 	 * testing GUI
 	 * stub data
-	 * @@author A0131300-unused because these are used to test GUI
+	 * @@author A0131300-unused 
+	 * Reason: because these are used to test GUI
 	 *
     public MainApp() {    	
     	event.add("school activites");
@@ -789,7 +792,8 @@ public class MainApp extends Application {
     
     /*
 	 * Display today and tomorrow's tasks individually
-	 * @@author A0131300-unused due to change in plans
+	 * @@author A0131300-unused
+	 * Reason: due to change in plans
 	 *	
     public ObservableList<String> getToday() {
     	return today;
@@ -801,7 +805,8 @@ public class MainApp extends Application {
     
     /*
 	 * Display today and tomorrow's tasks individually
-	 * @@author A0131300-unused due to change in plans
+	 * @@author A0131300-unused 
+	 * Reason: due to change in plans
 	 * 
     private void addToday() {
     	try {
@@ -831,7 +836,8 @@ public class MainApp extends Application {
     
     /*
 	 * Display today and tomorrow's tasks individually
-	 * @@author A0131300-unused due to change in plans
+	 * @@author A0131300-unused 
+	 * Reason: due to change in plans
 	 * 
     public void handleEnterPress(CommandBarController commandBarController, String _userInput ) {
     
@@ -848,7 +854,8 @@ public class MainApp extends Application {
 	
 	/* 
      * Determines user input
-     * @@author A0131300-unused as this section is for testing the GUI separately
+     * @@author A0131300-unused 
+     * Reason: as this section is for testing the GUI separately
      *
 	public void handleEnterPress(CommandBarController commandBarController, String _userInput ) {
 		

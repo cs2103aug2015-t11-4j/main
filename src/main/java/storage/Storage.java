@@ -18,7 +18,7 @@ import main.java.resources.Task;
  * appropriate action requested by the Logic component
  * 
  * @author Lim Yong Zhi
- * @@author a0126058
+ * @@author A0126058
  */
 
 public class Storage {
@@ -566,7 +566,8 @@ public class Storage {
     /*
      * Deletes a task from the taskList and deletes the entry from external file
      * by an item number
-     * @@author A0126058-unused due to change of requirements
+     * @@author A0126058-unused 
+     * Reason: due to change of requirements
     */
     /*
     public static int deleteOneItemByItemNum(int itemNumber) {
@@ -608,7 +609,8 @@ public class Storage {
     
     /* 
      * Updates one task to the taskList and writes to external file
-     * @@author A0126058-unused due to change of requirements
+     * @@author A0126058-unused
+     * Reason: due to change of requirements
      */
     /*
     public int updateOneItem(int itemNumber, Task task) {
@@ -655,7 +657,8 @@ public class Storage {
     
 	/* 
      * Displays all tasks to the taskList
-     * @@author A0126058-unused due to change of requirements
+     * @@author A0126058-unused 
+     * Reason: due to change of requirements
      
 	public void display() {
         try {

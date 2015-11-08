@@ -1,4 +1,7 @@
-//@@author Jiahuan
+/*
+ * @@author A0104278 
+ */
+
 package main.java.logic;
 
 import java.io.IOException;
@@ -7,8 +10,12 @@ import main.java.storage.Storage;
 
 public class searchRecurDemo {
 	public static void main (String[] arg) throws IOException{
-		History history = History.getInstance();
-		Storage storage = Storage.getInstance();
+		@SuppressWarnings("unused")
+        History history = History.getInstance();
+		
+		@SuppressWarnings("unused")
+        Storage storage = Storage.getInstance();
+		
 		System.out.println(obtainLargestRecurID());
 	}
 	

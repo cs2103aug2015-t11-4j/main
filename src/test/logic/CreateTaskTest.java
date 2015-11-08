@@ -1,14 +1,15 @@
-package main.java.parser;
+/*
+ * @@author A0131300 
+ */
+
+package test.logic;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 
+import main.java.parser.CreateTask;
 import main.java.resources.Task;
 
-/**
- * @@author yuju 
- */
 
 public class CreateTaskTest {
 	

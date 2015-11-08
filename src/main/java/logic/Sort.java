@@ -1,4 +1,7 @@
-//@@author Jiahuan
+/*
+ * @@author A0104278 
+ */
+
 package main.java.logic;
 
 import java.util.ArrayList;
@@ -344,11 +347,10 @@ public class Sort {
 	}
     */
 
-	// Yongzhi's Code
 	/*
 	 * Sorts task by task type and description in the taskList
 	 * 
-	 * @@author Lim Yong Zhi
+	 * @@author A0126058
 	 * 
 	 * public static ArrayList<Task> sortTaskList (ArrayList<Task> taskList) {
 	 * Collections.sort(taskList, new TaskComparatorByTaskDescription()); return
@@ -357,7 +359,7 @@ public class Sort {
 	 *//**
 		 * Comparator override methods for sorting purposes
 		 * 
-		 * @@author Lim Yong Zhi
+		 * @@author A0126058
 		 *//*
 		 * 
 		 * 

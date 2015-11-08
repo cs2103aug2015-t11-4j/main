@@ -1,4 +1,7 @@
-//@@author Jiahuan
+/*
+ * @@author A0126058
+ */
+
 package test.logic;
 
 import static org.junit.Assert.*;

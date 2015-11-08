@@ -14,8 +14,7 @@ import javax.swing.Timer;
 
 /**
  * 
- * @author Yu Ju
- *
+ * @@author A0131300
  */
 
 public class ToDoApp extends JFrame{

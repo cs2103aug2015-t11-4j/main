@@ -1,7 +1,9 @@
-//author wenbin
+/*
+ * @@author A0124524 
+ */
+
 package main.java.parser;
 
-//@@author: A0124524N; wenbin 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;

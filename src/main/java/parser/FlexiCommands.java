@@ -1,5 +1,8 @@
+/*
+ * @@author A0124524 
+ */
+
 package main.java.parser;
-//@@author: A0124524N; wenbin 
 
 public class FlexiCommands {
 	
@@ -115,12 +118,12 @@ public class FlexiCommands {
 			command = "all";
 			break;
 		/**
-		 * @@author yuju
+		 * @@author A0131300
 		 */
 		case "help":
 			command = "help";
 			break;
-		//@@author: A0124524N; wenbin 
+		//@@author A0124524 
 		default:
 			break;
 		}

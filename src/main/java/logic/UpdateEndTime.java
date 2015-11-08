@@ -1,4 +1,7 @@
-//@@author Jiahuan
+/*
+ * @@author A0104278 
+ */
+
 package main.java.logic;
 
 import java.util.ArrayList;
@@ -36,7 +39,7 @@ public class UpdateEndTime implements Command{
 			newTask.setEndTime(DateAndTime.reformatTime(newEndTime));
 			history.pushCommandToUndoList(this);
 		}
-		//@@author: A0124524N; wenbin 
+		//@@author A0124524
 		else {
 			this.oldRecurTaskGroup = Search.obtainRecurTaskListByItemNum(itemNum, screenList);
 			for(int i=0; i<oldRecurTaskGroup.size(); i++) {
@@ -50,8 +53,8 @@ public class UpdateEndTime implements Command{
 			
 		}
 	}
-	//@@author
-	//@@author Jiahuan
+	
+	//@@author A0104278
 	@Override
 	public OutputToUI execute() {
 		int code;
@@ -81,7 +84,7 @@ public class UpdateEndTime implements Command{
 			System.out.println("Ouside empty");
 			storage.addOneItem(newTask);
 		}
-		//@@author: A0124524N; wenbin 
+		//@@author A0124524
 		else {
 			for(int i=0; i<this.newRecurTaskGroup.size(); i++) {
 				storage.deleteOneItem(oldRecurTaskGroup.get(i));
@@ -89,7 +92,7 @@ public class UpdateEndTime implements Command{
 				storage.addOneItem(newRecurTaskGroup.get(i));
 			}
 		}
-		//@@Author: Jiahuan
+		//@@author A0104278
 		outputToUI = Controller.refreshScreen();
 		code = 0;
 		feedbackMsg = DataDisplay.feedback("Update", code);

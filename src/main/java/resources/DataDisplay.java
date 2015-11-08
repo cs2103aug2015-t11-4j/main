@@ -1,4 +1,6 @@
-//@@author Jiahuan
+/*
+ * @@author A0104278 
+ */
 
 package main.java.resources;
 
@@ -204,7 +206,10 @@ public class DataDisplay {
 		}
 	}
 	
-	//Unused due to change of screen listviews
+	/*
+	 * @@author A0104278-unused
+	 * Reason: Unused due to change of screen listviews 
+	 */
 	/*
 	 * // To display summary in the summary list
 	public static ArrayList<String> displaySummary(ArrayList<Task> summaryList) {

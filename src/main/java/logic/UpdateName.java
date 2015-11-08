@@ -1,4 +1,7 @@
-//@@author Jiahuan
+/*
+ * @@author A0104278 
+ */
+
 package main.java.logic;
 
 import java.util.ArrayList;
@@ -31,7 +34,7 @@ public class UpdateName implements Command{
 					oldTask.getIsDateTimeValid(), oldTask.getRecurringID());
 			newTask.setTaskDescription(newName);
 		}
-		//@@author: A0124524N; wenbin 
+		//@@author A0124524
 		else {
 			this.oldRecurTaskGroup = Search.obtainRecurTaskListByItemNum(itemNum, screenList);
 			for(int i=0; i<oldRecurTaskGroup.size(); i++) {
@@ -45,7 +48,7 @@ public class UpdateName implements Command{
 		}
 	}
 	
-	//@@Author: Jiahuan
+	//@@author A0104278
 	@Override
 	public OutputToUI execute() {
 		int code;
@@ -70,7 +73,7 @@ public class UpdateName implements Command{
 			//System.out.println("Ouside empty");
 			storage.addOneItem(newTask);
 		}
-		//@@author: A0124524N; wenbin 
+		//@@author A0124524
 		else {
 			for(int i=0; i<this.newRecurTaskGroup.size(); i++) {
 				storage.deleteOneItem(oldRecurTaskGroup.get(i));
@@ -87,7 +90,7 @@ public class UpdateName implements Command{
 		return outputToUI;
 	}
 	
-	//@@Author: Jiahuan
+	//@@author A0104278
 	@Override
 	public OutputToUI undo() {
 		int code;

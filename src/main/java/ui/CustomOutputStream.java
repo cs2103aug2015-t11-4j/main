@@ -7,8 +7,7 @@ import javax.swing.JTextArea;
 
 /**
  * 
- * @author Yu Ju
- *
+ * @@author A0131300
  */
 
 public class CustomOutputStream extends OutputStream {

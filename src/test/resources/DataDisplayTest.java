@@ -1,13 +1,10 @@
-//@@author Jiahuan
+/*
+ * @@author A0104278 
+ */
+
 package test.resources;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
-
-import org.junit.Test;
-
-import main.java.resources.DataDisplay;
 import main.java.resources.Task;
 
 public class DataDisplayTest {
