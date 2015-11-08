@@ -1,5 +1,5 @@
 package main.java.parser;
-//@author: A0124524N; wenbin 
+//@@author: A0124524N; wenbin 
 
 import java.util.ArrayList;
 
@@ -12,42 +12,7 @@ public class Parser {
 	private static final String KEYWORD_FROM = " from ";
 	private static final String KEYWORD_TO = " to ";
 	
-/*	//for testing purposes
-	public static void main(String[] args) {
-		
-		String date = "21/12/2015";
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate date1 = LocalDate.parse(date, formatter);
-		date1 = date1.plusDays(1);
-		System.out.println(date1.toString());
-		System.out.println("Enter: ");
-		Scanner sc = new Scanner(System.in);
-		String input = sc.nextLine();
-		ArrayList<String> contentListForLogic = retrieveCommand(input);
-		ArrayList<Task> recurring = new ArrayList<Task>();
-		recurring = createRecurringTasks(contentListForLogic);
-		for(int i=0; i<recurring.size(); i++) {
-			System.out.println(recurring.get(i).getTaskDescription() + " ; " +
-					recurring.get(i).getStartDate() + " ; " +
-					recurring.get(i).getEndDate() + " ; " +
-					recurring.get(i).getStartTime() + " ; " +
-					recurring.get(i).getEndTime() + " ; ");
-		}
-
-		String tasktype = identifyTaskType(contentListForLogic);
-		System.out.println(tasktype);
-		
-		Task task = createTaskForAdd(contentListForLogic);
-		System.out.println("startdate: " + task.getStartDate());
-		System.out.println("enddate: " + task.getEndDate());
-		System.out.println("task: " + task.getTaskDescription());
-		System.out.println("TT: " + task.getTaskType());
-		System.out.println("ST: " + task.getStartTime());
-		System.out.println("ET: " + task.getEndTime()); 
-
-		
-	}//
-*/	//FOR LOGIC USE ONLY
+	//FOR LOGIC USE ONLY
 	public final static ArrayList<String> retrieveCommand(String inputFromLogic){
 		
 		ArrayList<String> contentListForLogic = new ArrayList<String>();
@@ -81,10 +46,12 @@ public class Parser {
 		}
 	
 	//FOR LOGIC USE ONLY
-	public final static ArrayList<Task> createRecurringTasks(ArrayList<String> listFromLogic/*, int recurringID*/) {
+	public final static ArrayList<Task> createRecurringTasks(ArrayList<String> listFromLogic) {
 		ArrayList<Task> recurringTasks = new ArrayList<Task>();
 		recurringTasks = RecurringTask.create(listFromLogic);
-/*		for(int i=0; i<recurringTasks.size(); i++) {
+		/*
+		 * @@author: A0124524N -unused
+		for(int i=0; i<recurringTasks.size(); i++) {
 			recurringTasks.get(i).setRecurringID(recurringID);
 		}*/
 		return recurringTasks;
@@ -117,12 +84,15 @@ public class Parser {
 	public static String identifyTaskType(ArrayList<String> listFromLogic ) {
 		String taskContent = listFromLogic.get(1);
 		
-		if(taskContent.contains(KEYWORD_BY))
+		if(taskContent.contains(KEYWORD_BY)) {
 			return "deadline";
-		else if(taskContent.contains(KEYWORD_FROM) && taskContent.contains(KEYWORD_TO))
+		}
+		else if(taskContent.contains(KEYWORD_FROM) && taskContent.contains(KEYWORD_TO)) {
 			return "event";
-		else
+		}
+		else {
 			return "floating";
+		}
 	}
 	
 	//removes all unnecessary whitespaces to 1 whitespace
@@ -131,10 +101,12 @@ public class Parser {
 	}
 	//check if a string input is only a word
 	private final static boolean isOneWord(String input) {
-		if (input.contains(REGEX_WHITESPACE))
+		if (input.contains(REGEX_WHITESPACE)) {
 			return false;
-		else 
+		}
+		else { 
 			return true;
+		}
 	}
 
 	public static ArrayList<String> retrieveInputForUpdate(String string) {
@@ -150,5 +122,43 @@ public class Parser {
 		}
 		return output;
 	}
+	
+	
+	//@@author: A0124524N -unused
+	/*	//for testing purposes
+	public static void main(String[] args) {
+		
+		String date = "21/12/2015";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate date1 = LocalDate.parse(date, formatter);
+		date1 = date1.plusDays(1);
+		System.out.println(date1.toString());
+		System.out.println("Enter: ");
+		Scanner sc = new Scanner(System.in);
+		String input = sc.nextLine();
+		ArrayList<String> contentListForLogic = retrieveCommand(input);
+		ArrayList<Task> recurring = new ArrayList<Task>();
+		recurring = createRecurringTasks(contentListForLogic);
+		for(int i=0; i<recurring.size(); i++) {
+			System.out.println(recurring.get(i).getTaskDescription() + " ; " +
+					recurring.get(i).getStartDate() + " ; " +
+					recurring.get(i).getEndDate() + " ; " +
+					recurring.get(i).getStartTime() + " ; " +
+					recurring.get(i).getEndTime() + " ; ");
+		}
+
+		String tasktype = identifyTaskType(contentListForLogic);
+		System.out.println(tasktype);
+		
+		Task task = createTaskForAdd(contentListForLogic);
+		System.out.println("startdate: " + task.getStartDate());
+		System.out.println("enddate: " + task.getEndDate());
+		System.out.println("task: " + task.getTaskDescription());
+		System.out.println("TT: " + task.getTaskType());
+		System.out.println("ST: " + task.getStartTime());
+		System.out.println("ET: " + task.getEndTime()); 
+
+		
+	}*/
 	
 }
