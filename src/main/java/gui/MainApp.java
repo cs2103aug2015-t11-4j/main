@@ -120,10 +120,11 @@ public class MainApp extends Application {
 
         // Add components to RootLayout
         addCommandBar(this);
-        createDeadlineList(itemList);
-    	createEventList(itemList);
-    	createFloatingList(itemList);
-    	addTodaySummaryView();
+        //createDeadlineList(itemList);
+    	//createEventList(itemList);
+    	//createFloatingList(itemList);
+    	//addTodaySummaryView();
+        callToday();
     }
 
 	private void initRootLayout() {
@@ -150,6 +151,10 @@ public class MainApp extends Application {
         Scene scene = new Scene(rootLayout);
         this.primaryStage.setScene(scene);
         this.primaryStage.show();
+        
+        OutputToUI outputToUI = new OutputToUI();
+        
+        itemList = outputToUI.getItemList();
         
         switchDisplay = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
         
