@@ -12,81 +12,19 @@ import main.java.resources.Task;
 import main.java.resources.TaskComparator;
 import main.java.storage.Storage;
 
+/*
+ * This class is for sort the internal list
+ * By creating the command with tasklist
+ * sort in order of complete/incomplete, event+deadline/floating, time and date, task string alphabet
+ */
+
 public class Sort {
 
 	public static final String TYPE_DEADLINE = "deadline";
 	public static final String TYPE_EVENT = "event";
 	public static final String TYPE_FLOATING = "floating";
 
-	public static void main(String arg[]) {
 
-		Task task1 = new Task(TYPE_DEADLINE, "wake up", "null", "01/01/2015", "null", "0900", false, false, 0);
-		Task task2 = new Task(TYPE_DEADLINE, "wash face with cool water", "null", "02/02/2015", "null", "1100", true, false, 0);
-		Task task3 = new Task(TYPE_EVENT, "go toilet", "01/01/2015", "01/02/2015", "0900", "1000", false, false, 0);
-		Task task4 = new Task(TYPE_EVENT, "wash hand with soap", "03/02/2015", "03/02/2015", "0915", "1100", true, false, 0);
-		Task task5 = new Task(TYPE_FLOATING, "meet with bob", "null", "null", "null", "null", false, false, 0);
-		Task task6 = new Task(TYPE_FLOATING, "eat breakfast", "null", "null", "null", "null", true, false, 0);
-		//Task task7 = new Task(TYPE_DEADLINE, "wake up", "null", "01/01/2015", "null", "0900", false, false);	
-		//int taskTime = createTaskTime(task1);
-		//int taskTime2 = createTaskTime(task4);
-		//int taskDate = createTaskDate(task1);
-		//int taskDate2 = createTaskDate(task3);
-/*		p(taskTime);
-		p(taskTime2);
-		p(taskDate);
-		p(taskDate2);*/
-		
-		
-/*		Sort sort = new Sort(task1, createTaskDate(task1), createTaskTime(task1), task1.getTaskDescription());
-		if(sort.getTask().equals(task1)){
-			p(sort.getTaskDate());
-			p(sort.getTaskTime());
-			System.out.println(sort.getTaskContent());
-		}*/
-		
-		ArrayList<Task> list = new ArrayList<Task>();
-		ArrayList<Sort> sortList = new ArrayList <Sort>();
-		
-		list.add(task1);
-		list.add(task2);
-		list.add(task3);
-		list.add(task4);
-		list.add(task5);
-		list.add(task6);
-		sortList = createSortList(list);
-		printSortList(sortList, list);
-		
-		Storage storage = Storage.getInstance();
-		storage.addOneItem(task1);
-		storage.addOneItem(task2);
-		storage.addOneItem(task3);
-		storage.addOneItem(task4);
-		storage.addOneItem(task5);
-		storage.addOneItem(task6);
-		DataDisplay.displayList(storage.getTaskList());
-		ArrayList<Task> sortResult = sortAll();
-		DataDisplay.displayList(sortResult);
-		
-	}
-	
-	
-	
-	private static void printSortList(ArrayList<Sort> sortList, ArrayList<Task> list){
-		Sort sort;
-		for (int i = 0; i < sortList.size(); i++){
-			sort = sortList.get(i);
-			if(sort.getTask().equals(list.get(i))){
-				p(sort.getTaskDate());
-				p(sort.getTaskTime());
-				System.out.println(sort.getTaskContent());
-			}
-		}
-	}
-	
-	private static void p(int i){
-		System.out.println(i);
-	}
-    
 	
 	private static Storage storage = Storage.getInstance();
 	private Task task;
@@ -341,6 +279,79 @@ public class Sort {
 		return new Integer(taskTime);
 	}
 
+	//@@ author a0104278-unused
+	//originally for testing
+/*		public static void main(String arg[]) {
+
+	Task task1 = new Task(TYPE_DEADLINE, "wake up", "null", "01/01/2015", "null", "0900", false, false, 0);
+	Task task2 = new Task(TYPE_DEADLINE, "wash face with cool water", "null", "02/02/2015", "null", "1100", true, false, 0);
+	Task task3 = new Task(TYPE_EVENT, "go toilet", "01/01/2015", "01/02/2015", "0900", "1000", false, false, 0);
+	Task task4 = new Task(TYPE_EVENT, "wash hand with soap", "03/02/2015", "03/02/2015", "0915", "1100", true, false, 0);
+	Task task5 = new Task(TYPE_FLOATING, "meet with bob", "null", "null", "null", "null", false, false, 0);
+	Task task6 = new Task(TYPE_FLOATING, "eat breakfast", "null", "null", "null", "null", true, false, 0);
+	//Task task7 = new Task(TYPE_DEADLINE, "wake up", "null", "01/01/2015", "null", "0900", false, false);	
+	//int taskTime = createTaskTime(task1);
+	//int taskTime2 = createTaskTime(task4);
+	//int taskDate = createTaskDate(task1);
+	//int taskDate2 = createTaskDate(task3);
+	p(taskTime);
+	p(taskTime2);
+	p(taskDate);
+	p(taskDate2);
+	
+	
+	Sort sort = new Sort(task1, createTaskDate(task1), createTaskTime(task1), task1.getTaskDescription());
+	if(sort.getTask().equals(task1)){
+		p(sort.getTaskDate());
+		p(sort.getTaskTime());
+		System.out.println(sort.getTaskContent());
+	}
+	
+	ArrayList<Task> list = new ArrayList<Task>();
+	ArrayList<Sort> sortList = new ArrayList <Sort>();
+	
+	list.add(task1);
+	list.add(task2);
+	list.add(task3);
+	list.add(task4);
+	list.add(task5);
+	list.add(task6);
+	sortList = createSortList(list);
+	printSortList(sortList, list);
+	
+	Storage storage = Storage.getInstance();
+	storage.addOneItem(task1);
+	storage.addOneItem(task2);
+	storage.addOneItem(task3);
+	storage.addOneItem(task4);
+	storage.addOneItem(task5);
+	storage.addOneItem(task6);
+	DataDisplay.displayList(storage.getTaskList());
+	ArrayList<Task> sortResult = sortAll();
+	DataDisplay.displayList(sortResult);
+	
+}
+
+
+
+private static void printSortList(ArrayList<Sort> sortList, ArrayList<Task> list){
+	Sort sort;
+	for (int i = 0; i < sortList.size(); i++){
+		sort = sortList.get(i);
+		if(sort.getTask().equals(list.get(i))){
+			p(sort.getTaskDate());
+			p(sort.getTaskTime());
+			System.out.println(sort.getTaskContent());
+		}
+	}
+}
+
+private static void p(int i){
+	System.out.println(i);
+}
+*/
+	
+
 	/*
 	private static void p(int toprint) {
 		System.out.println(toprint);
@@ -356,7 +367,13 @@ public class Sort {
 	 * Collections.sort(taskList, new TaskComparatorByTaskDescription()); return
 	 * taskList; } }
 	 * 
-	 *//**
+	 */
+	
+	
+	
+	
+	
+	/**
 		 * Comparator override methods for sorting purposes
 		 * 
 		 * @@author A0126058

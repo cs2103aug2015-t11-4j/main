@@ -13,6 +13,12 @@ import main.java.resources.OutputToUI;
 import main.java.resources.Task;
 import main.java.storage.Storage;
 
+/*
+ * This class is to display task
+ * By creating the command with user input
+ * Pass to UI for display respective task objects
+ */
+
 public class Display implements Command {
 	private ArrayList<String> inputForAction = new ArrayList<String>();
 	private Storage storage;

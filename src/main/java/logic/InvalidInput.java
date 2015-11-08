@@ -7,6 +7,12 @@ package main.java.logic;
 import main.java.resources.DataDisplay;
 import main.java.resources.OutputToUI;
 
+/*
+ * This class is for handle invalid inputs
+ * By creating the command with user input
+ * Pass to storage to acknowledge the invalid input
+ */
+
 public class InvalidInput implements Command{
 	@SuppressWarnings("unused")
     private History history;

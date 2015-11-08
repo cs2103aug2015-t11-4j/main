@@ -6,6 +6,12 @@ package main.java.logic;
 
 import main.java.resources.OutputToUI;
 
+/*
+ * This class is for quit alt4
+ * By creating the command with user input
+ * Pass to storage to quit alt4
+ */
+
 public class Exit implements Command {
 
 	@Override

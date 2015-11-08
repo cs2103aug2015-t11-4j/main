@@ -6,7 +6,10 @@ package main.java.logic;
 
 import main.java.resources.DataDisplay;
 import main.java.resources.OutputToUI;
-
+/*
+ * This class is for undo
+ * By creating the command with no input
+ */
 public class Undo implements Command{
 	
 	private History history = History.getInstance();

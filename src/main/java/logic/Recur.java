@@ -21,6 +21,8 @@ public class Recur implements Command{
 	@SuppressWarnings("unused")
     private int recurID;
 	
+	public Recur(){}
+	
 	public Recur(ArrayList<String> inputForAction) {
 		storage = Storage.getInstance();
 		history = History.getInstance();
@@ -37,6 +39,23 @@ public class Recur implements Command{
 
 		//history.setRecurID();
 		//System.out.println("recur ID in recur is = " + history.getNextRecurID());
+	}
+	
+	public History getHistory(){
+		return history;
+	}
+	
+	//Mutator
+	public void setHistory(History history){
+		this.history = History.getInstance();
+	}
+	
+	public void setStorage(Storage storage){
+		this.storage = Storage.getInstance();
+	}
+	
+	public void setRecurList(ArrayList<Task> recurList){
+		this.recurList = recurList;
 	}
 	
 	@Override
@@ -106,6 +125,7 @@ public class Recur implements Command{
 		int code = 0;
 		OutputToUI outputToUI = this.execute();
 		outputToUI.setFeedbackMsg(DataDisplay.feedback("Redo", code));
+		history.pushCommandToUndoList(this);
 		return outputToUI;
 	}
 	

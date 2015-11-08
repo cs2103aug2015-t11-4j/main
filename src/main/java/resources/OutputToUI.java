@@ -5,7 +5,10 @@
 package main.java.resources;
 
 import java.util.ArrayList;
-
+/*
+ * This class is for update the UI for neccessary information to be display in different locations
+ * So the UI can know what to do and what to display everytime after a commend is executed
+ */
 public class OutputToUI {
 	private String typeOfScreen;
 	private ArrayList<ItemForUserScreen> itemList;
@@ -28,7 +31,6 @@ public class OutputToUI {
 	}
 	
 	//Accessor
-	
 	public String getTypeOfScreen(){
 		return typeOfScreen;
 	}

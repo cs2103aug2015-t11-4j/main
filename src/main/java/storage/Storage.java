@@ -147,8 +147,10 @@ public class Storage {
             
             if(retrieveDirectory()) {
                 filename = directory + "\\" + filename;
+                System.out.println("inside retrievedirectory");
             }
-            
+            System.out.println("inside regeneratetasklist");
+            System.out.println(filename);
             FileReader fr = new FileReader(filename);
             BufferedReader br = new BufferedReader(fr);
 
@@ -222,7 +224,7 @@ public class Storage {
     private boolean retrieveDirectory() {
         String[] getDirectory;
         
-        if(getTaskTypeByItemNum(0).equals("deadlines") 
+        if(getTaskTypeByItemNum(0).equals("deadline") 
                 || getTaskTypeByItemNum(0).equals("event") 
                 || getTaskTypeByItemNum(0).equals("floating")) { 
             return false;

@@ -6,7 +6,11 @@ package main.java.logic;
 
 import main.java.resources.DataDisplay;
 import main.java.resources.OutputToUI;
-
+/*
+ * This class is for redo task
+ * By creating the command with no input
+ * Redo the command
+ */
 public class Redo implements Command{
 	private History history = History.getInstance();
 	

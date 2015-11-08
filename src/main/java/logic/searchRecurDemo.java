@@ -8,6 +8,10 @@ import java.io.IOException;
 
 import main.java.storage.Storage;
 
+/*
+ * This class is for testing and demo the search recur function
+ */
+
 public class searchRecurDemo {
 	public static void main (String[] arg) throws IOException{
 		@SuppressWarnings("unused")

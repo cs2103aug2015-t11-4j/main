@@ -6,44 +6,56 @@ package main.java.resources;
 
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import main.java.logic.Command;
 import main.java.logic.History;
-
+/*
+ * This class is for display various informations
+ * By creating the result by various different input
+ */
 public class DataDisplay {
 
-	//private static final String LABEL_FLOATING = "Floating";
-	//private static final String LABEL_EVENT = "Event";
-	//private static final String LABEL_DEADLINE = "Deadline";
-	//private static final String LABEL_ALL = "All";
-	//private static final String LABEL_COMPLETE = "Complete";
-	//private static final String LABEL_INCOMPLETE = "Incomplete";
+	private static final Logger log = Logger.getLogger( DataDisplay.class.getName() );
 	private static final String TASK_TYPE_FLOATING_LOWERCASE = "floating";
 	private static final String TASK_TYPE_EVENT_LOWERCASE = "event";
 	private static final String TASK_TYPE_DEADLINE_LOWERCASE = "deadline";
-
+	private static final String KEYWORD_ADD = "add";
+	private static final String KEYWORD_FROM =" from ";
+	private static final String KEYWORD_UPPER_FROM ="From ";
+	private static final String KEYWORD_TO =" to ";
+	private static final String KEYWORD_BY = " by ";
+	private static final String REGEX_COLON = ": ";
+	private static final String REGEX_SEMICOLON = ";";
+	private static final String REGEX_COMMA =", ";
 	
 
 	// To display a given list of task in order
 	public static ArrayList<String> displayList(ArrayList<Task> listForPrint) {
+		log.log(Level.INFO, "start to display task list");
 		ArrayList<String> outputForTesting = new ArrayList<String>();
 		if (listForPrint.isEmpty()) {
-			System.out.println("No task. Please enter one to start");
+			log.log(Level.WARNING, "No task. Please enter one to start");
 		} else {
 			for (int i = 0; i < listForPrint.size(); i++) {
+				assert listForPrint.size() > 0; //Make sure there are sth to print
 				int itemNum = i + 1;
 				switch (listForPrint.get(i).getTaskType().toLowerCase()) {
 				case TASK_TYPE_DEADLINE_LOWERCASE:
-				//	System.out.println(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
-					outputForTesting.add(itemNum + ": " + createContentForDeadline(listForPrint.get(i)));
+					log.log(Level.INFO, itemNum + REGEX_COLON + createContentForDeadline(listForPrint.get(i)));
+					outputForTesting.add(itemNum + REGEX_COLON + createContentForDeadline(listForPrint.get(i)));
 					break;
 				case TASK_TYPE_EVENT_LOWERCASE:
-				//	System.out.println(itemNum + ": " + createContentForEvent(listForPrint.get(i)));
-					outputForTesting.add(itemNum + ": " + createContentForEvent(listForPrint.get(i)));
+					log.log(Level.INFO, itemNum + REGEX_COLON + createContentForEvent(listForPrint.get(i)));
+					outputForTesting.add(itemNum + REGEX_COLON + createContentForEvent(listForPrint.get(i)));
 					break;
 				case TASK_TYPE_FLOATING_LOWERCASE:
-				//	System.out.println(itemNum + ": " + createContentForFloating(listForPrint.get(i)));
-					outputForTesting.add(itemNum + ": " + createContentForFloating(listForPrint.get(i)));
+					log.log(Level.INFO, itemNum + REGEX_COLON + createContentForFloating(listForPrint.get(i)));
+					outputForTesting.add(itemNum + REGEX_COLON + createContentForFloating(listForPrint.get(i)));
+					break;
+				default:
+					log.log(Level.WARNING, "task type is invalid");
 					break;
 				}
 			}
@@ -52,117 +64,130 @@ public class DataDisplay {
 	}
 
 	// get a strig to display on input box to ask user to update accordingly
-	// TODO: j-unit testing
+
 	public static String displayTaskNeedForUpdate(Task task) {
+		log.log(Level.INFO, "start to display the task for update");
 		String outputForTesting = "";
 		switch (task.getTaskType()) {
-		case "deadline":
-			// System.out.println("add " + updateContentForDeadline(task));
-			outputForTesting = "add " + updateContentForDeadline(task);
+		case TASK_TYPE_DEADLINE_LOWERCASE:
+			log.log(Level.INFO,KEYWORD_ADD + updateContentForDeadline(task));
+			outputForTesting = KEYWORD_ADD + updateContentForDeadline(task);
 			break;
-		case "floating":
-			// System.out.println("add " + updateContentForFloating(task));
-			outputForTesting = "add " + updateContentForFloating(task);
+		case TASK_TYPE_FLOATING_LOWERCASE:
+			log.log(Level.INFO,KEYWORD_ADD + updateContentForFloating(task));
+			outputForTesting = KEYWORD_ADD + updateContentForFloating(task);
 			break;
-		case "event":
-			// System.out.println("add " + updateContentForEvent(task));
-			outputForTesting = "add " + updateContentForEvent(task);
+		case TASK_TYPE_EVENT_LOWERCASE:
+			log.log(Level.INFO,KEYWORD_ADD + updateContentForEvent(task));
+			outputForTesting = KEYWORD_ADD + updateContentForEvent(task);
 			break;
+		default:
+			log.log(Level.WARNING,"task type is invalid");
 		}
 		return outputForTesting;
 	}
 
 	private static String updateContentForDeadline(Task task) {
-		return task.getTaskDescription() + " by " + task.getEndDate() + ";" + task.getEndTime();
+		log.log(Level.INFO,"update Content For Deadline");
+		return task.getTaskDescription() + KEYWORD_BY + task.getEndDate() + REGEX_SEMICOLON + task.getEndTime();
 	}
 
 	private static String updateContentForFloating(Task task) {
+		log.log(Level.INFO,"update Content For Floating");
 		return createContentForFloating(task);
 	}
 
 	private static String updateContentForEvent(Task task) {
-		return task.getTaskDescription() + " from " + task.getStartDate() + ";" + task.getStartTime() + " to "
-				+ task.getEndDate() + ";" + task.getEndTime();
+		log.log(Level.INFO,"update Content For Event");
+		return task.getTaskDescription() + KEYWORD_FROM + task.getStartDate() + REGEX_SEMICOLON + task.getStartTime() + " to "
+				+ task.getEndDate() + REGEX_SEMICOLON + task.getEndTime();
 	}
 
 	private static String createContentForFloating(Task task) {
+		log.log(Level.INFO,"create Content For Floating");
 		return task.getTaskDescription();
 	}
 
 	private static String createContentForEvent(Task task) {
+		log.log(Level.INFO,"create Content For Event");
 		if (task.getEndTime().equals("-")){
-			return "From "  + task.getStartDate() + " to " 
-					+ task.getEndDate() + ": " + task.getTaskDescription();
+			return KEYWORD_UPPER_FROM  + task.getStartDate() + KEYWORD_TO
+					+ task.getEndDate() + REGEX_COLON + task.getTaskDescription();
 		}
-		return "From " + task.getStartTime() + ", " + task.getStartDate() + " to " + task.getEndTime() + ", "
-				+ task.getEndDate() + ": " + task.getTaskDescription();
+		return KEYWORD_UPPER_FROM + task.getStartTime() + REGEX_COMMA + task.getStartDate() + KEYWORD_TO + task.getEndTime() + ", "
+				+ task.getEndDate() + REGEX_COLON + task.getTaskDescription();
 	}
 
 	private static String createContentForDeadline(Task task) {
-
+		log.log(Level.INFO,"create Content For Deadline");
 		if (task.getEndTime().equals("-")){
-			return "By " + task.getEndDate() + ": " + task.getTaskDescription();
+			return KEYWORD_BY + task.getEndDate() + REGEX_COLON + task.getTaskDescription();
 		} 
 
 		
-		return "By " + task.getEndTime() + ", " + task.getEndDate() + ": " + task.getTaskDescription();
+		return KEYWORD_BY + task.getEndTime() + REGEX_COMMA + task.getEndDate() + REGEX_COLON + task.getTaskDescription();
 	}
 
+	
+	//give out different feedback for the user to see
 	public static String feedback(String action, int code) {
-		// TODO: Code = 0: success
-		String feedbackMsg;
+		// Code = 0: success
+		String feedbackMsg="";
 
 		if (code == 0) {
 			feedbackMsg = action + " is successful";
-			System.out.println(feedbackMsg);
+			log.log(Level.INFO,feedbackMsg);
 			return feedbackMsg;	
 		}else if (code == 1){
             feedbackMsg = action + " is not a valid format, please refer to HELP for the correct format";
-			System.out.println(feedbackMsg);
+            log.log(Level.INFO,feedbackMsg);
 			return feedbackMsg;
 		}else if (code == 2){
 			feedbackMsg = action + " is not successful. Task description cannot be empty.";
-			System.out.println(feedbackMsg);
+			log.log(Level.INFO,feedbackMsg);
 			return feedbackMsg;
 		}else if (code == 3){
 			feedbackMsg = action + " is not successful. Task start time cannot be empty.";
-			System.out.println(feedbackMsg);
+			log.log(Level.INFO,feedbackMsg);
 			return feedbackMsg;
 		}else if (code == 4){
 			feedbackMsg = action + " is not successful. No start time for this task or the new time is not a valid format.";
-			System.out.println(feedbackMsg);
+			log.log(Level.INFO,feedbackMsg);
 			return feedbackMsg;
 		}else if (code == 5){
 			feedbackMsg = action + " is not successful. Task start date cannot be empty.";
-			System.out.println(feedbackMsg);
+			log.log(Level.INFO,feedbackMsg);
 			return feedbackMsg;
 		}else if (code == 6){
 			feedbackMsg = action + " is not successful. No start date for this task or the new date is not a valid format.";
-			System.out.println(feedbackMsg);
+			log.log(Level.INFO,feedbackMsg);
 			return feedbackMsg;
 		}else if (code == 7){
 			feedbackMsg = action + " is not successful. Task end time cannot be empty.";
-			System.out.println(feedbackMsg);
+			log.log(Level.INFO,feedbackMsg);
 			return feedbackMsg;
 		}else if (code == 8){
 			feedbackMsg = action + " is not successful. No end time for this task or the new time is not a valid format.";
-			System.out.println(feedbackMsg);
+			log.log(Level.INFO,feedbackMsg);
 			return feedbackMsg;
 		}else if (code == 9){
 			feedbackMsg = action + " is not successful. There is no task to be " + action.toLowerCase() + "ne" ;
-			System.out.println(feedbackMsg);
+			log.log(Level.INFO,feedbackMsg);
 			return feedbackMsg;
 		}else if (code == 10){
 			feedbackMsg = "Unsuccessful. There is no task No. " + action + " on screen" ;
-			System.out.println(feedbackMsg);
+			log.log(Level.INFO,feedbackMsg);
 			return feedbackMsg;
 		}else if (code == 11){
 			feedbackMsg = "Delete recurring tasks is not successful, task No. "+ action + " is not a recurring task" ;
-			System.out.println(feedbackMsg);
+			log.log(Level.INFO,feedbackMsg);
 			return feedbackMsg;
-		}
-		feedbackMsg = action + " is not successful, please enter the correct format";
-		System.out.println(feedbackMsg);
+		}else if (code < 0){
+			feedbackMsg = action + " is not successful, please enter the correct format";
+			log.log(Level.INFO,feedbackMsg);
+		}else 
+			log.log(Level.WARNING, "feedback code is invalid");
+			
 		return feedbackMsg;
 	}
 
@@ -210,6 +235,12 @@ public class DataDisplay {
 	 * @@author A0104278-unused
 	 * Reason: Unused due to change of screen listviews 
 	 */
+	//private static final String LABEL_FLOATING = "Floating";
+	//private static final String LABEL_EVENT = "Event";
+	//private static final String LABEL_DEADLINE = "Deadline";
+	//private static final String LABEL_ALL = "All";
+	//private static final String LABEL_COMPLETE = "Complete";
+	//private static final String LABEL_INCOMPLETE = "Incomplete";
 	/*
 	 * // To display summary in the summary list
 	public static ArrayList<String> displaySummary(ArrayList<Task> summaryList) {

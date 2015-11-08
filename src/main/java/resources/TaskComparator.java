@@ -3,7 +3,10 @@
  */
 
 package main.java.resources;
-
+/*
+ * This class is for the sort.java to use to sort all tasks in a necessary order
+ * It goes in an order of date, time and string alphabet
+ */
 import java.util.Comparator;
 
 import main.java.logic.Sort;
@@ -27,7 +30,10 @@ public class TaskComparator implements Comparator<Sort> {
 		}
 	}
 
+	//author a0104278-unused
+	//Due to change of plan
 	/*
+	 * 
 	 * public static final String TYPE_DEADLINE = "deadline"; public static
 	 * final String TYPE_EVENT = "event"; public static final String
 	 * TYPE_FLOATING = "floating";

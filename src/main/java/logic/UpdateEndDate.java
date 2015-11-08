@@ -12,6 +12,11 @@ import main.java.resources.OutputToUI;
 import main.java.resources.Task;
 import main.java.storage.Storage;
 
+/*
+ * This class is for update end date
+ * By creating the command with item number and the expected new end date
+ */
+
 public class UpdateEndDate implements Command{
 	private Storage storage = Storage.getInstance();
 	private String newEndDate;//TODO change each copy
