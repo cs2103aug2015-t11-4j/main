@@ -31,7 +31,7 @@ public class UpdateName implements Command{
 					oldTask.getIsDateTimeValid(), oldTask.getRecurringID());
 			newTask.setTaskDescription(newName);
 		}
-		//@@author:wenbin
+		//@@author: A0124524N; wenbin 
 		else {
 			this.oldRecurTaskGroup = Search.obtainRecurTaskListByItemNum(itemNum, screenList);
 			for(int i=0; i<oldRecurTaskGroup.size(); i++) {
@@ -70,7 +70,7 @@ public class UpdateName implements Command{
 			//System.out.println("Ouside empty");
 			storage.addOneItem(newTask);
 		}
-		//@@author:wenbin
+		//@@author: A0124524N; wenbin 
 		else {
 			for(int i=0; i<this.newRecurTaskGroup.size(); i++) {
 				storage.deleteOneItem(oldRecurTaskGroup.get(i));

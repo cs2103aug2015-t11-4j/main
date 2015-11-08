@@ -327,7 +327,7 @@ public class MainApp extends Application {
     	return incomplete;
     }
     
-    //@@author: wenbin
+	//@@author: A0124524N; wenbin 
     public ObservableList<Text> getSearch() {
     	return search;
     }
@@ -510,7 +510,7 @@ public class MainApp extends Application {
         }
     }
     
-    //@@author: wenbin
+	//@@author: A0124524N; wenbin 
     private void addSearch() {
     	try {
         	FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(SEARCH_LAYOUT_FXML));
@@ -600,7 +600,7 @@ public class MainApp extends Application {
     				//commandBarController.setFeedback(FEEDBACK_INCOMPLETE);
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
-    			//@@author:wenbin
+    		    //@@author: A0124524N; wenbin 
     			} else if (userInput.equals(SEARCH_SCENE)) {
     				createSearchList(itemList);
     				addSearch();
@@ -918,7 +918,7 @@ public class MainApp extends Application {
     	return complete;
     }    
     
-    //@@author:wenbin
+	//@@author: A0124524N; wenbin 
     private ObservableList<Text> createSearchList(ArrayList<ItemForUserScreen> itemList) {
     	search.clear();
     	for (int i = 0; i < itemList.size(); i++) {

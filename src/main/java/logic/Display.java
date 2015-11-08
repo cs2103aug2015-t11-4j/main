@@ -58,7 +58,6 @@ public class Display implements Command {
 			taskList = Search.obtainAllIncompleteTasks(storage);
 			typeOfScreen = "incomplete";
 			break;
-		//@@author:wenbin
 		case "search":
 /*			//@@author: Jiahuan
 			outputToUI = history.gerSearchCommand().execute();

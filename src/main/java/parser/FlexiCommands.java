@@ -69,6 +69,7 @@ public class FlexiCommands {
 			case "recur":
 			case "r":
 				return "recurring";
+			case "incompleted":
 			case "incomplete":
 				return "incomplete";
 			case "set":
@@ -90,10 +91,16 @@ public class FlexiCommands {
 		case "deadline":
 			command = "deadline";
 			break;
+		case "unfinished":
+		case "incompleted":
 		case "incomplete":
 			command = "incomplete";
 			break;
 		case "complete":
+		case "completed":
+		case "done":
+		case "finish":
+		case "finished":
 			command = "complete";
 			break;
 		case "today":
