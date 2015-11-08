@@ -40,17 +40,13 @@ public class Controller {
 		String contentForUpdate;
 		ArrayList<String> inputForUpdate; //include itemNuN + contenteForUpdate
 		switch (FlexiCommands.flexiCommands(inputForAction.get(0).toLowerCase())) {
-		// if add, need to create task object for storage
 		case "add":
 			task = Parser.createTaskForAdd(inputForAction);
 			command = new Add(task, storage);
-			//history.getUndoCommandList().push(command);
-			//history.pushCommandToUndoList(command);
 			break;
 		case "recurring":
 			//ArrayList<Task> recurList = Parser.createRecurringTasks(inputForAction);
 			command = new Recur(inputForAction);
-			//history.pushCommandToUndoList(command);
 			break;
 		case "update":
 			try{
@@ -59,8 +55,6 @@ public class Controller {
 				itemNum = 0;
 			}
 			command = new Update(itemNum, storage);
-			//history.getUndoCommandList().push(command);
-			//history.pushCommandToUndoList(command);
 			break;
 		case "-n":
 			inputForUpdate = Parser.retrieveInputForUpdate(inputForAction.get(1));
@@ -68,40 +62,34 @@ public class Controller {
 			//System.out.printf(inputForUpdate.get(0)+"**"+ inputForUpdate.get(1));
 			contentForUpdate = inputForUpdate.get(1);
 			command = new UpdateName(itemNum, contentForUpdate);
-			//history.pushCommandToUndoList(command);
 			break;
 		case "-st":
 			inputForUpdate = Parser.retrieveInputForUpdate(inputForAction.get(1));
 			itemNum = Integer.parseInt(inputForUpdate.get(0));
 			contentForUpdate = inputForUpdate.get(1);
 			command = new UpdateStartTime(itemNum, contentForUpdate);
-			//history.pushCommandToUndoList(command);
 			break;
 			case "-sd":
 			inputForUpdate = Parser.retrieveInputForUpdate(inputForAction.get(1));
 			itemNum = Integer.parseInt(inputForUpdate.get(0));
 			contentForUpdate = inputForUpdate.get(1);
 			command = new UpdateStartDate(itemNum, contentForUpdate);
-			//history.pushCommandToUndoList(command);
 			break;
 		case "-et":
 			inputForUpdate = Parser.retrieveInputForUpdate(inputForAction.get(1));
 			itemNum = Integer.parseInt(inputForUpdate.get(0));
 			contentForUpdate = inputForUpdate.get(1);
 			command = new UpdateEndTime(itemNum, contentForUpdate);
-			//history.pushCommandToUndoList(command);
 			break;
 		case "-ed":
 			inputForUpdate = Parser.retrieveInputForUpdate(inputForAction.get(1));
 			itemNum = Integer.parseInt(inputForUpdate.get(0));
 			contentForUpdate = inputForUpdate.get(1);
 			command = new UpdateEndDate(itemNum, contentForUpdate);
-			//history.pushCommandToUndoList(command);
 			break;
 		case "delete":
 			String content[] = inputForAction.get(1).split(" ", 2);
 			try{
-			//itemNum = Integer.parseInt(content[0]);
                 itemNum = Integer.parseInt(content[0]);
                 String deletePara = "";
                 if (content.length == 2){
@@ -115,36 +103,27 @@ public class Controller {
                     command = new Delete(itemNum, deletePara, storage);
                 }
 			} catch (NumberFormatException e){
-				//itemNum = 0;
                 command = new InvalidInput(content[0]);
 			}
-			/*String deletePara = "";
-			if (content.length == 2){
-				deletePara = FlexiCommands.flexiDisplayCommands(content[1]);
-			}
-			command = new Delete(itemNum, deletePara, storage);
-			//history.getUndoCommandList().push(command);
-			//history.pushCommandToUndoList(command);*/
 			break;
 		case "exit":
 			command = new Exit();
 			break;
 		case "complete":
-			itemNum = Integer.parseInt(inputForAction.get(1));
-			command = new Complete(itemNum, storage);
-			//history.getUndoCommandList().push(command);
-			//history.pushCommandToUndoList(command);
+			try{
+                itemNum = Integer.parseInt(inputForAction.get(1));     
+                command = new Complete(itemNum, storage);
+			} catch (NumberFormatException e){
+                command = new InvalidInput(inputForAction.get(1));
+			}
 			break;
 		case "incomplete":
 			//System.out.println("**********INSIDE INCOMPLETE*********");
 			itemNum =Integer.parseInt(inputForAction.get(1));
 			command = new Incomplete(itemNum, storage);
-			//history.getUndoCommandList().push(command);
-			//history.pushCommandToUndoList(command);
 			break;
 		case "set":
 			command = new SetPath(inputForAction.get(1));
-			//history.pushCommandToUndoList(command);
 			break;
 		case "undo":
 			command = new Undo();
