@@ -14,6 +14,9 @@ import javafx.scene.text.Text;
  * that is to be displayed to the user.
  *
  * @@author yuju
+ * 
+ * Followed tutorial from:
+ * http://code.makery.ch/library/javafx-2-tutorial/
  */
 
 public class DeadlineController {

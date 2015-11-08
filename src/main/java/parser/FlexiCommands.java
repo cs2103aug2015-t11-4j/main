@@ -114,6 +114,13 @@ public class FlexiCommands {
 		case "all":
 			command = "all";
 			break;
+		/**
+		 * @@author yuju
+		 */
+		case "help":
+			command = "help";
+			break;
+		//@@author: A0124524N; wenbin 
 		default:
 			command = "invalid display";
 			break;

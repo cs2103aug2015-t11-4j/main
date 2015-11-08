@@ -15,6 +15,9 @@ import javafx.scene.text.Text;
  * This class adds tasks into the lists that are to be displayed to the user.
  * 
  * @@author yuju
+ * 
+ * Followed tutorial from:
+ * http://code.makery.ch/library/javafx-2-tutorial/
  */
 
 public class SummaryController {
