@@ -75,7 +75,7 @@ public class FlexiCommands {
 			case "set":
 				return "set";
 			default:
-				return "invalid command";	
+				return command;	
 		}
 	}
 	

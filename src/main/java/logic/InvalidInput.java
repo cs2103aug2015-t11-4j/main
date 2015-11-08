@@ -6,17 +6,19 @@ import main.java.resources.OutputToUI;
 
 public class InvalidInput implements Command{
 	private History history;
+	private String invalidInput;
 	
 	
-	public InvalidInput(){
+	public InvalidInput(String invalidInput){
 		history = History.getInstance();
+		this.invalidInput = invalidInput;
 	}
 	
 	@Override
 	public OutputToUI execute() {
 		OutputToUI outputToUI = Controller.refreshScreen();
 		
-		outputToUI.setFeedbackMsg(DataDisplay.feedback("Invalid input",1));
+		outputToUI.setFeedbackMsg(DataDisplay.feedback(invalidInput,1));
 		return outputToUI;
 	}
 
