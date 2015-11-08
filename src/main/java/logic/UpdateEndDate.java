@@ -1,4 +1,7 @@
-//@@author Jiahuan
+/*
+ * @@author A0104278 
+ */
+
 package main.java.logic;
 
 import java.util.ArrayList;
@@ -8,6 +11,11 @@ import main.java.resources.DataDisplay;
 import main.java.resources.OutputToUI;
 import main.java.resources.Task;
 import main.java.storage.Storage;
+
+/*
+ * This class is for update end date
+ * By creating the command with item number and the expected new end date
+ */
 
 public class UpdateEndDate implements Command{
 	private Storage storage = Storage.getInstance();

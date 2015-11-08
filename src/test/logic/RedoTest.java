@@ -1,10 +1,10 @@
 /*
- * @@author A0104278 
+ * @@author A0126058 
  */
 
 package test.logic;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 
@@ -12,18 +12,21 @@ import org.junit.Test;
 
 import main.java.logic.Add;
 import main.java.logic.Command;
-import main.java.logic.Complete;
 import main.java.logic.Controller;
+import main.java.logic.History;
+import main.java.logic.Redo;
+import main.java.logic.Undo;
 import main.java.resources.DataDisplay;
 import main.java.resources.OutputToUI;
 import main.java.resources.Task;
 import main.java.storage.Storage;
 
-public class CompleteTest {
+public class RedoTest {
 	public static final String TYPE_DEADLINE = "deadline";
 	public static final String TYPE_EVENT = "event";
 	public static final String TYPE_FLOATING = "floating";
 	
+
 	Task task1 = new Task(TYPE_DEADLINE, "wake up", "-", "01/01/2015", "-", "0900", false, true, 0);
 	Task task2 = new Task(TYPE_DEADLINE, "wash face with cool water", "-", "02/02/2015", "null", "1100", true, true, 0);
 	Task task3 = new Task(TYPE_EVENT, "go toilet", "01/01/2015", "01/02/2015", "0900", "1000", false, true, 0);
@@ -32,6 +35,8 @@ public class CompleteTest {
 	Task task6 = new Task(TYPE_FLOATING, "eat breakfast", "-", "-", "-", "-", true, true, 0);
 	Task task7 = new Task(TYPE_DEADLINE, "wake up", "-", "01/01/2015", "-", "0900", false, true, 0);	
 	
+	
+	
 	Storage storage = Storage.getInstance();
 	Command command1 = new Add(task1, storage);
 	Command command2 = new Add(task2, storage);
@@ -39,33 +44,72 @@ public class CompleteTest {
 	Command command4 = new Add(task4, storage);
 	Command command5 = new Add(task5, storage);
 	Command command6 = new Add(task6, storage);
-	Command displayCommand = Controller.createCommand("display all");
-	int itemNum = 5;
+	Command undo = new Undo();
+	Command redo = new Redo();
 	
-	//Test only when external file is empty
+	public OutputToUI outputToUI = new OutputToUI();
+	
 	@Test
-	public void test() throws IOException {
-		Controller.initializeProgram();
-		storage.getTaskList().clear();
-		DataDisplay.displayList(storage.getTaskList());
+	public void test() {
+		History history = History.getInstance();
+		try {
+			Controller.initializeProgram();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		history.setCurrentScreen("all");
 		command1.execute();
 		command2.execute();
 		command3.execute();
 		command4.execute();
 		command5.execute();
-		command6.execute();
-		OutputToUI outputToUI=displayCommand.execute();
+		outputToUI = command6.execute();
 		DataDisplay.printOutputToUI(outputToUI);
-		//DataDisplay.displayList(storage.getTaskList());
-		Command command_update = new Complete(itemNum, storage);
-		OutputToUI outputToUI2=command_update.execute();
+		DataDisplay.printUndoCommandList();
+		DataDisplay.printRedoCommandList();
 		DataDisplay.displayList(storage.getTaskList());
-		DataDisplay.printOutputToUI(outputToUI2);
-		task7.setCompleted(true);
-		OutputToUI outputToUI3=displayCommand.execute();
-		DataDisplay.printOutputToUI(outputToUI3);
-		System.out.println(task7.getIsCompleted());
-		assertTrue(storage.getTaskList().contains(task7));
+		
+		outputToUI = undo.execute();
+		
+		DataDisplay.printOutputToUI(outputToUI);
+		DataDisplay.printUndoCommandList();
+		DataDisplay.printRedoCommandList();
+		
+		outputToUI = undo.execute();
+		
+		DataDisplay.printOutputToUI(outputToUI);
+		DataDisplay.printUndoCommandList();
+		DataDisplay.printRedoCommandList();
+		
+		outputToUI = undo.execute();
+		
+		DataDisplay.printOutputToUI(outputToUI);
+		DataDisplay.printUndoCommandList();
+		DataDisplay.printRedoCommandList();
+		
+		outputToUI = redo.execute();
+		
+		assertTrue(storage.getTaskList().contains(task4));
+		
+		DataDisplay.printOutputToUI(outputToUI);
+		DataDisplay.printUndoCommandList();
+		DataDisplay.printRedoCommandList();
+		
+		outputToUI = redo.execute();
+		
+		assertTrue(storage.getTaskList().contains(task5));
+		
+		DataDisplay.printOutputToUI(outputToUI);
+		DataDisplay.printUndoCommandList();
+		DataDisplay.printRedoCommandList();
+		
+		outputToUI = redo.execute();
+		
+		assertTrue(storage.getTaskList().contains(task6));
+		
+		DataDisplay.printOutputToUI(outputToUI);
+		DataDisplay.printUndoCommandList();
+		DataDisplay.printRedoCommandList();
 	}
-
 }

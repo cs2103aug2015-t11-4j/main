@@ -1,4 +1,7 @@
-//@@author Jiahuan
+/*
+ * @@author A0104278 
+ */
+
 package main.java.logic;
 
 import java.io.IOException;
@@ -6,6 +9,11 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import main.java.resources.Task;
+
+/*
+ * This class is for storing most of the history
+ * Called only by logic
+ */
 
 public class History {
 	private ArrayList<Task> screenList;

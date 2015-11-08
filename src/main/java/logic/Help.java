@@ -1,8 +1,15 @@
-//@@author Jiahuan
+/*
+ * @@author A0104278 
+ */
+
 package main.java.logic;
 
 import main.java.resources.OutputToUI;
-
+/*
+ * This class is for display help
+ * By creating the command with user input
+ * Pass to storage for display help
+ */
 public class Help implements Command{
 	public Help(){
 		

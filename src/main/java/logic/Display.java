@@ -1,4 +1,7 @@
-//@@author Jiahuan
+/*
+ * @@author A0104278 
+ */
+
 package main.java.logic;
 
 import java.util.ArrayList;
@@ -9,6 +12,12 @@ import main.java.resources.ItemForUserScreen;
 import main.java.resources.OutputToUI;
 import main.java.resources.Task;
 import main.java.storage.Storage;
+
+/*
+ * This class is to display task
+ * By creating the command with user input
+ * Pass to UI for display respective task objects
+ */
 
 public class Display implements Command {
 	private ArrayList<String> inputForAction = new ArrayList<String>();
@@ -59,14 +68,14 @@ public class Display implements Command {
 			typeOfScreen = "incomplete";
 			break;
 		case "search":
-/*			//@@author: Jiahuan
+		/*
 			outputToUI = history.gerSearchCommand().execute();
 			itemList = outputToUI.getItemList();
 			typeOfScreen = outputToUI.getTypeOfScreen();
 			
 			break;
-		//@@author: Jiahuan
-*/		case "all":
+        */
+		case "all":
 			taskList = Search.obtainAllTasks(storage);
 			typeOfScreen = "all";
 			break;
@@ -79,7 +88,7 @@ public class Display implements Command {
 			break;
 		}
 		
-//		System.out.println("Inside display.execute() : ");
+		//System.out.println("Inside display.execute() : ");
 		
 		printOnScreenMsgList = DataDisplay.displayList(taskList);
 		history.setScreenList(taskList);

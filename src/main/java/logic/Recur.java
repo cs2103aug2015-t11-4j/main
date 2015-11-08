@@ -1,4 +1,7 @@
-//@@author Jiahuan
+/*
+ * @@author A0104278 
+ */
+
 package main.java.logic;
 
 import java.io.IOException;
@@ -14,8 +17,11 @@ public class Recur implements Command{
 	private History history;
 	private Storage storage;
 	private ArrayList<Task> recurList;
-	private int recurID;
 	
+	@SuppressWarnings("unused")
+    private int recurID;
+	
+	public Recur(){}
 	
 	public Recur(ArrayList<String> inputForAction) {
 		storage = Storage.getInstance();
@@ -33,6 +39,23 @@ public class Recur implements Command{
 
 		//history.setRecurID();
 		//System.out.println("recur ID in recur is = " + history.getNextRecurID());
+	}
+	
+	public History getHistory(){
+		return history;
+	}
+	
+	//Mutator
+	public void setHistory(History history){
+		this.history = History.getInstance();
+	}
+	
+	public void setStorage(Storage storage){
+		this.storage = Storage.getInstance();
+	}
+	
+	public void setRecurList(ArrayList<Task> recurList){
+		this.recurList = recurList;
 	}
 	
 	@Override
@@ -102,6 +125,7 @@ public class Recur implements Command{
 		int code = 0;
 		OutputToUI outputToUI = this.execute();
 		outputToUI.setFeedbackMsg(DataDisplay.feedback("Redo", code));
+		history.pushCommandToUndoList(this);
 		return outputToUI;
 	}
 	

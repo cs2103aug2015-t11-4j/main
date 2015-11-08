@@ -1,4 +1,7 @@
-//@@author Jiahuan
+/*
+ * @@author A0104278 
+ */
+
 package test.logic;
 
 import java.io.IOException;
@@ -19,13 +22,14 @@ public class DisplayTest {
 	public static final String TYPE_FLOATING = "floating";
 	
 
-	Task task1 = new Task(TYPE_DEADLINE, "wake up", "null", "01/01/2015", "null", "0900", false, false, 0);
-	Task task2 = new Task(TYPE_DEADLINE, "wash face with cool water", "null", "02/02/2015", "null", "1100", true, false, 0);
-	Task task3 = new Task(TYPE_EVENT, "go toilet", "01/01/2015", "01/02/2015", "0900", "1000", false, false, 0);
-	Task task4 = new Task(TYPE_EVENT, "wash hand with soap", "03/02/2015", "03/02/2015", "0915", "1100", true, false, 0);
-	Task task5 = new Task(TYPE_FLOATING, "meet with bob", "null", "null", "null", "null", false, false, 0);
-	Task task6 = new Task(TYPE_FLOATING, "eat breakfast", "null", "null", "null", "null", true, false, 0);
-	Task task7 = new Task(TYPE_DEADLINE, "wake up", "null", "01/01/2015", "null", "0900", false, false, 0);		
+	Task task1 = new Task(TYPE_DEADLINE, "wake up", "-", "01/01/2015", "-", "0900", false, true, 0);
+	Task task2 = new Task(TYPE_DEADLINE, "wash face with cool water", "-", "02/02/2015", "null", "1100", true, true, 0);
+	Task task3 = new Task(TYPE_EVENT, "go toilet", "01/01/2015", "01/02/2015", "0900", "1000", false, true, 0);
+	Task task4 = new Task(TYPE_EVENT, "wash hand with soap", "03/02/2015", "03/02/2015", "0915", "1100", true, true, 0);
+	Task task5 = new Task(TYPE_FLOATING, "meet with bob", "-", "-", "-", "-", false, true, 0);
+	Task task6 = new Task(TYPE_FLOATING, "eat breakfast", "-", "-", "-", "-", true, true, 0);
+	Task task7 = new Task(TYPE_DEADLINE, "wake up", "-", "01/01/2015", "-", "0900", false, true, 0);	
+	
 	Storage storage = Storage.getInstance();
 	Command command1 = new Add(task1, storage);
 	Command command2 = new Add(task2, storage);
@@ -37,6 +41,8 @@ public class DisplayTest {
 	//ArrayList<String> inputForAction = new ArrayList<String>();
 	Command displayCommand = Controller.createCommand("display all");
 	public OutputToUI outputToUI = new OutputToUI();
+	
+	//Test only when external file is empty
 	@Test
 	public void test() throws IOException {
 		/*inputForAction.add("display");

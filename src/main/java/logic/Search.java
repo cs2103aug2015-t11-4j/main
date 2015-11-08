@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import main.java.resources.DataDisplay;
 import main.java.resources.Task;
 import main.java.storage.Storage;
 
@@ -13,7 +12,7 @@ import main.java.storage.Storage;
  * This class handles all search operations and executes the 
  * appropriate action as requested by the Logic component
  * 
- * @@author Lim Yong Zhi; A0124524N wenbin
+ * @@author A0126058
  */
 
 public class Search {
@@ -31,7 +30,7 @@ public class Search {
         ArrayList<Task> taskList = storage.getTaskList();
         
         /* 
-         *@@Author: Lim Yong Zhi
+         *@@author A0126058
         while(todaySummary.size() == 25 || taskList.isEmpty()) {
             for(int i = 0; i<taskList.size(); i++) {
                 if((taskList.get(i).getTaskType().equals("deadline"))) { 
@@ -56,7 +55,7 @@ public class Search {
         }
         */
         
-        //@@Author: A0124524N wenbin
+        //@@author A0124524
         //add only top 10 urgent deadlines into list first
         ArrayList<Task> urgentDeadlines = new ArrayList<Task>();
         urgentDeadlines = obtainApproachingDeadlineTasks(TODAY, taskList);
@@ -94,7 +93,7 @@ public class Search {
      * the user's next day as a summary
      * PREREQUISITE: Storage.taskList must be sorted by date and time
      */
-    //@@Author: A0124524N wenbin
+    //@@author A0124524
     public static ArrayList<Task> obtainTomorrowSummary(Storage storage) { 
         ArrayList<Task> tmrSummary = new ArrayList<Task>();
         ArrayList<Task> taskList = storage.getTaskList();
@@ -180,7 +179,7 @@ public class Search {
     private static ArrayList<Task> obtainApproachingDeadlineTasks(LocalDateTime date, ArrayList<Task> fullStorageTaskList) {
         ArrayList<Task> urgentDeadlines = new ArrayList<Task>();
         
-        //@@author: Lim Yong Zhi
+        //@@author A0126058
         /*for(int i = 0; i<task.size(); i++) {
             if(Storage.getTaskList().get(i).getTaskType().equals("deadline")
                     && (Storage.getTaskList().get(i).getEndDate().equals(ldt.getDayOfMonth()  + "/" + toMonthValue() + "/" + ldt.getYear()))
@@ -190,7 +189,7 @@ public class Search {
             }
         }*/
         
-        //@@Author: A0124524N wenbin
+        //@@author A0124524
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     	String today = date.format(formatter);
     	String tmr = date.plusDays(1).format(formatter);
@@ -213,7 +212,7 @@ public class Search {
     }
     
     //Obtains all tasks happening on the date
-    //@@Author: A0124524N wenbin
+    //@@author A0124524
     private static ArrayList<Task> obtainTodayEvents(LocalDateTime date, ArrayList<Task> fullStorageTaskList) {
         ArrayList<Task> eventsToday = new ArrayList<Task>();
         
@@ -287,7 +286,7 @@ public class Search {
     	return itemNum;
     }
     
-    //@@author: wenbin
+    //@@author A0124524
     public static ArrayList<Task> obtainRecurTaskListByItemNum(int itemNumber, ArrayList<Task> list) {
         ArrayList<Task> recurTaskGroup = new ArrayList<Task>();
         if (list.size()<itemNumber || itemNumber <= 0){
@@ -308,8 +307,8 @@ public class Search {
     	}
     	return recurTaskGroup;
     }
-   //@@author 
-  //@@author Jiahuan
+
+    //@@author A0104278
 	public static int obtainLargestRecurID() throws IOException {
 		Storage storage = Storage.getInstance();
 		/*ArrayList<Task> tempList = storage.getTaskList();
@@ -332,9 +331,8 @@ public class Search {
 		}
 		return largestRecurID;
 	}
-    //author
     
-    /* @@Author: Lim Yong Zhi
+    /* @@author A0126058
      * Return the corrected month format to compare with date stored in taskList
      * Example: 01 (January) is returned instead of 1
     private static String toMonthValue() {
@@ -345,5 +343,4 @@ public class Search {
         return "" + ldt.getMonthValue();
     }
     */
-    
 }

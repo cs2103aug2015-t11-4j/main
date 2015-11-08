@@ -1,12 +1,19 @@
-//@@author Jiahuan
+/*
+ * @@author A0104278 
+ */
+
 package main.java.logic;
 
 import java.util.ArrayList;
-
 import main.java.resources.DataDisplay;
 import main.java.resources.OutputToUI;
 import main.java.resources.Task;
 import main.java.storage.Storage;
+
+/*
+ * This class is for update
+ * By creating the command with item number
+ */
 
 public class Update implements Command{
 	private int itemNum;
@@ -50,7 +57,6 @@ public class Update implements Command{
 		outputToUI = Controller.refreshScreen();
 		outputToUI.setInputBoxMsg(inputBoxMsg);
 		outputToUI.setFeedbackMsg(feedbackMsg);
-		history.pushCommandToUndoList(this);
 		history.clearRedoList();
 		return outputToUI;
 	}

@@ -14,7 +14,7 @@ import javafx.scene.layout.BorderPane;
  * This class handles the TextField that the user inputs commands in and the Label
  * that shows feedback of action performed by the programme.
  *
- * @@author Collate
+ * @@author A0131300
  */
 
 public class CommandBarController extends BorderPane {
@@ -56,8 +56,6 @@ public class CommandBarController extends BorderPane {
     }
     
     /**
-     * @@ yuju
-     * 
      * @param listviewName
      */
     public void setText(String listviewName) {
@@ -66,12 +64,14 @@ public class CommandBarController extends BorderPane {
     
     /*
 	 * set text in command bar
-	 * @@author A0131300-unused as this section is used to test prompt text
+	 * @@author A0131300-unused 
+	 * Reason: This section is used to test prompt text
 	 * 
     public void setText(String listviewName) {
     	/*
     	 * set text in command bar
-    	 * @@author A0131300-unused as this section is used to test prompt text
+    	 * @@author A0131300-unused 
+    	 * Reason: as this section is used to test prompt text
     	 * 
     	commandBar.setOnKeyTyped(new EventHandler<KeyEvent>() {
     		public void handle(KeyEvent event) {

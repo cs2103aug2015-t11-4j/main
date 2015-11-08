@@ -1,11 +1,22 @@
-//@@author Jiahuan
+/*
+ * @@author A0104278 
+ */
+
 package main.java.logic;
 
 import main.java.resources.DataDisplay;
 import main.java.resources.OutputToUI;
 
+/*
+ * This class is for handle invalid inputs
+ * By creating the command with user input
+ * Pass to storage to acknowledge the invalid input
+ */
+
 public class InvalidInput implements Command{
-	private History history;
+	@SuppressWarnings("unused")
+    private History history;
+	
 	private String invalidInput;
 	
 	

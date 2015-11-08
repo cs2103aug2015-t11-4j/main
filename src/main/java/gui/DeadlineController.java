@@ -13,7 +13,7 @@ import javafx.scene.text.Text;
  * This class handles the ListView of urgent deadline tasks by adding them into the list
  * that is to be displayed to the user.
  *
- * @@author yuju
+ * @@author A0131300
  * 
  * Followed tutorial from:
  * http://code.makery.ch/library/javafx-2-tutorial/

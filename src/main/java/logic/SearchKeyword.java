@@ -1,4 +1,6 @@
-//@@author: A0124524N; wenbin 
+/*
+ * @@author: A0124524
+ */
 
 package main.java.logic;
 

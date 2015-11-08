@@ -14,7 +14,7 @@ import javafx.scene.text.Text;
  * The three ListViews are the lists that would be shown in a summary view.
  * This class adds tasks into the lists that are to be displayed to the user.
  * 
- * @@author yuju
+ * @@author A0131300
  * 
  * Followed tutorial from:
  * http://code.makery.ch/library/javafx-2-tutorial/

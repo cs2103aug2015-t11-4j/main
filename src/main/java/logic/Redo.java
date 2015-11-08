@@ -1,9 +1,16 @@
-//@@author Jiahuan
+/*
+ * @@author A0104278 
+ */
+
 package main.java.logic;
 
 import main.java.resources.DataDisplay;
 import main.java.resources.OutputToUI;
-
+/*
+ * This class is for redo task
+ * By creating the command with no input
+ * Redo the command
+ */
 public class Redo implements Command{
 	private History history = History.getInstance();
 	
@@ -21,7 +28,7 @@ public class Redo implements Command{
 		Command command = history.popCommandToRedoList();
 		OutputToUI outputToUI = command.redo();
 		outputToUI.setFeedbackMsg(DataDisplay.feedback("Redo", code));
-		history.pushCommandToUndoList(command);
+		
 		return outputToUI;
 	}
 

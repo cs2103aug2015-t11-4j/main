@@ -1,11 +1,18 @@
-//@@author Jiahuan
+/*
+ * @@author A0104278 
+ */
+
 package main.java.logic;
 
 import main.java.resources.DataDisplay;
 import main.java.resources.OutputToUI;
 import main.java.resources.Task;
 import main.java.storage.Storage;
-
+/*
+ * This class is for incomplete task
+ * By creating the command with item Number
+ * Pass to storage for update respective task object
+ */
 public class Incomplete implements Command{
 	//private boolean ifComplete = false;
 	private History history = History.getInstance();

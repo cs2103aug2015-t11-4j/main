@@ -1,5 +1,5 @@
 /*
- * @@author A0104278 
+ * @@author A0126058
  */
 
 package test.logic;
@@ -13,17 +13,19 @@ import org.junit.Test;
 import main.java.logic.Add;
 import main.java.logic.Command;
 import main.java.logic.Controller;
-import main.java.logic.Delete;
+import main.java.logic.History;
+import main.java.logic.Undo;
 import main.java.resources.DataDisplay;
 import main.java.resources.OutputToUI;
 import main.java.resources.Task;
 import main.java.storage.Storage;
 
-public class DeleteTest {
+public class UndoTest {
 	public static final String TYPE_DEADLINE = "deadline";
 	public static final String TYPE_EVENT = "event";
 	public static final String TYPE_FLOATING = "floating";
 	
+
 	Task task1 = new Task(TYPE_DEADLINE, "wake up", "-", "01/01/2015", "-", "0900", false, true, 0);
 	Task task2 = new Task(TYPE_DEADLINE, "wash face with cool water", "-", "02/02/2015", "null", "1100", true, true, 0);
 	Task task3 = new Task(TYPE_EVENT, "go toilet", "01/01/2015", "01/02/2015", "0900", "1000", false, true, 0);
@@ -32,33 +34,64 @@ public class DeleteTest {
 	Task task6 = new Task(TYPE_FLOATING, "eat breakfast", "-", "-", "-", "-", true, true, 0);
 	Task task7 = new Task(TYPE_DEADLINE, "wake up", "-", "01/01/2015", "-", "0900", false, true, 0);	
 	
+	
+	
 	Storage storage = Storage.getInstance();
-
 	Command command1 = new Add(task1, storage);
 	Command command2 = new Add(task2, storage);
 	Command command3 = new Add(task3, storage);
 	Command command4 = new Add(task4, storage);
-	int itemNum = 1;
-	String deleteType = "";
-	Command displayCommand = Controller.createCommand("display all");
-
-	//Test only when external file is empty
+	Command command5 = new Add(task5, storage);
+	Command command6 = new Add(task6, storage);
+	Command undo = new Undo();
+	
+	public OutputToUI outputToUI = new OutputToUI();
+	
 	@Test
-	public void test() throws IOException {
-		Controller.initializeProgram();
-		storage.getTaskList().clear();
-		DataDisplay.displayList(storage.getTaskList());
+	public void test() {
+		History history = History.getInstance();
+		try {
+			Controller.initializeProgram();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		history.setCurrentScreen("all");
 		command1.execute();
 		command2.execute();
 		command3.execute();
 		command4.execute();
-		OutputToUI outputToUI=displayCommand.execute();
+		command5.execute();
+		outputToUI = command6.execute();
 		DataDisplay.printOutputToUI(outputToUI);
-		//DataDisplay.displayList(storage.getTaskList());
-		Command command_del = new Delete(itemNum, deleteType, storage);
-		command_del.execute();
+		DataDisplay.printUndoCommandList();
+		DataDisplay.printRedoCommandList();
 		DataDisplay.displayList(storage.getTaskList());
-		assertTrue(!storage.getTaskList().contains(task2));
+		
+		outputToUI = undo.execute();
+		
+		assertTrue(!storage.getTaskList().contains(task6));
+		
+		DataDisplay.printOutputToUI(outputToUI);
+		DataDisplay.printUndoCommandList();
+		DataDisplay.printRedoCommandList();
+		
+		outputToUI = undo.execute();
+		
+		assertTrue(!storage.getTaskList().contains(task5));
+		
+		DataDisplay.printOutputToUI(outputToUI);
+		DataDisplay.printUndoCommandList();
+		DataDisplay.printRedoCommandList();
+		
+		outputToUI = undo.execute();
+		
+		assertTrue(!storage.getTaskList().contains(task4));
+		
+		DataDisplay.printOutputToUI(outputToUI);
+		DataDisplay.printUndoCommandList();
+		DataDisplay.printRedoCommandList();
+
 	}
 
 }
