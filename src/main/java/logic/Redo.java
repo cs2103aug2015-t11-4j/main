@@ -21,7 +21,7 @@ public class Redo implements Command{
 		Command command = history.popCommandToRedoList();
 		OutputToUI outputToUI = command.redo();
 		outputToUI.setFeedbackMsg(DataDisplay.feedback("Redo", code));
-		history.pushCommandToUndoList(command);
+		
 		return outputToUI;
 	}
 

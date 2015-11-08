@@ -185,6 +185,7 @@ public class DataDisplay {
 	public static void printUndoCommandList(){
 		History history = History.getInstance();
 		Stack<Command> undoCommandList = history.getUndoCommandList();
+		System.out.println("Printing undo List:");
 		int size = undoCommandList.size();
 		for (int i = 0; i < size; i++){
 			Command command = undoCommandList.get(i);
@@ -195,6 +196,7 @@ public class DataDisplay {
 	public static void printRedoCommandList(){
 		History history = History.getInstance();
 		Stack<Command> redoCommandList = history.getRedoCommandList();
+		System.out.println("Printing redo List:");
 		int size = redoCommandList.size();
 		for (int i = 0; i < size; i++){
 			Command command = redoCommandList.get(i);

@@ -49,6 +49,7 @@ public class Complete implements Command{
 	@Override
 	public OutputToUI undo() {
 		int code;
+		task.setCompleted(true);
 		code = storage.incompleteOneItem(task);
 		String feedbackMsg = DataDisplay.feedback("Undo", code);
 		outputToUI = Controller.refreshScreen();
@@ -67,6 +68,7 @@ public class Complete implements Command{
 			outputToUI.setFeedbackMsg(feedbackMsg);
 			return outputToUI;
 		}
+		task.setCompleted(false);
 		code = storage.completeOneItem(task);
 		/*for (int i = 0; i < storage.getTaskList().size(); i++){
 			if (storage.getTaskList().get(i).equals(task)){
