@@ -13,7 +13,7 @@ import javafx.scene.text.Text;
  * This class handles the ListView of floating tasks by adding the them into the list
  * that is to be displayed to the user.
  *
- * @@author yuju
+ * @@author A0131300
  * 
  * Followed tutorial from:
  * http://code.makery.ch/library/javafx-2-tutorial/

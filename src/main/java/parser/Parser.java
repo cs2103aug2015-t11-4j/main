@@ -1,5 +1,8 @@
+/*
+ * @@author A0124524 
+ */
+
 package main.java.parser;
-//@@author: A0124524N; wenbin 
 
 import java.util.ArrayList;
 
@@ -50,7 +53,7 @@ public class Parser {
 		ArrayList<Task> recurringTasks = new ArrayList<Task>();
 		recurringTasks = RecurringTask.create(listFromLogic);
 		/*
-		 * @@author: A0124524N -unused
+		 * @@author A0124524-unused
 		for(int i=0; i<recurringTasks.size(); i++) {
 			recurringTasks.get(i).setRecurringID(recurringID);
 		}*/
@@ -124,7 +127,7 @@ public class Parser {
 	}
 	
 	
-	//@@author: A0124524N -unused
+	//@@author A0124524-unused
 	/*	//for testing purposes
 	public static void main(String[] args) {
 		

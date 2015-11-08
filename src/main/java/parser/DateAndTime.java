@@ -1,5 +1,8 @@
+/*
+ * @@author A0124524 
+ */
+
 package main.java.parser;
-//@@author: A0124524N; wenbin 
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -824,7 +827,7 @@ public class DateAndTime {
 		return (count == input.length());
 	}
 	
-	//@@author: A0124524N -unused
+	//@@author A0124524-unused
 	/* testing purposes
 	public static void main(String[] args) {
 

@@ -1,11 +1,16 @@
-//@@author Jiahuan
+/*
+ * @@author A0104278 
+ */
+
 package main.java.logic;
 
 import main.java.resources.DataDisplay;
 import main.java.resources.OutputToUI;
 
 public class InvalidInput implements Command{
-	private History history;
+	@SuppressWarnings("unused")
+    private History history;
+	
 	private String invalidInput;
 	
 	

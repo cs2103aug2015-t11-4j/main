@@ -1,5 +1,8 @@
+/*
+ * @@author A0124524 
+ */
+
 package main.java.parser;
-//@@author: A0124524N; wenbin 
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -178,7 +181,7 @@ public class CreateTask {
 		return input.replaceAll(";", "").replaceAll("/", "");
 	}
 	
-	//@@author: A0124524N -unused 
+	//@@author A0124524-unused 
 	/*	// for testing purposes
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);

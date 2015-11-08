@@ -1,5 +1,8 @@
+/*
+ * @@author A0124524
+ */
+
 package main.java.resources;
-//@@author: A0124524N; wenbin 
 
 public class Task {
 	

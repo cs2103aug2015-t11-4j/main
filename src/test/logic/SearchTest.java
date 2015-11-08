@@ -1,6 +1,7 @@
 /**
- * @@author yuju
+ * @@author A0131300
  */
+
 package test.logic;
 
 import static org.junit.Assert.*;

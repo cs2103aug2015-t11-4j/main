@@ -1,4 +1,6 @@
-//@@author Jiahuan
+/*
+ * @@author A0104278 
+ */
 
 package test.logic;
 

@@ -1,4 +1,7 @@
-//@@author Jiahuan
+/*
+ * @@author A0104278 
+ */
+
 package main.java.logic;
 
 import java.io.IOException;
@@ -14,8 +17,9 @@ public class Recur implements Command{
 	private History history;
 	private Storage storage;
 	private ArrayList<Task> recurList;
-	private int recurID;
 	
+	@SuppressWarnings("unused")
+    private int recurID;
 	
 	public Recur(ArrayList<String> inputForAction) {
 		storage = Storage.getInstance();

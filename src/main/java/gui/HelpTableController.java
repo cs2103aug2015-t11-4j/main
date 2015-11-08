@@ -1,10 +1,9 @@
 package main.java.gui;
 
 /**
- * This class handles the quick help table that displays basic features of the programme.
- *
- *
- * @@author yuju
+ * This class handles the quick help table that displays basic features of the program.
+ * 
+ * @@author A0131300
  * 
  * Followed tutorial from:
  * http://code.makery.ch/library/javafx-2-tutorial/
@@ -18,7 +17,7 @@ public class HelpTableController {
     public HelpTableController() {
     	/* 
 	     * setting stub data for testing
-	     * @@author A0131300-unused as this section is for testing
+	     * @@author A0131300
 	     *
         FXMLLoader loader = new FXMLLoader(getClass().getResource(OVERVIEW_LAYOUT_FXML));
         loader.setController(this);
