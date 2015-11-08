@@ -58,7 +58,23 @@ public class Incomplete implements Command{
 
 	@Override
 	public OutputToUI redo() {
-		OutputToUI outputToUI = this.execute();
+		int code;
+		//un-used
+		//System.out.println("***");
+		//DataDisplay.displayList(history.getScreenList());
+		//System.out.println("***");
+		
+		code = storage.incompleteOneItem(task);
+		if (task.equals(new Task())){
+			code = 10; 
+			outputToUI = Controller.refreshScreen();
+			outputToUI.setFeedbackMsg(DataDisplay.feedback(String.valueOf(itemNum),code));
+			return outputToUI;
+		}
+		String feedbackMsg = DataDisplay.feedback("Redo", code);
+		outputToUI = Controller.refreshScreen();
+		outputToUI.setFeedbackMsg(feedbackMsg);
+		history.pushCommandToUndoList(this);
 		return outputToUI;
 	}
 }

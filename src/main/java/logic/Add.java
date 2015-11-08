@@ -37,7 +37,7 @@ public class Add implements Command{
 		outputToUI.setFeedbackMsg(DataDisplay.feedback("Add",code));
 		history.pushCommandToUndoList(this);
 		history.clearRedoList();
-		DataDisplay.printOutputToUI(outputToUI);
+		//DataDisplay.printOutputToUI(outputToUI);
 		return outputToUI;
 	}
 
@@ -57,8 +57,22 @@ public class Add implements Command{
 
 	@Override
 	public OutputToUI redo() {
-		int code = 0;
-		OutputToUI outputToUI = this.execute();
+		int code;
+		OutputToUI outputToUI = new OutputToUI();
+		if (!task.getIsDateTimeValid()){
+			outputToUI = Controller.refreshScreen();
+			//DataDisplay.printOutputToUI(outputToUI);
+			outputToUI.setFeedbackMsg(DataDisplay.feedback("Add",-1));
+			DataDisplay.printOutputToUI(outputToUI);
+			return outputToUI;
+		}
+		code = storage.addOneItem(task); 
+		
+		outputToUI = Controller.refreshScreen();
+		//DataDisplay.printOutputToUI(outputToUI);
+		outputToUI.setFeedbackMsg(DataDisplay.feedback("Add",code));
+		history.pushCommandToUndoList(this);
+		//DataDisplay.printOutputToUI(outputToUI);
 		outputToUI.setFeedbackMsg(DataDisplay.feedback("Redo", code));
 		return outputToUI;
 	}

@@ -51,10 +51,6 @@ public class Recur implements Command{
 			/*ArrayList<Task> tempList = storage.getTaskList();
 			System.out.println("Inside recur Execute() : ");
 			DataDisplay.displayList(tempList);*/
-			//needs to handle if some task is added while others are not
-			/*if (code != 0){
-				
-			}*/
 		}
 		/*ArrayList<Task> tempList = storage.getTaskList();
 		System.out.println("Inside recur Execute(), after for loop for adding tasks : ");

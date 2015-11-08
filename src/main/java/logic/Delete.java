@@ -56,7 +56,7 @@ public class Delete implements Command{
 			outputToUI = Controller.refreshScreen();
 			outputToUI.setFeedbackMsg(DataDisplay.feedback(String.valueOf(itemNum),code));
 			return outputToUI;
-		} else if (recurTaskList.isEmpty()){
+		} else if (recurTaskList.isEmpty()&& deletePara.equals("all")){
 			code = 11; 
 			outputToUI = Controller.refreshScreen();
 			outputToUI.setFeedbackMsg(DataDisplay.feedback(String.valueOf(itemNum),code));
@@ -117,7 +117,45 @@ public class Delete implements Command{
 	}
 	@Override
 	public OutputToUI redo() {
-		OutputToUI outputToUI = this.execute();
+		int code;
+		OutputToUI outputToUI = new OutputToUI();
+		/*if (itemNum == 0){
+			code = -1;
+			outputToUI = Controller.refreshScreen();
+			outputToUI.setFeedbackMsg(DataDisplay.feedback("Delete",code));
+			history.pushCommandToUndoList(this);
+			history.clearRedoList();
+			return outputToUI;
+		}else*/ 
+		if (task.equals(new Task())){
+			code = 10; 
+			outputToUI = Controller.refreshScreen();
+			outputToUI.setFeedbackMsg(DataDisplay.feedback(String.valueOf(itemNum),code));
+			return outputToUI;
+		} else if (recurTaskList.isEmpty()&& deletePara.equals("all")){
+			code = 11; 
+			outputToUI = Controller.refreshScreen();
+			outputToUI.setFeedbackMsg(DataDisplay.feedback(String.valueOf(itemNum),code));
+			return outputToUI;
+		} else if (!recurTaskList.isEmpty()){
+			code = -1;
+			
+			int size = recurTaskList.size();
+			for (int i = 0; i < size; i++){
+				Task recurTask = recurTaskList.get(i);
+				code = storage.deleteOneItem(recurTask);
+			}
+			outputToUI = Controller.refreshScreen();
+			outputToUI.setFeedbackMsg(DataDisplay.feedback("Delete recurring tasks",code));
+			history.pushCommandToUndoList(this);
+			history.clearRedoList();
+			return outputToUI;
+		} 
+		
+		code = storage.deleteOneItem(task); 
+		outputToUI = Controller.refreshScreen();
+		outputToUI.setFeedbackMsg(DataDisplay.feedback("Redo",code));
+		history.pushCommandToUndoList(this);
 		return outputToUI;
 	}
 

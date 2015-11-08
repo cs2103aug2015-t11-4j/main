@@ -41,6 +41,7 @@ public class Complete implements Command{
 		outputToUI = Controller.refreshScreen();
 		outputToUI.setFeedbackMsg(feedbackMsg);
 		history.pushCommandToUndoList(this);
+		history.clearRedoList();
 		return outputToUI;
 	}
 
@@ -58,8 +59,24 @@ public class Complete implements Command{
 
 	@Override
 	public OutputToUI redo() {
-		OutputToUI outputToUI = this.execute();
-		
+		int code;
+		if (task.equals(new Task())){
+			code = 10;
+			String feedbackMsg = DataDisplay.feedback(String.valueOf(itemNum), code);
+			outputToUI = Controller.refreshScreen();
+			outputToUI.setFeedbackMsg(feedbackMsg);
+			return outputToUI;
+		}
+		code = storage.completeOneItem(task);
+		/*for (int i = 0; i < storage.getTaskList().size(); i++){
+			if (storage.getTaskList().get(i).equals(task)){
+				storage.getTaskList().get(i).setCompleted(ifComplete);
+			}
+		}*/
+		String feedbackMsg = DataDisplay.feedback("Redo", code);
+		outputToUI = Controller.refreshScreen();
+		outputToUI.setFeedbackMsg(feedbackMsg);
+		history.pushCommandToUndoList(this);		
 		return outputToUI;
 	}
 	
