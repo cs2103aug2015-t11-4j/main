@@ -25,6 +25,8 @@ import javafx.fxml.FXMLLoader;
 
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -94,6 +96,8 @@ public class MainApp extends Application {
 
     private static ArrayList<ItemForUserScreen> itemList;
     
+    private KeyCombination switchDisplay;
+    
     public static void main(String[] args) {
         launch(args);
     }
@@ -147,6 +151,8 @@ public class MainApp extends Application {
         this.primaryStage.setScene(scene);
         this.primaryStage.show();
         
+        switchDisplay = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
+        
         scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent key) {
@@ -158,49 +164,49 @@ public class MainApp extends Application {
             	  primaryStage.setMaximized(true);
               } else if (key.getCode() == KeyCode.F7) {  //restore to original size
             	  primaryStage.setMaximized(false);
-              } else if ((key.getCode() == KeyCode.ALT) && (pressCount == 1)) {
-        		  callDisplayAll();
-        		  pressCount++;
-        		  if(isLimit()) {
-        			  resetPressCount();
-        		  }
-              } else if ((key.getCode() == KeyCode.ALT) && (pressCount == 2)) {
+              } else if (switchDisplay.match(key) && (pressCount == 1)) {
         		  callToday();
         		  pressCount++;
         		  if(isLimit()) {
         			  resetPressCount();
         		  }
-              } else if ((key.getCode() == KeyCode.ALT) && (pressCount == 3)) {
-        		  callTomorrow();
+              } else if (switchDisplay.match(key) && (pressCount == 2)) {
+            	  callTomorrow();
+        		  pressCount++;
+        		  if(isLimit()) {
+        			  resetPressCount();
+        		  }
+              } else if (switchDisplay.match(key) && (pressCount == 3)) {
+            	  callDisplayAll();
         		  pressCount++;
         		  if(isLimit()) {
         			 resetPressCount();
         		  }
-              } else if ((key.getCode() == KeyCode.ALT) && (pressCount == 4)) {
+              } else if (switchDisplay.match(key) && (pressCount == 4)) {
     			  callComplete();
     			  pressCount++;
     			  if(isLimit()) {
     				  resetPressCount();
         		  }
-              } else if ((key.getCode() == KeyCode.ALT) && (pressCount == 5)) {
+              } else if (switchDisplay.match(key) && (pressCount == 5)) {
     			  callIncomplete();
     			  pressCount++;
     			  if(isLimit()) {
     				  resetPressCount();
         		  }
-              } else if ((key.getCode() == KeyCode.ALT) && (pressCount == 6)) {
+              } else if (switchDisplay.match(key) && (pressCount == 6)) {
     			  callDeadline();
     			  pressCount++;
     			  if(isLimit()) {
     				  resetPressCount();
         		  }
-              } else if ((key.getCode() == KeyCode.ALT) && (pressCount == 7)) {
+              } else if (switchDisplay.match(key) && (pressCount == 7)) {
     			  callEvent();
     			  pressCount++;
     			  if(isLimit()) {
     				  resetPressCount();
         		  }
-              } else if ((key.getCode() == KeyCode.ALT) && (pressCount == 8)) {
+              } else if (switchDisplay.match(key) && (pressCount == 8)) {
     			  callFloating();
     			  pressCount++;
     			  if(isLimit()) {
