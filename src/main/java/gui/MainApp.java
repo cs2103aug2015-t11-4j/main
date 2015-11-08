@@ -1,5 +1,10 @@
 /**
  * @@author yuju 
+ * 
+ * Followed tutorial from:
+ * http://code.makery.ch/library/javafx-2-tutorial/
+ * 
+ * Followed Collate
  */
 package main.java.gui;
 
@@ -49,11 +54,9 @@ public class MainApp extends Application {
     private static final String FLOATING_LAYOUT_FXML = "/main/resources/layouts/Floating.fxml";
     private static final String DEADLINE_LAYOUT_FXML = "/main/resources/layouts/Deadline.fxml";
     private static final String EVENT_LAYOUT_FXML = "/main/resources/layouts/Event.fxml";
-    //private static final String TODAY_LAYOUT_FXML = "/main/resources/layouts/Today.fxml";
-    //private static final String TOMORROW_LAYOUT_FXML = "/main/resources/layouts/Tomorrow.fxml";
     private static final String COMPLETE_LAYOUT_FXML = "/main/resources/layouts/Complete.fxml";
     private static final String INCOMPLETE_LAYOUT_FXML = "/main/resources/layouts/Incomplete.fxml";
-    private static final String HELP_LAYOUT_FXML = "/main/resources/layouts/Help.fxml";
+    private static final String HELP_LAYOUT_FXML = "/main/resources/layouts/HelpTable.fxml";
     private static final String SEARCH_LAYOUT_FXML = "/main/resources/layouts/Search.fxml";
     
     private static final String TODAY_SCENE = "today";
@@ -67,35 +70,12 @@ public class MainApp extends Application {
     private static final String HELP_SCENE = "help";
     private static final String EXIT_SCENE = "exit";
     private static final String SEARCH_SCENE = "search";
-    
-    /*
-	 * testing GUI
-	 * stub feedback
-	 * @@author A0131300-unused because there is change of plans
-	 *
-    private static final String FEEDBACK_TODAY_SUMMARY = "Today's Summary";
-    private static final String FEEDBACK_TMR_SUMMARY = "Tomorrow's Summary";
-    private static final String FEEDBACK_DISPLAY = "All Events";
-    private static final String FEEDBACK_COMPLETE = "Completed Events";
-    private static final String FEEDBACK_INCOMPLETE = "Incomplete Events";
-    private static final String FEEDBACK_TODAY = "Today's Tasks";
-    private static final String FEEDBACK_TOMORROW = "Tomorrow's Tasks";
-    private static final String FEEDBACK_DEADLINE = "Deadline Tasks";
-    private static final String FEEDBACK_EVENT = "Events";
-    private static final String FEEDBACK_FLOATING = "Floating Tasks";
-    
-    private static final String FEEDBACK_INVALID_COMMAND = "Invalid command.";
-    private static final String FEEDBACK_ADDED = "Successfully Added: ";
-    private static final String FEEDBACK_DELETED = "Successfully Deleted: ";
-    private static final String FEEDBACK_UPDATED = "Successfully Updated ";
-    private static final String FEEDBACK_UNDONE = "Undone: ";*/
+
     private static final String FEEDBACK_EXIT = "Exiting Alt4";
     
     private static final String TYPE_DEADLINE = "deadline";
     private static final String TYPE_EVENT = "event";
     private static final String TYPE_FLOATING = "floating";
-    //private static final String TYPE_COMPLETE = "complete";
-    //private static final String TYPE_INCOMPLETE = "incomplete";
     
     private ObservableList<Text> event = FXCollections.observableArrayList();
     private ObservableList<Text> deadline = FXCollections.observableArrayList();
@@ -103,28 +83,14 @@ public class MainApp extends Application {
     private ObservableList<Text> complete = FXCollections.observableArrayList();
     private ObservableList<Text> incomplete = FXCollections.observableArrayList();
     private ObservableList<Text> search = FXCollections.observableArrayList();
-    //private ObservableList<String> today = FXCollections.observableArrayList();
-    //private ObservableList<String> tomorrow = FXCollections.observableArrayList();
-    
-    /*
-	 * testing
-	 * @@author A0131300-unused because there is change of plans
-	 *
-    private String[] arr;
-    private String[] array;
-    private String typeDisplay;  //types of display in command
-    private String command;
-    private String description;
-    private String type;
-    private String newDescription;
-    private int listNum;*/
+
     private PauseTransition delay;
+    private int pressCount = 1;
 	
 	private Stage primaryStage;
 	private Stage secondaryStage;
     private BorderPane rootLayout;
     private BorderPane rootLayout2;
-    //private MainApp mainApp;
 
     private static ArrayList<ItemForUserScreen> itemList;
     
@@ -157,8 +123,8 @@ public class MainApp extends Application {
     }
 
 	private void initRootLayout() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(ROOT_LAYOUT_FXML));
         try {
+        	FXMLLoader loader = new FXMLLoader(getClass().getResource(ROOT_LAYOUT_FXML));
             rootLayout = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
@@ -166,8 +132,8 @@ public class MainApp extends Application {
     }
 	
 	private void initHelpRootLayout() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(ROOT_LAYOUT2_FXML));
         try {
+        	FXMLLoader loader = new FXMLLoader(getClass().getResource(ROOT_LAYOUT2_FXML));
             rootLayout2 = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
@@ -178,9 +144,6 @@ public class MainApp extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle(WINDOW_TITLE);
         Scene scene = new Scene(rootLayout);
-        //scene.setFill(Color.TRANSPARENT);
-        //rootLayout.setBackground(Background.EMPTY);
-        //this.primaryStage.initStyle(StageStyle.TRANSPARENT);
         this.primaryStage.setScene(scene);
         this.primaryStage.show();
         
@@ -191,21 +154,69 @@ public class MainApp extends Application {
             	  primaryStage.close();
               } else if (key.getCode() == KeyCode.F5) {  //minimise the window
             	  primaryStage.setIconified(true);
-              } else if (key.getCode() == KeyCode.F6) {  //restore window
-            	  if (primaryStage.isShowing()) {
-            		  //primaryStage.setIconified(false);
-            		  primaryStage.show();
-            	  }
-            	  //primaryStage.setIconified(false);
-            	  //primaryStage.setWidth((double)900);
-            	  //primaryStage.setHeight((double)700);
-              } else if (key.getCode() == KeyCode.F7) {  //maximise the window
+              } else if (key.getCode() == KeyCode.F6) {  //maximise the window
             	  primaryStage.setMaximized(true);
-              } else if (key.getCode() == KeyCode.F8) {  //restore to original size
+              } else if (key.getCode() == KeyCode.F7) {  //restore to original size
             	  primaryStage.setMaximized(false);
+              } else if ((key.getCode() == KeyCode.ALT) && (pressCount == 1)) {
+        		  callDisplayAll();
+        		  pressCount++;
+        		  if(isLimit()) {
+        			  resetPressCount();
+        		  }
+              } else if ((key.getCode() == KeyCode.ALT) && (pressCount == 2)) {
+        		  callToday();
+        		  pressCount++;
+        		  if(isLimit()) {
+        			  resetPressCount();
+        		  }
+              } else if ((key.getCode() == KeyCode.ALT) && (pressCount == 3)) {
+        		  callTomorrow();
+        		  pressCount++;
+        		  if(isLimit()) {
+        			 resetPressCount();
+        		  }
+              } else if ((key.getCode() == KeyCode.ALT) && (pressCount == 4)) {
+    			  callComplete();
+    			  pressCount++;
+    			  if(isLimit()) {
+    				  resetPressCount();
+        		  }
+              } else if ((key.getCode() == KeyCode.ALT) && (pressCount == 5)) {
+    			  callIncomplete();
+    			  pressCount++;
+    			  if(isLimit()) {
+    				  resetPressCount();
+        		  }
+              } else if ((key.getCode() == KeyCode.ALT) && (pressCount == 6)) {
+    			  callDeadline();
+    			  pressCount++;
+    			  if(isLimit()) {
+    				  resetPressCount();
+        		  }
+              } else if ((key.getCode() == KeyCode.ALT) && (pressCount == 7)) {
+    			  callEvent();
+    			  pressCount++;
+    			  if(isLimit()) {
+    				  resetPressCount();
+        		  }
+              } else if ((key.getCode() == KeyCode.ALT) && (pressCount == 8)) {
+    			  callFloating();
+    			  pressCount++;
+    			  if(isLimit()) {
+    				  resetPressCount();
+        		  }
               }
             }
         });
+    }
+    
+    private boolean isLimit() {
+    	return (pressCount == 9);
+    }
+    
+    private void resetPressCount() {
+    	pressCount = 1;
     }
     
     private void initSecondaryStage(Stage secondaryStage) {
@@ -220,89 +231,51 @@ public class MainApp extends Application {
         scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent key) {
-              if ((key.getCode() == KeyCode.ESCAPE) || (key.getCode() == KeyCode.ENTER) ||
-            	 (key.getCode() == KeyCode.ALT) || (key.getCode() == KeyCode.A) || 
-            	 (key.getCode() == KeyCode.B) || (key.getCode() == KeyCode.C) || 
-            	 (key.getCode() == KeyCode.D) || (key.getCode() == KeyCode.E) ||
-            	 (key.getCode() == KeyCode.F) || (key.getCode() == KeyCode.G) ||
-            	 (key.getCode() == KeyCode.H) || (key.getCode() == KeyCode.I) ||
-            	 (key.getCode() == KeyCode.J) || (key.getCode() == KeyCode.K) ||
-            	 (key.getCode() == KeyCode.L) || (key.getCode() == KeyCode.M) ||
-            	 (key.getCode() == KeyCode.N) || (key.getCode() == KeyCode.O) ||
-            	 (key.getCode() == KeyCode.P) || (key.getCode() == KeyCode.Q) ||
-            	 (key.getCode() == KeyCode.R) || (key.getCode() == KeyCode.S) ||
-            	 (key.getCode() == KeyCode.T) || (key.getCode() == KeyCode.U) ||
-            	 (key.getCode() == KeyCode.V) || (key.getCode() == KeyCode.W) ||
-            	 (key.getCode() == KeyCode.X) || (key.getCode() == KeyCode.Y) ||
-            	 (key.getCode() == KeyCode.Z)) {
-            	  secondaryStage.close();
-              }
+            	if ((key.getCode() == KeyCode.ESCAPE) || (isLetterCode(key)) || 
+            	   (isDigitCode(key)) || (isFunctionCode(key))) {
+            		secondaryStage.close();
+            	}
             }
         });
+    }
+    
+    public boolean isLetterCode(KeyEvent key) {
+    	return ((key.getCode() == KeyCode.A) || (key.getCode() == KeyCode.B) || 
+               (key.getCode() == KeyCode.C) || (key.getCode() == KeyCode.D) || 
+               (key.getCode() == KeyCode.E) || (key.getCode() == KeyCode.F) ||
+               (key.getCode() == KeyCode.G) || (key.getCode() == KeyCode.H) || 
+               (key.getCode() == KeyCode.I) || (key.getCode() == KeyCode.J) || 
+               (key.getCode() == KeyCode.K) || (key.getCode() == KeyCode.L) || 
+               (key.getCode() == KeyCode.M) || (key.getCode() == KeyCode.N) || 
+               (key.getCode() == KeyCode.O) || (key.getCode() == KeyCode.P) || 
+               (key.getCode() == KeyCode.Q) || (key.getCode() == KeyCode.R) || 
+               (key.getCode() == KeyCode.S) || (key.getCode() == KeyCode.T) || 
+               (key.getCode() == KeyCode.U) || (key.getCode() == KeyCode.V) || 
+               (key.getCode() == KeyCode.W) || (key.getCode() == KeyCode.X) || 
+               (key.getCode() == KeyCode.Y) || (key.getCode() == KeyCode.Z));
+    }
+    
+    public boolean isDigitCode(KeyEvent key) {
+    	return ((key.getCode() == KeyCode.DIGIT0) || (key.getCode() == KeyCode.DIGIT1) || 
+           	   (key.getCode() == KeyCode.DIGIT2) || (key.getCode() == KeyCode.DIGIT3) || 
+           	   (key.getCode() == KeyCode.DIGIT4) || (key.getCode() == KeyCode.DIGIT5) ||
+           	   (key.getCode() == KeyCode.DIGIT6) || (key.getCode() == KeyCode.DIGIT7) || 
+           	   (key.getCode() == KeyCode.DIGIT8) || (key.getCode() == KeyCode.DIGIT9));
+    }
+    
+    public boolean isFunctionCode(KeyEvent key) {
+    	return ((key.getCode() == KeyCode.F1) || (key.getCode() == KeyCode.F2) || 
+               (key.getCode() == KeyCode.F3) || (key.getCode() == KeyCode.F4) || 
+               (key.getCode() == KeyCode.F5) || (key.getCode() == KeyCode.F6) ||
+               (key.getCode() == KeyCode.F7) || (key.getCode() == KeyCode.F8) || 
+               (key.getCode() == KeyCode.F9) || (key.getCode() == KeyCode.F10) ||
+               (key.getCode() == KeyCode.F11) || (key.getCode() == KeyCode.F12));
     }
 
     /**
      * Constructor
      */
     public MainApp() {
-    	/*
-    	 * testing GUI
-    	 * stub data
-    	 * @@author A0131300-unused because these are used to test GUI
-    	 *    	
-    	event.add("school activites");
-        event.add("community service");
-        event.add("cca");
-        event.add("school activities");
-        event.add("welfare packs packing");
-        event.add("church visit with friend");
-        event.add("family outing");
-        event.add("family dinner");
-        event.add("banquet");
-        
-        deadline.add("V0.2 Project Manual Submission");
-        deadline.add("Review on Reflections");
-        deadline.add("Post Lecture Quiz");
-        deadline.add("Tutorial Homework");
-        deadline.add("V0.2 Features");
-        deadline.add("Link All Components Together");
-        deadline.add("Essay Submission");
-        deadline.add("Demo");
-        deadline.add("V0.5 Poject Manual Submission");
-        
-        floating.add("badminton with friends");
-        floating.add("project meeting");
-        floating.add("meal with family");
-        floating.add("replace broken cup");
-        floating.add("study for test");
-        floating.add("movie");
-        floating.add("buy birthday present");
-        floating.add("shopping");
-        floating.add("dinner with friends");
-        
-        Text text = new Text("V0.1 Project Manual");
-        text.setFill(Color.GREEN);
-        Text t2 = new Text("V0.1 Live Demo");
-        t2.setFill(Color.GREEN);
-        Text t3 = new Text("Study for mid-terms");
-        t3.setFill(Color.GREEN);
-        
-        complete.add("hello");
-        complete.add("world");
-        complete.add(text);
-        complete.add(t2);
-        complete.add(t3);
-        
-        Text text2 = new Text("Adde All V0.2 Features");
-        text2.setFill(Color.RED);
-        
-        incomplete.add("not yet");
-        incomplete.add("undone");
-        incomplete.add(text2);
-        
-        today.add("Change GUI");
-        
-        tomorrow.add("Edit Developer Guide");*/
     	
     }
 
@@ -335,19 +308,6 @@ public class MainApp extends Application {
     /**
      * @@author yuju 
      */
-    
-    /*
-	 * Display today and tomorrow's tasks individually
-	 * @@author A0131300-unused due to change in plans
-	 * 
-    public ObservableList<String> getToday() {
-    	return today;
-    }
-
-    public ObservableList<String> getTmr() {
-    	return tomorrow;
-    }*/
-    
     private void addCommandBar(MainApp mainApp) {
         rootLayout.setBottom(new CommandBarController(mainApp));
     }
@@ -360,11 +320,6 @@ public class MainApp extends Application {
     	try {
         	FXMLLoader loader2 = new FXMLLoader(MainApp.class.getResource(HELP_LAYOUT_FXML));
         	StackPane page = (StackPane) loader2.load();
-        	//page.setStyle("-fx-background-color: rgba(230, 230, 250, 0.5)"); //lavendar
-        	//page.setStyle("-fx-background-color: rgba(205, 197, 191, 0.5)");  //seashell3
-        	//page.setStyle("-fx-background-color: rgba(000, 229, 238, 0.5)");  //turquoise2
-        	//page.setStyle("-fx-background-color: rgba(150, 150, 150, 0.5)");  //grey59
-        	//page.setStyle("-fx-background-color: rgba(204, 204, 204)");  //grey80
         	rootLayout2.setCenter(page);
         	
         	HelpTableController controller = loader2.getController();
@@ -414,36 +369,6 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
-    
-    /*
-	 * Display today and tomorrow's tasks individually
-	 * @@author A0131300-unused due to change in plans
-	 * 
-    private void addToday() {
-    	try {
-        	FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(TODAY_LAYOUT_FXML));
-        	AnchorPane page = (AnchorPane) loader.load();
-        	rootLayout.setTop(page);
-        	
-        	TodayController controller = loader.getController();
-            controller.setMainApp(this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    private void addTmr() {
-    	try {
-        	FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(TOMORROW_LAYOUT_FXML));
-        	AnchorPane page = (AnchorPane) loader.load();
-        	rootLayout.setTop(page);
-        	
-        	TomorrowController controller = loader.getController();
-            controller.setMainApp(this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
     
     private void addDeadline() {
     	try {
@@ -526,7 +451,60 @@ public class MainApp extends Application {
 
     /**
      * @@author yuju 
-     */     
+     */ 
+    public void callToday() {
+    	createDeadlineList(itemList);
+		createEventList(itemList);
+		createFloatingList(itemList);
+		addTodaySummaryView();
+    }
+    
+    public void callTomorrow() {
+    	createDeadlineList(itemList);
+		createEventList(itemList);
+		createFloatingList(itemList);
+		addTomorrowSummaryView();
+    }
+    
+    public void callFloating() {
+    	createFloatingList(itemList);
+		addFloating();
+    }
+    
+    public void callEvent() {
+    	createEventList(itemList);
+		addEvent();
+    }
+    
+    public void callDeadline() {
+    	createDeadlineList(itemList);
+		addDeadline();
+    }
+    
+    public void callComplete() {
+    	createCompleteList(itemList);
+		addComplete();
+    }
+    
+    public void callIncomplete() {
+    	createIncompleteList(itemList);
+		addIncomplete();
+    }
+    
+    public void callSearch() {
+    	createSearchList(itemList);
+		addSearch();
+    }
+    
+    public void callDisplayAll() {
+    	createCompleteList(itemList);
+		createIncompleteList(itemList);
+		addDisplayAll();
+    }
+    
+    public void callHelp() {
+		addHelpTable();
+    }
     
     public void handleKeyPress(CommandBarController commandBarController,
             				   KeyCode key,
@@ -550,73 +528,50 @@ public class MainApp extends Application {
     		String taskToUpdate = outputToUI.getInputBoxMsg();
 
     		commandBarController.setFeedback(feedbackMsg);
-    		
-    		//test UI with testFX
 
     		if (userInput != null) {
     			if (userInput.equals(TODAY_SCENE)) {
-    				createDeadlineList(itemList);
-    				createEventList(itemList);
-    				createFloatingList(itemList);
-    				addTodaySummaryView();
-    				//commandBarController.setFeedback(FEEDBACK_TODAY_SUMMARY);
+    				callToday();
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			} else if (userInput.equals(TOMORROW_SCENE)) {
-    				createDeadlineList(itemList);
-    				createEventList(itemList);
-    				createFloatingList(itemList);
-    				addTomorrowSummaryView();
-    				//commandBarController.setFeedback(FEEDBACK_TMR_SUMMARY);
+    				callTomorrow();
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			} else if (userInput.equals(FLOATING_SCENE)) {
-    				createFloatingList(itemList);
-    				addFloating();
-    				//commandBarController.setFeedback(FEEDBACK_FLOATING);
+    				callFloating();
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			} else if (userInput.equals(EVENT_SCENE)) {
-    				createEventList(itemList);
-    				addEvent();
-    				//commandBarController.setFeedback(FEEDBACK_EVENT);
+    				callEvent();
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			} else if (userInput.equals(DEADLINE_SCENE)) {
-    				createDeadlineList(itemList);
-    				addDeadline();
-    				//commandBarController.setFeedback(FEEDBACK_DEADLINE);
+    				callDeadline();
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			} else if (userInput.equals(COMPLETE_SCENE)) {
-    				createCompleteList(itemList);
-    				addComplete();
-    				//commandBarController.setFeedback(FEEDBACK_COMPLETE);
+    				callComplete();
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			} else if (userInput.equals(INCOMPLETE_SCENE)) {
-    				createIncompleteList(itemList);
-    				addIncomplete();
-    				//commandBarController.setFeedback(FEEDBACK_INCOMPLETE);
+    				callIncomplete();
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     		    //@@author: A0124524N; wenbin 
     			} else if (userInput.equals(SEARCH_SCENE)) {
-    				createSearchList(itemList);
-    				addSearch();
+    				callSearch();
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			/**
     			 * @@author yuju 
     			 */ 
     			} else if (userInput.equals(DISPLAY_ALL_SCENE)) {
-    				createCompleteList(itemList);
-    				createIncompleteList(itemList);
-    				addDisplayAll();
+    				callDisplayAll();
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			} else if (userInput.equals(HELP_SCENE)) {
-    				addHelpTable();
+    				callHelp();
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			} else if (userInput.equals(EXIT_SCENE)) {
@@ -633,225 +588,17 @@ public class MainApp extends Application {
     				delay.play();
     			}
     		}
-    			
-    		/*
-    		 * Display today and tomorrow's tasks individually
-    		 * @@author A0131300-unused due to change in plans
-    		 * 
-    		else if (userInput.equals(TODAY_SCENE)) {
-    			addToday();
-    			commandBarController.setFeedback(FEEDBACK_TODAY);
-    			commandBarController.clear();
-    		} else if (userInput.equals(TOMORROW_SCENE)) {
-    			addTmr();
-    			commandBarController.setFeedback(FEEDBACK_TOMORROW);
-    			commandBarController.clear();
-    		}*/
 
     		if (taskToUpdate != null) {
     			commandBarController.setText(taskToUpdate);
     			commandBarController.setFeedback(feedbackMsg);
     		}
     }
-    	
-    	/* 
-	     * Determines user input
-	     * @@author A0131300-unused as this section is for testing the GUI separately
-	     *
-    	 * need Logic to pass me the event with task type that is to be deleted
-		 * or get task type from Task
-    	else if(userInput.substring(0, 6).equals("delete") || 
-    			userInput.substring(0, 3).equals("del") ||
-    			userInput.substring(0, 1).equals("d")) {
-    		listNum = Integer.parseInt(userInput.substring(7));
-			Logic.takeAction(userInput);
-			if(type.equals(TYPE_DEADLINE)) {
-				deadline.remove(listNum);
-			}
-			else if(type.equals(TYPE_EVENT)) {
-				event.add(description);
-			}
-			else if(type.equals(TYPE_FLOATING)) {
-				floating.add(description);
-			}
-			commandBarController.setFeedback(FEEDBACK_DELETED + description); 
-    	}
-    	
-    	list.get(1).getTaskType();
-    	
-    	else {
-    		
-    		Command command = createCommand(userInput);
-    		command.execute();
-    		
-    		update (num)
-    		commandBarController.setText(string event returned by logic);
-    		
-    		ArrayList<String> list = new ArrayList<String>();
-    		Command command = createCommand(userInput);
-    		list = command.execute();
-    		
-    		handleEnterPress(commandBarController, list.get(0));
-    		
-    		listView.getItems().remove(item);  // Here I remove the item form my list.
-    		remove item from incomplete list when user is done with it and add it into complete list
-    		
-    		arr = userInput.split(" ", 3);
-    		command = arr[0];
-    	
-    		switch (command) {
-            
-    			case "add":
-    				type = arr[1];
-    	    		description = (arr[2]).trim();
-    				//Logic.takeAction(userInput);
-    	    		if (type.equals(TYPE_DEADLINE)) {
-    					deadline.add(description);
-    				} else if(type.equals(TYPE_EVENT)) {
-    					event.add(description);
-    				} else if(type.equals(TYPE_FLOATING)) {
-    					floating.add(description);
-    				} else {
-    					description = type + " " + description;
-    					floating.add(description);
-    				}
-    	    		//show added list
-    	    		//commandBarController.setText("floating");
-
-    				commandBarController.setFeedback(FEEDBACK_ADDED + description);
-    				commandBarController.setText("floating");
-    				//handleEnterPress(commandBarController, "floating");  //update screen once an action is done
-    				break;
-    				
-    			case "create":   //add command
-    				type = arr[1];
-    	    		description = (arr[2]).trim();
-    				//Logic.takeAction(userInput);
-    				if (type.equals(TYPE_DEADLINE)) {
-    					deadline.add(description);
-    				} else if (type.equals(TYPE_EVENT)) {
-    					event.add(description);
-    				} else if (type.equals(TYPE_FLOATING)) {
-    					floating.add(description);
-    				} else {
-    					description = type + " " + description;
-    					floating.add(description);
-    				}
-    				
-    				commandBarController.setFeedback(FEEDBACK_ADDED + description);
-    				break;
-    				
-    			case "a":   //add command
-    				type = arr[1];
-    	    		description = (arr[2]).trim();
-    				//Logic.takeAction(userInput);
-    				if (type.equals(TYPE_DEADLINE)) {
-    					deadline.add(description);
-    				} else if (type.equals(TYPE_EVENT)) {
-    					event.add(description);
-    				} else if (type.equals(TYPE_FLOATING)) {
-    					floating.add(description);
-    				} else {
-    					description = type + " " + description;
-    					floating.add(description);
-    				}
-    				
-    				commandBarController.setFeedback(FEEDBACK_ADDED + description);
-    				break;
-    				
-    			case "c":  //add command
-    				type = arr[1];
-    	    		description = (arr[2]).trim();
-    				//Logic.takeAction(userInput);
-    				if (type.equals(TYPE_DEADLINE)) {
-    					deadline.add(description);
-    				} else if (type.equals(TYPE_EVENT)) {
-    					event.add(description);
-    				} else if (type.equals(TYPE_FLOATING)) {
-    					floating.add(description);
-    				} else {
-    					description = type + " " + description;
-    					floating.add(description);
-    				}
-    				
-    				commandBarController.setFeedback(FEEDBACK_ADDED + description);
-    				break;
-                
-    			case "update" :
-    				description = (arr[2]).trim();
-    				listNum = Integer.parseInt(arr[1]);  //get data from Logic
-    				
-    				//Logic.takeAction(userInput);
-    				commandBarController.setFeedback(FEEDBACK_UPDATED + "\"" + description +
-    						"\" to " + newDescription);
-    				break;
-            	
-    			case "delete" :  
-    				description = (arr[1]).trim();
-    				listNum = Integer.parseInt(arr[1]);
-    				//Logic.takeAction(userInput);
-    				if (type.equals(TYPE_DEADLINE)) {
-    					deadline.remove(listNum);
-    				} else if (type.equals(TYPE_EVENT)) {
-    					event.add(description);
-    				} else if (type.equals(TYPE_FLOATING)) {
-    					floating.add(description);
-    				}
-    				commandBarController.setFeedback(FEEDBACK_DELETED + description);
-    				break;
-    				
-    			case "del":  //delete command
-    				description = (arr[1]).trim();
-    				listNum = Integer.parseInt(arr[1]);
-    				//Logic.takeAction(userInput);
-    				if (type.equals(TYPE_DEADLINE)) {
-    					deadline.remove(listNum);
-    				} else if (type.equals(TYPE_EVENT)) {
-    					event.add(description);
-    				} else if (type.equals(TYPE_FLOATING)) {
-    					floating.add(description);
-    				}
-    				commandBarController.setFeedback(FEEDBACK_DELETED + description);
-    				break;
-    				
-    			case "d":  //delete command
-    				description = (arr[1]).trim();
-    				listNum = Integer.parseInt(arr[1]);
-    				//Logic.takeAction(userInput);
-    				if (type.equals(TYPE_DEADLINE)) {
-    					deadline.remove(listNum);
-    				} else if (type.equals(TYPE_EVENT)) {
-    					event.add(description);
-    				} else if (type.equals(TYPE_FLOATING)) {
-    					floating.add(description);
-    				}
-    				commandBarController.setFeedback(FEEDBACK_DELETED + description);
-    				break;
-    				
-    			case "undo" :
-    				description = (arr[1]).trim();
-    				//Logic.takeAction(userInput);
-    				commandBarController.setFeedback(FEEDBACK_UNDONE + description);
-    				break;
-    			
-    			case "search" :
-    				//Logic.takeAction(userInput);
-    				break;
-                
-    			default :
-    				commandBarController.setFeedback(FEEDBACK_INVALID_COMMAND);
-    				break;
-    		}
-    		commandBarController.clear();
-    	}
-    	
-    }*/
     
     /**
      * Return list of tasks to be added into the respective listviews
      * 
-     * @author Jiahuan
-     * edit by Yu Ju
+     * @@author Jiahuan, yuju
      * 
      * @param itemList list of tasks from storage
      * @return list of tasks
@@ -930,4 +677,345 @@ public class MainApp extends Application {
 		}
     	return search;
     }
+    
+    /*
+	 * testing GUI
+	 * stub feedback
+	 * @@author A0131300-unused because there is change of plans
+	 *
+	private static final String TODAY_LAYOUT_FXML = "/main/resources/layouts/Today.fxml";
+    private static final String TOMORROW_LAYOUT_FXML = "/main/resources/layouts/Tomorrow.fxml";
+	
+    private static final String FEEDBACK_TODAY_SUMMARY = "Today's Summary";
+    private static final String FEEDBACK_TMR_SUMMARY = "Tomorrow's Summary";
+    private static final String FEEDBACK_DISPLAY = "All Events";
+    private static final String FEEDBACK_COMPLETE = "Completed Events";
+    private static final String FEEDBACK_INCOMPLETE = "Incomplete Events";
+    private static final String FEEDBACK_TODAY = "Today's Tasks";
+    private static final String FEEDBACK_TOMORROW = "Tomorrow's Tasks";
+    private static final String FEEDBACK_DEADLINE = "Deadline Tasks";
+    private static final String FEEDBACK_EVENT = "Events";
+    private static final String FEEDBACK_FLOATING = "Floating Tasks";
+    
+    private static final String FEEDBACK_INVALID_COMMAND = "Invalid command.";
+    private static final String FEEDBACK_ADDED = "Successfully Added: ";
+    private static final String FEEDBACK_DELETED = "Successfully Deleted: ";
+    private static final String FEEDBACK_UPDATED = "Successfully Updated ";
+    private static final String FEEDBACK_UNDONE = "Undone: ";
+    
+    private static final String TYPE_COMPLETE = "complete";
+    private static final String TYPE_INCOMPLETE = "incomplete";
+    
+    private ObservableList<String> today = FXCollections.observableArrayList();
+    private ObservableList<String> tomorrow = FXCollections.observableArrayList();
+
+    private String[] arr;
+    private String[] array;
+    private String typeDisplay;  //types of display in command
+    private String command;
+    private String description;
+    private String type;
+    private String newDescription;
+    private int listNum;
+    private MainApp mainApp;*/
+    
+    /*
+	 * testing GUI
+	 * stub data
+	 * @@author A0131300-unused because these are used to test GUI
+	 *
+    public MainApp() {    	
+    	event.add("school activites");
+        event.add("community service");
+        event.add("cca");
+        event.add("school activities");
+        event.add("welfare packs packing");
+        event.add("church visit with friend");
+        event.add("family outing");
+        event.add("family dinner");
+        event.add("banquet");
+        
+        deadline.add("V0.2 Project Manual Submission");
+        deadline.add("Review on Reflections");
+        deadline.add("Post Lecture Quiz");
+        deadline.add("Tutorial Homework");
+        deadline.add("V0.2 Features");
+        deadline.add("Link All Components Together");
+        deadline.add("Essay Submission");
+        deadline.add("Demo");
+        deadline.add("V0.5 Poject Manual Submission");
+        
+        floating.add("badminton with friends");
+        floating.add("project meeting");
+        floating.add("meal with family");
+        floating.add("replace broken cup");
+        floating.add("study for test");
+        floating.add("movie");
+        floating.add("buy birthday present");
+        floating.add("shopping");
+        floating.add("dinner with friends");
+        
+        Text text = new Text("V0.1 Project Manual");
+        text.setFill(Color.GREEN);
+        Text t2 = new Text("V0.1 Live Demo");
+        t2.setFill(Color.GREEN);
+        Text t3 = new Text("Study for mid-terms");
+        t3.setFill(Color.GREEN);
+        
+        complete.add("hello");
+        complete.add("world");
+        complete.add(text);
+        complete.add(t2);
+        complete.add(t3);
+        
+        Text text2 = new Text("Adde All V0.2 Features");
+        text2.setFill(Color.RED);
+        
+        incomplete.add("not yet");
+        incomplete.add("undone");
+        incomplete.add(text2);
+        
+        today.add("Change GUI");
+        
+        tomorrow.add("Edit Developer Guide");
+    	
+    }*/
+    
+    /*
+	 * Display today and tomorrow's tasks individually
+	 * @@author A0131300-unused due to change in plans
+	 *	
+    public ObservableList<String> getToday() {
+    	return today;
+    }
+
+    public ObservableList<String> getTmr() {
+    	return tomorrow;
+    }*/
+    
+    /*
+	 * Display today and tomorrow's tasks individually
+	 * @@author A0131300-unused due to change in plans
+	 * 
+    private void addToday() {
+    	try {
+        	FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(TODAY_LAYOUT_FXML));
+        	AnchorPane page = (AnchorPane) loader.load();
+        	rootLayout.setTop(page);
+        	
+        	TodayController controller = loader.getController();
+            controller.setMainApp(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void addTmr() {
+    	try {
+        	FXMLLoader loader = new FXMLLoader(MainApp.class.getResource(TOMORROW_LAYOUT_FXML));
+        	AnchorPane page = (AnchorPane) loader.load();
+        	rootLayout.setTop(page);
+        	
+        	TomorrowController controller = loader.getController();
+            controller.setMainApp(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
+    
+    /*
+	 * Display today and tomorrow's tasks individually
+	 * @@author A0131300-unused due to change in plans
+	 * 
+    public void handleEnterPress(CommandBarController commandBarController, String _userInput ) {
+    
+		else if (userInput.equals(TODAY_SCENE)) {
+			addToday();
+			commandBarController.setFeedback(FEEDBACK_TODAY);
+			commandBarController.clear();
+		} else if (userInput.equals(TOMORROW_SCENE)) {
+			addTmr();
+			commandBarController.setFeedback(FEEDBACK_TOMORROW);
+			commandBarController.clear();
+		}
+	}*/
+	
+	/* 
+     * Determines user input
+     * @@author A0131300-unused as this section is for testing the GUI separately
+     *
+	public void handleEnterPress(CommandBarController commandBarController, String _userInput ) {
+		
+		else if(userInput.substring(0, 6).equals("delete") || 
+			userInput.substring(0, 3).equals("del") ||
+			userInput.substring(0, 1).equals("d")) {
+		listNum = Integer.parseInt(userInput.substring(7));
+		Logic.takeAction(userInput);
+		if(type.equals(TYPE_DEADLINE)) {
+			deadline.remove(listNum);
+		}
+		else if(type.equals(TYPE_EVENT)) {
+			event.add(description);
+		}
+		else if(type.equals(TYPE_FLOATING)) {
+			floating.add(description);
+		}
+		commandBarController.setFeedback(FEEDBACK_DELETED + description); 
+	
+		else {
+		
+		Command command = createCommand(userInput);
+		command.execute();
+		
+		update (num)
+		commandBarController.setText(string event returned by logic);
+		
+		ArrayList<String> list = new ArrayList<String>();
+		Command command = createCommand(userInput);
+		list = command.execute();
+		
+		handleEnterPress(commandBarController, list.get(0));
+		
+		listView.getItems().remove(item);  // Here I remove the item form my list.
+		remove item from incomplete list when user is done with it and add it into complete list
+		
+		arr = userInput.split(" ", 3);
+		command = arr[0];
+	
+		switch (command) {
+        
+			case "add":
+				type = arr[1];
+	    		description = (arr[2]).trim();
+				//Logic.takeAction(userInput);
+	    		if (type.equals(TYPE_DEADLINE)) {
+					deadline.add(description);
+				} else if(type.equals(TYPE_EVENT)) {
+					event.add(description);
+				} else if(type.equals(TYPE_FLOATING)) {
+					floating.add(description);
+				} else {
+					description = type + " " + description;
+					floating.add(description);
+				}
+	    		//show added list
+	    		//commandBarController.setText("floating");
+
+				commandBarController.setFeedback(FEEDBACK_ADDED + description);
+				commandBarController.setText("floating");
+				//handleEnterPress(commandBarController, "floating");  //update screen once an action is done
+				break;	
+			case "create":   //add command
+				type = arr[1];
+	    		description = (arr[2]).trim();
+				//Logic.takeAction(userInput);
+				if (type.equals(TYPE_DEADLINE)) {
+					deadline.add(description);
+				} else if (type.equals(TYPE_EVENT)) {
+					event.add(description);
+				} else if (type.equals(TYPE_FLOATING)) {
+					floating.add(description);
+				} else {
+					description = type + " " + description;
+					floating.add(description);
+				}
+				
+				commandBarController.setFeedback(FEEDBACK_ADDED + description);
+				break;
+			case "a":   //add command
+				type = arr[1];
+	    		description = (arr[2]).trim();
+				//Logic.takeAction(userInput);
+				if (type.equals(TYPE_DEADLINE)) {
+					deadline.add(description);
+				} else if (type.equals(TYPE_EVENT)) {
+					event.add(description);
+				} else if (type.equals(TYPE_FLOATING)) {
+					floating.add(description);
+				} else {
+					description = type + " " + description;
+					floating.add(description);
+				}
+				
+				commandBarController.setFeedback(FEEDBACK_ADDED + description);
+				break;
+			case "c":  //add command
+				type = arr[1];
+	    		description = (arr[2]).trim();
+				//Logic.takeAction(userInput);
+				if (type.equals(TYPE_DEADLINE)) {
+					deadline.add(description);
+				} else if (type.equals(TYPE_EVENT)) {
+					event.add(description);
+				} else if (type.equals(TYPE_FLOATING)) {
+					floating.add(description);
+				} else {
+					description = type + " " + description;
+					floating.add(description);
+				}
+				
+				commandBarController.setFeedback(FEEDBACK_ADDED + description);
+				break;
+			case "update" :
+				description = (arr[2]).trim();
+				listNum = Integer.parseInt(arr[1]);  //get data from Logic
+				
+				//Logic.takeAction(userInput);
+				commandBarController.setFeedback(FEEDBACK_UPDATED + "\"" + description +
+						"\" to " + newDescription);
+				break;
+			case "delete" :  
+				description = (arr[1]).trim();
+				listNum = Integer.parseInt(arr[1]);
+				//Logic.takeAction(userInput);
+				if (type.equals(TYPE_DEADLINE)) {
+					deadline.remove(listNum);
+				} else if (type.equals(TYPE_EVENT)) {
+					event.add(description);
+				} else if (type.equals(TYPE_FLOATING)) {
+					floating.add(description);
+				}
+				commandBarController.setFeedback(FEEDBACK_DELETED + description);
+				break;	
+			case "del":  //delete command
+				description = (arr[1]).trim();
+				listNum = Integer.parseInt(arr[1]);
+				//Logic.takeAction(userInput);
+				if (type.equals(TYPE_DEADLINE)) {
+					deadline.remove(listNum);
+				} else if (type.equals(TYPE_EVENT)) {
+					event.add(description);
+				} else if (type.equals(TYPE_FLOATING)) {
+					floating.add(description);
+				}
+				commandBarController.setFeedback(FEEDBACK_DELETED + description);
+				break;	
+			case "d":  //delete command
+				description = (arr[1]).trim();
+				listNum = Integer.parseInt(arr[1]);
+				//Logic.takeAction(userInput);
+				if (type.equals(TYPE_DEADLINE)) {
+					deadline.remove(listNum);
+				} else if (type.equals(TYPE_EVENT)) {
+					event.add(description);
+				} else if (type.equals(TYPE_FLOATING)) {
+					floating.add(description);
+				}
+				commandBarController.setFeedback(FEEDBACK_DELETED + description);
+				break;	
+			case "undo" :
+				description = (arr[1]).trim();
+				//Logic.takeAction(userInput);
+				commandBarController.setFeedback(FEEDBACK_UNDONE + description);
+				break;
+			case "search" :
+				//Logic.takeAction(userInput);
+				break;
+			default :
+				commandBarController.setFeedback(FEEDBACK_INVALID_COMMAND);
+				break;
+			}
+			commandBarController.clear();
+		}
+	}*/
 }

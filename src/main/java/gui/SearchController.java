@@ -9,7 +9,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 
-//@@author: A0124524N; wenbin 
+/**
+ * @@author: A0124524N; wenbin 
+ * 
+ * Followed tutorial from:
+ * http://code.makery.ch/library/javafx-2-tutorial/
+ */
 
 public class SearchController {
 	

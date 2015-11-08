@@ -5,6 +5,9 @@ package main.java.gui;
  *
  *
  * @@author yuju
+ * 
+ * Followed tutorial from:
+ * http://code.makery.ch/library/javafx-2-tutorial/
  */
 
 public class HelpTableController {

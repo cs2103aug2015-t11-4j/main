@@ -14,6 +14,9 @@ import javafx.scene.text.Text;
  * to be displayed to the user.
  *
  * @@author yuju
+ * 
+ * Followed tutorial from:
+ * http://code.makery.ch/library/javafx-2-tutorial/
  */
 
 public class CompleteController {
@@ -36,15 +39,9 @@ public class CompleteController {
 		
 		completeList.setItems(mainApp.getComplete());
 		
-		//DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	    //get current date time with Date()
 	    Date date = new Date();
-	    //System.out.println(dateFormat.format(date));
-	 
-	    //get current date time with Calendar()
-	    //Calendar cal = Calendar.getInstance();
-	    //System.out.println(dateFormat.format(cal.getTime()));
 
 	    clock.setText(" " + dateFormat.format(date));
 	}

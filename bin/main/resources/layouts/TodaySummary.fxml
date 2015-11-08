@@ -16,9 +16,9 @@
     </Label>
     <Label font="$x1" prefHeight="35.0" prefWidth="880.0" style="-fx-background-color: rgba(255, 106, 106);" text="  Events" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="240.0" />
     <Label font="$x1" prefHeight="35.0" prefWidth="880.0" style="-fx-background-color: rgba(058, 095, 205);" text="  Floating Tasks" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="445.0" />
-    <ListView fx:id="deadlineList" prefHeight="170.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
-    <ListView fx:id="eventList" prefHeight="170.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="275.0" />
-    <ListView fx:id="floatingList" prefHeight="170.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+    <ListView fx:id="deadlineList" maxHeight="-1.0" maxWidth="-1.0" prefHeight="170.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
+    <ListView fx:id="eventList" maxHeight="-1.0" maxWidth="-1.0" prefHeight="170.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="275.0" />
+    <ListView fx:id="floatingList" maxHeight="-1.0" maxWidth="-1.0" prefHeight="170.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
     <Label fx:id="clock" font="$x1" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: rgba(000, 000, 000);" text="" textFill="#66ffed" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
     <Label alignment="CENTER" prefHeight="35.0" text="Today's Summary" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <font>
