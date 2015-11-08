@@ -111,6 +111,7 @@ public class Controller {
 			break;
 		case "complete":
 			try{
+				System.out.println("Inside controller complete");
                 itemNum = Integer.parseInt(inputForAction.get(1));     
                 command = new Complete(itemNum, storage);
 			} catch (NumberFormatException e){

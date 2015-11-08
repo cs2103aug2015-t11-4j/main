@@ -41,6 +41,7 @@ public class Complete implements Command{
 		outputToUI = Controller.refreshScreen();
 		outputToUI.setFeedbackMsg(feedbackMsg);
 		history.pushCommandToUndoList(this);
+		//DataDisplay.printUndoCommandList();
 		history.clearRedoList();
 		return outputToUI;
 	}
@@ -52,7 +53,6 @@ public class Complete implements Command{
 		String feedbackMsg = DataDisplay.feedback("Undo", code);
 		outputToUI = Controller.refreshScreen();
 		outputToUI.setFeedbackMsg(feedbackMsg);
-		history.clearRedoList();
 		return outputToUI;
 	}
 
@@ -73,10 +73,10 @@ public class Complete implements Command{
 				storage.getTaskList().get(i).setCompleted(ifComplete);
 			}
 		}*/
-		String feedbackMsg = DataDisplay.feedback("Redo", code);
+		String feedbackMsg = DataDisplay.feedback("Complete", code);
 		outputToUI = Controller.refreshScreen();
 		outputToUI.setFeedbackMsg(feedbackMsg);
-		history.pushCommandToUndoList(this);		
+		history.pushCommandToUndoList(this);
 		return outputToUI;
 	}
 	

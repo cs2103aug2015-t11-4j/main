@@ -3,6 +3,10 @@
 package main.java.resources;
 
 import java.util.ArrayList;
+import java.util.Stack;
+
+import main.java.logic.Command;
+import main.java.logic.History;
 
 public class DataDisplay {
 
@@ -177,6 +181,26 @@ public class DataDisplay {
 		System.out.println("inputBoxMsg: " + outputToUI.getInputBoxMsg());
 	}
 	
+	//for testing, to print the command content
+	public static void printUndoCommandList(){
+		History history = History.getInstance();
+		Stack<Command> undoCommandList = history.getUndoCommandList();
+		int size = undoCommandList.size();
+		for (int i = 0; i < size; i++){
+			Command command = undoCommandList.get(i);
+			System.out.println(command);
+		}
+	}
+	
+	public static void printRedoCommandList(){
+		History history = History.getInstance();
+		Stack<Command> redoCommandList = history.getRedoCommandList();
+		int size = redoCommandList.size();
+		for (int i = 0; i < size; i++){
+			Command command = redoCommandList.get(i);
+			System.out.println(command);
+		}
+	}
 	
 	//Unused due to change of screen listviews
 	/*
