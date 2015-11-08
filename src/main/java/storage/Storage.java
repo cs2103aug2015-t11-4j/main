@@ -47,23 +47,74 @@ public class Storage {
     /* 
 	 * Generates an alt4 file containing taskList
 	 */
-	private String filename = "Alt4.txt";	
-	
+    private String directory = "";
+    private String filename = "Alt4.txt";
+    
 	/* 
      * Allows user to change the destination of the taskList and write actual
      * taskList location
-     * 
-     * TODO: To allow duplicates of the taskList? Rely on Alt4.txt for location storage?
      */
-	public int changeDirectory(String directory) {
+	public int changeDirectory(String setDirectory) {
 	    try {
-	        File file = new File(filename = directory + filename);
+	        if (setDirectory.equals("default") || setDirectory.equals("\\") || setDirectory.equals("/")) {
+	            File file = new File(directory + "\\" + filename);
+	            file.delete();
+	            
+	            directory = "";
+                filename = "Alt4.txt";
+                
+                // Blanks off the file
+                FileWriter fw2 = new FileWriter(filename, false);
+                BufferedWriter bw2 = new BufferedWriter(fw2);
 
-	        if(!file.exists()) {
-	            file.createNewFile(); 
+                bw2.write("");
+                
+                // Copies all existing tasks in the taskList onto the default location
+                FileWriter fw1 = new FileWriter(filename, true);
+                BufferedWriter bw1 = new BufferedWriter(fw1);
+                
+                for(int i = 0; i<taskList.size(); i++) {
+                    bw1.write(taskList.get(i).getTaskType() + ";" + taskList.get(i).getTaskDescription() + ";" + taskList.get(i).getStartDate()
+                    + ";" + taskList.get(i).getEndDate() + ";" + taskList.get(i).getStartTime() + ";" + taskList.get(i).getEndTime() + ";"
+                    + taskList.get(i).getIsCompleted() + ";" + taskList.get(i).getIsDateTimeValid() + ";" + taskList.get(i).getRecurringID() + ";" );
+
+                    bw1.newLine();
+                }
+                
+                bw1.close();
+                bw2.close();
+	        } else {
+                directory = setDirectory;
+                
+                File file = new File(directory, filename);
+
+                if(file.exists()) {
+                    file.createNewFile(); 
+                }
+
+                file.getParentFile().mkdirs();
+                
+                // Copies all existing tasks in the taskList onto the new location
+                FileWriter fw1 = new FileWriter(directory + "\\" + filename, true);
+                BufferedWriter bw1 = new BufferedWriter(fw1);
+                
+                for(int i = 0; i<taskList.size(); i++) {
+                    bw1.write(taskList.get(i).getTaskType() + ";" + taskList.get(i).getTaskDescription() + ";" + taskList.get(i).getStartDate()
+                    + ";" + taskList.get(i).getEndDate() + ";" + taskList.get(i).getStartTime() + ";" + taskList.get(i).getEndTime() + ";"
+                    + taskList.get(i).getIsCompleted() + ";" + taskList.get(i).getIsDateTimeValid() + ";" + taskList.get(i).getRecurringID() + ";" );
+
+                    bw1.newLine();
+                }
+
+                // Writes the user's set directory onto the first line
+                FileWriter fw2 = new FileWriter(filename, false);
+                BufferedWriter bw2 = new BufferedWriter(fw2);
+
+                bw2.write(directory + ";");
+                
+                bw1.close();
+                bw2.close();    
 	        }
-
-	        file.getParentFile().mkdirs();
 	        return 0;
 	    } catch (Exception e) {
 	        logger.log(Level.WARNING, "Unable to create external file in {0}!", directory);
@@ -82,18 +133,18 @@ public class Storage {
             if(!taskList.isEmpty()) {
                 wipeTaskList();
             }
-
+            
+            if(retrieveDirectory()) {
+                filename = directory + "\\" + filename;
+            }
+            
             FileReader fr = new FileReader(filename);
             BufferedReader br = new BufferedReader(fr);
 
             @SuppressWarnings("unused")
             String line;
             int count = 0;
-            /*
-            if(retrieveDirectory()){
-                count = 1;
-            }
-            */
+            
             while ((line = br.readLine()) != null) {
                 taskList.add(new Task(getTaskTypeByItemNum(count),
                         getTaskDescriptionByItemNum(count),
@@ -149,22 +200,20 @@ public class Storage {
      * NOTE: External file saves the path of the user's directory of choice 
      * to the first line of the external file
      */
-    /*
     private boolean retrieveDirectory() {
         String[] getDirectory;
         
         if(getTaskTypeByItemNum(0).equals("deadlines") 
                 || getTaskTypeByItemNum(0).equals("event") 
                 || getTaskTypeByItemNum(0).equals("floating")) { 
-            logger.log(Level.INFO, "Retrieving directory from external file!");
-            getDirectory = readExternalFile(0);
-            filename = getDirectory[0] + filename;
-            return true;
+            return false;
         }
-        
-        return false;
+        logger.log(Level.INFO, "Retrieving directory from external file!");
+        getDirectory = readExternalFile(0);
+        directory = getDirectory[0];
+        return true;
     }
-    */
+    
 	
 	/* 
      * Adds one task to the taskList and writes to external file
@@ -175,7 +224,8 @@ public class Storage {
 		
 		try {
 		    logger.log(Level.INFO, "Writing {0} to external file", task.getTaskDescription());
-			FileWriter fw = new FileWriter(filename, true);
+		    
+		    FileWriter fw = new FileWriter(filename, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			
 			bw.write(task.getTaskType() + ";" + task.getTaskDescription() + ";" + task.getStartDate()
@@ -413,20 +463,13 @@ public class Storage {
      * Reads the external file based on its line number
      */
     private String[] readExternalFile(int itemNumber) {
-        try {
+        try {  
             FileReader fr = new FileReader(filename);
-            BufferedReader br = new BufferedReader(fr);        
+            BufferedReader br = new BufferedReader(fr);       
 
             int lineNumber = 0;
             String line = null;
             String[] target = new String[9];
-            
-            /*
-            //Checks if the first line is a user specified directory for the taskList
-                if(retrieveDirectory()){
-                lineNumber = 1;
-            }
-            */
             
             while ((line = br.readLine()) != null) {
                 if (lineNumber == itemNumber) {
