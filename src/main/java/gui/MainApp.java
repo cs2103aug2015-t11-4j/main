@@ -176,10 +176,6 @@ public class MainApp extends Application {
             	  primaryStage.close();
               } else if (key.getCode() == KeyCode.F5) {  //minimise the window
             	  primaryStage.setIconified(true);
-              } else if (key.getCode() == KeyCode.F6) {  //maximise the window
-            	  primaryStage.setMaximized(true);
-              } else if (key.getCode() == KeyCode.F7) {  //restore to original size
-            	  primaryStage.setMaximized(false);
               } else if (switchDisplay.match(key) && (pressCount == 1)) {
             	  processItemList(DISPLAY_TODAY);
             	  callToday();
