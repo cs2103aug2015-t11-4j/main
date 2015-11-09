@@ -67,25 +67,11 @@ public class SearchTest {
 		command5.execute();
 		command6.execute();
 	}
-	
-	//Test only when external file is empty
-	@Test
-	public void test() throws IOException {
-		execute();
-		
-		assertTrue(storage.getTaskList().contains(task1));
-		assertTrue(storage.getTaskList().contains(task2));
-		assertTrue(storage.getTaskList().contains(task3));
-		assertTrue(storage.getTaskList().contains(task4));
-		assertTrue(storage.getTaskList().contains(task5));
-		assertTrue(storage.getTaskList().contains(task6));	
-	}
-	
-	//Test every method separately
+
 	//Pre-cond: empty ALT4.txt
 	@Test
-	public void testObtainTodaySummary() throws IOException {	
-		execute();
+	public void testObtainTodaySummary() throws IOException {			
+		//execute();
 		
 		ArrayList<Task> todaySummary = new ArrayList<Task>();
 		todaySummary.add(task1);  //deadline
@@ -94,19 +80,19 @@ public class SearchTest {
 		assertEquals(todaySummary, Search.obtainTodaySummary(storage));
 	}
 	
-	/*@Test
+	@Test
 	public void testObtainTomorrowSummary() throws IOException {
-		execute();
+		//execute();
 		
 		ArrayList<Task> tmrSummary = new ArrayList<Task>();
 		tmrSummary.add(task2);  //deadline
 		tmrSummary.add(task5);  //floating
 		assertEquals(tmrSummary, Search.obtainTomorrowSummary(storage));
-	}*/
+	}
 	
-	/*@Test
+	@Test
 	public void testObtainAllTasks() throws IOException {
-		execute();
+		//execute();
 		
 		//go by date -> time
 		ArrayList<Task> allTasks = new ArrayList<Task>();
@@ -117,11 +103,11 @@ public class SearchTest {
 		allTasks.add(task4);  //event
 		allTasks.add(task5);  //floating	
 		assertEquals(allTasks, Search.obtainAllTasks(storage));
-	}*/
+	}
 	
-	/*@Test
+	@Test
 	public void testObtainAllIncompleteTasks() throws IOException {
-		execute();
+		//execute();
 		
 		//go by deadline -> event -> floating
 		//go by date -> time
@@ -132,11 +118,11 @@ public class SearchTest {
 		incomplete.add(task4);  //event
 		incomplete.add(task5);  //floating
 		assertEquals(incomplete, Search.obtainAllIncompleteTasks(storage));
-	}*/
+	}
 	
-	/*@Test
+	@Test
 	public void testObtainAllCompleteTasks() throws IOException {
-		execute();
+		//execute();
 
 		//go by deadline -> event -> floating
 		//go by date -> time
@@ -144,11 +130,11 @@ public class SearchTest {
 		complete.add(task3);  //event
 		complete.add(task6);  //floating
 		assertEquals(complete, Search.obtainAllCompleteTasks(storage));
-	}*/
+	}
 	
-	/*@Test
+	@Test
 	public void testObtainDeadlineTasks() throws IOException {
-		execute();
+		//execute();
 		
 		//complete -> incomplete
 		//go by date -> time
@@ -156,9 +142,31 @@ public class SearchTest {
 		deadline.add(task1);  //deadline
 		deadline.add(task2);  //deadline
 		assertEquals(deadline, Search.obtainDeadlineTasks(storage));
-	}*/
+	}
 	
-	/*@Test
+	@Test
+	public void testObtainFloatingTasks() throws IOException {
+		//execute();
+		
+		//complete -> incomplete
+		ArrayList<Task> floating = new ArrayList<Task>();
+		floating.add(task6);  //floating
+		floating.add(task5);  //floating
+		assertEquals(floating, Search.obtainFloatingTasks(storage));
+	}
+	
+	@Test
+	public void testObtainSearchResults() throws IOException {
+		//execute();
+		
+		//complete -> incomplete
+		ArrayList<Task> results = new ArrayList<Task>();
+		results.add(task6);  //floating
+		results.add(task5);  //floating
+		assertEquals(results, Search.obtainSearchResults("wit", storage));
+	}
+	
+	@Test
 	public void testObtainEventTasks() throws IOException {
 		execute();
 		
@@ -168,28 +176,6 @@ public class SearchTest {
 		event.add(task3);  //event
 		event.add(task4);  //event
 		assertEquals(event, Search.obtainEventTasks(storage));
-	}*/
-	
-	/*@Test
-	public void testObtainFloatingTasks() throws IOException {
-		execute();
-		
-		//complete -> incomplete
-		ArrayList<Task> floating = new ArrayList<Task>();
-		floating.add(task6);  //floating
-		floating.add(task5);  //floating
-		assertEquals(floating, Search.obtainFloatingTasks(storage));
-	}*/
-	
-	/*@Test
-	public void testObtainSearchResults() throws IOException {
-		execute();
-		
-		//complete -> incomplete
-		ArrayList<Task> results = new ArrayList<Task>();
-		results.add(task6);  //floating
-		results.add(task5);  //floating
-		assertEquals(results, Search.obtainSearchResults("wit", storage));
-	}*/
+	}
 
 }
