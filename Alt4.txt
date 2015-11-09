@@ -1,2 +1,12 @@
-deadline;task3;-;09/11/2016;-;0900;false;true;4;
-floating;task;-;-;-;-;true;true;0;0;
+floating;meeting;-;-;-;-;false;true;0;
+floating;task1;-;-;-;-;false;true;0;
+floating;task2;-;-;-;-;false;true;0;
+floating;task3;-;-;-;-;false;true;0;
+floating;task4;-;-;-;-;false;true;0;
+deadline;task6;-;09/11/2015;-;2230;false;true;0;
+deadline;task7;-;10/11/2015;-;2300;false;true;0;
+deadline;task8;-;11/11/2015;-;2320;false;true;0;
+deadline;task9;-;12/11/2015;-;1000;false;true;0;
+event;task10;09/11/2015;09/11/2015;2230;2300;false;true;0;
+event;task11;10/11/2015;10/11/2015;1000;1200;false;true;0;
+floating;floating;-;-;-;-;true;true;0;0;
