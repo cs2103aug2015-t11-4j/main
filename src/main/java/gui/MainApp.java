@@ -1058,4 +1058,105 @@ public class MainApp extends Application {
 			commandBarController.clear();
 		}
 	}*/
+    
+    /*
+     * @@author A0131300-unused 
+     * Reason: Change of plans (change from Swing to JavaFX)
+     *
+    package main.java.ui;
+
+    import java.io.IOException;
+    import java.io.OutputStream;
+
+    import javax.swing.JTextArea;
+
+
+    public class CustomOutputStream extends OutputStream {
+
+        private JTextArea textArea;
+        
+        public CustomOutputStream(JTextArea textArea) {
+            this.textArea = textArea;
+        }
+        
+        //b is the byte to be written as character to the JTextArea
+        @Override
+        public void write(int b) throws IOException {
+            // redirects data to the text area
+            textArea.append(String.valueOf((char)b));
+            // scrolls the text area to the end of data
+            //textArea.setCaretPosition(textArea.getDocument().getLength());
+        }
+
+    }*/
+
+    /*
+     * @@author A0131300-unused 
+     * Reason: Change of plans (change from Swing to JavaFX)
+     *
+    package main.java.ui;
+
+    import java.io.IOException;
+    import java.io.OutputStream;
+
+    import javax.swing.JTextArea;
+
+
+    public class CustomOutputStream extends OutputStream {
+
+        private JTextArea textArea;
+        
+        public CustomOutputStream(JTextArea textArea) {
+            this.textArea = textArea;
+        }
+        
+        //b is the byte to be written as character to the JTextArea
+        @Override
+        public void write(int b) throws IOException {
+            // redirects data to the text area
+            textArea.append(String.valueOf((char)b));
+            // scrolls the text area to the end of data
+            //textArea.setCaretPosition(textArea.getDocument().getLength());
+        }
+
+    }*/
+    
+    /*
+     * @@author A0104278-unused 
+     * Reason: Change of plans (change from Swing to JavaFX)
+     *
+    package main.java.ui;
+
+    import java.util.Scanner; 
+
+    public class UI { 
+        public static void welcome(){ 
+            System.out.println("Welcome to ALT4, your personlized agenda manager"); 
+        } 
+         
+        public static String promoteCommand(){ 
+            Scanner sc = new Scanner(System.in); 
+            System.out.print("Command: "); 
+            String command = sc.nextLine(); 
+            sc.close(); 
+            return command; 
+        } 
+     
+     
+        public static void feedback(String action, int code) { 
+            switch (action){ 
+            case "Add": 
+                if (code==0){ 
+                    System.out.println("Added!"); 
+                }else{ 
+                    System.out.println("Failed!"); 
+                } 
+            } 
+             
+        }
+
+        public static void feedbackWrongCommand() {
+            // TODO Auto-generated method stub
+        } 
+     } */
 }

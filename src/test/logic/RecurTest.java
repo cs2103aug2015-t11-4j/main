@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import main.java.logic.Command;
 import main.java.logic.Controller;
 import main.java.logic.History;
 import main.java.logic.Recur;
@@ -60,7 +59,7 @@ public class RecurTest {
 		recur.setHistory(history);
 		recur.setRecurList(recurList1);
 		recur.setStorage(storage);
-		Command recurCmd = recur;
+		//Command recurCmd = recur;
 		
 		
 		//userInput2.add(user2_1);
@@ -73,7 +72,7 @@ public class RecurTest {
 		recur2.setHistory(history);
 		recur2.setRecurList(recurList2);
 		recur2.setStorage(storage);
-		Command recurCmd2 = recur;
+		//Command recurCmd2 = recur;
 		
 
 		try {

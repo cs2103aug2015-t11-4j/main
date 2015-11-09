@@ -7,7 +7,6 @@ package main.java.logic;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import main.java.resources.DataDisplay;
 import main.java.resources.Task;
 import main.java.resources.TaskComparator;
 import main.java.storage.Storage;

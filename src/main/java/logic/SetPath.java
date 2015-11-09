@@ -14,7 +14,7 @@ import main.java.storage.Storage;
  */
 public class SetPath implements Command{
 	private Storage storage = Storage.getInstance();
-	private History history = History.getInstance();
+	//private History history = History.getInstance();
 	private String newPath;
 	
 	public SetPath(String newPath){
