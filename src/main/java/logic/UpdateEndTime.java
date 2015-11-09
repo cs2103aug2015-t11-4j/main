@@ -17,7 +17,7 @@ import main.java.storage.Storage;
  */
 public class UpdateEndTime implements Command{
 	private Storage storage = Storage.getInstance();
-	private String newEndTime;//TODO change each copy
+	private String newEndTime;
 	private int itemNum;
 	private Task oldTask;
 	private Task newTask;
@@ -71,7 +71,6 @@ public class UpdateEndTime implements Command{
 		}
 		//If empty, return feedback msg saying task description cannot be empty
 		if (newEndTime.isEmpty()){
-			//System.out.println("Inside empty");
 			code = 7;
 			feedbackMsg = DataDisplay.feedback("Update", code);
 			outputToUI.setFeedbackMsg(feedbackMsg);
@@ -132,7 +131,6 @@ public class UpdateEndTime implements Command{
 		}
 		//If empty, return feedback msg saying task description cannot be empty
 		if (newEndTime.isEmpty()){
-			//System.out.println("Inside empty");
 			code = 7;
 			feedbackMsg = DataDisplay.feedback("Update", code);
 			outputToUI.setFeedbackMsg(feedbackMsg);

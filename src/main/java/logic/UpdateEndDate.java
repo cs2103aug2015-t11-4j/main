@@ -19,7 +19,7 @@ import main.java.storage.Storage;
 
 public class UpdateEndDate implements Command{
 	private Storage storage = Storage.getInstance();
-	private String newEndDate;//TODO change each copy
+	private String newEndDate;
 	private int itemNum;
 	private Task oldTask;
 	private Task newTask;
@@ -55,7 +55,6 @@ public class UpdateEndDate implements Command{
 		}
 		//If empty, return feedback msg saying task description cannot be empty
 		if (newEndDate.isEmpty()){
-			//System.out.println("Inside empty");
 			code = 5;
 			feedbackMsg = DataDisplay.feedback("Update", code);
 			outputToUI.setFeedbackMsg(feedbackMsg);
@@ -106,7 +105,6 @@ public class UpdateEndDate implements Command{
 		}
 		//If empty, return feedback msg saying task description cannot be empty
 		if (newEndDate.isEmpty()){
-			//System.out.println("Inside empty");
 			code = 5;
 			feedbackMsg = DataDisplay.feedback("Redo", code);
 			outputToUI.setFeedbackMsg(feedbackMsg);

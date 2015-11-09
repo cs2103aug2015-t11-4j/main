@@ -18,7 +18,7 @@ import main.java.storage.Storage;
 public class UpdateStartDate implements Command{
 
 	private Storage storage = Storage.getInstance();
-	private String newStartDate;//TODO change each copy
+	private String newStartDate;
 	private int itemNum;
 	private Task oldTask;
 	private Task newTask;
@@ -54,7 +54,6 @@ public class UpdateStartDate implements Command{
 		}
 		//If empty, return feedback msg saying task description cannot be empty
 		if (newStartDate.isEmpty()){
-			//System.out.println("Inside empty");
 			code = 5;
 			feedbackMsg = DataDisplay.feedback("Update", code);
 			outputToUI.setFeedbackMsg(feedbackMsg);
@@ -105,7 +104,6 @@ public class UpdateStartDate implements Command{
 		}
 		//If empty, return feedback msg saying task description cannot be empty
 		if (newStartDate.isEmpty()){
-			//System.out.println("Inside empty");
 			code = 5;
 			feedbackMsg = DataDisplay.feedback("Update", code);
 			outputToUI.setFeedbackMsg(feedbackMsg);

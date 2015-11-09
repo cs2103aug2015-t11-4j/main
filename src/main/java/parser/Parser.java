@@ -52,11 +52,7 @@ public class Parser {
 	public final static ArrayList<Task> createRecurringTasks(ArrayList<String> listFromLogic) {
 		ArrayList<Task> recurringTasks = new ArrayList<Task>();
 		recurringTasks = RecurringTask.create(listFromLogic);
-		/*
-		 * @@author A0124524-unused
-		for(int i=0; i<recurringTasks.size(); i++) {
-			recurringTasks.get(i).setRecurringID(recurringID);
-		}*/
+
 		return recurringTasks;
 	}
 	
@@ -164,4 +160,9 @@ public class Parser {
 		
 	}*/
 	
+	/*
+	 * @@author A0124524-unused
+	for(int i=0; i<recurringTasks.size(); i++) {
+		recurringTasks.get(i).setRecurringID(recurringID);
+	}*/
 }

@@ -14,9 +14,8 @@ import main.java.storage.Storage;
  * Pass to storage for update respective task object
  */
 public class Incomplete implements Command{
-	//private boolean ifComplete = false;
+
 	private History history = History.getInstance();
-	//private int itemNum;
 	private OutputToUI outputToUI = new OutputToUI();
 	private Storage storage = Storage.getInstance();
 	private Task task;
@@ -33,10 +32,6 @@ public class Incomplete implements Command{
 	@Override
 	public OutputToUI execute() {
 		int code;
-		//un-used
-		//System.out.println("***");
-		//DataDisplay.displayList(history.getScreenList());
-		//System.out.println("***");
 		
 		code = storage.incompleteOneItem(task);
 		if (task.equals(new Task())){
@@ -66,10 +61,6 @@ public class Incomplete implements Command{
 	@Override
 	public OutputToUI redo() {
 		int code;
-		//un-used
-		//System.out.println("***");
-		//DataDisplay.displayList(history.getScreenList());
-		//System.out.println("***");
 		
 		code = storage.incompleteOneItem(task);
 		if (task.equals(new Task())){
@@ -84,4 +75,16 @@ public class Incomplete implements Command{
 		history.pushCommandToUndoList(this);
 		return outputToUI;
 	}
+	
+	//private boolean ifComplete = false;
+	//private int itemNum;
+	//un-used
+	//System.out.println("***");
+	//DataDisplay.displayList(history.getScreenList());
+	//System.out.println("***");
+	
+	//un-used
+	//System.out.println("***");
+	//DataDisplay.displayList(history.getScreenList());
+	//System.out.println("***");
 }

@@ -37,13 +37,11 @@ public class Undo implements Command{
 
 	@Override
 	public OutputToUI undo() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public OutputToUI redo() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

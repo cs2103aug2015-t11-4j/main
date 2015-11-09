@@ -29,16 +29,11 @@ public class Recur implements Command{
 		try {
 			history.setRecurID();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		recurID = history.getNextRecurID();
 		this.recurList = Parser.createRecurringTasks(inputForAction);
-		//System.out.println("Inside recur constructor : ");
-		//DataDisplay.displayList(recurList);
 
-		//history.setRecurID();
-		//System.out.println("recur ID in recur is = " + history.getNextRecurID());
 	}
 	
 	public History getHistory(){
@@ -71,26 +66,14 @@ public class Recur implements Command{
 		for (int i = 0; i < recurList.size(); i++){
 			Task task = recurList.get(i);
 			code = storage.addOneItem(task); 
-			/*ArrayList<Task> tempList = storage.getTaskList();
-			System.out.println("Inside recur Execute() : ");
-			DataDisplay.displayList(tempList);*/
 		}
-		/*ArrayList<Task> tempList = storage.getTaskList();
-		System.out.println("Inside recur Execute(), after for loop for adding tasks : ");
-		DataDisplay.displayList(tempList);*/
-		//history.updateRecurID();
+
 		try {
 			history.setRecurID();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		outputToUI = Controller.refreshScreen();
-		/*tempList = storage.getTaskList();
-		System.out.println("Inside recur Execute(), after for loop for adding tasks : ");
-		DataDisplay.displayList(tempList);*/
-		//System.out.println("After refreshScreen in recur.execute : ");
-		//DataDisplay.printOutputToUI(outputToUI);
 				
 		outputToUI.setFeedbackMsg(DataDisplay.feedback("Recurring",code));
 		history.pushCommandToUndoList(this);
@@ -108,10 +91,6 @@ public class Recur implements Command{
 		for (int i = 0; i < recurList.size(); i++){
 			Task task = recurList.get(i);
 			code = storage.deleteOneItem(task); 
-			//needs to handle if some task is added while others are not
-			/*if (code != 0){
-				
-			}*/
 		}
 		outputToUI = Controller.refreshScreen();
 		
@@ -129,5 +108,30 @@ public class Recur implements Command{
 		return outputToUI;
 	}
 	
+	//-unused
+	//System.out.println("Inside recur constructor : ");
+	//DataDisplay.displayList(recurList);
 
+	//history.setRecurID();
+	//System.out.println("recur ID in recur is = " + history.getNextRecurID());
+	
+	/*ArrayList<Task> tempList = storage.getTaskList();
+	System.out.println("Inside recur Execute() : ");
+	DataDisplay.displayList(tempList);*/
+	
+	/*ArrayList<Task> tempList = storage.getTaskList();
+	System.out.println("Inside recur Execute(), after for loop for adding tasks : ");
+	DataDisplay.displayList(tempList);*/
+	//history.updateRecurID();
+	
+	/*tempList = storage.getTaskList();
+	System.out.println("Inside recur Execute(), after for loop for adding tasks : ");
+	DataDisplay.displayList(tempList);*/
+	//System.out.println("After refreshScreen in recur.execute : ");
+	//DataDisplay.printOutputToUI(outputToUI);
+	
+	//needs to handle if some task is added while others are not
+	/*if (code != 0){
+		
+	}*/
 }

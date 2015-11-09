@@ -29,32 +29,6 @@ public class Search {
         ArrayList<Task> todaySummary = new ArrayList<Task>();
         ArrayList<Task> taskList = storage.getTaskList();
         
-        /* 
-         *@@author A0126058
-        while(todaySummary.size() == 25 || taskList.isEmpty()) {
-            for(int i = 0; i<taskList.size(); i++) {
-                if((taskList.get(i).getTaskType().equals("deadline"))) { 
-                    todaySummary.add(taskList.get(i));
-                    taskList.remove(i);
-                }
-            }
-
-            for(int i = 0; i<10; i++) {
-                if(taskList.get(i).getTaskType().equals("event")) {
-                    todaySummary.add(taskList.get(i));
-                    taskList.remove(i);
-                }
-            }
-
-            for(int i = 0; i<5; i++) { 
-                if(taskList.get(i).getTaskType().equals("floating")) {
-                    todaySummary.add(taskList.get(i));
-                    taskList.remove(i);
-                }
-            }
-        }
-        */
-        
         //@@author A0124524
         //add only top 10 urgent deadlines into list first
         ArrayList<Task> urgentDeadlines = new ArrayList<Task>();
@@ -131,7 +105,7 @@ public class Search {
         return tmrSummary;
     }
     
-    
+    //@@author A0126058
     //Obtains all tasks in the taskList
     public static ArrayList<Task> obtainAllTasks(Storage storage) {
             return storage.getTaskList();
@@ -179,16 +153,6 @@ public class Search {
     private static ArrayList<Task> obtainApproachingDeadlineTasks(LocalDateTime date, ArrayList<Task> fullStorageTaskList) {
         ArrayList<Task> urgentDeadlines = new ArrayList<Task>();
         
-        //@@author A0126058
-        /*for(int i = 0; i<task.size(); i++) {
-            if(Storage.getTaskList().get(i).getTaskType().equals("deadline")
-                    && (Storage.getTaskList().get(i).getEndDate().equals(ldt.getDayOfMonth()  + "/" + toMonthValue() + "/" + ldt.getYear()))
-                    && (Storage.getTaskList().get(i).getEndDate().equals((ldt.getDayOfMonth() + 1) + "/" + toMonthValue() + "/" + ldt.getYear()))
-                    && (Storage.getTaskList().get(i).getEndDate().equals((ldt.getDayOfMonth() + 2) + "/" + toMonthValue() + "/" + ldt.getYear()))) {
-                deadlines.add(Storage.getTaskList().get(i));
-            }
-        }*/
-        
         //@@author A0124524
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     	String today = date.format(formatter);
@@ -227,7 +191,7 @@ public class Search {
     	return eventsToday;
     }
   
-
+    //@@author A0126058
     //Obtains all tasks tagged with events as task type in the taskList
     public static ArrayList<Task> obtainEventTasks(Storage storage) {
     	ArrayList<Task> events = new ArrayList<Task>();
@@ -311,27 +275,55 @@ public class Search {
     //@@author A0104278
 	public static int obtainLargestRecurID() throws IOException {
 		Storage storage = Storage.getInstance();
-		/*ArrayList<Task> tempList = storage.getTaskList();
-		System.out.println("Inside search.largestRecurID(), before regenerateTaskList : ");
-		DataDisplay.displayList(tempList);*/
+
 		storage.regenerateTaskList();
-		/*tempList = storage.getTaskList();
-		System.out.println("Inside search.largestRecurID(), after regenerateTaskList : ");
-		DataDisplay.displayList(tempList);*/
 		int temp, largestRecurID = 0;
-	//	System.out.println("Inside Search.obtainLargestrecurID() : " + storage.getTaskList().size());
+
 		for (int i = 0; i < storage.getTaskList().size(); i++){
-			
-	//		System.out.println("RecurID is" + storage.getTaskList().get(i).getRecurringID());
 			if (storage.getTaskList().get(i).getRecurringID() > largestRecurID){
-				
 				temp = storage.getTaskList().get(i).getRecurringID();
 				largestRecurID = temp;
 			}
 		}
 		return largestRecurID;
 	}
-    
+	
+    /* 
+     *@@author A0126058
+    while(todaySummary.size() == 25 || taskList.isEmpty()) {
+        for(int i = 0; i<taskList.size(); i++) {
+            if((taskList.get(i).getTaskType().equals("deadline"))) { 
+                todaySummary.add(taskList.get(i));
+                taskList.remove(i);
+            }
+        }
+
+        for(int i = 0; i<10; i++) {
+            if(taskList.get(i).getTaskType().equals("event")) {
+                todaySummary.add(taskList.get(i));
+                taskList.remove(i);
+            }
+        }
+
+        for(int i = 0; i<5; i++) { 
+            if(taskList.get(i).getTaskType().equals("floating")) {
+                todaySummary.add(taskList.get(i));
+                taskList.remove(i);
+            }
+        }
+    }
+    */
+	
+    //@@author A0126058
+    /*for(int i = 0; i<task.size(); i++) {
+        if(Storage.getTaskList().get(i).getTaskType().equals("deadline")
+                && (Storage.getTaskList().get(i).getEndDate().equals(ldt.getDayOfMonth()  + "/" + toMonthValue() + "/" + ldt.getYear()))
+                && (Storage.getTaskList().get(i).getEndDate().equals((ldt.getDayOfMonth() + 1) + "/" + toMonthValue() + "/" + ldt.getYear()))
+                && (Storage.getTaskList().get(i).getEndDate().equals((ldt.getDayOfMonth() + 2) + "/" + toMonthValue() + "/" + ldt.getYear()))) {
+            deadlines.add(Storage.getTaskList().get(i));
+        }
+    }*/
+	
     /* @@author A0126058
      * Return the corrected month format to compare with date stored in taskList
      * Example: 01 (January) is returned instead of 1
@@ -343,4 +335,14 @@ public class Search {
         return "" + ldt.getMonthValue();
     }
     */
+	
+    //@@author A0104278
+	/*ArrayList<Task> tempList = storage.getTaskList();
+	System.out.println("Inside search.largestRecurID(), before regenerateTaskList : ");
+	DataDisplay.displayList(tempList);*/
+	/*tempList = storage.getTaskList();
+	System.out.println("Inside search.largestRecurID(), after regenerateTaskList : ");
+	DataDisplay.displayList(tempList);*/
+	//	System.out.println("Inside Search.obtainLargestrecurID() : " + storage.getTaskList().size());
+	//		System.out.println("RecurID is" + storage.getTaskList().get(i).getRecurringID());
 }

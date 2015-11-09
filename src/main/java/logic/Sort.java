@@ -93,35 +93,16 @@ public class Sort {
 		ArrayList<Task> completeNonFloatingListSorted = new ArrayList<Task>();
 		
 		incompleteList = Search.obtainAllIncompleteTasks(storage);
-		//System.out.println("***");
-		//System.out.println("incompleteList:");
-		//DataDisplay.displayList(incompleteList);
-		//System.out.println("***");
+
 		completeList = Search.obtainAllCompleteTasks(storage);
-		/*System.out.println("***");
-		System.out.println("completeList:");
-		DataDisplay.displayList(completeList);
-		System.out.println("***");*/
+
 		incompleteFloatingList = getFloatingList(incompleteList);
-		/*System.out.println("***");
-		System.out.println("incompleteFloatingList:");
-		DataDisplay.displayList(incompleteFloatingList);
-		System.out.println("***");*/
+
 		completeFloatingList = getFloatingList(completeList);
-		/*System.out.println("***");
-		System.out.println("completeFloatingList:");
-		DataDisplay.displayList(completeFloatingList);
-		System.out.println("***");*/
+
 		incompleteNonFloatingList = getNonFloatingList(incompleteList);
-		/*System.out.println("***");
-		System.out.println("incompleteNonFloatingList:");
-		DataDisplay.displayList(incompleteNonFloatingList);
-		System.out.println("***");*/
+
 		completeNonFloatingList = getNonFloatingList(completeList);
-		/*System.out.println("***");
-		System.out.println("completeList:");
-		DataDisplay.displayList(completeList);
-		System.out.println("***");*/
 
 		ArrayList<Sort> sortListForIncomplete = createSortList(incompleteNonFloatingList);
 		ArrayList<Sort> sortListForComplete = createSortList(completeNonFloatingList);
@@ -200,25 +181,6 @@ public class Sort {
 		return result;
 	}
 
-	// sort a task list by time then followed by alphabetic order of content
-	/*
-	 * public static ArrayList<Task> sortByTime(ArrayList<Task> listForSort) {
-	 * ArrayList<Task> sortResult = new ArrayList<Task>(); ArrayList<Sort>
-	 * sortList = createSortList(listForSort); Collections.sort(sortList, new
-	 * TaskComparator()); for (int i = 0; i < sortList.size(); i++) {
-	 * sortResult.add(sortList.get(i).getTask()); } return sortResult; }
-	 * 
-	 * // create sortlist with sort objects for sort private static
-	 * ArrayList<Sort> createSortList(ArrayList<Task> listForSort) {
-	 * ArrayList<Sort> sortList = new ArrayList<Sort>(); for (int i = 0; i <
-	 * listForSort.size(); i++) { Task task = listForSort.get(i);
-	 * sortList.add(new Sort(task, task.getTaskDescription(),
-	 * task.getIsCompleted())); }
-	 * 
-	 * return sortList; }
-	 */
-	// create calendar from task timing 
-
 	private static int createTaskDate(Task task) {
 		int taskDate = 0;
 		if (task.getTaskType().equals("event")) {
@@ -226,15 +188,8 @@ public class Sort {
 			int day = Integer.parseInt(date[0]);
 			int month = Integer.parseInt(date[1]);
 			int year = Integer.parseInt(date[2]);
-			// int hour = Integer.parseInt(task.getStartTime().substring(0, 2));
-			// int minute = Integer.parseInt(task.getStartTime().substring(2));
+
 			taskDate = day + month * 100 + year * 10000;
-			//p(year);
-			//p(month);
-			//p(day);
-			// p(hour);
-			// p(minute);
-			//System.out.println(taskDate);
 		}
 
 		if (task.getTaskType().equals("deadline")) {
@@ -242,17 +197,9 @@ public class Sort {
 			int day = Integer.parseInt(date[0]);
 			int month = Integer.parseInt(date[1]);
 			int year = Integer.parseInt(date[2]);
-			// int hour = Integer.parseInt(task.getEndTime().substring(0, 2));
-			// int minute = Integer.parseInt(task.getEndTime().substring(2));
-			taskDate = day + month * 100 + year * 10000;
-			//p(year);
-			//p(month);
-			//p(day);
-			// p(hour);
-			// p(minute);
-			//System.out.println(taskDate);
-		}
 
+			taskDate = day + month * 100 + year * 10000;
+		}
 		return new Integer(taskDate);
 	}
 
@@ -264,16 +211,11 @@ public class Sort {
 			int hour = Integer.parseInt(task.getStartTime().substring(0, 2));
 			int minute = Integer.parseInt(task.getStartTime().substring(2));
 			taskTime = minute + hour * 100;
-			//p(hour);
-			//p(minute);
-			//System.out.println(taskTime);
+
 		} else if (task.getTaskType().equals("deadline")) {
 			int hour = Integer.parseInt(task.getEndTime().substring(0, 2));
 			int minute = Integer.parseInt(task.getEndTime().substring(2));
 			taskTime = minute + hour * 100;
-			//p(hour);
-			//p(minute);
-			//System.out.println(taskTime);
 		}
 
 		return new Integer(taskTime);
@@ -332,8 +274,78 @@ public class Sort {
 	
 }
 
+	// sort a task list by time then followed by alphabetic order of content
+	/*
+	 * public static ArrayList<Task> sortByTime(ArrayList<Task> listForSort) {
+	 * ArrayList<Task> sortResult = new ArrayList<Task>(); ArrayList<Sort>
+	 * sortList = createSortList(listForSort); Collections.sort(sortList, new
+	 * TaskComparator()); for (int i = 0; i < sortList.size(); i++) {
+	 * sortResult.add(sortList.get(i).getTask()); } return sortResult; }
+	 * 
+	 * // create sortlist with sort objects for sort private static
+	 * ArrayList<Sort> createSortList(ArrayList<Task> listForSort) {
+	 * ArrayList<Sort> sortList = new ArrayList<Sort>(); for (int i = 0; i <
+	 * listForSort.size(); i++) { Task task = listForSort.get(i);
+	 * sortList.add(new Sort(task, task.getTaskDescription(),
+	 * task.getIsCompleted())); }
+	 * 
+	 * return sortList; }
+	 */
+	// create calendar from task timing 
+	
+	//System.out.println("***");
+	//System.out.println("incompleteList:");
+	//DataDisplay.displayList(incompleteList);
+	//System.out.println("***");
+	/*System.out.println("***");
+	System.out.println("completeList:");
+	DataDisplay.displayList(completeList);
+	System.out.println("***");*/
+	/*System.out.println("***");
+	System.out.println("incompleteFloatingList:");
+	DataDisplay.displayList(incompleteFloatingList);
+	System.out.println("***");*/
+	/*System.out.println("***");
+	System.out.println("completeFloatingList:");
+	DataDisplay.displayList(completeFloatingList);
+	System.out.println("***");*/
+	/*System.out.println("***");
+	System.out.println("incompleteNonFloatingList:");
+	DataDisplay.displayList(incompleteNonFloatingList);
+	System.out.println("***");*/
+	/*System.out.println("***");
+	System.out.println("completeList:");
+	DataDisplay.displayList(completeList);
+	System.out.println("***");
 
+			// int hour = Integer.parseInt(task.getStartTime().substring(0, 2));
+			// int minute = Integer.parseInt(task.getStartTime().substring(2));
 
+			//p(year);
+			//p(month);
+			//p(day);
+			// p(hour);
+			// p(minute);
+			//System.out.println(taskDate)
+
+			// int hour = Integer.parseInt(task.getEndTime().substring(0, 2));
+			// int minute = Integer.parseInt(task.getEndTime().substring(2));
+
+			//p(year);
+			//p(month);
+			//p(day);
+			// p(hour);
+			// p(minute);
+			//System.out.println(taskDate);
+
+			//p(hour);
+			//p(minute);
+			//System.out.println(taskTime);
+
+			//p(hour);
+			//p(minute);
+			//System.out.println(taskTime)
+			 * 
 private static void printSortList(ArrayList<Sort> sortList, ArrayList<Task> list){
 	Sort sort;
 	for (int i = 0; i < sortList.size(); i++){
@@ -414,4 +426,5 @@ private static void p(int i){
 		 * @Override public int compare(Task t1, Task t2) { return
 		 * t1.getTaskType().compareTo(t2.getTaskType()); }
 		 */
+	
 }

@@ -51,9 +51,8 @@ public class Update implements Command{
 			return outputToUI;
 		}
 		storage.deleteOneItem(task);
-		//TODO: Display this task on to the screen
 		String inputBoxMsg = DataDisplay.displayTaskNeedForUpdate(task);
-		String feedbackMsg = "Please edit the task to update"; //TODO: Include in DataDisplay.feedback
+		String feedbackMsg = "Please edit the task to update"; 
 		outputToUI = Controller.refreshScreen();
 		outputToUI.setInputBoxMsg(inputBoxMsg);
 		outputToUI.setFeedbackMsg(feedbackMsg);
@@ -74,7 +73,6 @@ public class Update implements Command{
 
 	@Override
 	public OutputToUI redo() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

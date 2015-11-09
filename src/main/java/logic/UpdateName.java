@@ -65,7 +65,6 @@ public class UpdateName implements Command{
 		}
 		//If empty, return feedback msg saying task description cannot be empty
 		if (newName.isEmpty()){
-			//System.out.println("Inside empty");
 			code = 2;
 			feedbackMsg = DataDisplay.feedback("Update", code);
 			outputToUI.setFeedbackMsg(feedbackMsg);
@@ -73,14 +72,12 @@ public class UpdateName implements Command{
 		} 
 		if(this.oldRecurTaskGroup.isEmpty()) {
 			storage.deleteOneItem(oldTask);
-			//System.out.println("Ouside empty");
 			storage.addOneItem(newTask);
 		}
 		//@@author A0124524
 		else {
 			for(int i=0; i<this.newRecurTaskGroup.size(); i++) {
 				storage.deleteOneItem(oldRecurTaskGroup.get(i));
-				//System.out.println("Outside empty");
 				storage.addOneItem(newRecurTaskGroup.get(i));
 			}
 		}
@@ -105,7 +102,6 @@ public class UpdateName implements Command{
 		} else  {
 			for(int i=0; i<this.newRecurTaskGroup.size(); i++) {
 				storage.deleteOneItem(newRecurTaskGroup.get(i));
-				//System.out.println("Outside empty");
 				storage.addOneItem(oldRecurTaskGroup.get(i));
 			}
 		}
@@ -130,7 +126,6 @@ public class UpdateName implements Command{
 		}
 		//If empty, return feedback msg saying task description cannot be empty
 		if (newName.isEmpty()){
-			//System.out.println("Inside empty");
 			code = 2;
 			feedbackMsg = DataDisplay.feedback("Update", code);
 			outputToUI.setFeedbackMsg(feedbackMsg);
@@ -138,14 +133,12 @@ public class UpdateName implements Command{
 		} 
 		if(this.oldRecurTaskGroup.isEmpty()) {
 			storage.deleteOneItem(oldTask);
-			//System.out.println("Ouside empty");
 			storage.addOneItem(newTask);
 		}
 		//@@author A0124524
 		else {
 			for(int i=0; i<this.newRecurTaskGroup.size(); i++) {
 				storage.deleteOneItem(oldRecurTaskGroup.get(i));
-				//System.out.println("Outside empty");
 				storage.addOneItem(newRecurTaskGroup.get(i));
 			}
 		}

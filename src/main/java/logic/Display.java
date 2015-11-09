@@ -38,7 +38,6 @@ public class Display implements Command {
 		String feedbackMsg;
 		String typeOfScreen = null;
 		switch (FlexiCommands.flexiDisplayCommands(inputForAction.get(1).toLowerCase())) {
-		//switch (inputForAction.get(1).toLowerCase()) {
 		case "today":
 			taskList = Search.obtainTodaySummary(storage);
 			typeOfScreen = "today";
@@ -68,13 +67,6 @@ public class Display implements Command {
 			typeOfScreen = "incomplete";
 			break;
 		case "search":
-		/*
-			outputToUI = history.gerSearchCommand().execute();
-			itemList = outputToUI.getItemList();
-			typeOfScreen = outputToUI.getTypeOfScreen();
-			
-			break;
-        */
 		case "all":
 			taskList = Search.obtainAllTasks(storage);
 			typeOfScreen = "all";
@@ -87,8 +79,6 @@ public class Display implements Command {
 			typeOfScreen = "null";
 			break;
 		}
-		
-		//System.out.println("Inside display.execute() : ");
 		
 		printOnScreenMsgList = DataDisplay.displayList(taskList);
 		history.setScreenList(taskList);
@@ -114,14 +104,19 @@ public class Display implements Command {
 
 	@Override
 	public OutputToUI undo() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public OutputToUI redo() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* -unused
+	outputToUI = history.gerSearchCommand().execute();
+	itemList = outputToUI.getItemList();
+	typeOfScreen = outputToUI.getTypeOfScreen();
+	
+	break;
+*/
 }

@@ -204,20 +204,6 @@ public class Storage {
             }
             br.close();
             
-            /*
-            // For testing purposes
-            for(int i = 0; i<taskList.size(); i++) {
-                logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getTaskType());
-                logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getTaskDescription());
-                logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getStartDate());
-                logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getEndDate());
-                logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getStartTime());
-                logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getEndTime());
-                logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getIsCompleted());
-                logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getIsDateTimeValid());
-            }
-            */
-            
             sortTaskList(taskList);
             logger.log(Level.INFO, "Completed regeneration of internal taskList from external file");
         } catch (Exception e) {
@@ -718,4 +704,18 @@ public class Storage {
        }
 	}
 	*/
+    
+    /*
+    // For testing purposes
+    for(int i = 0; i<taskList.size(); i++) {
+        logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getTaskType());
+        logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getTaskDescription());
+        logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getStartDate());
+        logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getEndDate());
+        logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getStartTime());
+        logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getEndTime());
+        logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getIsCompleted());
+        logger.log(Level.INFO, "Reading task from taskList: {0}", taskList.get(i).getIsDateTimeValid());
+    }
+    */
 }
