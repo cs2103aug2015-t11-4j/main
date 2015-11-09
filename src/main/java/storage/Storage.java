@@ -36,7 +36,7 @@ public class Storage {
      * @return a newly created storage object for manipulation
      */
     public static Storage getInstance(){
-        if (storage == null){
+        if (storage == null) {
             storage = new Storage();
         }
         return storage;
@@ -99,7 +99,7 @@ public class Storage {
             FileWriter fw1 = new FileWriter(filename, true);
             BufferedWriter bw1 = new BufferedWriter(fw1);
 
-            for(int i = 0; i<taskList.size(); i++) {
+            for (int i = 0; i < taskList.size(); i++) {
                 bw1.write(taskList.get(i).getTaskType() + ";" + taskList.get(i).getTaskDescription() + ";" + taskList.get(i).getStartDate()
                         + ";" + taskList.get(i).getEndDate() + ";" + taskList.get(i).getStartTime() + ";" + taskList.get(i).getEndTime() + ";"
                         + taskList.get(i).getIsCompleted() + ";" + taskList.get(i).getIsDateTimeValid() + ";" + taskList.get(i).getRecurringID() + ";" );
@@ -128,7 +128,7 @@ public class Storage {
 
             File file = new File(directory, filename);
 
-            if(file.exists()) {
+            if (file.exists()) {
                 file.createNewFile(); 
             }
 
@@ -138,7 +138,7 @@ public class Storage {
             FileWriter fw1 = new FileWriter(directory + "\\" + filename, true);
             BufferedWriter bw1 = new BufferedWriter(fw1);
 
-            for(int i = 0; i<taskList.size(); i++) {
+            for (int i = 0; i < taskList.size(); i++) {
                 bw1.write(taskList.get(i).getTaskType() + ";" + taskList.get(i).getTaskDescription() + ";" + taskList.get(i).getStartDate()
                         + ";" + taskList.get(i).getEndDate() + ";" + taskList.get(i).getStartTime() + ";" + taskList.get(i).getEndTime() + ";"
                         + taskList.get(i).getIsCompleted() + ";" + taskList.get(i).getIsDateTimeValid() + ";" + taskList.get(i).getRecurringID() + ";" );
@@ -172,12 +172,12 @@ public class Storage {
             logger.log(Level.INFO, "Regenerating internal taskList from external file!");
 
             // Ensure internal taskList is emptied before regeneration 
-            if(!taskList.isEmpty()) {
+            if (!taskList.isEmpty()) {
                 wipeTaskList();
             }
             
             // Checks if the first line of the external file is a directory path
-            if(retrieveDirectory()) {
+            if (retrieveDirectory()) {
                 filename = directory + "\\" + filename;
                 System.out.println("inside retrievedirectory");
             }
@@ -208,7 +208,7 @@ public class Storage {
             logger.log(Level.INFO, "Completed regeneration of internal taskList from external file");
         } catch (Exception e) {
             File file = new File(filename);
-            if(!file.exists()) {
+            if (!file.exists()) {
                 try {
                     file.createNewFile();
                 } catch (IOException ioe) {
@@ -242,9 +242,9 @@ public class Storage {
     private boolean retrieveDirectory() {
         String[] getDirectory;
         
-        if(getTaskTypeByItemNum(0).equals("deadline") 
-                || getTaskTypeByItemNum(0).equals("event") 
-                || getTaskTypeByItemNum(0).equals("floating")) { 
+        if (getTaskTypeByItemNum(0).equals("deadline") 
+           || getTaskTypeByItemNum(0).equals("event") 
+           || getTaskTypeByItemNum(0).equals("floating")) { 
             return false;
         }
         logger.log(Level.INFO, "Retrieving directory from external file!");
@@ -342,7 +342,7 @@ public class Storage {
      */
     public int completeOneItem(Task task) {
         try {
-            if(task.getIsCompleted() != true) {
+            if (task.getIsCompleted() != true) {
                 task.setCompleted(true);
 
                 FileReader fr = new FileReader(filename);
@@ -395,7 +395,7 @@ public class Storage {
      */
     public int incompleteOneItem(Task task) {
         try {
-            if(task.getIsCompleted() != false) {
+            if (task.getIsCompleted() != false) {
                 task.setCompleted(false);
 
                 FileReader fr = new FileReader(filename);

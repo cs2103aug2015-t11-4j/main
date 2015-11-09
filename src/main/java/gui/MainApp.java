@@ -80,6 +80,11 @@ public class MainApp extends Application {
     private static final String TYPE_EVENT = "event";
     private static final String TYPE_FLOATING = "floating";
     
+    //for switching scenes
+    private static final String DISPLAY_ALL = "display all";
+    private static final String DISPLAY_TODAY = "display today";
+    private static final String DISPLAY_TMR = "display tomorrow";
+    
     //For logging
     private static final String FEEDBACK_TODAY_SUMMARY = "Today's Summary";
     private static final String FEEDBACK_TMR_SUMMARY = "Tomorrow's Summary";
@@ -159,12 +164,9 @@ public class MainApp extends Application {
         this.primaryStage.setTitle(WINDOW_TITLE);
         Scene scene = new Scene(rootLayout);
         this.primaryStage.setScene(scene);
-        this.primaryStage.show();
+        this.primaryStage.show();	
         
-        OutputToUI outputToUI = new OutputToUI();
-        
-        itemList = outputToUI.getItemList();
-        
+        //switch screens when Ctrl+S are pressed
         switchDisplay = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
         
         scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
@@ -179,55 +181,49 @@ public class MainApp extends Application {
               } else if (key.getCode() == KeyCode.F7) {  //restore to original size
             	  primaryStage.setMaximized(false);
               } else if (switchDisplay.match(key) && (pressCount == 1)) {
-        		  callToday();
-        		  pressCount++;
-        		  if(isLimit()) {
-        			  resetPressCount();
-        		  }
+            	  processItemList(DISPLAY_TODAY);
+            	  callToday();
+            	  processPressCount();
               } else if (switchDisplay.match(key) && (pressCount == 2)) {
+            	  processItemList(DISPLAY_TMR);
             	  callTomorrow();
-        		  pressCount++;
-        		  if(isLimit()) {
-        			  resetPressCount();
-        		  }
+            	  processPressCount();
               } else if (switchDisplay.match(key) && (pressCount == 3)) {
+            	  processItemList(DISPLAY_ALL);
             	  callDisplayAll();
-        		  pressCount++;
-        		  if(isLimit()) {
-        			 resetPressCount();
-        		  }
+            	  processPressCount();
               } else if (switchDisplay.match(key) && (pressCount == 4)) {
-    			  callComplete();
-    			  pressCount++;
-    			  if(isLimit()) {
-    				  resetPressCount();
-        		  }
+            	  callComplete();
+            	  processPressCount();
               } else if (switchDisplay.match(key) && (pressCount == 5)) {
-    			  callIncomplete();
-    			  pressCount++;
-    			  if(isLimit()) {
-    				  resetPressCount();
-        		  }
+            	  callIncomplete();
+            	  processPressCount();
               } else if (switchDisplay.match(key) && (pressCount == 6)) {
-    			  callDeadline();
-    			  pressCount++;
-    			  if(isLimit()) {
-    				  resetPressCount();
-        		  }
+            	  callDeadline();
+            	  processPressCount();
               } else if (switchDisplay.match(key) && (pressCount == 7)) {
-    			  callEvent();
-    			  pressCount++;
-    			  if(isLimit()) {
-    				  resetPressCount();
-        		  }
+            	  callEvent();
+            	  processPressCount();
               } else if (switchDisplay.match(key) && (pressCount == 8)) {
-    			  callFloating();
-    			  pressCount++;
-    			  if(isLimit()) {
-    				  resetPressCount();
-        		  }
+            	  callFloating();
+            	  processPressCount();
               }
             }
+
+			private void processItemList(String loadScene) {
+				Command command = Controller.createCommand(loadScene);
+            	  OutputToUI outputToUI = new OutputToUI();
+            	  outputToUI = command.execute();
+            	  itemList = outputToUI.getItemList();
+			}
+
+			private void processPressCount() {
+				pressCount++;
+            	  if(isLimit()) {
+            		  resetPressCount();
+            	  }
+			}
+			
         });
     }
     
@@ -553,60 +549,45 @@ public class MainApp extends Application {
     			if (userInput.equals(TODAY_SCENE)) {
     				callToday();
     				Logger.log(FEEDBACK_TODAY_SUMMARY);
-    				commandBarController.setFeedback(feedbackMsg);
-    				commandBarController.clear();
+    				handleCommandBar(commandBarController, feedbackMsg);
     			} else if (userInput.equals(TOMORROW_SCENE)) {
     				callTomorrow();
     				Logger.log(FEEDBACK_TMR_SUMMARY);
-    				commandBarController.setFeedback(feedbackMsg);
-    				commandBarController.clear();
+    				handleCommandBar(commandBarController, feedbackMsg);
     			} else if (userInput.equals(FLOATING_SCENE)) {
     				callFloating();
     				Logger.log(FEEDBACK_FLOATING);
-    				commandBarController.setFeedback(feedbackMsg);
-    				commandBarController.clear();
+    				handleCommandBar(commandBarController, feedbackMsg);
     			} else if (userInput.equals(EVENT_SCENE)) {
     				callEvent();
     				Logger.log(FEEDBACK_EVENT);
-    				commandBarController.setFeedback(feedbackMsg);
-    				commandBarController.clear();
+    				handleCommandBar(commandBarController, feedbackMsg);
     			} else if (userInput.equals(DEADLINE_SCENE)) {
     				callDeadline();
     				Logger.log(FEEDBACK_DEADLINE);
-    				commandBarController.setFeedback(feedbackMsg);
-    				commandBarController.clear();
+    				handleCommandBar(commandBarController, feedbackMsg);
     			} else if (userInput.equals(COMPLETE_SCENE)) {
     				callComplete();
     				Logger.log(FEEDBACK_COMPLETE);
-    				commandBarController.setFeedback(feedbackMsg);
-    				commandBarController.clear();
+    				handleCommandBar(commandBarController, feedbackMsg);
     			} else if (userInput.equals(INCOMPLETE_SCENE)) {
     				callIncomplete();
     				Logger.log(FEEDBACK_INCOMPLETE);
-    				commandBarController.setFeedback(feedbackMsg);
-    				commandBarController.clear();
-    		    //@@author A0124524
+    				handleCommandBar(commandBarController, feedbackMsg);
     			} else if (userInput.equals(SEARCH_SCENE)) {
     				callSearch();
     				Logger.log(FEEDBACK_SEARCH);
-    				commandBarController.setFeedback(feedbackMsg);
-    				commandBarController.clear();
-    			 /**
-    			  * @@author A0131300
-    			  */
+    				handleCommandBar(commandBarController, feedbackMsg);
     			} else if (userInput.equals(DISPLAY_ALL_SCENE)) {
     				callDisplayAll();
     				Logger.log(FEEDBACK_DISPLAY);
-    				commandBarController.setFeedback(feedbackMsg);
-    				commandBarController.clear();
+    				handleCommandBar(commandBarController, feedbackMsg);
     			} else if (userInput.equals(HELP_SCENE)) {
     				callHelp();
     				Logger.log(FEEDBACK_HELP);
-    				commandBarController.setFeedback(feedbackMsg);
-    				commandBarController.clear();
+    				handleCommandBar(commandBarController, feedbackMsg);
     			} else if (userInput.equals(EXIT_SCENE)) {
-    				commandBarController.setFeedback(FEEDBACK_EXIT);
-    				commandBarController.clear();
+    				handleCommandBar(commandBarController, FEEDBACK_EXIT);
     				//delay closing of GUI window by 1s
     				delay = new PauseTransition(Duration.seconds(1));
     				delay.setOnFinished(new EventHandler<ActionEvent> () {
@@ -624,6 +605,11 @@ public class MainApp extends Application {
     			commandBarController.setFeedback(feedbackMsg);
     		}
     }
+
+	private void handleCommandBar(CommandBarController commandBarController, String feedbackMsg) {
+		commandBarController.setFeedback(feedbackMsg);
+		commandBarController.clear();
+	}
     
     /**
      * Return list of tasks to be added into the respective listviews
@@ -637,9 +623,15 @@ public class MainApp extends Application {
 		event.clear();
     	for (int i = 0; i < itemList.size(); i++) {
 			if (itemList.get(i).getTaskType().equals(TYPE_EVENT)){
+				/**
+			     * @@author A0131300
+			     */ 
 				Text text = new Text(itemList.get(i).getPrintOnScreenMsg());
 				text.setFont(Font.font ("System", 20));
 				event.add(text);
+				/** 
+			     * @@author A0104278
+			     */
 			}
 		}
     	return event;
@@ -649,9 +641,15 @@ public class MainApp extends Application {
     	deadline.clear();
     	for (int i = 0; i < itemList.size(); i++) {
 			if (itemList.get(i).getTaskType().equals(TYPE_DEADLINE)){
+				/**
+			     * @@author A0131300
+			     */ 
 				Text text = new Text(itemList.get(i).getPrintOnScreenMsg());
 				text.setFont(Font.font ("System", 20));
 				deadline.add(text);
+				/** 
+			     * @@author A0104278
+			     */
 			}
 		}
     	return deadline;
@@ -661,9 +659,15 @@ public class MainApp extends Application {
     	floating.clear();
     	for (int i = 0; i < itemList.size(); i++) {
 			if (itemList.get(i).getTaskType().equals(TYPE_FLOATING)){
+				/**
+			     * @@author A0131300
+			     */ 
 				Text text = new Text(itemList.get(i).getPrintOnScreenMsg());
 				text.setFont(Font.font ("System", 20));
 				floating.add(text);
+				/** 
+			     * @@author A0104278
+			     */
 			}
 		}
     	return floating;
@@ -673,10 +677,16 @@ public class MainApp extends Application {
     	incomplete.clear();
     	for (int i = 0; i < itemList.size(); i++) {
     		if (!(itemList.get(i).getIfComplete())) {
+    			/**
+    		     * @@author A0131300
+    		     */ 
 				Text text = new Text(itemList.get(i).getPrintOnScreenMsg());
 				text.setFont(Font.font ("System", 20));
 				text.setFill(Color.RED);
 				incomplete.add(text);
+				/** 
+			     * @@author A0104278
+			     */
 			}
 		}
     	return incomplete;
@@ -686,10 +696,16 @@ public class MainApp extends Application {
     	complete.clear();
     	for (int i = 0; i < itemList.size(); i++) {
 			if (itemList.get(i).getIfComplete()) {
+				/**
+			     * @@author A0131300
+			     */ 
 				Text text = new Text(itemList.get(i).getPrintOnScreenMsg());
 				text.setFont(Font.font ("System", 20));
 				text.setFill(Color.GREEN);
 				complete.add(text);
+				/** 
+			     * @@author A0104278
+			     */
 			}
 		}
     	return complete;
