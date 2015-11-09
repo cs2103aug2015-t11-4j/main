@@ -1,3 +1,7 @@
+/*
+ * @@author A0131300-unused 
+ * Reason: Change of plans (change from Swing to JavaFX)
+ *
 package main.java.ui;
 
 import java.awt.BorderLayout;
@@ -12,11 +16,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
-/**
- * 
- * @@author A0131300
- */
-
 public class ToDoApp extends JFrame{
 	
 	private static final long serialVersionUID = 7154613852426382429L;
@@ -24,8 +23,8 @@ public class ToDoApp extends JFrame{
 	//JTextField to input a task
 	static private JTextField textField;     
    
-	/*JTextArea to display the to-do list. JScrollPane to ensure text area can be
-	scrolled down when too much information has to be showed*/
+	//JTextArea to display the to-do list. JScrollPane to ensure text area can be
+	//scrolled down when too much information has to be showed
 	static private JTextArea outputTextArea;
 	static private JScrollPane textAreaScrollPane;
 	
@@ -62,13 +61,13 @@ public class ToDoApp extends JFrame{
 		
 	public ToDoApp() {
 		
-		/*try {
+		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException e) {
 		} catch (InstantiationException e) {
 		} catch (IllegalAccessException e) {
 		} catch (UnsupportedLookAndFeelException e) {
-		}*/
+		}
 		
 		JFrame mainFrame = new JFrame("Alt4");
 		mainFrame.setSize(600, 600);
@@ -197,7 +196,7 @@ public class ToDoApp extends JFrame{
         System.setErr(printStream);
 
         //textarea();
-	} // end method main
+	} // end method main*/
 
 	/*private void textarea() throws Exception {
 		Container contentPane;
@@ -212,5 +211,5 @@ public class ToDoApp extends JFrame{
 	    this.setSize(new Dimension(400, 300));
 	    this.setTitle("JTextArea as JTable");
 	    contentPane.add(outputJTextArea, BorderLayout.CENTER);
-	}*/
-}
+	}
+}*/

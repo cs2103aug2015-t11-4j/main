@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- @@author A0131300 -->
-
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -49,7 +48,7 @@
             <Label font="$x1" text="add &lt;content&gt;" GridPane.columnIndex="1" GridPane.margin="$x2" GridPane.rowIndex="2" />
             <Label font="$x1" text="recur daily &lt;task&gt; for &lt;number&gt; times" GridPane.columnIndex="1" GridPane.margin="$x2" GridPane.rowIndex="3" />
             <Label font="$x1" text="delete &lt;task number&gt;" GridPane.columnIndex="1" GridPane.margin="$x2" GridPane.rowIndex="4" />
-            <Label font="$x1" text="update -n &lt;task number&gt; &lt;new name&gt;" GridPane.columnIndex="1" GridPane.margin="$x2" GridPane.rowIndex="5" />
+            <Label font="$x1" text="-n &lt;task number&gt; &lt;new name&gt;" GridPane.columnIndex="1" GridPane.margin="$x2" GridPane.rowIndex="5" />
             <Label font="$x1" text="undo" GridPane.columnIndex="1" GridPane.margin="$x2" GridPane.rowIndex="8" />
             <Label font="$x1" text="redo" GridPane.columnIndex="1" GridPane.margin="$x2" GridPane.rowIndex="9" />
             <Label font="$x1" text="complete &lt;task number&gt;" GridPane.columnIndex="1" GridPane.margin="$x2" GridPane.rowIndex="10" />
@@ -70,12 +69,12 @@
                 <Insets left="10.0" fx:id="x2" />
               </GridPane.margin>
             </Label>
-            <Label font="$x1" text="update -sd &lt;task number&gt; &lt;new date&gt;" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <Label font="$x1" text="-sd &lt;task number&gt; &lt;new date&gt;" GridPane.columnIndex="1" GridPane.rowIndex="6">
               <GridPane.margin>
                 <Insets left="10.0" fx:id="x2" />
               </GridPane.margin>
             </Label>
-            <Label font="$x1" text="update -st &lt;task number&gt; &lt;new time&gt;" GridPane.columnIndex="1" GridPane.rowIndex="7">
+            <Label font="$x1" text="-st &lt;task number&gt; &lt;new time&gt;" GridPane.columnIndex="1" GridPane.rowIndex="7">
               <GridPane.margin>
                 <Insets left="10.0" fx:id="x2" />
               </GridPane.margin>

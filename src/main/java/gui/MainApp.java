@@ -80,6 +80,18 @@ public class MainApp extends Application {
     private static final String TYPE_EVENT = "event";
     private static final String TYPE_FLOATING = "floating";
     
+    //For logging
+    private static final String FEEDBACK_TODAY_SUMMARY = "Today's Summary";
+    private static final String FEEDBACK_TMR_SUMMARY = "Tomorrow's Summary";
+    private static final String FEEDBACK_DISPLAY = "All Events";
+    private static final String FEEDBACK_COMPLETE = "Completed Events";
+    private static final String FEEDBACK_INCOMPLETE = "Incomplete Events";
+    private static final String FEEDBACK_DEADLINE = "Deadline Tasks";
+    private static final String FEEDBACK_EVENT = "Events";
+    private static final String FEEDBACK_FLOATING = "Floating Tasks";
+    private static final String FEEDBACK_HELP = "Help Table";
+    private static final String FEEDBACK_SEARCH = "Search Results";
+    
     private ObservableList<Text> event = FXCollections.observableArrayList();
     private ObservableList<Text> deadline = FXCollections.observableArrayList();
     private ObservableList<Text> floating = FXCollections.observableArrayList();
@@ -121,10 +133,6 @@ public class MainApp extends Application {
 
         // Add components to RootLayout
         addCommandBar(this);
-        //createDeadlineList(itemList);
-    	//createEventList(itemList);
-    	//createFloatingList(itemList);
-    	//addTodaySummaryView();
         callToday();
     }
 
@@ -243,8 +251,8 @@ public class MainApp extends Application {
         scene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent key) {
-            	if ((key.getCode() == KeyCode.ESCAPE) || (isLetterCode(key)) || 
-            	   (isDigitCode(key)) || (isFunctionCode(key))) {
+            	if ((key.getCode() == KeyCode.ESCAPE) || (key.getCode() == KeyCode.SPACE) ||
+            	   (isLetterCode(key)) || (isDigitCode(key)) || (isFunctionCode(key))) {
             		secondaryStage.close();
             	}
             }
@@ -544,46 +552,56 @@ public class MainApp extends Application {
     		if (userInput != null) {
     			if (userInput.equals(TODAY_SCENE)) {
     				callToday();
+    				Logger.log(FEEDBACK_TODAY_SUMMARY);
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			} else if (userInput.equals(TOMORROW_SCENE)) {
     				callTomorrow();
+    				Logger.log(FEEDBACK_TMR_SUMMARY);
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			} else if (userInput.equals(FLOATING_SCENE)) {
     				callFloating();
+    				Logger.log(FEEDBACK_FLOATING);
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			} else if (userInput.equals(EVENT_SCENE)) {
     				callEvent();
+    				Logger.log(FEEDBACK_EVENT);
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			} else if (userInput.equals(DEADLINE_SCENE)) {
     				callDeadline();
+    				Logger.log(FEEDBACK_DEADLINE);
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			} else if (userInput.equals(COMPLETE_SCENE)) {
     				callComplete();
+    				Logger.log(FEEDBACK_COMPLETE);
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			} else if (userInput.equals(INCOMPLETE_SCENE)) {
     				callIncomplete();
+    				Logger.log(FEEDBACK_INCOMPLETE);
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     		    //@@author A0124524
     			} else if (userInput.equals(SEARCH_SCENE)) {
     				callSearch();
+    				Logger.log(FEEDBACK_SEARCH);
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
-    			/**
-    			 * @@author A0131300
-    			 */ 
+    			 /**
+    			  * @@author A0131300
+    			  */
     			} else if (userInput.equals(DISPLAY_ALL_SCENE)) {
     				callDisplayAll();
+    				Logger.log(FEEDBACK_DISPLAY);
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			} else if (userInput.equals(HELP_SCENE)) {
     				callHelp();
+    				Logger.log(FEEDBACK_HELP);
     				commandBarController.setFeedback(feedbackMsg);
     				commandBarController.clear();
     			} else if (userInput.equals(EXIT_SCENE)) {
@@ -698,17 +716,9 @@ public class MainApp extends Application {
 	 *
 	private static final String TODAY_LAYOUT_FXML = "/main/resources/layouts/Today.fxml";
     private static final String TOMORROW_LAYOUT_FXML = "/main/resources/layouts/Tomorrow.fxml";
-	
-    private static final String FEEDBACK_TODAY_SUMMARY = "Today's Summary";
-    private static final String FEEDBACK_TMR_SUMMARY = "Tomorrow's Summary";
-    private static final String FEEDBACK_DISPLAY = "All Events";
-    private static final String FEEDBACK_COMPLETE = "Completed Events";
-    private static final String FEEDBACK_INCOMPLETE = "Incomplete Events";
+
     private static final String FEEDBACK_TODAY = "Today's Tasks";
     private static final String FEEDBACK_TOMORROW = "Tomorrow's Tasks";
-    private static final String FEEDBACK_DEADLINE = "Deadline Tasks";
-    private static final String FEEDBACK_EVENT = "Events";
-    private static final String FEEDBACK_FLOATING = "Floating Tasks";
     
     private static final String FEEDBACK_INVALID_COMMAND = "Invalid command.";
     private static final String FEEDBACK_ADDED = "Successfully Added: ";

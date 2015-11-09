@@ -1,7 +1,7 @@
 /*
- * @@author A0104278 
- */
-
+ * @@author A0104278-unused 
+ * Reason: Change of plans (change from Swing to JavaFX)
+ *
 package main.java.ui;
 
 import java.util.Scanner; 
@@ -35,4 +35,4 @@ public class UI {
 	public static void feedbackWrongCommand() {
 		// TODO Auto-generated method stub
 	} 
- } 
+ } */

@@ -1,3 +1,7 @@
+/*
+ * @@author A0131300-unused 
+ * Reason: Change of plans (change from Swing to JavaFX)
+ *
 package main.java.ui;
 
 import java.io.IOException;
@@ -5,10 +9,6 @@ import java.io.OutputStream;
 
 import javax.swing.JTextArea;
 
-/**
- * 
- * @@author A0131300
- */
 
 public class CustomOutputStream extends OutputStream {
 
@@ -18,9 +18,7 @@ public class CustomOutputStream extends OutputStream {
         this.textArea = textArea;
     }
     
-    /**
-     * @param b the byte to be written as character to the JTextArea
-     */
+    //b is the byte to be written as character to the JTextArea
     @Override
     public void write(int b) throws IOException {
         // redirects data to the text area
@@ -29,4 +27,4 @@ public class CustomOutputStream extends OutputStream {
         //textArea.setCaretPosition(textArea.getDocument().getLength());
     }
 
-}
+}*/
